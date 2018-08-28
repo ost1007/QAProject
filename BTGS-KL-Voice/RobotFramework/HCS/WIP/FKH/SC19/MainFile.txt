@@ -1,0 +1,49 @@
+*** Settings ***
+Documentation	Cloud_SC01_AWS_Private
+Suite Setup	
+Resource	../Common/CommonResources.txt
+Resource	../Common/readTestDataFromExcel.txt	
+Resource	../Common/CloudResource.txt	
+Resource	resource_keywords.txt
+
+*** Variables ***
+#-------------------------------#
+#${CQMusername}	609424665
+#${CQMpassword}	Asdf4321
+#${Browser}		FF
+#-------------------------------#
+#${salesChannel}	BT GERMANY	
+#${customerName}	TESTR373		
+#-------------------------------#
+${QuoteName}	AQAWSPVT	#SC17AZO365
+#${OrderType}	Provide
+#${ContractTerm}	24
+#${Currency}		EUR
+${RefNo}		SC19@
+#-------------------------------#
+${quoteID}		000000000226876	#000000000225842	#None
+#-------------------------------#
+
+*** Test Cases ***
+Load Test Data From Excel
+	Define And Read Test Data Variable
+SC19_Provide an MS Azure O365 (Microsoft) service with Inbound NAT+ RA without NAT + FW + ACC
+	Open Browser And Login To CQM Page	${CQMusername}	${CQMpassword}	${Browser}
+	Select Customer	${salesChannel}	${customerName}
+	Go to Manage Quote
+	#Create Quote	${QuoteName}	${OrderType}	${ContractTerm}	${Currency}	${RefNo}
+	Select Quote	${quoteID}	${QuoteName}
+	Launch RSQE
+Configure Product in rSQE
+	RSQE
+	Close Browser
+	[Teardown]	Debug
+Waiting for 5 minutes for order IDs to be generated
+	Sleep	5m
+Capturing all Expedio Order IDs
+	Open Browser And Login To CQM Page	${CQMusername}	${CQMpassword}	${Browser}
+	Select Customer	${salesChannel}	${customerName}
+	Capture The OrderID	${quoteID}
+	Close Browser
+	[Teardown]	Close Browser
+	

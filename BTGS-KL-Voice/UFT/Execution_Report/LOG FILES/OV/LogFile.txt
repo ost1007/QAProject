@@ -1,0 +1,2003 @@
+********************************************************************
+Date 18/01/2017 2:33:00 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 18/01/2017 2:33:05 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/01/2017 10:07:32 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/01/2017 10:07:38 AM
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Sales User 1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 20/01/2017 10:07:56 AM
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Sales - Sales United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 20/01/2017 10:08:11 AM
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+####  Link lnkCreateNewOrder Clicked   #####
+********************************************************************
+Date 20/01/2017 10:08:30 AM
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+BT GLOBAL SERVICES is Selected From lstDistributorLegalName
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+********************************************************************
+Date 16/02/2017 10:53:26 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 16/02/2017 10:53:29 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 01/03/2017 17:20:52
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 01/03/2017 17:20:56
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+********************************************************************
+Date 01/03/2017 17:23:01
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 01/03/2017 17:23:03
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+BTGS UK is Selected From lstDistributorLegalName
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+********************************************************************
+Date 02/03/2017 11:00:37
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 11:00:41
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+BTGS UK is Selected From lstDistributorLegalName
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+WebButton btnSearch  Clicked 
+********************************************************************
+Date 02/03/2017 11:17:00
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 11:17:02
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+BTGS UK is Selected From lstDistributorLegalName
+WebButton btnSearch  Clicked 
+In Text Box, txtContractId, the data entered is 299921CID
+EUR is Selected From lstCurrencyName
+In Text Box, txtSiebelId, the data entered is 299921SID
+UK BT Cust. Mgmt Centre (Manchester) is Selected From lstServiceCentre
+In Text Box, txtContractTerm, the data entered is 20
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:18:16
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtCFirstName, the data entered is Nagaraj
+In Text Box, txtCLastName, the data entered is Venkobasa
+In Text Box, txtCEmail, the data entered is Nagaraj.Venkobasa@bt.com
+In Text Box, txtCPhone, the data entered is 6611256
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:18:26
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnSearchOrderCreatorDetails  Clicked 
+WebButton btnSearchOrderDesignerDetails  Clicked 
+WebButton btnSearchAccountMgrDetails  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:20:12
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtOrderMgrFirstName, the data entered is Sunil
+In Text Box, txtOrderMgrLastName, the data entered is Kumar
+In Text Box, txtOrderMgrEmail, the data entered is svv@bt.com
+In Text Box, txtOrderMgrPhone, the data entered is 6612536
+In Text Box, txtBTMgrFirstName, the data entered is suvarna
+In Text Box, txtBTMgrLastName, the data entered is vernekar
+In Text Box, txtBTMgrEmail, the data entered is sv@bt.com
+In Text Box, txtBTMgrPhone, the data entered is 9878787676
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:20:22
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:20:34
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+BT ONEVOICE is Selected From lstProductName
+In Text Box, txtCapacityPlanningReferenceNumber, the data entered is 299921CPRN
+No is Selected From lstVoiceTrafficReportsRequested
+No is Selected From lstCentralizedBillingReportingRequired
+Centralised Invoice is Selected From lstInvoicingOption
+#####	WebCheckBox chkIsNewInclusiveTariff is Found and Checked   #####
+No is Selected From lstConferencingFacilityRequired
+No is Selected From lstOneVoiceAnywhereRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:21:32
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddSite  Clicked 
+South Africa is Selected From lstCountry
+WebButton btnGetSitesfromClassic  Clicked 
+####  Link lnkAddNewBranchSite Clicked   #####
+WebButton btnEdit  Clicked 
+********************************************************************
+Date 02/03/2017 11:22:04
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+South Africa is Selected From lstCountry
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar_CustReqdDate Clicked 
+WebImage imgClickForCalendar_CustSignDate Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:23:29
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtSiteName, the data entered is 299921Site1
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:23:44
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtFloor, the data entered is 1
+In Text Box, txtRoom, the data entered is 2
+In Text Box, txtBuildingNumber, the data entered is 3
+In Text Box, txtStreet, the data entered is 22
+In Text Box, txtCity, the data entered is Cape Town
+In Text Box, txtPostOrZIPCode, the data entered is 8022
+In Text Box, txtStateOrProvince, the data entered is South Africa
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:24:00
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtPrimarySiteFirstName, the data entered is Neha
+In Text Box, txtPrimarySiteLastName, the data entered is Jashnani
+In Text Box, txtPrimarySiteEmail, the data entered is nj@bt.com
+In Text Box, txtPrimarySitePhone, the data entered is 6623562
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:24:18
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddNewOnevoiceService  Clicked 
+One Voice SIP Trunking is Selected From lstServiceType
+Full PSTN is Selected From lstSubServiceType
+In Text Box, txtNoOfChannels, the data entered is 22
+No is Selected From lstnonstandardtype
+No is Selected From lstVoiceVPNRequired
+No is Selected From lstPSTNRequired
+MPLS is Selected From lstDirectAccessType
+In Text Box, txtMPLSServiceID, the data entered is GMPLS6C-01013318-0002
+#####	WebCheckBox chkServiceInstanceCOS is Found and Checked   #####
+National Direct is Selected From lstDirectAccessTariff
+Cat A+ (>=99.99% availability) is Selected From lstSLACategory
+WebButton btnSave  Clicked 
+WebButton btnSIEdit  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:27:40
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Europe is Selected From lstOneVoicePoPRegion
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:28:04
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+TDM PBX is Selected From lstPBXType
+In Text Box, txtPBXManufacturer, the data entered is 299921PBX
+In Text Box, txtPBXModel, the data entered is 299921PBXM
+CLIP is Selected From lstCLIPresentation
+E1 is Selected From lstPhysicalPortSpeed
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:28:35
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:28:47
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:29:09
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:29:19
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 11:29:29
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+G.711 is Selected From lstCodec
+TCP is Selected From lstSBCTransportProtocol
+In Text Box, txtMplsVpnName, the data entered is 299921VPN
+WebButton btnAddNewTrunkGroup  Clicked 
+In Text Box, txtUniqueTrunkGroupFriendlyName, the data entered is 299921UTGFN
+In Text Box, txtTrunkGroupCACLimit, the data entered is 25
+Round Robin is Selected From lstTrunkGroupTrunkCallDistribution
+WebButton btnTrunkGroupSave  Clicked 
+WebButton btnAddNewTrunkDetail  Clicked 
+In Text Box, txtUniqueTrunkFriendlyName, the data entered is 299921UTFN
+********************************************************************
+Date 02/03/2017 14:20:35
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 14:20:37
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+G.711 is Selected From lstCodec
+TCP is Selected From lstSBCTransportProtocol
+In Text Box, txtMplsVpnName, the data entered is 299921VPN
+WebButton btnAddNewTrunkGroup  Clicked 
+In Text Box, txtUniqueTrunkGroupFriendlyName, the data entered is 299921UTGFN
+In Text Box, txtTrunkGroupCACLimit, the data entered is 25
+Round Robin is Selected From lstTrunkGroupTrunkCallDistribution
+WebButton btnTrunkGroupSave  Clicked 
+WebButton btnAddNewTrunkDetail  Clicked 
+In Text Box, txtUniqueTrunkFriendlyName, the data entered is 299921UTFN
+In Text Box, txtTrunkCACLimit, the data entered is 15
+In Text Box, txtPBXIPaddress, the data entered is 10.10.56.39
+WebButton btnTrunkDetailSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 14:23:12
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596301
+In Text Box, txtNumberBlockSize, the data entered is 5
+********************************************************************
+Date 02/03/2017 15:13:48
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 15:13:50
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596301
+In Text Box, txtNumberBlockSize, the data entered is 5
+WebButton btnSave  Clicked 
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596306
+In Text Box, txtNumberBlockSize, the data entered is 5
+WebButton btnSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 15:15:20
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtBillingSiteId, the data entered is 299921BSID
+In Text Box, txtContractMSANo, the data entered is 299921MSAID
+In Text Box, txtTariffDetailFileLocation, the data entered is File1
+On-line is Selected From lstUsageReportDeliveryMethod
+In Text Box, txtCompanyName, the data entered is Techmahindra
+In Text Box, txtAddressLine1, the data entered is Blr
+In Text Box, txtCityBillingDetails, the data entered is Blr
+In Text Box, txtRegionState, the data entered is Karnataka
+In Text Box, txtPostZIPCode, the data entered is 560068
+In Text Box, txtBillingContactName, the data entered is linta
+In Text Box, txtBillingContactPhoneNumber, the data entered is 6612456
+In Text Box, txtBillingContactEmailAddress, the data entered is lin@bt.com
+In Text Box, txtServiceDescription, the data entered is GSIP
+In Text Box, txtProductDescription, the data entered is MPLS
+Monthly is Selected From lstInvoicePeriod
+Not Required is Selected From lstItemisedBillRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 15:16:02
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 15:16:28
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+Service Delivery1 is Selected From lstSubmitServiceDeliveryOwner
+WebButton btnSubmitToSDWithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299921
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 02/03/2017 15:20:09
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Service Delivery1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 02/03/2017 15:20:32
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Service Delivery - Service Delivery United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 02/03/2017 15:20:46
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299921
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 02/03/2017 15:21:05
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+#####	WebCheckBox chkPPRValidationCompleted is Found and Checked   #####
+WebButton btnSubmitToOETwithAutoEmail  Clicked 
+********************************************************************
+Date 02/03/2017 15:58:20
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 15:58:23
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+#####	WebCheckBox chkPPRValidationCompleted is Found and Checked   #####
+#####	WebCheckBox chkSubmitOETQueue is Found and Checked   #####
+********************************************************************
+Date 02/03/2017 16:11:18
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 16:11:21
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+#####	WebCheckBox chkPPRValidationCompleted is Found and Checked   #####
+#####	WebCheckBox chkSubmitOETQueue is Found and Checked   #####
+BT Customer Order Entry Wipro is Selected From lstSubmitOET
+********************************************************************
+Date 02/03/2017 16:18:10
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 16:18:13
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+#####	WebCheckBox chkPPRValidationCompleted is Found and Checked   #####
+#####	WebCheckBox chkSubmitOETQueue is Found and Checked   #####
+BT Customer Order Entry Wipro is Selected From lstSubmitOET
+OET User Wipro is Selected From lstSubmitOETOwner
+WebButton btnSubmitToOETwithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299921
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 02/03/2017 16:19:40
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+OET User Wipro is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 02/03/2017 16:19:59
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order Entry Profile - BT Customer Order Entry Wipro is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 02/03/2017 16:20:15
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299921
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 02/03/2017 16:20:47
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnUploadPass1DataToClassic  Clicked 
+********************************************************************
+Date 02/03/2017 16:57:07
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 16:57:10
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Sales User 1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 02/03/2017 16:57:29
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Sales - Sales United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 02/03/2017 16:57:45
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+####  Link lnkCreateNewOrder Clicked   #####
+********************************************************************
+Date 02/03/2017 16:58:01
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+BTGS UK is Selected From lstDistributorLegalName
+WebButton btnSearch  Clicked 
+In Text Box, txtContractId, the data entered is 299933CID
+EUR is Selected From lstCurrencyName
+In Text Box, txtSiebelId, the data entered is 299933SID
+UK BT Cust. Mgmt Centre (Manchester) is Selected From lstServiceCentre
+In Text Box, txtContractTerm, the data entered is 20
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 16:59:17
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtCFirstName, the data entered is Nagaraj
+In Text Box, txtCLastName, the data entered is Venkobasa
+In Text Box, txtCEmail, the data entered is Nagaraj.Venkobasa@bt.com
+In Text Box, txtCPhone, the data entered is 6611256
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 16:59:27
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnSearchOrderCreatorDetails  Clicked 
+WebButton btnSearchOrderDesignerDetails  Clicked 
+WebButton btnSearchAccountMgrDetails  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:01:08
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtOrderMgrFirstName, the data entered is Sunil
+In Text Box, txtOrderMgrLastName, the data entered is Kumar
+In Text Box, txtOrderMgrEmail, the data entered is svv@bt.com
+In Text Box, txtOrderMgrPhone, the data entered is 6612536
+In Text Box, txtBTMgrFirstName, the data entered is suvarna
+In Text Box, txtBTMgrLastName, the data entered is vernekar
+In Text Box, txtBTMgrEmail, the data entered is sv@bt.com
+In Text Box, txtBTMgrPhone, the data entered is 9878787676
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:01:19
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:01:30
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+BT ONEVOICE is Selected From lstProductName
+In Text Box, txtCapacityPlanningReferenceNumber, the data entered is 299933CPRN
+No is Selected From lstVoiceTrafficReportsRequested
+No is Selected From lstCentralizedBillingReportingRequired
+Centralised Invoice is Selected From lstInvoicingOption
+#####	WebCheckBox chkIsNewInclusiveTariff is Found and Checked   #####
+No is Selected From lstConferencingFacilityRequired
+No is Selected From lstOneVoiceAnywhereRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:02:22
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddSite  Clicked 
+United Kingdom is Selected From lstCountry
+WebButton btnGetSitesfromClassic  Clicked 
+####  Link lnkAddNewBranchSite Clicked   #####
+WebButton btnEdit  Clicked 
+********************************************************************
+Date 02/03/2017 17:02:53
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+United Kingdom is Selected From lstCountry
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar_CustReqdDate Clicked 
+WebImage imgClickForCalendar_CustSignDate Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:16:54
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 02/03/2017 17:16:57
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+United Kingdom is Selected From lstCountry
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar_CustReqdDate Clicked 
+WebImage imgClickForCalendar_CustSignDate Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:18:15
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtSiteName, the data entered is 299933Site1
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:18:28
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtFloor, the data entered is 1
+In Text Box, txtRoom, the data entered is 2
+In Text Box, txtBuildingNumber, the data entered is 3
+In Text Box, txtStreet, the data entered is 22
+In Text Box, txtCity, the data entered is London
+In Text Box, txtPostOrZIPCode, the data entered is SW19
+In Text Box, txtStateOrProvince, the data entered is United Kingdom
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:18:44
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtPrimarySiteFirstName, the data entered is Neha
+In Text Box, txtPrimarySiteLastName, the data entered is Jashnani
+In Text Box, txtPrimarySiteEmail, the data entered is nj@bt.com
+In Text Box, txtPrimarySitePhone, the data entered is 6623562
+WebButton btnNext  Clicked 
+********************************************************************
+Date 02/03/2017 17:19:00
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddNewOnevoiceService  Clicked 
+One Voice SIP Trunking is Selected From lstServiceType
+Full PSTN is Selected From lstSubServiceType
+In Text Box, txtNoOfChannels, the data entered is 22
+No is Selected From lstnonstandardtype
+No is Selected From lstVoiceVPNRequired
+No is Selected From lstPSTNRequired
+MPLS is Selected From lstDirectAccessType
+In Text Box, txtMPLSServiceID, the data entered is GMPLS6C-01013318-0002
+#####	WebCheckBox chkServiceInstanceCOS is Found and Checked   #####
+No is Selected From lstPOPDualHomed
+********************************************************************
+Date 03/03/2017 10:04:40
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:04:43
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddSite  Clicked 
+United Kingdom is Selected From lstCountry
+WebButton btnGetSitesfromClassic  Clicked 
+####  Link lnkAddNewBranchSite Clicked   #####
+WebButton btnEdit  Clicked 
+********************************************************************
+Date 03/03/2017 10:05:14
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+United Kingdom is Selected From lstCountry
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar_CustReqdDate Clicked 
+WebImage imgClickForCalendar_CustSignDate Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:06:30
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtSiteName, the data entered is 299933Site1
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:06:42
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtFloor, the data entered is 1
+In Text Box, txtRoom, the data entered is 2
+In Text Box, txtBuildingNumber, the data entered is 3
+In Text Box, txtStreet, the data entered is 22
+In Text Box, txtCity, the data entered is London
+In Text Box, txtPostOrZIPCode, the data entered is SW19
+In Text Box, txtStateOrProvince, the data entered is United Kingdom
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:06:56
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtPrimarySiteFirstName, the data entered is Neha
+In Text Box, txtPrimarySiteLastName, the data entered is Jashnani
+In Text Box, txtPrimarySiteEmail, the data entered is nj@bt.com
+In Text Box, txtPrimarySitePhone, the data entered is 6623562
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:07:14
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddNewOnevoiceService  Clicked 
+One Voice SIP Trunking is Selected From lstServiceType
+Full PSTN is Selected From lstSubServiceType
+In Text Box, txtNoOfChannels, the data entered is 22
+No is Selected From lstnonstandardtype
+No is Selected From lstVoiceVPNRequired
+No is Selected From lstPSTNRequired
+MPLS is Selected From lstDirectAccessType
+In Text Box, txtMPLSServiceID, the data entered is GMPLS6C-01013318-0002
+#####	WebCheckBox chkServiceInstanceCOS is Found and Checked   #####
+No is Selected From lstPOPDualHomed
+********************************************************************
+Date 03/03/2017 10:15:07
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:15:10
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddNewOnevoiceService  Clicked 
+One Voice SIP Trunking is Selected From lstServiceType
+Full PSTN is Selected From lstSubServiceType
+In Text Box, txtNoOfChannels, the data entered is 22
+No is Selected From lstnonstandardtype
+No is Selected From lstVoiceVPNRequired
+No is Selected From lstPSTNRequired
+MPLS is Selected From lstDirectAccessType
+In Text Box, txtMPLSServiceID, the data entered is GMPLS6C-01013318-0002
+#####	WebCheckBox chkServiceInstanceCOS is Found and Checked   #####
+No is Selected From lstPOPDualHomed
+Paris (Le Capitole) is Selected From lstPrimaryVoicePoP
+National Direct is Selected From lstDirectAccessTariff
+Cat A+ (>=99.99% availability) is Selected From lstSLACategory
+WebButton btnSave  Clicked 
+WebButton btnSIEdit  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:17:25
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Europe is Selected From lstOneVoicePoPRegion
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:17:51
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+TDM PBX is Selected From lstPBXType
+In Text Box, txtPBXManufacturer, the data entered is 299933PBX
+In Text Box, txtPBXModel, the data entered is 299933PBXM
+CLIP is Selected From lstCLIPresentation
+E1 is Selected From lstPhysicalPortSpeed
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:18:20
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:18:32
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:18:52
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:19:01
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:19:12
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+G.711 is Selected From lstCodec
+TCP is Selected From lstSBCTransportProtocol
+In Text Box, txtMplsVpnName, the data entered is 299933VPN
+WebButton btnAddNewTrunkGroup  Clicked 
+In Text Box, txtUniqueTrunkGroupFriendlyName, the data entered is 299933UTGFN
+In Text Box, txtTrunkGroupCACLimit, the data entered is 25
+Round Robin is Selected From lstTrunkGroupTrunkCallDistribution
+WebButton btnTrunkGroupSave  Clicked 
+WebButton btnAddNewTrunkDetail  Clicked 
+In Text Box, txtUniqueTrunkFriendlyName, the data entered is 299933UTFN
+In Text Box, txtTrunkCACLimit, the data entered is 15
+In Text Box, txtPBXIPaddress, the data entered is 10.10.56.39
+WebButton btnTrunkDetailSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:21:41
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596301
+In Text Box, txtNumberBlockSize, the data entered is 5
+WebButton btnSave  Clicked 
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596306
+In Text Box, txtNumberBlockSize, the data entered is 5
+WebButton btnSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:32:58
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:33:00
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+********************************************************************
+Date 03/03/2017 10:36:14
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:36:16
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+********************************************************************
+Date 03/03/2017 10:40:11
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:40:14
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596301
+In Text Box, txtNumberBlockSize, the data entered is 5
+WebButton btnSave  Clicked 
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596306
+In Text Box, txtNumberBlockSize, the data entered is 5
+WebButton btnSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:43:48
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:43:50
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596301
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 27748596306
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:50:30
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:51:18
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 10:51:21
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 44748596301
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 44748596306
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:53:11
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtBillingSiteId, the data entered is 299933BSID
+In Text Box, txtContractMSANo, the data entered is 299933MSAID
+In Text Box, txtTariffDetailFileLocation, the data entered is File1
+On-line is Selected From lstUsageReportDeliveryMethod
+In Text Box, txtCompanyName, the data entered is Techmahindra
+In Text Box, txtAddressLine1, the data entered is Blr
+In Text Box, txtCityBillingDetails, the data entered is Blr
+In Text Box, txtRegionState, the data entered is Karnataka
+In Text Box, txtPostZIPCode, the data entered is 560068
+In Text Box, txtBillingContactName, the data entered is linta
+In Text Box, txtBillingContactPhoneNumber, the data entered is 6612456
+In Text Box, txtBillingContactEmailAddress, the data entered is lin@bt.com
+In Text Box, txtServiceDescription, the data entered is GSIP
+In Text Box, txtProductDescription, the data entered is MPLS
+Monthly is Selected From lstInvoicePeriod
+Not Required is Selected From lstItemisedBillRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:53:52
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 03/03/2017 10:54:19
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+Service Delivery1 is Selected From lstSubmitServiceDeliveryOwner
+WebButton btnSubmitToSDWithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299933
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 03/03/2017 11:01:07
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Service Delivery1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 03/03/2017 11:01:30
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Service Delivery - Service Delivery United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 03/03/2017 11:01:45
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299933
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 03/03/2017 11:02:05
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+#####	WebCheckBox chkPPRValidationCompleted is Found and Checked   #####
+#####	WebCheckBox chkSubmitOETQueue is Found and Checked   #####
+BT Customer Order Entry Wipro is Selected From lstSubmitOET
+OET User Wipro is Selected From lstSubmitOETOwner
+WebButton btnSubmitToOETwithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299933
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 03/03/2017 11:03:32
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+OET User Wipro is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 03/03/2017 11:03:53
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order Entry Profile - BT Customer Order Entry Wipro is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 03/03/2017 11:04:08
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299933
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 03/03/2017 11:04:41
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnUploadPass1DataToClassic  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 07/03/2017 14:59:06
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 14:59:09
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+********************************************************************
+Date 07/03/2017 15:08:33
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 15:08:35
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Sales User 1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 07/03/2017 15:08:56
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Sales - Sales United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 07/03/2017 15:09:11
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+####  Link lnkCreateNewOrder Clicked   #####
+********************************************************************
+Date 07/03/2017 15:09:26
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+BTGS UK is Selected From lstDistributorLegalName
+WebButton btnSearch  Clicked 
+In Text Box, txtContractId, the data entered is 299967CID
+EUR is Selected From lstCurrencyName
+In Text Box, txtSiebelId, the data entered is 299967SID
+UK BT Cust. Mgmt Centre (Manchester) is Selected From lstServiceCentre
+In Text Box, txtContractTerm, the data entered is 20
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:10:30
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtCFirstName, the data entered is Nagaraj
+In Text Box, txtCLastName, the data entered is Venkobasa
+In Text Box, txtCEmail, the data entered is Nagaraj.Venkobasa@bt.com
+In Text Box, txtCPhone, the data entered is 6611256
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:10:41
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnSearchOrderCreatorDetails  Clicked 
+WebButton btnSearchOrderDesignerDetails  Clicked 
+WebButton btnSearchAccountMgrDetails  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:11:26
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtOrderMgrFirstName, the data entered is Sunil
+In Text Box, txtOrderMgrLastName, the data entered is Kumar
+In Text Box, txtOrderMgrEmail, the data entered is svv@bt.com
+In Text Box, txtOrderMgrPhone, the data entered is 6612536
+In Text Box, txtBTMgrFirstName, the data entered is suvarna
+In Text Box, txtBTMgrLastName, the data entered is vernekar
+In Text Box, txtBTMgrEmail, the data entered is sv@bt.com
+In Text Box, txtBTMgrPhone, the data entered is 9878787676
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:11:37
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:11:45
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+BT ONEVOICE is Selected From lstProductName
+In Text Box, txtCapacityPlanningReferenceNumber, the data entered is 299967CPRN
+No is Selected From lstVoiceTrafficReportsRequested
+No is Selected From lstCentralizedBillingReportingRequired
+Centralised Invoice is Selected From lstInvoicingOption
+#####	WebCheckBox chkIsNewInclusiveTariff is Found and Checked   #####
+No is Selected From lstConferencingFacilityRequired
+No is Selected From lstOneVoiceAnywhereRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:12:24
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddSite  Clicked 
+United Kingdom is Selected From lstCountry
+WebButton btnGetSitesfromClassic  Clicked 
+####  Link lnkAddNewBranchSite Clicked   #####
+WebButton btnEdit  Clicked 
+********************************************************************
+Date 07/03/2017 15:12:50
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+United Kingdom is Selected From lstCountry
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar_CustReqdDate Clicked 
+WebImage imgClickForCalendar_CustSignDate Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:13:51
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtSiteName, the data entered is 299967Site1
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:14:00
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtFloor, the data entered is 1
+In Text Box, txtRoom, the data entered is 2
+In Text Box, txtBuildingNumber, the data entered is 3
+In Text Box, txtStreet, the data entered is 22
+In Text Box, txtCity, the data entered is London
+In Text Box, txtPostOrZIPCode, the data entered is SW19
+In Text Box, txtStateOrProvince, the data entered is United Kingdom
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:14:10
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtPrimarySiteFirstName, the data entered is Neha
+In Text Box, txtPrimarySiteLastName, the data entered is Jashnani
+In Text Box, txtPrimarySiteEmail, the data entered is nj@bt.com
+In Text Box, txtPrimarySitePhone, the data entered is 6623562
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:14:21
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddNewOnevoiceService  Clicked 
+One Voice SIP Trunking is Selected From lstServiceType
+Full PSTN is Selected From lstSubServiceType
+In Text Box, txtNoOfChannels, the data entered is 22
+No is Selected From lstnonstandardtype
+No is Selected From lstVoiceVPNRequired
+No is Selected From lstPSTNRequired
+MPLS is Selected From lstDirectAccessType
+In Text Box, txtMPLSServiceID, the data entered is GMPLS6C-01013318-0002
+#####	WebCheckBox chkServiceInstanceCOS is Found and Checked   #####
+No is Selected From lstPOPDualHomed
+Paris (Le Capitole) is Selected From lstPrimaryVoicePoP
+National Direct is Selected From lstDirectAccessTariff
+Cat A+ (>=99.99% availability) is Selected From lstSLACategory
+WebButton btnSave  Clicked 
+WebButton btnSIEdit  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:16:05
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Europe is Selected From lstOneVoicePoPRegion
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:16:27
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+TDM PBX is Selected From lstPBXType
+In Text Box, txtPBXManufacturer, the data entered is 299967PBX
+In Text Box, txtPBXModel, the data entered is 299967PBXM
+CLIP is Selected From lstCLIPresentation
+E1 is Selected From lstPhysicalPortSpeed
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:16:43
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:16:52
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:17:12
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:17:21
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:17:32
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+G.711 is Selected From lstCodec
+TCP is Selected From lstSBCTransportProtocol
+In Text Box, txtMplsVpnName, the data entered is 299967VPN
+WebButton btnAddNewTrunkGroup  Clicked 
+In Text Box, txtUniqueTrunkGroupFriendlyName, the data entered is 299967UTGFN
+In Text Box, txtTrunkGroupCACLimit, the data entered is 25
+Round Robin is Selected From lstTrunkGroupTrunkCallDistribution
+WebButton btnTrunkGroupSave  Clicked 
+WebButton btnAddNewTrunkDetail  Clicked 
+In Text Box, txtUniqueTrunkFriendlyName, the data entered is 299967UTFN
+In Text Box, txtTrunkCACLimit, the data entered is 15
+In Text Box, txtPBXIPaddress, the data entered is 10.10.56.39
+WebButton btnTrunkDetailSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:19:52
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 44748596301
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 44748596306
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:21:06
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtBillingSiteId, the data entered is 299967BSID
+In Text Box, txtContractMSANo, the data entered is 299967MSAID
+In Text Box, txtTariffDetailFileLocation, the data entered is File1
+On-line is Selected From lstUsageReportDeliveryMethod
+In Text Box, txtCompanyName, the data entered is Techmahindra
+In Text Box, txtAddressLine1, the data entered is Blr
+In Text Box, txtCityBillingDetails, the data entered is Blr
+In Text Box, txtRegionState, the data entered is Karnataka
+In Text Box, txtPostZIPCode, the data entered is 560068
+In Text Box, txtBillingContactName, the data entered is linta
+In Text Box, txtBillingContactPhoneNumber, the data entered is 6612456
+In Text Box, txtBillingContactEmailAddress, the data entered is lin@bt.com
+In Text Box, txtServiceDescription, the data entered is GSIP
+In Text Box, txtProductDescription, the data entered is MPLS
+Monthly is Selected From lstInvoicePeriod
+Not Required is Selected From lstItemisedBillRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:21:36
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:21:46
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+Service Delivery1 is Selected From lstSubmitServiceDeliveryOwner
+WebButton btnSubmitToSDWithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299967
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 07/03/2017 15:25:12
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Service Delivery1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 07/03/2017 15:25:25
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Service Delivery - Service Delivery United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 07/03/2017 15:25:35
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299967
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 07/03/2017 15:25:54
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+#####	WebCheckBox chkPPRValidationCompleted is Found and Checked   #####
+#####	WebCheckBox chkSubmitOETQueue is Found and Checked   #####
+BT Customer Order Entry Wipro is Selected From lstSubmitOET
+OET User Wipro is Selected From lstSubmitOETOwner
+WebButton btnSubmitToOETwithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299967
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 07/03/2017 15:26:57
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+OET User Wipro is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 07/03/2017 15:27:10
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order Entry Profile - BT Customer Order Entry Wipro is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 07/03/2017 15:27:21
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299967
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 07/03/2017 15:27:45
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnUploadPass1DataToClassic  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 07/03/2017 15:42:30
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 15:42:32
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Sales User 1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 07/03/2017 15:42:45
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Sales - Sales United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 07/03/2017 15:42:55
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+####  Link lnkCreateNewOrder Clicked   #####
+********************************************************************
+Date 07/03/2017 15:43:05
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+ADD is Selected From lstOrderType
+BT GLOBAL SERVICES is Selected From lstDistributorLegalName
+WebButton btnSearch  Clicked 
+In Text Box, txtContractId, the data entered is 299968CID
+EUR is Selected From lstCurrencyName
+In Text Box, txtSiebelId, the data entered is 299968SID
+UK BT Cust. Mgmt Centre (Manchester) is Selected From lstServiceCentre
+In Text Box, txtContractTerm, the data entered is 20
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:44:02
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtCFirstName, the data entered is Nagaraj
+In Text Box, txtCLastName, the data entered is Venkobasa
+In Text Box, txtCEmail, the data entered is Nagaraj.Venkobasa@bt.com
+In Text Box, txtCPhone, the data entered is 6611256
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:44:11
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnSearchOrderCreatorDetails  Clicked 
+WebButton btnSearchOrderDesignerDetails  Clicked 
+WebButton btnSearchAccountMgrDetails  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:44:55
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtOrderMgrFirstName, the data entered is Sunil
+In Text Box, txtOrderMgrLastName, the data entered is Kumar
+In Text Box, txtOrderMgrEmail, the data entered is svv@bt.com
+In Text Box, txtOrderMgrPhone, the data entered is 6612536
+In Text Box, txtBTMgrFirstName, the data entered is suvarna
+In Text Box, txtBTMgrLastName, the data entered is vernekar
+In Text Box, txtBTMgrEmail, the data entered is sv@bt.com
+In Text Box, txtBTMgrPhone, the data entered is 9878787676
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:45:04
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:45:12
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+BT ONEVOICE is Selected From lstProductName
+In Text Box, txtCapacityPlanningReferenceNumber, the data entered is 299968CPRN
+No is Selected From lstVoiceTrafficReportsRequested
+No is Selected From lstCentralizedBillingReportingRequired
+Centralised Invoice is Selected From lstInvoicingOption
+#####	WebCheckBox chkIsNewInclusiveTariff is Found and Checked   #####
+No is Selected From lstConferencingFacilityRequired
+No is Selected From lstOneVoiceAnywhereRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:45:48
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddSite  Clicked 
+United Kingdom is Selected From lstCountry
+WebButton btnGetSitesfromClassic  Clicked 
+####  Link lnkAddNewBranchSite Clicked   #####
+WebButton btnEdit  Clicked 
+********************************************************************
+Date 07/03/2017 15:46:11
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+United Kingdom is Selected From lstCountry
+WebButton btnClear  Clicked 
+WebImage imgClickForCalendar_CustReqdDate Clicked 
+WebImage imgClickForCalendar_CustSignDate Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:47:08
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtSiteName, the data entered is 299968Site1
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:47:17
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtFloor, the data entered is 1
+In Text Box, txtRoom, the data entered is 2
+In Text Box, txtBuildingNumber, the data entered is 3
+In Text Box, txtStreet, the data entered is 22
+In Text Box, txtCity, the data entered is London
+In Text Box, txtPostOrZIPCode, the data entered is SW19
+In Text Box, txtStateOrProvince, the data entered is United Kingdom
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:47:27
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtPrimarySiteFirstName, the data entered is Neha
+In Text Box, txtPrimarySiteLastName, the data entered is Jashnani
+In Text Box, txtPrimarySiteEmail, the data entered is nj@bt.com
+In Text Box, txtPrimarySitePhone, the data entered is 6623562
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:47:37
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnAddNewOnevoiceService  Clicked 
+One Voice SIP Trunking is Selected From lstServiceType
+Full PSTN is Selected From lstSubServiceType
+In Text Box, txtNoOfChannels, the data entered is 22
+No is Selected From lstnonstandardtype
+No is Selected From lstVoiceVPNRequired
+No is Selected From lstPSTNRequired
+MPLS is Selected From lstDirectAccessType
+In Text Box, txtMPLSServiceID, the data entered is GMPLS6C-01013318-0002
+#####	WebCheckBox chkServiceInstanceCOS is Found and Checked   #####
+No is Selected From lstPOPDualHomed
+Paris (Le Capitole) is Selected From lstPrimaryVoicePoP
+National Direct is Selected From lstDirectAccessTariff
+Cat A+ (>=99.99% availability) is Selected From lstSLACategory
+WebButton btnSave  Clicked 
+WebButton btnSIEdit  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:49:46
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Europe is Selected From lstOneVoicePoPRegion
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:50:05
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+TDM PBX is Selected From lstPBXType
+In Text Box, txtPBXManufacturer, the data entered is 299968PBX
+In Text Box, txtPBXModel, the data entered is 299968PBXM
+CLIP is Selected From lstCLIPresentation
+E1 is Selected From lstPhysicalPortSpeed
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:50:17
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:50:25
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:50:44
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:50:54
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 15:51:03
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+G.711 is Selected From lstCodec
+TCP is Selected From lstSBCTransportProtocol
+In Text Box, txtMplsVpnName, the data entered is 299968VPN
+WebButton btnAddNewTrunkGroup  Clicked 
+In Text Box, txtUniqueTrunkGroupFriendlyName, the data entered is 299968UTGFN
+In Text Box, txtTrunkGroupCACLimit, the data entered is 25
+Round Robin is Selected From lstTrunkGroupTrunkCallDistribution
+WebButton btnTrunkGroupSave  Clicked 
+WebButton btnAddNewTrunkDetail  Clicked 
+In Text Box, txtUniqueTrunkFriendlyName, the data entered is 299968UTFN
+********************************************************************
+Date 07/03/2017 16:01:14
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 16:01:16
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+G.711 is Selected From lstCodec
+TCP is Selected From lstSBCTransportProtocol
+In Text Box, txtMplsVpnName, the data entered is 299968VPN
+WebButton btnAddNewTrunkGroup  Clicked 
+In Text Box, txtUniqueTrunkGroupFriendlyName, the data entered is 299968UTGFN
+In Text Box, txtTrunkGroupCACLimit, the data entered is 25
+Round Robin is Selected From lstTrunkGroupTrunkCallDistribution
+WebButton btnTrunkGroupSave  Clicked 
+WebButton btnAddNewTrunkDetail  Clicked 
+In Text Box, txtUniqueTrunkFriendlyName, the data entered is 299968UTFN
+In Text Box, txtTrunkCACLimit, the data entered is 15
+In Text Box, txtPBXIPaddress, the data entered is 10.10.56.39
+WebButton btnTrunkDetailSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 16:03:23
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+No is Selected From lstDirectoryListingRequired
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 44748596301
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnAddBlockDetails  Clicked 
+New Number is Selected From lstNumberType
+Yes is Selected From lstBTSupplied
+In Text Box, txtBlockStartNumber, the data entered is 44748596306
+In Text Box, txtNumberBlockSize, the data entered is 12
+WebButton btnSave  Clicked 
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 16:04:26
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+In Text Box, txtBillingSiteId, the data entered is 299968BSID
+In Text Box, txtContractMSANo, the data entered is 299968MSAID
+In Text Box, txtTariffDetailFileLocation, the data entered is File1
+On-line is Selected From lstUsageReportDeliveryMethod
+In Text Box, txtCompanyName, the data entered is Techmahindra
+In Text Box, txtAddressLine1, the data entered is Blr
+In Text Box, txtCityBillingDetails, the data entered is Blr
+In Text Box, txtRegionState, the data entered is Karnataka
+In Text Box, txtPostZIPCode, the data entered is 560068
+In Text Box, txtBillingContactName, the data entered is linta
+In Text Box, txtBillingContactPhoneNumber, the data entered is 6612456
+In Text Box, txtBillingContactEmailAddress, the data entered is lin@bt.com
+In Text Box, txtServiceDescription, the data entered is GSIP
+In Text Box, txtProductDescription, the data entered is MPLS
+Monthly is Selected From lstInvoicePeriod
+Not Required is Selected From lstItemisedBillRequired
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 16:04:51
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnNext  Clicked 
+********************************************************************
+Date 07/03/2017 16:05:03
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+********************************************************************
+Date 07/03/2017 16:27:56
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 16:27:58
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+********************************************************************
+Date 07/03/2017 16:40:52
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 16:40:54
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+********************************************************************
+Date 07/03/2017 17:00:56
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 17:00:58
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 17:03:48
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 17:03:50
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 17:19:21
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 17:19:23
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+********************************************************************
+Date 07/03/2017 17:36:07
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 17:36:09
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Service Delivery1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 07/03/2017 17:36:25
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Service Delivery - Service Delivery United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 07/03/2017 17:36:35
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299968
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+********************************************************************
+Date 07/03/2017 17:41:28
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 17:41:30
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+********************************************************************
+Date 08/03/2017 10:13:41
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 10:13:43
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+********************************************************************
+Date 08/03/2017 10:18:25
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 10:18:27
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+********************************************************************
+Date 08/03/2017 10:26:24
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 10:26:26
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+********************************************************************
+Date 08/03/2017 10:46:14
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 10:46:16
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+********************************************************************
+Date 08/03/2017 10:47:48
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 10:47:50
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+********************************************************************
+Date 08/03/2017 10:54:39
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 10:54:41
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+********************************************************************
+Date 08/03/2017 10:58:19
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 10:58:21
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+********************************************************************
+Date 08/03/2017 11:05:33
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:05:35
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnOrderValidation  Clicked 
+#####	WebCheckBox chkSubmitSDqueue is Found and Checked   #####
+Service Delivery United Kingdom is Selected From lstSubmitServiceDelivery
+Service Delivery1 is Selected From lstSubmitServiceDeliveryOwner
+WebButton btnSubmitToSDWithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299968
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 08/03/2017 11:07:57
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Service Delivery1 is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 08/03/2017 11:08:12
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Global Service Delivery - Service Delivery United Kingdom is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 08/03/2017 11:08:21
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299968
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 08/03/2017 11:08:34
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+#####	WebCheckBox chkPPRValidationCompleted is Found and Checked   #####
+#####	WebCheckBox chkSubmitOETQueue is Found and Checked   #####
+BT Customer Order Entry Wipro is Selected From lstSubmitOET
+OET User Wipro is Selected From lstSubmitOETOwner
+WebButton btnSubmitToOETwithAutoEmail  Clicked 
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299968
+WebButton btnSearch  Clicked 
+####  Link lnkSignout Clicked   #####
+********************************************************************
+Date 08/03/2017 11:09:36
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+OET User Wipro is Selected From lstUserID
+####  Link lnkLogin Clicked   #####
+********************************************************************
+Date 08/03/2017 11:09:48
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order Entry Profile - BT Customer Order Entry Wipro is Selected From lstProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 08/03/2017 11:09:59
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+Order ID is Selected From lstSearch
+In Text Box, txtSearch, the data entered is 299968
+WebButton btnSearch  Clicked 
+####  Link lnkOrderId Clicked   #####
+####  Link lnkWrite/AmendOrder Clicked   #####
+********************************************************************
+Date 08/03/2017 11:10:24
+Starting QTP Script :  DriverScript
+Browser brweDCAPortal  Exists
+Page pgeDCAPortal  Exists
+WebButton btnValidateTrunkGroupAndTrunkFriendlyName  Clicked 
+WebButton btnUploadPass1DataToClassic  Clicked 
+####  Link lnkSignout Clicked   #####

@@ -1,0 +1,57 @@
+*** Settings ***
+Documentation	TA_SC04_SOTI Full PSTN_HongKong. Order Creation full
+
+Library			Selenium2Library
+Library			DebugLibrary
+Library			SikuliLibrary
+Resource	../../Common_OV/CLASSIC_Resource.txt
+#modified by Azry 23042018 - make common resource keyword for order creation
+#Resource	resource_keywords.txt
+Resource	../../Common_OV/resource_keywords_order_creation.txt
+#end modified by Azry 23042018 - make common resource keyword for order creation
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+#${TC_ID}		R55_SC61_T3_08
+#commented by Azry 23042018 - push images to common folder by putting img folder name in the console
+#${IMAGE_DIR}	${CURDIR}\\img
+${IMAGE_DIR}	..\\..\\Common_OV
+#end commented by Azry 23042018 - push images to common folder by putting img folder name in the console
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	PREREQUISITE
+	${IMAGE_FINAL_PATH}=	Set Variable	${IMAGE_DIR}\\${IMAGE_FOLDER}
+	Set Global Variable	${IMAGE_FINAL_PATH}
+	Add Image Path    ${IMAGE_FINAL_PATH}	
+	Read data	Classics	${TC_ID}		
+	Log To Console	Retrieved Classics variables
+	Create Index Numbering
+	
+TC02 Seach Customer in Amdocs
+	[TAGS]	CLASSICS
+	Get File Content	${ClassicOrderID_TextFile}
+	Log To Console	${ClassicOrderID} in testcase
+	#Login To AMDOCS
+	
+TC03 Select Profile
+	[TAGS]	CLASSICS	
+	Log To Console	SKIP
+	#Select Profile As ClearSales
+	
+TC04 Select Order	
+	#Select Order
+	Log To Console	SKIP
+	
+TC05 Perform Yank Task
+	#Yank Task
+	Log To Console	SKIP
+	
+TC06 Order Configuration	
+	#Configure Header
+	#Configure Contract Summary
+	#Configure Service Summary
+	#Configure Technical Elements
+	Configure Service Subproject
+	

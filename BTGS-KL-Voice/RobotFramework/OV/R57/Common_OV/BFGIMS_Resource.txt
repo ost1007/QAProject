@@ -1,0 +1,316 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			OperatingSystem
+Library  		String
+Library			Collections
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+Resource		../Common_OV/CommonResources.txt
+
+*** Variables ***
+${wait_time}	360s
+${long_wait_time}    600s
+
+*** Keywords ***
+Open Browser And Login To BFGIMS Page
+	Browser Config	${BFG_IMS_URL}
+	Goto	${BFG_IMS_URL}
+	21CN Authentication
+
+21CN Authentication
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    #Changes by Veena 11042018 - R55 BFG IMS 21CN login page changed
+	#${BetaVersionExist}=  Run Keyword And Return Status    Page Should Contain    beta version
+	${BetaVersionExist}=  Run Keyword And Return Status    Page Should Contain    Sign in
+    Run Keyword If      ${BetaVersionExist}     Run Keyword	Beta Sign In
+    ...     ELSE  Run Keyword	Sign On
+	Wait Until Page Contains	BFG IMS	${wait_time}
+    Select Window	title=BFG IMS
+
+Sign On
+    Page Should Contain     21C Authentication: Login
+    Selenium2Library.Input Text    USER   ${Username}    
+    Selenium2Library.Input Text    PASSWORD    ${Password}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-21C Authentication Page.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+    Click Button	Sign On
+    Wait Until Page Contains        21C Authentication: Warning Screen  ${wait_time}      Authentication page is not display
+    Wait Until Element Is Enabled   YES
+    Click Button      YES
+
+Beta Sign In
+    Page Should Contain    Sign in
+    Selenium2Library.Input Text    username   ${Username}
+    Selenium2Library.Input Text    password    ${Password}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-21C Authentication Page.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+    Click Button      xpath=.//*[@id='login']//button
+	#End changes by Veena 11042018 - R55 BFG IMS 21CN login page changed
+
+Select User Profile Group
+	Select Frame    container
+	Log to console	${Profile_Group}
+	#amended by Azry on 07062018
+	#Run Keyword If	'${Profile_Group}'=='AMMEND' and '${BFG_IMS_URL}'=='http://bfgimst3.nat.bt.com/bfgims.asp'	Run Keywords
+	#...	Click Element	xpath=.//select[@name='cmbProfile']
+	#...	AND	Select From List	xpath=.//select[@name='cmbProfile']	${BFG_EDIT_PROFILE_GRP}
+	#...	ELSE IF	'${Profile_Group}'=='AMMEND' and '${BFG_IMS_URL}'=='http://bfgimst1.nat.bt.com/bfgims.asp'	Run Keywords
+	#...	Click Element	xpath=.//select[@name='cmbProfile']
+	#...	AND	Select From List	xpath=.//select[@name='cmbProfile']	${BFG_EDIT_PROFILE_GRP_T1}
+	#...	ELSE	Select From List	xpath=.//select[@name='cmbProfile']	${Profile_Group}
+	Click Element	xpath=.//select[@name='cmbProfile']
+	Run Keyword If	'${Profile_Group}'=='AMMEND'	Run Keyword	Select From List	xpath=.//select[@name='cmbProfile']	${Edit_Profile_Group}
+	...	ELSE	Select From List	xpath=.//select[@name='cmbProfile']	${Profile_Group}
+	#end amended by Azry in 07062018
+	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select User Profile-Group.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Focus	xpath=*//input[@value='Continue']	
+	Click Element	xpath=*//input[@value='Continue']
+	Select Window	title=BFG IMS
+
+Search for Existing Customers
+	Select Frame    container
+	Current Frame Contains	Search for Existing Customers	60s
+	Click Link	icssearch2.asp
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Search for Existing Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+
+Customer Search (text)
+	Select Frame    container
+	Current Frame Contains	Customer Search (text)	60s
+	Click Link	icssearch2.asp
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Customer Search (text).png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+
+Customer Search by Customer Name
+	Select Frame    container
+#	Wait Until Page Contains	Customer Search (text)
+	Current Frame Contains	Customer Search (text)
+	Select From List 	SearchTerm	Customer Name	
+	Selenium2Library.Input Text	custName1	${CustomerName}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Search for Existing Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	xpath=.//input[@value='Search']
+	#DEBUG
+	#Need to cater alert message
+	#UnexpectedAlertPresentException: Alert Text: Do you want to debug this webpage? This webpage contains errors that might prevent it from displaying or working correctly. If you are not testing this webpage, click No. Message: Modal dialog present
+	Select Window	title=BFG IMS
+
+Verify Customer Not Exist
+	Select Frame    container
+	${present}=	Run Keyword And Return Status	Current Frame Contains 	No results found with those characters in customer name
+	Run Keyword If	'${present}' == 'True'	Capture Page Screenshot	${OUTPUTDIR}${/}${Numbering}-Verify Customer Not Exist.png	
+	...	ELSE	Fail	The customer is exist, please change your test data and restart the test
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+		
+Verify Customer Is Exist
+	Select Frame    container
+	${CustomerNameUpper}=    Convert To Uppercase    ${CustomerName}
+	Wait Until Page Contains	${CustomerNameUpper}    ${wait_time}    ${CustomerNameUpper} is not shown within ${wait_time}
+	#Wait Until Element Is Visible   	.//td[contains(text(),'${CustomerName}')]	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Verify Customer Is Exist.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+	
+Add Non-UK Customer
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Enter Customer Name below
+	Selenium2Library.Input Text	textstringsearch	${CustomerName}
+	Click Element	xpath=.//input[@value='Check']
+	Current Frame Contains   	There are currently no customers matching your search criteria	100s
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Validate LE
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Add Non-UK Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	xpath=.//input[@value='Add Customer (non-UK)']
+	Fill In Customer Detail
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Select Window	title=BFG IMS
+
+Add UK Customer
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Enter Customer Name below
+	Selenium2Library.Input Text	textstringsearch	${CustomerName}
+	Click Element	xpath=.//input[@value='Check']
+	Current Frame Contains   	There are currently no customers matching your search criteria	100s
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Validate LE
+	Selenium2Library.Input Text	xpath=.//input[@id='textstringsearch']	${Legal_Entity}	#BT Global Services
+	Focus	xpath=.//input[@value='Search']	
+	Click Element	xpath=.//input[@value='Search']
+	Wait Until Page Contains	Please search and select the correct customer entity.    ${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Search Legal Entity.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Focus	xpath=.//input[@value='Select']
+	Click Element	xpath=.//input[@value='Select']
+	Fill In Customer Detail
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Select Window	title=BFG IMS
+	
+Fill In Customer Detail
+	#Select Frame    container
+	Wait Until Page Contains	Registered Country    ${wait_time}    Registered Country is not shown in ${wait_time}
+	Current Frame Contains	Registered Country
+	Select From List 	CUS_REGISTERED_CTY_ID	${Country}
+	Selenium2Library.Input Text	xpath=.//input[@name='CUS_NAME']	${CustomerName}	
+	Selenium2Library.Input Text	xpath=.//input[@name='CUS_REFERENCE']	${CustomerRef}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Fill in Customer Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+	
+Get Customer Details
+	Select Frame    container
+	${Customer_ID}=	Selenium2Library.Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[1]/form
+	LOG	${Customer_ID}
+	Export Variable Into Text File	${CustomerID_TextFile}	${Customer_ID}	
+	${Customer_Name}=	Selenium2Library.Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[2]
+	LOG	${Customer_Name}
+	${Customer_Ref}=	Selenium2Library.Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[3]
+	LOG	${Customer_Ref}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Customer Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+
+Create Site Ref
+	Select Frame    container
+	Current Frame Contains	Search Results (Customers)	60s
+	Focus	xpath=*//input[@value='List Sites']	
+	Click Element	xpath=.//input[@value='List Sites']
+	Current Frame Contains   	 No Sites present for this Customer	100s
+	Click Element	xpath=.//input[@value='Add a new Site']
+	Current Frame Contains	${CustomerName}	60s
+	Select From List 	COUNTRY_ID	${BFG_Site_Country}
+	Click Button	xpath=.//button[.//text() = 'Choose']
+	Fill in Site Detail
+
+Create Site Ref for UK
+	Select Frame    container
+	Current Frame Contains	Search Results (Customers)	60s
+	Focus	xpath=*//input[@value='List Sites']	
+	Click Element	xpath=.//input[@value='List Sites']
+	Current Frame Contains   	 No Sites present for this Customer	100s
+	Click Element	xpath=.//input[@value='Add a new Site']
+	Current Frame Contains	${CustomerName}	60s
+	Select From List 	COUNTRY_ID	${BFG_Site_Country}
+	Click Button	xpath=.//button[.//text() = 'Choose']
+	PAF Validation
+	Fill in Site Detail
+		
+Fill in Site Detail
+	#amended by Azry on 07062018
+	#Wait Until Page Contains	Site name    ${wait_time}    Site name is not shown within ${wait_time}
+	#Current Frame Contains	Site name
+	Wait Until Page Contains	Add Site    ${wait_time}    Add Site is not shown within ${wait_time}
+	#end amended by Azry on 07062018
+	Selenium2Library.Input Text	xpath=.//input[@name='SIT_NAME']	${BFG_Site_Name}	
+	Selenium2Library.Input Text	xpath=.//input[@name='SIT_REFERENCE']	${BFG_Site_Ref}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_SITE_PREMISES']	${BFG_Site_BuildingName}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_STREET_NUMBER']	${BFG_Site_StreetNumber}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_STREET_NAME']	${BFG_Site_StreetName}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_TOWN']	${BFG_Site_City}
+	${BFG_Site_Postal_str}=	 Convert To String	${BFG_Site_Postal}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_POST_ZIP_CODE']	${BFG_Site_Postal_str}
+	Select From List By Value 	SIT_LANGUAGE	${BFG_Site_Language}
+	Select From List By Value	SIT_CURRENCY	${BFG_Site_Currency}
+	Select From List 	ADR_COUNTRY	${BFG_Site_Country}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Fill in Site Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Element is Enabled	xpath=*//input[@value='Add Site']	${wait_time}
+	Focus	xpath=*//input[@value='Add Site']	
+	Click Element	xpath=.//input[@value='Add Site']
+	Wait Until Page Contains	SUBPREMISE    ${wait_time}    SUBOREMISE is not shown within ${wait_time}
+	Current Frame Contains	SUBPREMISE
+	Selenium2Library.Input Text	xpath=.//input[@name='LOC_SUBPREMISE']	${BFG_Site_Subpremise}
+	Wait Until Element is Enabled	xpath=*//input[@value='Add Location']	${wait_time}
+	Focus	xpath=*//input[@value='Add Location']
+	Click Element	xpath=.//input[@value='Add Location']
+	Wait Until Page Contains	successfully    ${wait_time}
+	Select Window	title=BFG IMS
+	
+Get Site Details
+	Select Frame    container
+	Current Frame Contains	Search Results (Customers)	60s
+	Focus	xpath=*//input[@value='List Sites']	
+	Click Element	xpath=.//input[@value='List Sites']
+	Wait Until Page Contains	Site name    ${wait_time}    Site name is not shown within ${wait_time}
+	Current Frame Contains	Site Name	60s	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Get Site Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	
+EIS Inventory Report
+	Select Frame    container
+	Current Frame Contains	EIS Inventory Report	60s
+	Click Link	EISSearch.asp
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-EIS Inventory Report.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+	
+Search EIS Information
+	Select Frame    container
+	Current Frame Contains	Select Category:	60s	
+	Select From List By Value	xpath=.//select[@name='cmbAcronymCustomer']	cust2
+	Selenium2Library.Input Text	xpath=.//input[@name='CustomerText']	${CustomerName}	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Fill in Customer Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Focus	xpath=*//input[@value='Search']	
+	Click Element	xpath=.//input[@value='Search']
+	Sleep	5s
+	Select Frame    eisframe
+	#Wait Until Page Contains Element    xpath=*//input[@value='Back']    ${long_wait_time}
+	Current Frame Contains	${CustomerName}
+	Click Link	xpath=.//a[.//text() = '${CustomerID}']
+	#DEBUG
+	Unselect Frame
+	Select Frame	container
+	Focus	xpath=*//a[.//text()='Site List']
+	Click Link	xpath=*//a[.//text()='Site List']
+	Select Frame	ifLink
+	Current Frame Contains    Site Lists
+	Click Link	xpath=*//a[.//text()='Click to View Details']
+
+Get Site ID
+	#Select Frame    container
+	Wait Until Page Contains	SITE_NAME    ${wait_time}    SITE_NAME is not shown within ${wait_time}
+	${BFGSiteID}=	Selenium2Library.Get Text	xpath=html/body/div/div/div/form/table[3]/tbody/tr[2]/td[2]
+	LOG	${BFGSiteID}
+	Export Variable Into Text File	${BFGSiteID_TextFile}	${BFGSiteID}	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFG Site Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	
+PAF Validation
+	#Select Frame    container
+	Current Frame Contains	Note: Minimum of 2 characters are required, validation may take a few seconds.	60s	
+	Selenium2Library.Input Text	xpath=.//input[@name='PostCode']	${BFG_Site_Postal}
+	Focus	xpath=*//button[.//text()='PAF Validation']
+	Click Element	xpath=*//button[.//text()='PAF Validation']

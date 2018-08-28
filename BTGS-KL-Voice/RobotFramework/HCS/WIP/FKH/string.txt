@@ -1,0 +1,32 @@
+*** Settings ***
+Documentation		Read Test Data File From Excel. Note - Excel file must be .xls format
+...					Created by:	FKH
+...					Date:	20 December 2016
+...					Edited by:	..... 
+Library		Selenium2Library
+Library		String
+#Library		OperatingSystem
+#Test Teardown	Run Keyword If Test Failed	Close Browser
+#Suite Teardown	Delete Unwanted PNG
+
+
+*** Variables ***
+
+*** Keywords ***
+
+
+*** Test Cases ***
+Test run 1
+	#Read data
+	#Open Browser	http://sqe.t3.nat.bt.com/cqm	FF
+	Sleep	1
+	#${string}=	Get Text	xpath=html/body/table/tbody/tr[2]/td/table[1]/tbody/tr/td/table/tbody/tr[1]/th
+	${string}=	Set Variable	fasdfasf fadsf - 01112321 .11
+	Log To Console	${\n}string= ${string}
+	${quoteID}=	Fetch From Right	${string}	21C
+	${quoteID2}=	Get Substring	${string}	10	22
+	${quoteID3}=	Get Regexp Matches	${string}	0(.*)( .)
+	Log To Console	${\n}quoteID= ${quoteID}
+	Log To Console	${\n}quoteID2= ${quoteID2}
+	Log To Console	${\n}quoteID3= ${quoteID3}
+	Should Not Be Empty	${quoteID2}

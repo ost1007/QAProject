@@ -1,0 +1,1 @@
+pybot -i eDCAFull --removekeywords wuks --removekeywords name:*Execution* -d Output\  --exitonfailure -v TC_ID:R54_SC35_DR_03 02b_eDCA_ServiceInstance_R54.txt

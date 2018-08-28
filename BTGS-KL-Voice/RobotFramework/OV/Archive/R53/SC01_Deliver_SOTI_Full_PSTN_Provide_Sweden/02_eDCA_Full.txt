@@ -1,0 +1,80 @@
+*** Settings ***
+Documentation	SC01_Deliver_SOTI_Full_PSTN_Provide_Sweden. eDCA Full
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common_OV/EDCA_Resource.txt
+Resource	../Common_OV/CommonResources.txt
+Resource	resource_eDCA.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${TC_ID}		R53_SC01
+
+*** Test Cases ***
+Prerequisites
+	[TAGS]	eDCA
+	Read data	eDCA	${TC_ID}
+	Log To Console	Retrieved EDCA TestData
+	Create Index Numbering
+	
+TC01 Order Creation
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	Customer Details
+	Customer Contact Details
+	Distributor Contact List
+	Order Contact Details
+	Additional Information
+	Product Selection
+	[Teardown]	Close Browser
+
+TC02 Sites Information
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	Sites
+	Site Location Details
+	Site Address
+	Site Contact Details
+	[Teardown]	Close Browser
+	
+TC03 Service Instance Details
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	Service Instance R53 SC01
+	Network Connection Details
+	PBX Details
+	Configure Access
+	Access Details
+	Configure NTE
+	Configure VLAN
+	Add SIP Trunking Details R53 SC01
+	SOTI Full PSTN Additional Features Details
+	Billing Details
+	GSIP Full PSTN Pricing Details
+	[Teardown]	Close Browser
+
+TC04 EDCA Sales User
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	Sales User - Submit
+	[Teardown]	Close Browser
+	
+TC05 EDCA Service Delivery User
+	[TAGS]	eDCA	
+	Open Browser And Login To EDCA Page As Service Delivery User
+	Select Pending Order For Full Cycle
+	Service Delivery User - Submit
+	[Teardown]	Close Browser
+
+TC06 EDCA Order Entry Team
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As OET User
+	Select Pending Order For Full Cycle
+	OET User - Submit
+	[Teardown]	Close Browser						
+	

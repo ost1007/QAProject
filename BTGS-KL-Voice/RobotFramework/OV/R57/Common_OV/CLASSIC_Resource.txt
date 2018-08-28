@@ -1,0 +1,453 @@
+*** Settings ***
+Documentation	Classic Resource File.
+...				This resource files contains all the keywords related to Classic component.
+...				Author: Josh Ong
+Library			Selenium2Library
+Library			DebugLibrary
+Library			AutoItLibrary
+Library			SikuliLibrary	#mode=NEW
+Library			Screenshot	screenshot_module=PIL		
+#Library			OperatingSystem
+Library			Collections
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+Resource		../Common_OV/CommonResources.txt
+
+*** Variables ***
+${OutputDir}	xxx
+${Timeout}		60s
+${CaptureScreenOnError}	True
+
+*** Keywords ***
+Login To AMDOCS
+	Win Activate	Amdocs CRM Login
+	Control Focus	Amdocs CRM Login	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM Login	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${CLASSIC_password}
+	#Capture Screen
+	Take Screenshot	${Numbering}-AMDOC Login.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Control Focus	Amdocs CRM Login	Login	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM Login	Login	[CLASS:Button; INSTANCE:1]	LEFT	2
+	Wait For Active Window	clarify	Legal Warning	300
+	Win Activate	clarify
+	Control Focus	clarify	Yes	[CLASS:Button; INSTANCE:1]
+	Control Click	clarify	Yes	[CLASS:Button; INSTANCE:1]	LEFT	1
+	
+Select Profile As ClearSales
+	Wait For Active Window	Amdocs CRM - ClearSupport	ClearSupport	60
+	Win Activate	Amdocs CRM - ClearSupport
+	Send	!p
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}	
+
+Create New Account
+	Win Activate	Amdocs CRM - ClearSales - [Console]
+	Send	!n
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}
+	Send	{ENTER}
+	Wait For Active Window	Amdocs CRM - ClearSales	Search if the customer exists in BFG	60
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:1]	${CustomerID}
+	Control Click	Amdocs CRM - ClearSales	Search in BFG	[CLASS:Button; INSTANCE:3]	LEFT	1
+	Sleep	30s
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND;INSTANCE:1]	LEFT	1	57	27
+	Control Click	Amdocs CRM - ClearSales	Continue with Account Creation	[CLASS:Button; INSTANCE:4]	LEFT	1
+	#Sleep	30s
+	
+Select order
+	Win Activate	Amdocs CRM - ClearSales - [Console]
+	Send	!s
+	Send	{DOWN}
+	Send	{ENTER}
+	Wait For Active Window	Amdocs CRM - ClearSales	&Find	60
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	1	176	24
+	Sleep	10s
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${ClassicOrderID}
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:5]
+	Control Click	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:5]	LEFT	1	
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	2	175	40
+	Wait For Active Window    Amdocs CRM - ClearSales    Account:	360
+	#Sleep	120s
+
+
+Yank Task
+	Win Activate	Amdocs CRM - ClearSales
+	Send	^1
+	Send	!d
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}
+	Sleep	10s
+	Control Focus	Yank	Yank	[CLASS:Button; INSTANCE:2]
+	Control Click	Yank	Yank	[CLASS:Button; INSTANCE:2]	LEFT	1
+	Wait For Active Window	Amdocs CRM		Yanking of Quote/Contract/Order ${ClassicOrderID} was successful. It was placed in your default WIPbin default	120
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	#Win Wait Close	Amdocs CRM	OK	60
+	Sleep	30s
+	Send	^7
+	Sleep	5s
+	Take Screenshot	${Numbering}-Order In Progress.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	
+
+Yank SubTask
+	Win Activate	Amdocs CRM - ClearSupport
+	Send	^1
+	Send	!d
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}
+	Sleep	10s
+	DEBUG
+	Control Focus	Yank	Yank	[CLASS:Button; INSTANCE:2]
+	Control Click	Yank	Yank	[CLASS:Button; INSTANCE:2]	LEFT	1
+	DEBUG
+	Wait For Active Window	Amdocs CRM		Yanking of Quote/Contract/Order ${ClassicOrderID} was successful. It was placed in your default WIPbin default	120
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	#Win Wait Close	Amdocs CRM	OK	60
+	Sleep	30s
+	Send	^7
+	Sleep	5s
+	Take Screenshot	${Numbering}-Yank Sub Task.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+
+Navigate to Service Subproject    
+    log to console    Start Navigate to Service Subproject
+    log to console    win activate
+	Win Activate	Amdocs CRM - ClearSales
+	sleep    3s
+	log to console    click service_subproject
+	Click	service_subproject_tab.png
+	sleep    5s
+#	Wait For Active Window    Amdocs CRM - ClearSales    View Project	60
+	
+View Project	
+    log to console    start View Project
+#	Wait Until Screen Contain	service_subproject_view_project_btn.png    20
+	Click	service_subproject_view_project_btn.png
+	log to console    sleep 10s and click on subproject
+	sleep	10s
+#	Wait Until Screen Contain    service_subproject_subproject_tab.png    20
+	Click	service_subproject_subproject_tab.png
+	Wait Until Screen Contain    subproject.png    20   
+	log to console   sleep 20s and click timepicker
+	Sleep	20s
+#	Wait Until Screen Contain	InstallationCompleteTimePicker.png    20
+	#Click     InstallationCompleteTimePicker.png
+	Click In	InstallationCompleteTimePicker.png	InstallationCompleteTimePickerIcon.png
+	Sleep	10s
+	Control Click	Date/Time Entry	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	#Wait For Active Window    Amdocs CRM    The service elements with no activation date have been updated with date    120
+	Wait For Active Window    Amdocs CRM    The service cannot be activated because there are already installed elements. These elements should be activated individually.
+	Take Screenshot	${Numbering}-InstallationCompletedMsg.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	10s
+	Take Screenshot	${Numbering}-InstallationCompletedWithDate.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	
+View Case
+	#Click on View Case Button
+#	Win Activate     Amdocs CRM - ClearSales - [Commercial Project QUOTE DCA2ClassicIF
+#	Control Focus    Amdocs CRM - ClearSales - [Commercial Project QUOTE DCA2ClassicIF    View Case    [CLASS:Button; INSTANCE:17]
+#	Control Click	Amdocs CRM - ClearSales - [Commercial Project QUOTE DCA2ClassicIF    View Case    [CLASS:Button; INSTANCE:17]    LEFT    1
+#   Click    view_case.png
+#    Click In    view_case.png    view_case_view.png
+#	Double Click    view_case.png
+    Sleep    20s
+    Control Focus	Amdocs CRM - ClearSales	View Case	[CLASS:Button; INSTANCE:17]
+	Control Click	Amdocs CRM - ClearSales	View Case	[CLASS:Button; INSTANCE:17]	LEFT	1
+	Sleep    60s
+	#verify date populated at Installation Complete text box here.
+	${SubcaseTitle}=    Get Substring    ${TahitiManualTaskID}	0    13
+    Set Global Variable	${SubcaseTitle}
+	Wait For Active Window    Amdocs CRM - ClearSales - [ Case ${SubcaseTitle}    Subcases    20
+	Sleep    10s
+	
+Get SubcaseID
+    Get File Content	${ClassicManualTaskID_TextFile}
+	Log To Console	${TahitiManualTaskID} in testcase
+	${SubcaseTitle}=    Get Substring    ${TahitiManualTaskID}	0    13
+    Set Global Variable	${SubcaseTitle}
+    ${SubcaseSearchCriteria}=    Get Substring    ${TahitiManualTaskID}	7    16
+    Set Global Variable	${SubcaseSearchCriteria}
+		
+Subcases	
+	#Click on Subcases button
+	Control Focus    Amdocs CRM - ClearSales - [ Case ${SubcaseTitle}]    Subcases    [CLASS:Button; INSTANCE:17]
+	Control Click	Amdocs CRM - ClearSales - [ Case ${SubcaseTitle}]    Subcases    [CLASS:Button; INSTANCE:17]	LEFT	1   
+    Sleep    5s
+    Wait For Active Window    Amdocs CRM - ClearSupport - [Subcase list for case ${SubcaseTitle}]
+    Control Focus    Amdocs CRM - ClearSupport - [Subcase list for case    Subcases    [CLASS:ComboBox; INSTANCE:1]
+	Control Command	Amdocs CRM - ClearSupport - [Subcase list for case    Subcases    [CLASS:ComboBox; INSTANCE:1]	SelectString	Subcase ID
+	Control Focus	Amdocs CRM - ClearSupport - [Subcase list for case    Subcases	[CLASS:Edit; INSTANCE:1]  
+
+	Control Focus    Amdocs CRM - ClearSupport - [Subcase list for case    Subcases    [CLASS:ComboBox; INSTANCE:2]
+	Control Command	Amdocs CRM - ClearSupport - [Subcase list for case    Subcases    [CLASS:ComboBox; INSTANCE:2]	SelectString	contains
+	Control Send	Amdocs CRM - ClearSupport - [Subcase list for case    Subcases	[CLASS:Edit; INSTANCE:2]	${SubcaseSearchCriteria}
+	Sleep    5s
+	Control Focus    Amdocs CRM - ClearSupport - [Subcase list for case    Subcases    [CLASS:Button; INSTANCE:2]
+	Control Click	Amdocs CRM - ClearSupport - [Subcase list for case    Subcases    [CLASS:Button; INSTANCE:2]	LEFT	1 
+    Sleep    5s
+   # ControlSetText    Amdocs CRM - ClearSupport - [Subcase list for case    Subcases	[CLASS:Edit; INSTANCE:1]    ${EMPTY}	  	
+    Click    subcaseTaskName.png
+    Sleep    5s
+    Control Focus    Amdocs CRM - ClearSupport - [Subcase list for case    Open    [CLASS:Button; INSTANCE:5]
+	Control Click	Amdocs CRM - ClearSupport - [Subcase list for case    Open    [CLASS:Button; INSTANCE:5]	LEFT	1
+	Sleep    30s
+	#DEBUG 
+	#Wait For Active Window    Amdocs CRM - ClearSupport - [[READ] Subcase ${TahitiManualTaskID}    Subcase Title
+ 
+ Close Task
+    Control Focus    Amdocs CRM - ClearSupport - [[READ] Subcase ${TahitiManualTaskID}]    Close Task    [CLASS:Button; INSTANCE:18]
+	Control Click	Amdocs CRM - ClearSupport - [[READ] Subcase ${TahitiManualTaskID}]    Close Task    [CLASS:Button; INSTANCE:18]	LEFT	1 
+	Wait For Active Window    Amdocs CRM - ClearSupport - [${TahitiManualTaskID}:Close Task  Closing Summary 
+	#click CLose button
+	Control Focus    Amdocs CRM - ClearSupport - [${TahitiManualTaskID}:Close Task  Closing Summary      [CLASS:Button; INSTANCE:3]
+	Control Click    Amdocs CRM - ClearSupport - [${TahitiManualTaskID}:Close Task  Closing Summary      [CLASS:Button; INSTANCE:3]    	LEFT	1
+	Sleep    5s
+	#click on Wrong parameter in the 'config_itm' table TskStatusCancel
+	Wait For Active Window   #Wrong parameter in the 'config_itm' table TskStatusCancel 
+	Control Click	Date/Time Entry	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Wait For Active Window    Amdocs CRM - ClearSupport - [${TahitiManualTaskID}:Close Task  Closing Summary 
+	#click on Done button
+	Control Focus    Amdocs CRM - ClearSupport - [${TahitiManualTaskID}:Close Task  Closing Summary      [CLASS:Button; INSTANCE:4]
+	Control Click    Amdocs CRM - ClearSupport - [${TahitiManualTaskID}:Close Task  Closing Summary      [CLASS:Button; INSTANCE:4]    	LEFT	1
+	
+Close and Exit Amdocs
+    #click on subcase done button
+    Wait For Active Window    Amdocs CRM - ClearSupport - [[READ] Subcase ${TahitiManualTaskID}	
+	Control Focus    Amdocs CRM - ClearSupport - [[READ] Subcase ${TahitiManualTaskID}  Subcase Title      [CLASS:Button; INSTANCE:19]
+	Control Click    Amdocs CRM - ClearSupport - [[READ] Subcase ${TahitiManualTaskID}  Subcase Title      [CLASS:Button; INSTANCE:19]    	LEFT	1
+	#click on subcase list done button
+	Wait For Active Window    Amdocs CRM - ClearSupport - [Subcase list for case $[SubcaseTitle}
+	Control Focus    Amdocs CRM - ClearSupport - [Subcase list for case $[SubcaseTitle}  Subcase Search Criteria      [CLASS:Button; INSTANCE:6]
+	Control Click    Amdocs CRM - ClearSupport - [Subcase list for case $[SubcaseTitle}  Subcase Search Criteria      [CLASS:Button; INSTANCE:6]    	LEFT	1
+	#click on Case Done button
+	Wait for Active Window    Amdocs CRM - ClearSupport - [[READ] Case ${SubcaseTitle}
+	Control Focus    Amdocs CRM - ClearSupport - [[READ] Case ${SubcaseTitle}  Subcase Search Criteria      [CLASS:Button; INSTANCE:27]
+	Control Click    Amdocs CRM - ClearSupport - [[READ] Case ${SubcaseTitle}  Subcase Search Criteria      [CLASS:Button; INSTANCE:27]    	LEFT	1
+	#click on project done button
+	Wait for Active Window    Amdocs CRM - ClearSupport - [Commercial Project QUOTE
+	Control Focus    Amdocs CRM - ClearSupport - [Commercial Project QUOTE  Project ID      [CLASS:Button; INSTANCE:21]
+	Control Click    Amdocs CRM - ClearSupport - [Commercial Project QUOTE  Project ID      [CLASS:Button; INSTANCE:21]    	LEFT	1
+	#click on amdoc crm page done button
+	Wait For Active Window    Amdocs CRM - ClearSupport - [My Amdocs CRM
+	Control Focus    Amdocs CRM - ClearSupport - [My Amdocs CRM    Creation Date    [CLASS:Button; INSTANCE:1]
+	Control Click    Amdocs CRM - ClearSupport - [My Amdocs CRM    Creation Date    [CLASS:Button; INSTANCE:1]    LEFT	1
+	Sleep	10s
+	Send	^q	
+	
+############Classics Customer Creation Resource Keyword###############
+Fill In Account Details
+	Wait For Active Window	Amdocs CRM - ClearSales	Account untitled	60
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:9]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:9]	${Account_firstName}	#FirstName
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:10]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:10]	${Account_lastName}	#LastName
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:13]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:13]	${Account_phone}	#Phone
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:17]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:17]	${Account_street}	#Street
+	Set Activation Date
+	Set Trading Entity
+	Sleep	5s
+	Control Command	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:ComboBox; INSTANCE:1]	SelectString	NA
+	Sleep	5s
+	Control Command	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:ComboBox; INSTANCE:8]	SelectString	${Account_country}	#Contry
+	Sleep	5s
+	Control Command	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:ComboBox; INSTANCE:6]	SelectString	${Account_county}	#county
+	Sleep	5s
+	Set City
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:23]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:23]	${Account_postal}	#Postal Code
+	Control Click	Amdocs CRM - ClearSales	Add	[CLASS:Button; INSTANCE:21]	LEFT	1
+	Wait For Active Window	Amdocs CRM	Yes	60
+	Control Focus	Amdocs CRM	Yes	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	Yes	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Wait For Active Window	Amdocs CRM	A contact with the same name, last name and phone exists already. The data will be updated according to the database information.	60
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Win Wait Close	Amdocs CRM	OK	60
+	Wait For Active Window	Amdocs CRM - ClearSales	Street/Number:	60	
+	Take Screenshot	${Numbering}-Account Creation.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Export Account ID
+	#Sleep	10s
+	Add Site
+	#Capture Screen
+	Control Focus	Amdocs CRM - ClearSales	&Save	[CLASS:Button; INSTANCE:20]
+	Control Click	Amdocs CRM - ClearSales	&Save	[CLASS:Button; INSTANCE:20]	LEFT	1
+	Sleep	30s
+	Control Focus	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:22]
+	Control Click	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:22]	LEFT	1
+	Sleep	30s
+	
+Set Activation Date
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:4]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:4]	LEFT	1
+	Wait For Active Window	Date/Time Entry	Date:	60
+	Control Click	Date/Time Entry	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	10s
+
+Set Trading Entity
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:6]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:6]	LEFT	1
+	Wait For Active Window	Amdocs CRM - ClearSales	Entity ID:	60
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${Account_tradingEntity}	#Input Trading Entity value to filter
+	Control Click	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:1]	LEFT	1
+	#Get Active Window Image	Output\\SET TRADING ENTITY.jpg
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	1	72	24
+	Control Click	Amdocs CRM - ClearSales	Use/Done	[CLASS:Button; INSTANCE:3]	LEFT	1
+	Win Wait Close	Amdocs CRM - ClearSales	Entity ID:	60
+
+Set City
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:34]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:34]	LEFT	1
+	Wait For Active Window	Amdocs CRM	More than 100 items have been found. Please, redefine your search criteria.	60
+	#Sleep	30s
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	10s
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	1	48	23
+	Control Click	Amdocs CRM - ClearSales	Use/Done	[CLASS:Button; INSTANCE:3]	LEFT	1
+	Win Wait Close	Amdocs CRM - ClearSales	Town Council	60
+	#Sleep	30s
+
+Add Billing Account
+	Control Click	Amdocs CRM - ClearSales	Billing Account	[CLASS:Button; INSTANCE:18]	LEFT	1
+	Sleep	30s
+	Set Activation Date
+	Control Command	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:ComboBox; INSTANCE:9]	SelectString	${Billing_currency}
+	#Get Active Window Image	Output\\Set Billing Account.jpg
+	Sleep	20s
+	Control Click	Amdocs CRM - ClearSales	Add	[CLASS:Button; INSTANCE:10]	LEFT	1
+	Sleep	20s
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:12]
+	Control Click	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:12]	LEFT	1
+	Sleep	30s
+
+Add Site
+	Win Activate	Amdocs CRM - ClearSales
+	Control Focus	Amdocs CRM - ClearSales	Site	[CLASS:Button; INSTANCE:17]
+	Control Click	Amdocs CRM - ClearSales	Site	[CLASS:Button; INSTANCE:17]	LEFT	1
+	Wait For Active Window	Amdocs CRM - ClearSales	Site ID/Name:	60
+	#Set Activation Date
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	10s
+	Control Focus	Date/Time Entry	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Date/Time Entry	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	10s
+	#Add Site Name
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${Account_SiteName}
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:36]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Button; INSTANCE:36]	LEFT	1
+	Sleep	10s
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	20s
+	#Navidate to site detail
+	Control Focus	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:16]
+	Send	{TAB}{TAB}{ENTER}
+	Sleep	20s
+	#Search Address
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:1]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:1]	${Account_SiteCountry}
+	Sleep	10s
+	Control Focus	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	1	72	24
+	Sleep	10s
+	Control Focus	Amdocs CRM - ClearSales	Use/Done	[CLASS:Button; INSTANCE:2]
+	Control Click	Amdocs CRM - ClearSales	Use/Done	[CLASS:Button; INSTANCE:2]	LEFT	1
+	Sleep	30s
+	#Navigate to branch and set value
+	Send	{TAB}{TAB}{TAB}
+	Run Keyword If	'${ENV}'=='T3'	Run Keyword	Send	b
+	...	ELSE	Run Keyword	Send	bb
+	Sleep	10s
+	#Must Save first before create contact
+	Take Screenshot	${Numbering}-Fill in Site Detail.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Win Activate	Amdocs CRM - ClearSales
+	Control Focus	Amdocs CRM - ClearSales	Add	[CLASS:Button; INSTANCE:14]
+	Control Click	Amdocs CRM - ClearSales	Add	[CLASS:Button; INSTANCE:14]	LEFT	1
+	Sleep	20s
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	#Navigate to Contacts
+	Control Focus	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:16]
+	Send	{TAB}{RIGHT}{RIGHT}
+	Send	{TAB}{TAB}{ENTER}
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${Account_firstName}	#FirstName
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:3]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:3]	${Account_lastName}	#LastName
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:6]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:6]	${Account_phone}	#Phone
+	Take Screenshot	${Numbering}-Fill in Site Contact.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	20s	
+	Control Focus	Amdocs CRM - ClearSales	Add	[CLASS:Button; INSTANCE:9]
+	Control Click	Amdocs CRM - ClearSales	Add	[CLASS:Button; INSTANCE:9]	LEFT	1
+	Sleep	30s
+	Control Focus	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:11]
+	Control Click	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:11]	LEFT	1
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	Save/Done	[CLASS:Button; INSTANCE:43]
+	Control Click	Amdocs CRM - ClearSales	Save/Done	[CLASS:Button; INSTANCE:43]	LEFT	1
+	Sleep	10s
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	20s
+	
+	#Click Save and done
+	#Navigate to Site through side panel
+	Control Focus    Amdocs CRM - ClearSales    ${EMPTY}    [CLASS:SysTreeView32; INSTANCE:1]
+	Control Click    Amdocs CRM - ClearSales    ${EMPTY}    [CLASS:SysTreeView32; INSTANCE:1]    LEFT    1    41    281
+	Send	{DOWN}
+	Sleep	10s
+	#Get Active Window Image	Output\\Verify the branch site.jpg
+
+Export Account ID
+	Win Activate	Amdocs CRM - ClearSales
+	${AccountID}=	Control Get Text	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Log	${AccountID}
+	
+	Log To Console	${AccountID}
+	Export Variable Into Text File	${AccountID_TextFile}	${AccountID}	
+	
+Quit AMDOCS
+	Control Focus	Amdocs CRM - ClearSales	Cancel	[CLASS:Button; INSTANCE:5]
+	Control Click	Amdocs CRM - ClearSales	Cancel	[CLASS:Button; INSTANCE:5]	LEFT	1
+	Sleep	10s
+	Control Focus	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:3]
+	Control Click	Amdocs CRM - ClearSales	Done	[CLASS:Button; INSTANCE:3]	LEFT	1
+	Sleep	10s
+	Send	^q
+	
+############Classics Customer Creation Resource Keyword###############
+	
+	

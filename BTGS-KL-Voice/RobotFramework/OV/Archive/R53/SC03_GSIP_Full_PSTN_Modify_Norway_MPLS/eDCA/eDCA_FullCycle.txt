@@ -1,0 +1,80 @@
+*** Settings ***
+Documentation	Journey: Modify Order of BT OV GSIP Full PSTN for country Norway
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../../Common_OV/EDCA_Resource.txt
+Resource	../../Common_OV/CommonResources.txt
+Resource	resource_eDCA.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${TC_ID}		SC03_FullCycle
+
+*** Test Cases ***
+Prerequisites
+	[TAGS]	eDCA
+	Read data	eDCA	${TC_ID}
+	Log To Console	Retrieved EDCA TestData
+	Create Index Numbering
+	
+TC01 Order Creation
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	GSIP Modify Customer Details
+	GSIP Modify Customer Contact Details
+	Distributor Contact List
+	Order Contact Details
+	Additional Information
+	GSIP Modify Product Selection
+	[Teardown]	Close Browser
+
+TC02 Sites Information
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	GSIP Modify Sites
+	GSIP Modify Site Location Details
+	GSIP Modify Site Address
+	GSIP Modify Site Contact Details
+	[Teardown]	Close Browser
+
+TC03 Service Instance Details
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	GSIP Modify Service Instance
+	GSIP Modify Network Connection Details
+	GSIP Modify PBX Details
+	Configure Access
+	Access Details
+	Configure NTE
+	Configure VLAN
+	GSIP Modify SIP Trunking Details
+	Additional Features Details
+	GSIP Modify Billing Details
+	Pricing Details
+	[Teardown]	Close Browser
+	
+TC04 EDCA Sales User
+	[TAGS]	eDCA
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	GSIP Modify Sales User - Submit
+	[Teardown]	Close Browser
+	
+TC05 EDCA Service Delivery User
+	[TAGS]	eDCA	
+	Open Browser And Login To EDCA Page As Service Delivery User
+	Select Pending Order For Full Cycle
+	Service Delivery User - Submit
+	[Teardown]	Close Browser	
+
+TC06 EDCA Order Entry Team
+	[TAGS]	eDCA
+	GSIP Modify Open Browser And Login To EDCA Page As OET User
+	Select Pending Order For Full Cycle
+	GSIP Modify OET User - Submit
+	[Teardown]	Close Browser						
+	

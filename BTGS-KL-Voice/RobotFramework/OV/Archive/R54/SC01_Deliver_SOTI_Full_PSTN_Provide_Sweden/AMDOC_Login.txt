@@ -1,0 +1,24 @@
+*** Settings ***
+Documentation	This test script is use for retrigger the test where the previous test stop or fail after BFG-IMS Customer Creation part.
+Suite Setup	
+Library			Selenium2Library
+Resource	../Common_OV/CommonResources.txt
+Resource	../Common_OV/BFGIMS_Resource.txt
+Resource	../Common_OV/CLASSIC_Resource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${TC_ID}	R53_SC01
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	PREREQUISITE	CustomerCreation
+	Create Index Numbering
+	Log to console	${Numbering}
+	Log	${Numbering}
+	Set Global Variable	${Numbering}
+
+TC01 Seach Customer in Amdocs
+	[TAGS]	CLASSICS	CustomerCreation
+	Test 1
+	Test 2

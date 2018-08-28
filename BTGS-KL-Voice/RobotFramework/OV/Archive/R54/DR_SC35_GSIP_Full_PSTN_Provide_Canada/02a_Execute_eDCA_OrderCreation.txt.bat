@@ -1,0 +1,1 @@
+pybot -i --exitonfailure --removekeywords wuks --removekeywords name:*Execution* -d Output\  --exitonfailure -v TC_ID:R54_SC35_DR_03 02a_eDCA_OrderCreation.txt

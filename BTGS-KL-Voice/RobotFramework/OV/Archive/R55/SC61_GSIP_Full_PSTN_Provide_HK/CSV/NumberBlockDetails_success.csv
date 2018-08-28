@@ -1,0 +1,2 @@
+BFG*CustomerID,Service*ID,Action,In/Out,Number Block Start,Number Block End,Number Block Size,Gaining Service Provider,Losing Service Provider,Routing Prefix,Type,Number Type,Status,responseError
+913487,GONEV-01016429-0001,Add,NA,85200001100,85200001109,10,NA,NA,0,New Number,Geographic,SUCCESS,

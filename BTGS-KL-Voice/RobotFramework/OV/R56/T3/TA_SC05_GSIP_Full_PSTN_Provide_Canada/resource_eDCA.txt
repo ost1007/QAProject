@@ -1,0 +1,168 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library	Selenium2Library
+Library	DebugLibrary
+Library	DateTime
+Library		OperatingSystem
+Library		Collections
+Resource	../Common_OV/EDCA_Resource.txt
+
+*** Keywords ***
+#######eDCA SC02 resource keywords###############
+GSIP Full PSTN Additional Features Details
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Run Keyword If    '${AddBlock}' == 'True'    Add Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1	
+
+Add Block Details
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Sleep	30s
+	Select Window	Information
+	Wait Until Page Contains Element	btn1	${wait_time}
+	Click Element	btn1
+	Select Window	${eDCA_Title}
+	#Select Window	SQE Lite - MPLS
+#	Alert Should Be Present	For Main Site Orders,Account Teams please help set the correct expectation with our customers.
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlNumberType	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlNumberType	${NumberType}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlBTSupplied	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlBTSupplied	${BTSupplied}
+	Sleep	5s
+	# Added by Veena on 02052018 to cater Supplier Field
+	#Wait Until Page Contains Element	${TXT_AFD_SUPPLIER}	${wait_time}
+	Run Keyword Unless    '${BTSupplied}'=='Yes'    Selenium2Library.Input Text	${TXT_AFD_SUPPLIER}	${Supplier}
+	# Added by Veena on 02052018 to cater Supplier Field
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_txtNumberBlockSize	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtNumberBlockSize	${NumberBlockSize}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlParentName	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlParentName	${UniqueTrunkGroupFriendlyName}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber	${wait_time}
+	Run Keyword If	'${Country}' == 'Sweden'	Verify Sweden Block Start Number
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber	${BlockStartNumber}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_btnSave	${wait_time}
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnSave
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	
+Service Instance R56 SC68
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	Click Element	xpath=//input[@value = 'Edit']
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains	Service Instance	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-To fill-Service Instance Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+    ${DeleteOnevoiceService}=  Run Keyword And Return Status    Element Should Be Enabled   ${BTN_SI_DELTE_SI}
+	Run Keyword If	${DeleteOnevoiceService}	Run Keywords	Click Element		${BTN_SI_DELTE_SI}
+	...	AND	Confirm Action
+	${AddNewOnevoiceService}=  Run Keyword And Return Status    Element Should Be Enabled   ${BTN_SI_ADD_NEW_OV_SRV}
+	Sleep	5s
+	Run Keyword If    ${AddNewOnevoiceService}    Add New Service
+	Wait Until Page Contains Element	${CBO_SI_SRV_TYPE}	${wait_time}
+	Select From List	${CBO_SI_SRV_TYPE}	${ServiceType}
+	Run Keyword Unless	'${SubServiceType}' == '${EMPTY}'	Add SubServiceType
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_SI_NON_STD_ORD}	${wait_time} 
+	Select From List	${CBO_SI_NON_STD_ORD}	${NonStandardType}
+	Wait Until Page Contains Element	${CBO_SI_VOICE_VPN_REQUIRED}	${wait_time} 
+	Select From List	${CBO_SI_VOICE_VPN_REQUIRED}	${VoiceVPNRequired}
+	Run Keyword Unless	'${PSTNRequired}' == '${EMPTY}'	Add PSTNReq
+	Wait Until Page Contains Element	${CBO_SI_DIRECT_ACCESS_TYPE}	${wait_time} 
+	Select From List	${CBO_SI_DIRECT_ACCESS_TYPE}	${DirectAccessType}
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_SI_DIRECT_ENCRYPTION_REQUIRED}    ${wait_time}
+	Select From List	${CBO_SI_DIRECT_ENCRYPTION_REQUIRED}	${EncryptionRequired}
+	Sleep	5s
+	Wait Until Page Contains Element	${TXT_NO_OF_CHANNELS}	${wait_time}
+	Selenium2Library.Input Text	${TXT_NO_OF_CHANNELS}	${NoOfChannels}
+	Sleep	5s
+	Run Keyword Unless	'${POPDualHomed}' == '${EMPTY}'	Add Network Conn Details
+	Execute JavaScript    window.scrollTo(0,2000)
+	Click Element	${BTN_SI_SAVE}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Service Instance.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Wait Until Page Contains Element	${BTN_SI_EDIT}	${wait_time}
+	Click Element		${BTN_SI_EDIT}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1	
+	Click Element	btnNext1
+	#Sleep	20s
+
+Add SIP Trunking Details R56 SC68
+	Select From List	UsrOneVoiceSIPTrunkingDetails_ddlCodec	${Codec}
+	Sleep	5s	
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol
+	Click Element	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol
+	Select From List	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol	${SBCTransportProtocol}
+	Sleep	5s
+	${EditNewTrunkGroup}=	Run Keyword And Return Status	Page Should Contain Element  UsrOneVoiceSIPTrunkingDetails_dgTrunkGrp__ctl2_btnEdit
+	Run Keyword Unless  '${EditNewTrunkGroup}'=='True'  Add New trunk Group
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtTrunkFriendlyName	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_txtTrunkFriendlyName
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtTrunkFriendlyName	${UniqueTrunkFriendlyName}
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlResilienceGRP	${wait_time}
+	Select from List	UsrOneVoiceSIPTrunkingDetails_ddlResilienceGRP	${UniqueTrunkGroupFriendlyName}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit	${wait_time}
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit	${TrunkCACLimit}														  
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress	${PBXIPaddress}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlRTPIPPBXIP	${wait_time}
+	Select From List	UsrOneVoiceSIPTrunkingDetails_ddlRTPIPPBXIP	${IsRTPIPSameAsPBX}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Trunk Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	#Click Element	UsrOneVoiceSIPTrunkingDetails_ddlshrngipwithicg
+	Wait Until Page Contains	Trunk Details:	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails
+	#Sleep	4s
+	Press Key	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails	\\13
+	#Double Click Element	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_dgTrunkDetails__ctl2_Button1	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1
+	Press Key	btnNext1	\\13
+
+
+

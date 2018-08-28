@@ -1,0 +1,81 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+#Library	AutoItLibrary
+Library	DebugLibrary
+#Resource	ReadExcel.py
+Library		ReadExcel.ExcelUtility
+Variables	static-locators.py
+
+*** Keywords ***
+RSQE And Product Configuration
+	Launch RSQE
+	${status}	${value}=	Run Keyword and Ignore Error	Element Should Be Visible	${CBOX_ADDITIONAL_PRODUCT}
+	Run Keyword If	'${status}' == 'PASS'	Products in the quote	ELSE	Log	Product selected
+	Launch Provide Configuration
+	${noProductCreated}=	Run Keyword And Return Status	Page Should Contain Element	AddProducts
+	Run Keyword If	${noProductCreated}	Product Configuration	ELSE	Log To Console	Product configured
+	${orderDoesNotExist}=	Run Keyword And Return Status	Page Should Not Contain Element	OrdersTab
+	Run Keyword If	${orderDoesNotExist}	Run Keywords
+	...	Select Product
+	...	AND	Calculate Price
+	...	AND	Create Offer and Order
+	...	ELSE	Click Link	OrdersTab
+	#Configure Order
+	RFO Sheet Download and Upload 2
+	Submit Order
+	
+Product Configuration
+	Create New Cloud Product
+	
+	CCD Base Config
+	Provider Connection
+	Set Bandwidth
+	
+	Finalise Config
+	
+Edit Excel RFOSheet
+	${year}	${month}	${day}=	Get Time	year,month,day
+	AutoItSetOption 	WinWaitDelay	2000
+	Win Wait	${RFOSheet}	#SQE_AUTOQUOTE003_AQ00_RFOSheet.xlsx  [Read-Only] - Excel
+	Win Activate	${RFOSheet}
+	Send	^g
+	Send	o2{ENTER}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	!{DOWN}
+	Sleep	2
+	Send	{DOWN}{ENTER}
+	Send	^{PGDN}
+	Send	^g
+	Send	e3{ENTER}
+	Send	AWS Private{TAB}
+	Send	1{TAB}
+	Send	123{TAB}
+	Send	Bin Luv{TAB}{TAB}
+	Send	123456789012
+	Sleep	5
+	
+RFO Sheet Download and Upload 2
+	${year}	${month}	${day}=	Get Time	year,month,day
+	Wait Until Element Is Visible	xpath=.//*[contains(text(),'RFO invalid')]	${waiting_time}
+	Click Image    Export RFO
+	Capture Page Screenshot		${OUTPUTDIR}${/}Download RFOSheet.png
+	Remove File	C:\\Users\\609424665\\Downloads\\${RFOSheet}
+	Click Element	${BTN_OK_RFO}
+	Sleep	20
+	#Write To Cell	C:\\Users\\609424665\\Downloads\\${RFOSheet}	Order Details	O	2	${year}-${month}-${day}
+	#Write To Cell	C:\\Users\\609424665\\Downloads\\${RFOSheet}	Order Details	P	2	${year}-${month}-${day}
+	#Write To Cell	C:\\Users\\609424665\\Downloads\\${RFOSheet}	Cloud Connect Direct	E	3	AWS Private
+	#Write To Cell	C:\\Users\\609424665\\Downloads\\${RFOSheet}	Cloud Connect Direct	F	3	1
+	#Write To Cell	C:\\Users\\609424665\\Downloads\\${RFOSheet}	Cloud Connect Direct	G	3	123
+	#Write To Cell	C:\\Users\\609424665\\Downloads\\${RFOSheet}	Cloud Connect Direct	H	3	Bin Luv
+	#Write To Cell	C:\\Users\\609424665\\Downloads\\${RFOSheet}	Cloud Connect Direct	J	3	AWS Private
+	Send	^j
+	Win Wait	Library
+	Win Activate  Library
+	Send	{ENTER}
+	Sleep	20
+	Send	^s
+	Win Close	${RFOSheet} - Excel
+	Debug

@@ -1,0 +1,26 @@
+*** Settings ***
+Documentation	Journey: To rerun Provide Order of BT OV GSIP Full PSTN Provide for country Norway when it fails in Service Instance Details
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../../Common_OV/EDCA_Resource.txt
+Resource	../../Common_OV/CommonResources.txt
+Resource	resource_eDCA.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${TC_ID}		R53_SC02
+
+*** Test Cases ***
+Prerequisites
+	[TAGS]	eDCA
+	Read data	eDCA	${TC_ID}
+	Log To Console	Retrieved EDCA TestData
+	Create Index Numbering
+	
+TC03 Service Instance Details
+	[TAGS]	eDCA
+	JOSH TEST
+			
+	

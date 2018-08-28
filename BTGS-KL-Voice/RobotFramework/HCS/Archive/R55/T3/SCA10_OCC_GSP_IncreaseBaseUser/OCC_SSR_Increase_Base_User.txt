@@ -1,0 +1,39 @@
+*** Settings ***
+Documentation	Journey: OCC Contract Journey  for Non UK Country
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common_HCS/CommonResources.txt
+Resource	../Common_HCS/CommonAC.txt
+#Resource	../Common_HCS/resource_keywords_sd.txt
+Resource	../Common_HCS/readHCSTestDataFromExcel.txt
+Resource	../Common_HCS/HCSResource.txt
+##added in R54 to cater BFGIMS
+#Resource	../Common_HCS/BFGIMS_Resource.txt
+##end added in R54 to cater BFGIMS
+#Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+#${RefNo}		SC02@
+${RefNo}		${TC_ID}@
+#${sheetName}	CQM
+#${NewCustomer}	yes
+#${TC_ID}		SC02
+*** Test Cases ***
+prerequisites
+	[TAGS]	Q2O
+	Read data	VLP	${TC_ID}	
+	Log To Console	Retrieved Q2O TestData
+	Create Index Numbering
+	
+TC01 Quote Creation
+	[TAGS]	Q2O
+	#move from CommonResources in R54
+	Execution-Checking NEW or OLD Quote
+	#end move from CommonResources in R54
+	#Open Browser And Login To CQM Page
+	Open Browser And Login	${VLP_URL}	${BROWSER}	
+	VLP for SSR
+	[Teardown]	Log Location

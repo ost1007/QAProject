@@ -1,0 +1,11 @@
+0 [main] INFO org.robotframework.remoteserver.RemoteServer  - Mapped path / to library com.github.rainmanwy.robotframework.sikulilib.SikuliLibrary.
+0 [main] INFO org.robotframework.remoteserver.RemoteServer  - Robot Framework remote server starting
+0 [main] INFO org.eclipse.jetty.server.Server  - jetty-7.x.y-SNAPSHOT
+31 [main] INFO org.eclipse.jetty.server.handler.ContextHandler  - started o.e.j.s.ServletContextHandler{/,null}
+218 [main] INFO org.eclipse.jetty.server.AbstractConnector  - Started SelectChannelConnector@0.0.0.0:49255
+218 [main] INFO org.robotframework.remoteserver.RemoteServer  - Robot Framework remote server started on port 49255.
+[error] RobotDesktop: checkMousePosition: should be L(1893,347)@S(0)[0,0 1920x1080]
+but after move is L(1893,346)@S(0)[0,0 1920x1080]
+Possible cause in case you did not touch the mouse while script was running:
+ Mouse actions are blocked generally or by the frontmost application.
+You might try to run the SikuliX stuff as admin.

@@ -1,0 +1,339 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library	Selenium2Library
+Library	DebugLibrary
+Library		AutoItLibrary
+Library	DateTime
+Library		OperatingSystem
+Library		Collections
+Library		String
+
+*** Keywords ***
+######eDCA SC03 resource keywords###############
+GSIP Modify Customer Details
+	Click Element	menu1_rptMenu__ctl0_hlkMenu
+	Wait Until Page Contains	Customer Details	${wait_time}
+	Remove Files	${EXECDIR}\\Extracted_Data\\EDCAOrderID.txt
+	${EDCAOrderID}=	Get Text	lblOrderId
+	Set Global Variable	${EDCAOrderID}
+	Create File	${EXECDIR}\\Extracted_Data\\EDCAOrderID.txt	${EDCAOrderID}
+	Select From List	UsrTahitiCustomerDetails_cboOrderType	${OrderType}
+	Wait Until Page Contains	Distributor Legal Name	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-To fill in Customer details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select From List	UsrTahitiCustomerDetails_cboDistributorLegalName	${DistributorLegalName}
+	Click Element	UsrTahitiCustomerDetails_btnSearch
+	Select Window	Search
+	Input Text	TextBox1	${FullLegalCompanyName}
+	Click Element	Button1
+	Select From List By Index	ListBox1	0
+	Click Element	btnDone
+	Select Window	eDCA - MPLS
+	Wait Until Page contains Element	UsrTahitiCustomerDetails_cboSiteCountry	${wait_time}
+	Select From List	UsrTahitiCustomerDetails_cboSiteCountry	${Country}
+	Click Element	UsrTahitiCustomerDetails_btnSiteSearch
+	Wait Until Page Contains	Request for getting sites has been successfully created. Awaiting the response from classic. Please wait. Status will be updated in every one minute.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Search in Classic for site.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Element is Enabled	UsrTahitiCustomerDetails_btnSiteSearch	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select Site.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Choose Ok On Next Confirmation
+	Click Element	UsrTahitiCustomerDetails_grdSite__ctl5_btnSelect
+	Confirm Action
+	Wait Until Page Contains	Request is created successfully. Response has not come yet. Please wait. Status will be updated in every one minute.	${wait_time}
+	Wait Until Page Contains Element	UsrTahitiCustomerDetails_txtContactId	${wait_time}
+	Input Text	UsrTahitiCustomerDetails_txtContactId	${ContractId}
+	Select From List	UsrTahitiCustomerDetails_cboCurrency	${CurrencyName}
+	Input Text	UsrTahitiCustomerDetails_txtSiebelId	${SiebelId}
+	Select From List	UsrTahitiCustomerDetails_cboServiceCentre	${ServiceCentre}
+	Input Text	UsrTahitiCustomerDetails_txtContactTerms	${ContractTerm}
+	${year}=	Get Current Date	result_format=%Y
+	${month}=	Get Current Date	result_format=%b
+	${day}=	Get Current Date	result_format=%d
+	${my_date_to_select}=	set variable	${day}-${month}-${year}
+	Execute JavaScript  document.getElementById('UsrTahitiCustomerDetails_txtDate').value='${my_date_to_select}'
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Filled in Customer details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	2s
+	Click Element	btnNext1
+	
+GSIP Modify Customer Contact Details
+	Wait Until Page Contains	Customer Contact Details	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Customer Contact Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	
+GSIP Modify Product Selection
+	Wait Until Page Contains	Product Selection		${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Focus	btnNext1	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Product Selection.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+
+GSIP Modify Sites
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains	Sites	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-To fill Site Info.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Page Contains Element	UsrTahitiSites_dgMPLSSites__ctl3_btnEdit	${wait_time}
+	Click Element	UsrTahitiSites_dgMPLSSites__ctl3_btnEdit
+	Wait Until Page Contains	Site	${wait_time}
+	Wait Until Page Contains Element	UsrTahitiSite_txtCustRequiredDate	${wait_time}
+	${cust_req_date}=	Get Current Date	UTC	7 days	%d-%b-%Y
+	Sleep	6s
+	Focus	UsrTahitiSite_txtCustRequiredDate
+	Execute JavaScript  document.getElementById('UsrTahitiSite_txtCustRequiredDate').value='${cust_req_date}'
+	Wait Until Page Contains Element	UsrTahitiSite_txtCustSignDate	${wait_time}
+	${cust_sign_date}=	Get Current Date	UTC	-3 days	%d-%b-%Y
+	Sleep	6s
+	Focus	UsrTahitiSite_txtCustSignDate
+	Execute JavaScript  document.getElementById('UsrTahitiSite_txtCustSignDate').value='${cust_sign_date}'
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	
+GSIP Modify Site Location Details
+	Wait Until Page Contains	SiteLocationDetails	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site Location Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	
+GSIP Modify Site Address
+	Wait Until Page Contains	Site Address	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site Address.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	
+GSIP Modify Site Contact Details
+	Wait Until Page Contains	Site Contact Details	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtFirstName	${PrimarySiteFirstName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtLastName	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtLastName	${PrimarySiteLastName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtEmail	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtEmail	${PrimarySiteEmail}
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtPhone	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtPhone	${PrimarySitePhone}
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSFirstname	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtSFirstname	${SecondarySiteFirstName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSLastName	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtSLastName	${SecondarySiteLastName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSEmail	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtSEmail	${SecondarySiteEmail}
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSPhone	${wait_time}
+	Input Text	UsrTahitiSiteContactDetails_txtSPhone	${SecondarySitePhone}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site Contact Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+
+GSIP Modify Service Instance
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	UsrTahitiSites_dgMPLSSites__ctl3_btnEdit	${wait_time}
+	Click Element	UsrTahitiSites_dgMPLSSites__ctl3_btnEdit
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_dgServiceInstances__ctl2_btnEdit	${wait_time}
+	Click Element		UsrTahitiServiceInstance_dgServiceInstances__ctl2_btnEdit
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1	
+	Click Element	btnNext1
+	
+GSIP Modify Network Connection Details
+	Wait Until Page Contains	Network Connection Details	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Network Connection Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Click Element	btnNext1
+	
+GSIP Modify PBX Details
+	Wait Until Page Contains	PBX Details	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-PBX Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Click Element	btnNext1
+	
+GSIP Modify SIP Trunking Details
+	Wait Until Page Contains	SIP Trunking Details	${wait_time}
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlCodec	${wait_time}
+	Select From List	UsrOneVoiceSIPTrunkingDetails_ddlCodec	${Codec}
+	Sleep	5s
+	Clear Element Text	UsrOneVoiceSIPTrunkingDetails_txtCACLimit
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtCACLimit	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_txtCACLimit
+	Input Text	UsrOneVoiceSIPTrunkingDetails_txtCACLimit	${TrunkGroupCACLimit}
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit	${wait_time}
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit
+	Sleep	5s
+	Execute JavaScript    window.scrollTo(0,2000)
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Focus	btnNext1
+	Click Element	btnNext1
+	
+GSIP Modify Billing Details	
+	Wait Until Page Contains	Billing Details	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Billing Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Focus	btnNext1
+	Click Element	btnNext1
+	
+GSIP Modify Sales User - Submit
+	Win Activate	eDCA - MPLS - Internet Explorer
+	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	${EMPTY}	RIGHT	1	58	321
+	Sleep	2s
+	Send	{DOWN}
+	Send	{ENTER}
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-OrderValidation.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrTahitiSubmit_btnOrderValidation
+	Wait Until Page Contains Element	UsrTahitiSubmit_chkSDqueue	${wait_time}
+	Select Checkbox	UsrTahitiSubmit_chkSDqueue
+	Wait Until Element Is Enabled	UsrTahitiSubmit_ddlSDteam	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDteam	${ServiceDeliveryTeam}
+	Wait Until Page Contains Element	UsrTahitiSubmit_ddlSDowner	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDowner	${ServiceDeliveryOwner}
+	Wait Until Page Contains Element	UsrTahitiSubmit_txtEmail	${wait_time}
+	Clear Element Text	UsrTahitiSubmit_txtEmail
+	Input Text	UsrTahitiSubmit_txtEmail	${SubmitEmail}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Submit to SD.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrTahitiSubmit_btnSubmitToSDAuto
+	Wait Until Page Contains	Order ${EDCAOrderID} is submitted to Service Delivery successfully.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Successfull Submission.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	3s
+	
+GSIP Modify Open Browser And Login To EDCA Page As OET User 
+#	Execution-Checking NEW or OLD Order
+	Sleep	1s
+	${download_directory}=	Run Keyword If	'${BROWSER}'=='Chrome'	Set Variable	C:\\Jenkins\\RFOSheets
+	${chrome_options}=	Run Keyword If	'${BROWSER}'=='Chrome'	Evaluate	sys.modules['selenium.webdriver'].ChromeOptions()	sys, selenium.webdriver
+	${prefs}=	Run Keyword If	'${BROWSER}'=='Chrome'	Create Dictionary	download.default_directory=${download_directory}	#plugins.plugins_disabled=${disabled}
+	Run Keyword If	'${BROWSER}'=='Chrome'	Run Keywords
+    ...	Call Method	${chrome_options}	add_experimental_option	prefs	${prefs}
+    ...	AND	Create Webdriver	Chrome	chrome_options=${chrome_options}
+    ...	ELSE
+    ...	Open Browser	${EDCAURL}	FF	ff_profile_dir=${FF_PROFILE}
+    Goto	${EDCAURL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    eDCA Portal
+    Select From List    ddlLogin   ${EDCAOETUserID}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Login As OET User.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+    Send	{TAB}{TAB}{TAB}{ENTER}
+	Wait Until Page Contains	Please Select Profile	${wait_time}
+	Select From List    ddlProfile   ${OETProfile}
+	Wait Until Page Contains Element	${Continue}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Selection of profile.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	5s
+	Click Element	${Continue}
+	Wait Until Page Contains	View Pending Order	${wait_time}
+		
+GSIP Modify OET User - Submit	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	xpath=.//*[@id='TreeView1']/table/tbody/tr[9]/td/a/font
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-OET User Submit Page.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrTahitiSubmit_btnViewDiffRpt
+	Sleep	5s
+	Select Window	OnevoiceDiffReport
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Diff Report.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Close Window
+	Select Window	eDCA - MPLS
+	Click Element	UsrTahitiSubmit_btnDiffSummary
+	Sleep	5s
+	Select Window	Diff Summary Report
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Diff Summary Report.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Close Window
+	Select Window	eDCA - MPLS
+	Select From List	UsrTahitiSubmit_drpPhyLog	Logical
+	Wait Until Page Contains Element	UsrTahitiSubmit_btnApproveDiffRpt	${wait_time}	
+	Click Element	UsrTahitiSubmit_btnApproveDiffRpt
+	Wait Until Element Is Enabled	UsrTahitiSubmit_btnUploadPass1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Upload Pass1 Enabled.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Choose Ok On Next Confirmation
+	Click Element	UsrTahitiSubmit_btnUploadPass1
+	Confirm Action
+	Wait Until Page Contains	Request is successfully Created and waiting for Response from Classic for Order ${EDCAOrderID}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Request created successsfully to Classic.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Page Contains	Order ${EDCAOrderID} is successfully created in Classic.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Order successfully Created in Classic.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Remove Files	${EXECDIR}\\Extracted_Data\\ClassicOrderID.txt
+	${SuccessMessage}=	Get Text	lblMessage
+	${ClassicOrderID}=	Get Substring	${SuccessMessage}	-7
+	Set Global Variable	${ClassicOrderID}
+	Create File	${EXECDIR}\\Extracted_Data\\ClassicOrderID.txt	${ClassicOrderID}	
+	Sleep	3s							
+#######eDCA SC03 resource keywords###############
+	

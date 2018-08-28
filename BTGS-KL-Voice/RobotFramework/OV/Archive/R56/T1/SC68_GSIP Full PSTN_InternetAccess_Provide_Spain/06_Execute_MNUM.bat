@@ -1,0 +1,1 @@
+pybot -d Output\ --exitonfailure 06_MNUM.txt

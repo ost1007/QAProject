@@ -1,0 +1,92 @@
+*** Settings ***
+Documentation	@author 607253786
+...    @Description Central Site Level Product Active Directory Provide
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common/CommonResources.txt
+Resource	../Common/CommonAC.txt
+Resource	../Common/resource_keywords_sd.txt
+Resource	../Common/readHCSTestDataFromExcel.txt
+Resource	../Common/HCSResource.txt
+Resource	resource_keywords.txt
+
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	60s
+${TC_ID}		TC41_P
+${QuoteName}	TC41_01ASite
+${RefNo}		TC41_P
+${story}		TC41_P
+${sheetName}	CQM
+${crfsheet}     ADCRF.xlsx
+
+*** Test Cases ***
+prerequisites
+	[TAGS]	Q2O
+	Read data	${sheetName}	${TC_ID}	
+	Log To Console	Retrieved CQM variables
+	Asset Creation
+	#Create Index Numbering
+	
+TC01 Quote Creation
+	[TAGS]	Q2O
+	Open Browser And Login To CQM Page	
+	Select Customer	
+	Go to Manage Quote
+	Run Keyword If	'${newQuote}' == 'yes'	Run Keyword	Create Quote	${QuoteName}	${OrderType}	${ContractTerm}	${Currency}	${OppurtunityReferenceNumber}
+	Select Quote	${quoteID}	${QuoteName}
+	[Teardown]	Log Location
+	
+TC02 Quote Configuration
+	[TAGS]	Q2O
+	Quote Configuration
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+
+TC03 Pricing
+    [TAGS]	Q2O
+	Calculate Pricing	
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+
+TC04 Order Creation
+	[TAGS]	Q2O
+	Create Order   
+    Close Browser
+	Sleep	3m
+	Open Browser And Login To CQM Page
+	Select Customer
+	Capture The OrderID	${quoteID}
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+	...	AND	Close Browser
+
+TC05 Review Order
+	[TAGS]	SD
+	Set Suite Variable	${sheetName}	CQM
+	Read data	${sheetName}	${TC_ID}
+	Set Suite Variable	${sheetName}	SD
+	Read data	${sheetName}	${TC_ID}
+	Load Order IDs
+	Set Suite Variable	${browser}		Chrome
+	#Create Index Numbering
+	Open Browser And Login	${CQMusername}	${CQMpassword}	${browser}	${t3_SI_URL}
+	Navigate to Workflow and Search Order
+	Select Given Window	title=Si-Workflow
+	${sameSOPInTestData}=	Run Keyword And Return Status	Element Should Contain	lblSopEin	${installCoordinator}
+	Run Keyword Unless	${sameSOPInTestData}	Change Order Contact Details
+	${btnActionDisabled}=	Run Keyword And Return Status	Element Should Be Disabled	btnAction
+	Run Keyword If	${btnActionDisabled}	Accept Order
+	[Teardown]	Log Location
+
+TC06-TC12/13 L2C process	
+	[TAGS]	SD
+	Process Order
+	Confirm Status Complete in AIB
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser	
+
+
+    

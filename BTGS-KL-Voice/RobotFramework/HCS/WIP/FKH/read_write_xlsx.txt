@@ -1,0 +1,79 @@
+*** Settings ***
+#Documentation		Read Test Data File From Excel. Note - Excel file must be .xls format
+#...					Created by:	FKH
+#...					Date:	20 December 2016
+#...					Edited by:	..... 
+Library		Selenium2Library
+#Resource	ReadExcel.py
+#Resource	CopyxlSheet.py
+Library		CopyxlSheet.ExcelUtility
+#Library		ReadExcel.ExcelUtility
+#Library		update_excel.ExcelUtility
+Library		openpyxl.reader.excel
+Library		openpyxl.writer.excel
+#Library		openpyxl.worksheet
+#Library		copy
+Library		OperatingSystem
+Library		DateTime
+Library		String
+#Library		ExcelLibrary
+
+*** Variables ***
+
+*** Keywords ***
+Read data
+	${year}	${month}	${day}=	Get Time	year,month,day
+	#${itemvalue}=	Read Cell Value	mpdm.xlsx	TestData	C	73
+	#Log To Console	${\n}${itemvalue}
+	Copy File	C:\\Users\\609424665\\Downloads\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	${EXECDIR}\\
+	#${itemv}=	Read Cell Value	${EXECDIR}\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	Cloud Connect Direct	O	1
+	${itemv2}=	Write To Cell	${EXECDIR}\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	Order Details	O	2	${year}
+	#${itemv2}=	Write To Cell	${EXECDIR}\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	Order Details	P	2	${year}
+	#${itemv2}=	Write To Cell	${EXECDIR}\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	Order Details	R	2	88003 - Ioa
+	#update xlsx	${EXECDIR}\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	${EXECDIR}\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx
+	Log To Console	${\n}${itemv2}
+	
+Write data
+	#Copy File	C:\\Users\\609424665\\Downloads\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	${EXECDIR}\\
+	Copy File	C:\\Users\\609424665\\Downloads\\SQE_SC34AZO365344_SC34AZO365344_RFOSheet.xlsx	${EXECDIR}\\
+	${wb}=	load_workbook	${EXECDIR}\\SQE_SC34AZO365344_SC34AZO365344_RFOSheet.xlsx	#read_only=False
+	#${sheet_ranges}=	set variable	${wb.get_active_sheet()}
+	#${numws}=	set variable	1
+	#${numws}=	Convert To Integer	0
+	${ws}=	set variable	${wb['Order Details']}
+	#${source}=	set variable	${wb.active}
+	#Log To Console	${\n}${source}
+	#${target}=	WorksheetCopy()
+	#${cell}=	 set variable	${sheet_ranges.cell('O2')}
+	${ws.cell('P2').value}=	set variable	2017-Apr-19
+	${ws.cell('P3').value}=	set variable	2017-Apr-19
+	${ws.cell('P4').value}=	set variable	2017-Apr-19
+	${ws.cell('Q2').value}=	set variable	2017-Apr-19
+	${ws.cell('Q3').value}=	set variable	2017-Apr-19
+	${ws.cell('Q4').value}=	set variable	2017-Apr-19
+	${ws.cell('S3').value}=	set variable	102842 - SATHYA
+	${ws.cell('S4').value}=	set variable	102842 - SATHYA
+	save_workbook	${wb}	${EXECDIR}\\SQE_SC34AZO365344_SC34AZO365344_RFOSheet.xlsx
+	
+Copy Excel
+	Copy File	C:\\Users\\609424665\\Downloads\\SQE_SC07AZPV002195_SC07AZPV002195_RFOSheet.xlsx	${EXECDIR}\\
+	Copy Excel Sheet	${EXECDIR}\\SQE_SC07AZPV002195_SC07AZPV002195_RFOSheet.xlsx	Order Details.xlsx
+	
+Get Date
+	${day}=	Get Current Date	result_format=%d
+	Log To Console	${day}
+	
+Cts
+	${num}=	Set Variable	33.0
+	#${str}=	Convert To String	${num}
+	${regex}=	Strip String	${num}	right	.0
+	Log To Console	${regex}
+	
+*** Test Cases ***
+Test run
+	Cts
+	#Get Date
+	#Read data
+	#Write data
+	#Copy Excel
+	

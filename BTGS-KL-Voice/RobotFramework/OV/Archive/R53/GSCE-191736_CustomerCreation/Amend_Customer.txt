@@ -1,0 +1,36 @@
+*** Settings ***
+Documentation	SC01_Customer_Creation_BFG_IMS
+Suite Setup	
+Library			Selenium2Library
+Resource	../Common_OV/CommonResources.txt
+Resource	../Common_OV/BFGIMS_Resource.txt
+Resource	../Common_OV/CLASSIC_Resource.txt
+
+*** Variables ***
+${TC_ID}	GSCE-191736_CustomerCreation_amendSiteBFG
+
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	BFGIMS	BFGIMS_Amend
+	Remove Files in Extracted_Data Folder
+	Create Files in Extracted_Data Folder
+	Read data	Prerequsite	${TC_ID}
+	Log To Console	Retrieved prerequisite variables
+	Read data	BFGIMS	${TC_ID}		
+	Log To Console	Retrieved BFGIMS variables
+#	Read data	Classics	${TC_ID}		
+#	Log To Console	Retrieved Classics variables
+	Create Index Numbering
+
+TC01 Amend Customer Profile in BFGIMS
+	[TAGS]	BFGIMS_Amend	BFGIMS
+	Open Browser And Login To BFGIMS Page
+	Select User Profile Group
+	Customer Search (text)
+	Customer Search by Customer Name
+	Click List Sites
+	Customer Search (text)
+	Customer Search by Customer Name
+	Get Site Details
+	[Teardown]	Close Browser

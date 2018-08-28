@@ -1,0 +1,101 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			OperatingSystem
+Library  		String
+Library			Collections
+#Variables		CommonVariables.py
+#Variables		CommonStaticLocators.py
+
+*** Variables ***
+${BROWSER}	IE
+${Profile_Group}	IMS - Read Only - OCC_HCS_E2E
+${wait}	60s
+
+
+*** Keywords ***
+Select User Profile Group
+	Wait Until Page Contains	BFG IMS	${wait_time}
+	Select Frame    container
+	Log	Profile Group:${Profile_Group}	console=yes
+	Select From List	xpath=.//select[@name='cmbProfile']	${Profile_Group}	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select User Profile-Group.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Focus	xpath=*//input[@value='Continue']	
+	Click Element	xpath=*//input[@value='Continue']
+	Select Window	title=BFG IMS
+
+Customer Search
+	Select Frame    container
+	Wait Until Page Contains	Customer Search (text)	${wait}
+	Click Link	icssearch2.asp
+	#Select Frame    container
+	Wait Until Page Contains	Customer Search (text)
+	#Current Frame Contains	Customer Search (text)
+	Wait Until Element Is Enabled	SearchTerm	${wait}
+	Select From List 	SearchTerm	Customer Name	
+	Input Text	custName1	${CustomerName}
+	Click Element	xpath=.//input[@value='Search']
+	Current Frame Contains	Customer Name	${wait}
+	Log	Customer Name:${CustomerName}	console=yes
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Search for Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+	
+List Site
+	Select Frame    container
+	Focus	xpath=*//input[@value='List Sites']	
+	Click Element	xpath=.//input[@value='List Sites']
+	Wait Until Page Contains Element	xpath=.//th[contains(text(),'Site Name')]	${wait}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-List of Sites.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select Window	title=BFG IMS
+
+Site Summary
+	Select Frame    container
+	Wait Until Element Is Enabled 	sit_name	${wait}
+	#if contract - can use CS, else if site, need to grab details from test data for site name
+	Run Keyword If	'${BranchSiteToggle1}' == 'Yes'	Input Text	sit_name	${BranchSiteName1}
+	...	ELSE	Input Text	sit_name	%CS%
+	Click Button	xpath=.//form[@name='reSubmitSiteMaster']//input[@value='Search']
+	Wait Until Element Is Enabled	xpath=.//input[@value='Site Summary']
+	#need to cater for site as well, currently catered for contract (CS)
+	${siteName}=	Run Keyword If	'${BranchSiteToggle1}' == 'Yes'	Get Text	xpath=.//td[contains(text(),'- CS')]	ELSE	${BranchSiteName1}
+	Log	Site Name:${siteName}	console=yes
+	Click Button	xpath=.//input[@value='Site Summary']
+	Wait Until Page Contains	Results Summary
+	Capture Page Screenshot	${OUTPUTDIR}${/}${Numbering}-Results Summary.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+
+Package Instance Status
+	Sleep	120s
+	Wait Until Page Contains	Results Summary
+	#Select Frame    container
+	Wait Until Element Is Enabled 	xpath=.//a[contains(text(),'Package Instance')]	${wait}
+	Click Link	xpath=.//a[contains(text(),'Package Instance')]
+	Wait Until Element Is Enabled	xpath=.//input[@value='View PI']
+	Click Button	xpath=.//input[@value='View PI']
+	Run Keyword And Ignore Error	Dismiss Alert
+	Wait Until Page Contains	Package Instance Attributes	${wait}
+	Element Should Be Visible	PI_STA_ID
+	${packageInstanceStatus}=	Get Selected List Label	PI_STA_ID
+	Capture Page Screenshot	${OUTPUTDIR}${/}${Numbering}-Package Instance Status-${packageInstanceStatus}.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Log	PI Status: ${packageInstanceStatus}	console=yes
+	Run Keyword If	'${packageInstanceStatus}' == '${ExpectedStatus}'	Log	The PI Status is showing the correct status.	console=yes	ELSE	Fail	The PI Status is not showing the correct status!
+	
+	
+	
+	
+	
+	

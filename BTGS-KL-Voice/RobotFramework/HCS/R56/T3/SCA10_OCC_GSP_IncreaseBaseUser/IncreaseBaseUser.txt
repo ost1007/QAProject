@@ -1,0 +1,48 @@
+*** Settings ***
+Documentation	Add Base User
+Suite Setup	
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common_HCS/CommonResources.txt
+Resource	../Common_HCS/readHCSTestDataFromExcel.txt
+Variables	../Common_HCS/CommonGSPLocators.py
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	60s
+#${TC_ID}		AC05
+*** Test Cases ***
+TC01 Request Increase Base User 
+	[TAGS]	GSP
+	Read data	GSP	${TC_ID}
+	Log To Console	Retrieved Q2O TestData
+	Create Index Numbering
+	Open Browser And Login	${GSP_URL}	${BROWSER}
+	Increase Base User
+	[Teardown]	Run Keywords	Log Location
+	
+TC02 Site Selection and Configuration
+	[TAGS]	GSP
+	Site Selection and Configuration
+	[Teardown]	Run Keywords	Log Location
+	#...	AND	Close Browser
+		
+TC03 Service Status Configuration
+	[TAGS]	EXPSSR
+	Read data	EXPSSR	${TC_ID}
+	Create Index Numbering
+	Open Browser And Login	${EXP_URL}	${BROWSER}
+	Service Status Configuration
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser
+		
+#TC04 Foi Quantity Update
+#	[TAGS]	BFGSSR
+#	Read data	SSRBFG	&{TC_ID}
+#	Create Index Numbering
+#	Open Browser And Login	${BFG_URL}	${BROWSER}
+#	Update Foi Quantity 
+#	[Teardown]	Run Keywords	Log Location
+#	...	AND	Close Browser
+	
+	

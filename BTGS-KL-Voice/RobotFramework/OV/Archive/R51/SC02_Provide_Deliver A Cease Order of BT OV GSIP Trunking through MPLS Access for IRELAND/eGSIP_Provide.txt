@@ -1,0 +1,30 @@
+*** Settings ***
+Documentation	Journey: Provide Order of BT OV GSIP Trunking through MPLS Access for IRELAND
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common_OV/readOVTestDataFromExcel.txt
+Resource	../Common_OV/EDCA_Resource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${TC_ID}		eGSIP_Pro_01
+
+*** Test Cases ***
+Prerequisites
+	[TAGS]	eDCA_GSIP_Provide
+	Read data	eDCA_GSIP_Provide	${TC_ID}
+	Log To Console	Retrieved EDCA TestData
+	
+TC01 Order
+	[TAGS]	eDCA_GSIP_Provide
+	Open Browser And Login To EDCA Page As Sales User
+	Run Keyword If	'${newOrder}' == 'yes'	Run Keyword	Customer Details
+	Customer Contact Details
+	Distributor Contact List
+	Order Contact Details
+	Additional Information
+	Product Selection
+	[Teardown]	Close Browser

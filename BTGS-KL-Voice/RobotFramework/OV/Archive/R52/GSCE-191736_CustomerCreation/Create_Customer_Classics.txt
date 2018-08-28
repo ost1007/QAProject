@@ -1,0 +1,32 @@
+*** Settings ***
+Documentation	SC01_Customer_Creation_BFG_IMS
+Suite Setup	
+Library			Selenium2Library
+Resource	../Common_OV/CommonResources.txt
+Resource	../Common_OV/BFGIMS_Resource.txt
+Resource	../Common_OV/CLASSIC_Resource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${TC_ID}	FULL_CYCLE
+
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	BFGIMS	Classics	CustomerCreation	
+	Read data	Prerequsite	${TC_ID}
+	Log To Console	Retrieved prerequisite variables
+	Read data	BFGIMS	${TC_ID}		
+	Log To Console	Retrieved BFGIMS variables
+	Read data	Classics	${TC_ID}		
+	Log To Console	Retrieved Classics variables
+	Create Index Numbering
+		
+TC01 Create Customer Account in Classics
+	[TAGS]	AMDOCS	Classics	CustomerCreation
+	Get File Content	${CustomerID_TextFile}
+	Log To Console	${CustomerID} in testcase
+	Login To AMDOCS
+	Create New Account
+	Fill In Account Details
+	Quit AMDOCS

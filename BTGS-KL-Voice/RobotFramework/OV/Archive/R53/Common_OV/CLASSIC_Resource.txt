@@ -1,0 +1,101 @@
+*** Settings ***
+Documentation	Classic Resource File.
+...				This resource files contains all the keywords related to Classic component.
+...				Author: Josh Ong
+Library			Selenium2Library
+Library			DebugLibrary
+Library			AutoItLibrary
+Library			SikuliLibrary	mode=NEW
+Library			Screenshot	Output	PIL		
+#Library			OperatingSystem
+Library			Collections
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+Resource		../Common_OV/CommonResources.txt
+
+*** Variables ***
+${OutputDir}	xxx
+${Timeout}		60s
+${CaptureScreenOnError}	True
+
+*** Keywords ***
+Login To AMDOCS
+	Win Activate	Amdocs CRM Login
+	Control Focus	Amdocs CRM Login	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM Login	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${CLASSIC_password}
+	#Capture Screen
+	Take Screenshot	${Numbering}-AMDOC Login.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Control Focus	Amdocs CRM Login	Login	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM Login	Login	[CLASS:Button; INSTANCE:1]	LEFT	2
+	Wait For Active Window	clarify	Legal Warning	180
+	Win Activate	clarify
+	Control Focus	clarify	Yes	[CLASS:Button; INSTANCE:1]
+	Control Click	clarify	Yes	[CLASS:Button; INSTANCE:1]	LEFT	1
+	
+Select Profile As ClearSales
+	Wait For Active Window	Amdocs CRM - ClearSupport	ClearSupport	60
+	Win Activate	Amdocs CRM - ClearSupport
+	Send	!p
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}	
+
+Create New Account
+	Win Activate	Amdocs CRM - ClearSales - [Console]
+	Send	!n
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}
+	Send	{ENTER}
+	Wait For Active Window	Amdocs CRM - ClearSales	Search if the customer exists in BFG	60
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:1]	${CustomerID}
+	Control Click	Amdocs CRM - ClearSales	Search in BFG	[CLASS:Button; INSTANCE:3]	LEFT	1
+	Sleep	30s
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND;INSTANCE:1]	LEFT	1	57	27
+	Control Click	Amdocs CRM - ClearSales	Continue with Account Creation	[CLASS:Button; INSTANCE:4]	LEFT	1
+	#Sleep	30s
+	
+Select order
+	Win Activate	Amdocs CRM - ClearSales - [Console]
+	Send	!s
+	Send	{DOWN}
+	Send	{ENTER}
+	Wait For Active Window	Amdocs CRM - ClearSales	&Find	60
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	1	176	24
+	Sleep	10s
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${ClassicOrderID}
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:5]
+	Control Click	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:5]	LEFT	1	
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	2	175	40
+	Wait For Active Window    Amdocs CRM - ClearSales    Done    240
+	#Sleep	120s
+
+
+Yank Task
+	Win Activate	Amdocs CRM - ClearSales
+	Send	!d
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}
+	Sleep	10s
+	Control Focus	Yank	Yank	[CLASS:Button; INSTANCE:2]
+	Control Click	Yank	Yank	[CLASS:Button; INSTANCE:2]	LEFT	1
+	Wait For Active Window	Amdocs CRM		Yanking of Quote/Contract/Order ${ClassicOrderID} was successful. It was placed in your default WIPbin default	120
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	#Win Wait Close	Amdocs CRM	OK	60
+	Sleep	30s
+	Take Screenshot	${Numbering}-Order In Progress.jpg
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	
+
+
+	
+	
+
+	
+	

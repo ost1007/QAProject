@@ -1,0 +1,82 @@
+*** Settings ***
+Documentation		Read Test Data File From Excel. Note - Excel file must be .xls format
+...					Created by:	FKH
+...					Date:	10 August 2016
+...					Edited by:	..... 
+Library		Selenium2Library
+Library		DebugLibrary
+Library		ExcelLibrary
+Library		OperatingSystem
+
+*** Variables ***
+${story}		7
+${sheetName}	Q2O
+
+*** Keywords ***
+#Define And Read Test Data Variable old
+	#Open Excel	${CURDIR}\\testdata.xls
+	#Create Variable Name
+	#${CQMusername}=	Read Excel	${sheetName}	${story}	Username
+	#${CQMpassword}=	Read Excel	${sheetName}	${story}	Password
+	#${Browser}=		Read Excel	${sheetName}	${story}	Browser
+	#${customerName}=	Read Excel	${sheetName}	${story}	Customer Name
+	#${salesChannel}=	Read Excel	${sheetName}	${story}	Sales Channel
+	#${OrderType}=	Read Excel	${sheetName}	${story}	Order Type
+	#${ContractTerm}=	Read Excel	${sheetName}	${story}	Contract Term
+	#${Currency}=	Read Excel	${sheetName}	${story}	Currency
+	#${directConnectServiceProvider}=	Read Excel	${sheetName}	${story}	Product
+	#${interconnectLocation}=	Read Excel	${sheetName}	${story}	INTERCONNECT LOCATION
+	#${bandwidth}=	Read Excel	${sheetName}	${story}	BANDWIDTH
+	#${AzServiceConn}=	Read Excel	${sheetName}	${story}	MS Azure Service Connection
+	#${connType}=	Read Excel	${sheetName}	${story}	Connection Type 0365
+	#${AFkbps}=	Read Excel	${sheetName}	${story}	AF (Kbps)
+	#${DEkbps}=	Read Excel	${sheetName}	${story}	EF (Kbps)
+	#${myAccPortalDCFLink}=	Read Excel	${sheetName}	${story}	MY ACCOUNT PORTAL DCF LINK
+	#${existingVPN}=	Read Excel	${sheetName}	${story}	VPN Specification
+	
+	#Set Global Variable	${CQMusername}
+	#Set Global Variable	${CQMpassword}
+	#Set Global Variable	${Browser}
+	#Set Global Variable	${customerName}
+	#Set Global Variable	${salesChannel}
+	#Set Global Variable	${OrderType}
+	#Set Global Variable	${ContractTerm}
+	#Set Global Variable	${Currency}
+	#Set Global Variable	${directConnectServiceProvider}
+	#Set Global Variable	${interconnectLocation}
+	#Set Global Variable	${bandwidth}
+	#Set Global Variable	${AzServiceConn}
+	#Set Global Variable	${connType}
+	#Set Global Variable	${AFkbps}
+	#Set Global Variable	${DEkbps}
+	#Set Global Variable	${myAccPortalDCFLink}
+	
+Define And Read Test Data Variable
+	Open Excel	${CURDIR}\\testdata.xls
+	${excelColumn}=	Get Column Count	${sheetName}
+	${excelRow}=	Get Row Count	${sheetName}
+	:FOR	${index2}	IN RANGE	${excelRow}
+	\	${tcNo}=	Read Cell Data By Coordinates	${sheetName}	0	${index2}
+	\	Run Keyword If	"${tcNo}"=="${story}"	Set Test Variable	${rowNum}	${index2}
+	\	Run Keyword If	"${tcNo}"=="${story}"	Exit For Loop
+	:FOR	${index}	IN RANGE	${excelColumn}
+	\	${q2o}=	Read Cell Data By Coordinates	${sheetName}	${index}	6
+	\	Run Keyword If	'${q2o}'=='${Empty}'	Continue For Loop	
+	\	${tempValue}=	Read Cell Data By Coordinates	${sheetName}	${index}	${rowNum}
+	\	Set Global Variable	${${q2o}}	${tempValue}
+	\	Log To Console	${q2o}"="${tempValue}
+	
+#Read Excel	[Arguments]	${sheetName}	${story}	${columnName}
+	#${excelColumn}=	Get Column Count	${sheetName}
+	#${excelRow}=	Get Row Count	${sheetName}
+	#:FOR	${index}	IN RANGE	${excelColumn}
+	#\	Set Global Variable	${var${index}}	${Empty}
+	#\	${fieldName}=	Read Cell Data By Coordinates	${sheetName}	${index}	5
+	#\	Run Keyword If	"${fieldName}"=="${columnName}"	Set Test Variable	${colNum}	${index}
+	#\	Run Keyword If	"${fieldName}"=="${columnName}"	Exit For Loop
+	
+	#:FOR	${index2}	IN RANGE	${excelRow}
+	#\	${tcNo}=	Read Cell Data By Coordinates	${sheetName}	0	${index2}
+	#\	${searchData}=	Read Cell Data By Coordinates	${sheetName}	${colNum}	${index2}
+	#\	Run Keyword If	"${tcNo}"=="${story}"	Exit For Loop
+	#[Return]	${searchData}

@@ -1,0 +1,67 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+Library	AutoItLibrary
+Library	DebugLibrary
+Resource	../Common/readHCSTestDataFromExcel.txt
+Variables	../Common/CommonRSQELocators.py
+
+*** Keywords ***
+Quote Configuration
+	Launch RSQE
+	${status}	${value}=	Run Keyword and Ignore Error	Element Should Be Visible	${CBOX_ADDITIONAL_PRODUCT}
+	Run Keyword If	'${status}' == 'PASS'	Products in the quote	ELSE	Log	Product selected
+	Launch Provide Configuration
+	${noProductCreated}=	Run Keyword And Return Status	Page Should Contain Element	AddProducts
+	Run Keyword If	${noProductCreated}	Product Configuration	ELSE	Log To Console	Product configured
+	
+Product Configuration
+	Modify ActiveDir Product
+	Configure Product
+	Finalise Config
+
+Configure Product
+	Wait Until Element Is Enabled    bulkConfigurationButton 
+	Click Element	bulkConfigurationButton
+	Wait Until Page Contains Element	${LINK_BASE_CONFIGURATION}	${waiting_time} 
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Input Text	${NEW_QUANTITY}    ${Quantity}
+	Click Element	${ADD_PRODUCT}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-ModifyProduct.png
+	${Numbering}=	Evaluate	str(${Numbering})
+	Click Element	continue-to-quote-details
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	${waiting_time}
+
+Confirm Pricing
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	${waiting_time}
+	#Wait Until Element Is Visible	xpath=.//td[contains(text(),'Firm')]	${waiting_time}	
+	
+Calculate Pricing
+	${orderDoesNotExist}=	Run Keyword And Return Status	Page Should Not Contain Element	OrdersTab
+	Run Keyword If	${orderDoesNotExist}	Run Keywords
+	...	Confirm Pricing
+	...	AND Create Offer and Order
+	...	ELSE	Click Link	OrdersTab
+
+Create Order
+	Wait Until Element Is Visible	orderDetails	1200s
+	Wait Until Page Contains Element	${RFO_INVALID}	${waiting_time}
+	RFO Sheet Download and Upload
+	Submit Order
+	
+Edit Excel RFOSheet
+	${year}	${month}	${day}=	Get Time	year,month,day
+	AutoItSetOption 	WinWaitDelay	2000
+	Win Close	Library
+	Win Activate	${RFOSheet}
+	Sleep	2s
+	Send	^g
+	Send	p2{ENTER}
+	Send	${day}{-}${month}{-}${year}{TAB}
+	Send	${day}{-}${month}{-}${year}{TAB}
+	Send	!{DOWN}
+	Sleep	2
+	Send	{DOWN}{ENTER}
+	Send	^{PGDN}

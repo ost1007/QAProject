@@ -1,0 +1,97 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+Library	AutoItLibrary
+Library	DebugLibrary
+Library	DateTime
+Library	openpyxl.reader.excel
+Library	openpyxl.writer.excel
+Resource	../Common_HCS/HCSResource.txt
+
+*** Keywords ***
+Quote Configuration
+	Launch RSQE
+	${status}	${value}=	Run Keyword and Ignore Error	Element Should Be Visible	${CBOX_ADDITIONAL_PRODUCT}
+	Run Keyword If	'${status}' == 'PASS'	Products in the quote	ELSE	Log	Product selected
+	Launch Provide Configuration
+	${noProductCreated}=	Run Keyword And Return Status	Page Should Contain Element	AddProducts
+	Run Keyword If	${noProductCreated}	Add Product	ELSE	Log To Console	Product Added
+	Wait Until Page Contains Element	xpath=.//tbody//td	${waiting_time}
+	#Wait Until Page Does Not Contain	xpath=.//td[@class='validity pending validating']	${waiting_time}
+	#Sleep	1s
+	Validate Products	${None}
+	${orderNotConfigured}=	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//td[text()='VALID']
+	Run Keyword If	${orderNotConfigured}	Product Configuration	ELSE	Log To Console	Product Configured
+	
+#Calculate Pricing
+#	Page Should Contain Element	xpath=.//td[text()='VALID']
+#	${orderDoesNotExist}=	Run Keyword And Return Status	Page Should Not Contain Element	OrdersTab
+#	Run Keyword If	${orderDoesNotExist}	Run Keywords
+#	...	Confirm Pricing
+#	...	AND	Create Offer and Order
+#	...	ELSE	Click Link	OrdersTab
+
+#Confirm Pricing
+#	#Reload Page
+#	${priceNotFirm}=	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//td[contains(text(),'Firm')]
+#	Run Keyword If	${priceNotFirm}	Calculate Price
+#	#Wait Until Element Is Visible	xpath=.//td[.='VALID']	${waiting_time}
+#	Wait Until Element Is Visible	xpath=.//td[contains(text(),'Firm')]	${waiting_time}	
+	
+Create Order
+	Wait Until Element Is Visible	orderDetails	1200s
+	Wait Until Page Contains Element	${RFO_INVALID}	${waiting_time}
+	RFO Sheet Download and Upload
+	Submit Order
+	
+	
+Add Product
+	Create One Cloud Product - Internet Service Access
+	#One Cloud Cisco Config Site - via CRF
+	#Modify Internet Service Access			##### UnComment in R54 #####
+	#Finalise Config							##### UnComment in R54 #####
+	
+Product Configuration
+	#One Cloud Cisco Config Site - via CRF
+	#Configure Product OCC-HCS
+	Modify Internet Service Access
+	Finalise Config
+	#Reload Page
+
+Edit Excel RFOSheet
+	${year}=	Get Current Date	result_format=%Y
+	${month}=	Get Current Date	result_format=%b
+	${day}=	Get Current Date	result_format=%d
+	${wb}=	load_workbook	C:\\Jenkins\\RFOSheets\\${RFOSheet}	#read_only=False
+	${ws}=	set variable	${wb['Order Details']}
+	#${ws.cell('L2').value}=	set variable	CENTRAL
+	#${ws.cell('N2').value}=	set variable	CENTRAL
+	${ws.cell('O2').value}=	set variable	${year}-${month}-${day}
+	${ws.cell('P2').value}=	set variable	${year}-${month}-${day}
+	#${ws}=	set variable	${wb['One Cloud Cisco - Site']}
+	#${ws.cell('E3').value}=	set variable	VPNN860565
+	#${ws.cell('F3').value}=	set variable	VPN860565
+	#${ws.cell('G3').value}=	set variable	FTIP860565
+	#${ws.cell('H3').value}=	set variable	Cnw0000000079
+	#${ws.cell('I3').value}=	set variable	192.10.1.1/24
+	#${ws.cell('J3').value}=	set variable	No      #Tobe confirm whether want to add in as not sure it's a default value.
+	save_workbook	${wb}	C:\\Jenkins\\RFOSheets\\${RFOSheet}
+	
+	
+RFO Base Configuration
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	xpath=.//div[@rel='CUSTOMER BUSINESS DESCRIPTION']/div[2]
+	Input Text	xpath=.//div[@rel='CUSTOMER BUSINESS DESCRIPTION']/div[3]/input	${custBusinessDesc}
+	Click Element	xpath=.//div[@rel='INDICATIVE BUSINESS VALUE']/div[2]
+	Input Text	xpath=.//div[@rel='INDICATIVE BUSINESS VALUE']/div[3]/input	${indicativeBusinessValue}
+	Click Element	xpath=.//div[@rel='CUSTOMER IPCG HELPDESK']/div[2]
+	Input Text	xpath=.//div[@rel='CUSTOMER IPCG HELPDESK']/div[3]/input	${custIPCGHelpdesk}
+	Click Element	xpath=.//div[@rel='CUSTOMER HELPDESK CONTACT']/div[2]
+	Input Text	xpath=.//div[@rel='CUSTOMER HELPDESK CONTACT']/div[3]/input	${custHelpdeskContact}
+	Click Element	xpath=.//div[@rel='CLOUD PROVIDER ACCOUNT ID']/div[2]
+	Input Text	xpath=.//div[@rel='CLOUD PROVIDER ACCOUNT ID']/div[3]/input	${cloudProvAccID}
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}	
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	

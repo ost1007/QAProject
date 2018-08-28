@@ -1,0 +1,182 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+Library           DebugLibrary
+Library           OperatingSystem
+Library           Collections    
+#Library			  AutoItLibrary
+#Library			  SikuliLibrary
+#Library			  DateTime
+Resource		CommonResources.txt
+Variables		CommonVariables.py
+Variables       MNUMLocators.py
+*** Variables ***
+#Test Data
+${TXT_USERNAME}	USER
+${TXT_PWD}	PASSWORD
+${BTN_YES_LEGAL}	YES
+${MNUM_LANDING_PAGE}    Welcome to Manage Number GS 1.0 
+
+*** Keywords ***
+Open Browser to MNUM Login Page
+    #Set Environment Variable	no_proxy	127.0.0.1
+	#Set Environment Variable	webdriver.ie.driver	${local_ie_driver}
+    Browser Config	${URL}
+	Goto	${URL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Wait Until Element Is Visible	${BTN_SIGN_ON}    ${waiting_time}    Sign On Button is not visible.
+    Page Should Contain    21C Authentication: Login
+	Input Username Password
+	Submit Credentials
+
+Input Username Password
+    Selenium2Library.Input Text	${TXT_USERNAME}	${Username}
+    Selenium2Library.Input Text	${TXT_PWD}	${Password}
+    #Debug
+	
+Submit Credentials
+    Click Button   	Sign On
+    Wait Until Page Contains   	21C Authentication: Warning Screen    ${wait_time}    Authentication page is not display
+    Wait Until Element Is Visible	${BTN_YES_LEGAL}    ${waiting_time}    Legal page is not visible
+    Click Element	${BTN_YES_LEGAL}
+ 	Wait Until Page Contains	${MNUM_LANDING_PAGE}	${wait_time}
+    Select Window	title=${MNUM_LANDING_PAGE}
+    
+Select Country
+    Select From List	${CBO_COUNTRY}	${Country}
+    Click Element    ${BTN_LOGIN} 
+
+Manage Number State Change Operations
+    Wait Until Element Is Visible    ${LINK_MANAGE_NUM_STATE_CHG_OPS}    ${wait_time}    Manage Numner State Change Operations Link is not available.
+    Click Element    ${LINK_MANAGE_NUM_STATE_CHG_OPS}
+    
+Get Number Details
+    Wait Until Element is Visible    ${LINK_GET_NUM_DETAILS}    ${wait_time}    Get Number Details Link is not available.    
+    Click Element    ${LINK_GET_NUM_DETAILS}    
+    Wait Until Page Contains    Get Number Details Operation
+    Click Element    ${BTN_ADD_SINGLELINE_NUM}
+    Select Checkbox    ${CHKBOX_DIR_NUM}
+    Checkbox Should Be Selected    ${CHKBOX_DIR_NUM}
+    Input Text	${TXT_BLOCK_NUM}	${BlockStartNumber}
+    PrintScreen    get_number_details
+    Click Element    ${BTN_GET_NUM_SUBMIT}
+    Get Page Response
+    
+Get Page Response
+    Wait Until Page Contains    Get Number Details Response
+    PrintScreen    page_response
+    ${errorPresent}  Run Keyword And Return Status    Element Should Be Visible   ${MSG_NUM_QUERY_OP_FAILED}
+    Run Keyword If    ${errorPresent}    Fail    Number Query Operation Failed. Please enter a valid directory number.
+    ${messagePartial}    Run Keyword And Return Status    Element Should Be Visible   ${MSG_NUM_QUERY_OP_COMPLETED_PARTIALLY}
+    Run Keyword If    ${messagePartial}    Fail    Number Query Operation Completed Partially.
+    Page Should Contain Element    ${MSG_NUM_QUERY_OP_PASSED}    Number Query Operation Failed    
+
+    
+PrintScreen
+    [Arguments]    ${imageName}
+	${imageName}=		Remove String	${imageName}  (
+	${imageName}=		Remove String	${imageName}  )
+	${imageName}=		Replace String	${imageName}  \#  \-
+	${imageName}=		Replace String	${imageName}  \/  \_
+	${imageName}=		Replace String	${imageName}  \&  n
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering} 
+    
+Allocate Number Operation
+	Wait Until Page Contains Element	${HOME}	${wait_time}
+	Click Element	${HOME}
+	Manage Number State Change Operations
+    Wait Until Element Is Visible    ${LINK_ALLOCATE_NUMBER_OP}    ${wait_time}    Allocate Link is not available.
+    Click Element    ${LINK_ALLOCATE_NUMBER_OP}
+    PrintScreen    Allocate_Number_Operation
+    Wait Until Page Contains Element	${ALLOCATE_NUM_BLOCK}	${wait_time}
+    Click Element	${ALLOCATE_NUM_BLOCK}
+    Wait Until Element Is Visible    startNo    ${wait_time}    Allocate Link is not available.
+    Input Text	startNo	${BlockStartNumber}
+    Input Text	endNo	${BlockEndNumber}
+    Select From List	productCode	${ProductCode}
+    Select From List	customerType	${CustomerType}
+    Select From List	numberType	${NumberType}
+    Input Text	blockSize	${BlockSize}
+    Input Text	divisionCode	${DivisionCode}
+    Click Element	${BTN_ADD_BLOCK}
+    PrintScreen	Currently_Added_Blocks
+    Wait Until Page Contains Element   ${BTN_BLOCK_SUBMIT}	${wait_time}
+    Click Element	${BTN_BLOCK_SUBMIT} 
+    ${errorPresent}  Run Keyword And Return Status    Element Should Be Visible   ${MSG_NUM_QUERY_OP_FAILED}
+    Run Keyword If    ${errorPresent}    Fail    Allocate Number Details Response Failed.
+    Wait Until Page Contains	State Change Operation Completed Successfully	${wait_time} 
+    PrintScreen	Allocate_Number_Change_Response 
+    
+Activate Number Operation
+	Wait Until Page Contains Element	${HOME}	${wait_time}
+	Click Element	${HOME}
+	Manage Number State Change Operations
+	Wait Until Element Is Visible    ${ACTIVATE_NUM_BLOCK}    ${wait_time}    Activate Link is not available.
+    Click Element    ${ACTIVATE_NUM_BLOCK}
+    Wait Until Page Contains Element	${LNK_ACTIVATE_NUM_BLOCK}	${wait_time}
+    Click Element	${LNK_ACTIVATE_NUM_BLOCK}
+    Wait Until Element Is Visible    startNo    ${wait_time}    Allocate Link is not available.
+    Input Text	startNo	${BlockStartNumber}
+    Input Text	endNo	${BlockEndNumber}
+    Select From List	productCode	${ProductCode}
+    Select From List	customerType	${CustomerType}
+    Select From List	numberType	${NumberType}
+    Input Text	blockSize	${BlockSize}
+    Click Element	${BTN_ADD_BLOCK}
+    PrintScreen	Activate_Num_Operation_Blocks
+    Wait Until Page Contains Element   ${BTN_BLOCK_SUBMIT}	${wait_time}
+    Click Element	${BTN_BLOCK_SUBMIT}
+    ${errorPresent}  Run Keyword And Return Status    Element Should Be Visible   ${MSG_NUM_QUERY_OP_FAILED}
+    Run Keyword If    ${errorPresent}    Fail    Activate Number Details Response Failed.
+    Wait Until Page Contains	State Change Operation Completed Successfully	${wait_time} 
+    PrintScreen	Activate_Num_Operation_Response
+    
+Number Range Search      
+    Wait Until Element is Visible    ${LINK_NUMBER_RANGE}    ${wait_time}    Number Range Link is not available.    
+    Click Element    ${LINK_NUMBER_RANGE}    
+    Wait Until Page Contains    Number Range Search
+    Wait Until Element Is Visible    startNoField    ${wait_time}
+    Input Text	startNoField	${BlockStartNumber}
+    Wait Until Element Is Visible    endNoField    ${wait_time}
+    Input Text	endNoField	${BlockEndNumber}
+    Wait Until Element Is Visible    productCode    ${wait_time}
+    Select From List	productCode	${ProductCode}
+    Wait Until Element Is Visible	${SEARCH}	${wait_time}
+    Click Element    ${SEARCH}
+    Wait Until Element Is Visible    ${STATUS_OPEN}    ${wait_time}
+ 	PrintScreen	Number Range Search
+ 	Click Element	${SHOW_NUMBER_RANGE}
+ 	Wait Until Page Contains    Show Number Range
+ 	PrintScreen	Show Number Range
+ 
+ Geography Based Details
+    Click Element    xpath=.//a[contains(text(),'Country')]
+    Wait until page contains    Area List  
+    :FOR    ${currCount}    IN Range    1    50
+	\   ${status}=    Run Keyword And Return Status    Page Should Contain Element    xpath=.//a[contains(text(),'${AreaCode}')]
+    \	RUN KEYWORD IF	'${status}'=='True'    Click Element     xpath=.//a[contains(text(),'${AreaCode}')]
+    \   RUN KEYWORD IF	'${status}'=='True'    Exit For Loop
+    \	RUN KEYWORD UNLESS    '${status}'=='True'    Click Element    xpath=.//a[contains(text(),'Next')]
+    \   Sleep    3s
+    Wait Until Page Contains Element	xpath=.//a[contains(text(),'${BlockStartNumber}')]	${wait_time}
+    Click Element    xpath=.//a[contains(text(),'${BlockStartNumber}')]
+    PrintScreen	BlockNumberDetail  
+
+Operator Data
+    Wait Until Page Contains Element	xpath=.//a[contains(text(),'Operator Data')]	${wait_time}
+    Click Element    xpath=.//a[contains(text(),'Operator Data')]
+    Wait until page contains    Operator List
+    :FOR    ${currCount}    IN Range    1    50
+	\   ${status}=    Run Keyword And Return Status    Page Should Contain Element    xpath=.//a[contains(text(),'${Operator}')]
+    \	RUN KEYWORD IF	'${status}'=='True'    Click Element     xpath=.//a[contains(text(),'${Operator}')]
+    \   RUN KEYWORD IF	'${status}'=='True'    Exit For Loop
+    \	RUN KEYWORD UNLESS    '${status}'=='True'    Click Element    xpath=.//a[contains(text(),'Next')]
+    \   Sleep    3s
+    PrintScreen	Operator Data

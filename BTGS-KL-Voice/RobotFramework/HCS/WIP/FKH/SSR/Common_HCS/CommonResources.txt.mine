@@ -1,0 +1,948 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			OperatingSystem
+Library			Collections
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+Variables		CommonCQMLocators.py
+Variables		CommonRSQELocators.py
+*** Keywords ***
+Create Index Numbering
+	${Numbering}=	Evaluate	str(1)
+	Set Global Variable	${Numbering}
+	Log To Console	${\n}${\n}KL TEST AUTOMATION
+	Log To Console	${\n}Press Ctrl-c to abort the test${\n}Test will begin in a moment
+
+
+#Open Browser And Login To CQM Page	
+#	Execution-Checking NEW or OLD Quote
+#	Sleep	1
+#    #----- Added R50 for running chrome browser to set default download location ---------
+#	${download_directory}=	Run Keyword If	'${BROWSER}'=='Chrome'	Set Variable	C:\\Jenkins\\RFOSheets
+#	${chrome_options}=	Run Keyword If	'${BROWSER}'=='Chrome'	Evaluate	sys.modules['selenium.webdriver'].ChromeOptions()	sys, selenium.webdriver
+#	${prefs}=	Run Keyword If	'${BROWSER}'=='Chrome'	Create Dictionary	download.default_directory=${download_directory}	#plugins.plugins_disabled=${disabled}
+#	Run Keyword If	'${BROWSER}'=='Chrome'	Run Keywords
+#    ...	Call Method	${chrome_options}	add_experimental_option	prefs	${prefs}
+#    ...	AND	Create Webdriver	Chrome	chrome_options=${chrome_options}
+#    ...	ELSE
+#    #commented and amended to accommodate URL value retrieve from Test Data
+#    ##T3 CQM
+#    #...	Open Browser	${T3_CQM_URL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+#    #Goto	${T3_CQM_URL}
+#    ##T1 CQM
+#    ##...	Open Browser	${T1_CQM_URL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+#    ##Goto	${T1_CQM_URL}
+#    ...	Open Browser	${CQM_URL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+#    Goto	${CQM_URL}
+#   
+#    #-------------------------------------------------------------------------------------
+#    Maximize Browser Window
+#    Set Selenium Speed    ${DELAY}
+#    Page Should Contain    21C Authentication: Login
+#    Input Text    USER   ${CQMUsername}
+#    Input Text    PASSWORD    ${Password}
+#    Click Button   	Sign On
+#    Wait Until Page Contains   	21C Authentication: Warning Screen	${wait_time}	Authentication page is not display
+#    Wait Until Element Is Enabled	YES
+#	Click Button	YES
+#	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${waiting_time}	The page is still loading after 5 minute
+#    Select Window	title=Customer Quote Management
+
+#changes in R54 to cater BFGIMS as well
+Open Browser And Login	[Arguments]	${url}	${BROWSER}
+	${download_directory}=	Run Keyword If	'${BROWSER}'=='Chrome'	Set Variable	C:\\Jenkins\\RFOSheets
+	Set Global Variable	${download_directory}
+	${chrome_options}=	Run Keyword If	'${BROWSER}'=='Chrome'	Evaluate	sys.modules['selenium.webdriver'].ChromeOptions()	sys, selenium.webdriver
+	Set Global Variable	${chrome_options}
+	${prefs}=	Run Keyword If	'${BROWSER}'=='Chrome'	Create Dictionary	download.default_directory=${download_directory}	#plugins.plugins_disabled=${disabled}
+	Set Global Variable	${prefs}
+	Run Keyword If	'${BROWSER}'=='Chrome'	Run Keywords
+    ...	Call Method	${chrome_options}	add_experimental_option	prefs	${prefs}
+    ...	AND	Create Webdriver	Chrome	chrome_options=${chrome_options}
+    ...	ELSE
+    ...	Open Browser	${url}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+    Goto	${url}
+    21CN Authentication
+
+21CN Authentication
+	Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    #Page Should Contain    21C Authentication: Login	####Edited in R55 new 21C Authentication screen
+    Page Should Contain    21C Authentication	
+    Input Text    USER   ${Username}	#${CQMUsername}	to cater username used by both CQM and BFG IMS
+    Input Text    PASSWORD    ${Password}
+    ${SignOn}=	Run Keyword And Return Status	Page Should Contain Button	Sign On
+    Run Keyword If	${SignOn}	Run Keywords
+    ...	Click Button   	Sign On
+    ...	AND	Wait Until Page Contains   	21C Authentication: Warning Screen	${wait_time}	Authentication page is not display
+    ...	AND	Wait Until Element Is Enabled	YES
+	...	AND	Click Button	YES
+    ...	ELSE	Click Button   	Sign in
+    
+#end changes in R54 to cater BFGIMS as well
+ 
+Select Customer
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Click Element	xpath=.//*[@id='salesChannel']/a/span[3]/b
+	Wait Until Element Is Visible	xpath=.//div/span[contains(normalize-space(.), '${SalesChannel}')]	60s	The sales channel field is missing from the page
+	Click Element	xpath=.//div/span[contains(normalize-space(.), '${SalesChannel}')]
+	Input Text   customer-auto-complete   ${CustomerName}
+	Wait Until Element Is Visible   xpath=html/body/ul/li/a   120s	The value in contract field is fail to auto populate
+	Click Element	xpath=html/body/ul/li/a
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Execution-Select A contract
+	Wait Until Element Is Enabled	ManageQuoteOrOrder	60s	Manage Quote tab is disabled
+	Capture ScreenShot	${Numbering}	Select Customer
+    Select Window	title=Customer Quote Management
+
+Go to Manage Customer
+	Click Element	manageCustomer
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	
+Go to Manage Quote
+	#Focus	ManageQuoteOrOrder
+	#Click Button	ManageQuoteOrOrder
+	Focus	xpath=.//*[contains(text(),'Manage Quote')]
+	Click Element	xpath=.//*[contains(text(),'Manage Quote')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Capture ScreenShot	${Numbering}	View Quote
+	
+Check New Quote or Existing Quote
+	${quoteID}=	Run Keyword If	'${newQuote}' == 'No'	Get File 	${EXECDIR}\\quote_id\\quoteID.txt
+	...	ELSE IF	'${newQuote}' == 'Yes'	Replace Variables	${None}
+	Set Global Variable	${quoteID}
+	
+Create Quote	
+	Remove Files	${EXECDIR}\\quote_id\\quoteID.txt
+	Remove Files	${EXECDIR}\\order_id\\ACCOrderID.txt	${EXECDIR}\\order_id\\FWOrderID.txt	${EXECDIR}\\order_id\\HCSOrderID.txt
+	${TestRunCount}=	Get File 	C:\\Jenkins\\TestRunCount.txt	#${EXECDIR}\\TestRunCount.txt	
+	Focus	xpath=.//*/span[contains(text(),'Create Quote')]
+	Click Element	xpath=.//*/span[contains(text(),'Create Quote')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains Element	quoteName	${wait_time}
+	Wait Until Element Is Visible   quoteName   ${wait_time}
+	${fullQuoteName}=	Set Variable	${QuoteName}${TestRunCount}
+	Set Global Variable	${fullQuoteName}
+	Input Text	quoteName	${QuoteName}	#edit - quote name will not have additional number at the back anymore
+	Click Element	xpath=.//*[@id='orderType']/option[contains(text(),'${OrderType}')]
+	Click Element	xpath=.//*[@id='contractTerm']/option[contains(text(),'${ContractTerm}')]
+	Click Element	xpath=.//*[@id='currency']/option[contains(text(),'${Currency}')]
+	Input Text	orNumber	${OppurtunityReferenceNumber}
+	Wait Until Element Is Enabled    xpath=.//*[@id='createQuoteForm']/div[15]/button    60s    Create button is not enabled
+	Click Element	xpath=.//*[@id='createQuoteForm']/div[15]/button
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	600s	The page is still loading after a minute
+	Wait Until Page Contains   	Create Quote	100s	Create Quote page is not open
+	Wait Until Page Contains   	Quote successfully created.	100s	Quote Creation Failed
+	Capture ScreenShot	${Numbering}	Create Quote
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Wait Until Element Is Visible    xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]    60s    Button is not visible
+	#Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	Wait Until Element Is Visible    ${OKBUTTON}    60s    Button is not visible
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	${TestRunCount}=	Evaluate	str(${TestRunCount}+1)
+	Create File	C:\\Jenkins\\TestRunCount.txt	${TestRunCount}	#${EXECDIR}\\TestRunCount.txt	${TestRunCount}
+	Sleep	10s
+	Select Window	title=IPSDK Product Bundling
+	Close Window
+    Select Window	title=Customer Quote Management
+    Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+    Focus	xpath=.//*/span[contains(text(),'View Quote')]
+    Click Element	xpath=.//*/span[contains(text(),'View Quote')]
+    Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+    
+Select Created Quote	[Arguments]	${quoteID}	${QuoteName}
+    Wait Until Element Is Visible	fiterText	120s	Text field is missing
+    Input Text	fiterText	${QuoteName}
+    Execution-Select New Or Existing Quote
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after 1 minute
+	${EXPQoteName}=	Get Value	quoteName
+	Set Suite Variable	${EXPQoteName}
+
+Select Created Quote - New Quote
+	Wait Until Keyword Succeeds	30s	1s
+	...	Focus	xpath=.//div[2]/div/div[1]/div/div[1]/div[2]/div/span
+	Click Element	xpath=.//div[2]/div/div[1]/div/div[1]/div[2]/div/span
+	${newQuoteID}=	Get Text	xpath=.//div[2]/div/div[1]/div/div[1]/div[2]/div/span
+	Create File	${EXECDIR}\\quote_id\\quoteID.txt	${newQuoteID}
+	Append To File	${EXECDIR}\\quote_id\\quoteIDList.txt	${\n}${fullQuoteName}= ${newQuoteID}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after 1 minute
+	
+Select Created Quote - Existing Quote
+	Wait Until Keyword Succeeds	30s	1s
+	...	Run Keywords
+	...	Click Element	xpath=.//div[2]/div/div[*]/div/div[1]/div[2]/div/span[contains(normalize-space(.), '${quoteID}')]
+	...	AND	Element Should Be Visible	firstName
+	
+	
+Get Quotation ID
+	${Quote_Ref_ID}=	Get Value	quoteRefId
+	Log		${Quote_Ref_ID} 
+	Set Suite Variable	${Quote_Ref_ID} 
+    
+Add Channel Contact
+	Input Text	firstName	Sati Kumari
+	Click Element	xpath=.//*[@id='channelContactForm']/div[11]/button
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after 1 minute
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after 1 minute
+	Focus	xpath=.//*[@id='btDirectoryGrid']/div[2]/div/div/div[1]/div[2]/div/span[contains(normalize-space(.), '802026130')]
+	Click Element	xpath=.//*[@id='btDirectoryGrid']/div[2]/div/div/div[1]/div[2]/div/span[contains(normalize-space(.), '802026130')]
+	[Arguments]    ${DistributorRole}
+	Click Element	xpath=.//*[@id='distributorRole']/option[contains(text(),'${DistributorRole}')]
+	Wait Until Element Is Enabled	xpath=.//*[@id='channelContactForm']/div[12]/button	60s	Channel Contact Form is not enabled
+	Focus	xpath=.//*[@id='channelContactForm']/div[12]/button
+	Click Button	xpath=.//*[@id='channelContactForm']/div[12]/button
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after 1 minute
+	Wait Until Page Contains   	Quote Channel Contact	10s
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	Sleep	5s
+    Select Window	title=Customer Quote Management
+	
+Go to Manage Site
+	Focus	ManageSite
+	Click Button	ManageSite
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Capture ScreenShot	${Numbering}	Manage Site
+	
+Customer Validation
+	Run Keyword If	'${newQuote}' == 'Yes'
+	...	Run Keyword	Create Customer
+	...	ELSE IF	'${newQuote}' == 'No'	Run Keywords
+	...	Select Customer
+	...	AND	Go to Manage Customer
+	
+Create Customer
+	Focus	${CREATE_CUST_TAB}
+	Click Element	${CREATE_CUST_TAB}
+	Wait Until Element Is Visible	create-saleschannel	${wait_time}	create-saleschannel is missing
+	Focus	create-saleschannel
+	Click Element	xpath=.//*[@id='create-saleschannel']/option[contains(text(),'${SalesChannel}')]
+	Focus	create-customerName
+	Input Text	create-customerName	${CustomerName}
+	Focus	valid-status
+	Click Element	xpath=.//*[@id='valid-status']/option[contains(text(),'${CustValidStatus}')]
+	Focus	contractCeaseTerm
+	#commented by Azry 29032018 this code as this will apply in Customer Contract screen - R55 new mandatory field Contractual Cease Term
+	#Input Text	contractCeaseTerm	${ContractCeaseTerm}
+	#end commented by Azry 29032018 this code as this will apply in Customer Contract screen - R55 new mandatory field Contractual Cease Term
+	#Focus	linkedContractualCeaseTerm
+	#Input Text	linkedContractualCeaseTerm	${LinkedContractualCeaseTerm}
+	Click Element	xpath=.//*[@id='createCust']/div/div[7]/div/button
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	600s	#${wait_time}
+	Wait Until Page Contains	No customers with matching name:	600s	#${wait_time}
+	Click Button   	xpath=(.//button[contains(normalize-space(.), 'Ok')])[1]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	600s	#${wait_time}
+	Wait Until Page Contains	Customer ${CustomerName} is successfully created	600s
+	Capture ScreenShot	${Numbering}	Create Customer
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Sleep	5s
+    Select Window	title=Customer Quote Management
+	
+Customer Site Validation
+	${statusCustomerSIte}= 	Run Keyword And Return Status	Page Should Contain Button	xpath=.//*[@id='createCustomerId'][contains(text(),'Create')]
+	Run Keyword If 	'${statusCustomerSIte}' == 'True'	Create Customer Site
+		
+Create Customer Site
+	Wait Until Page Contains Element   	xpath=.//label[contains(normalize-space(.), 'Customer Main Site (RFO)')]	${wait_time}
+	Focus	custValidStatus
+	Click Element	xpath=.//*[@id='custValidStatus']/option[contains(text(),'${CustValidStatus}')]
+	Focus	buildingName
+	Input Text    buildingName    ${BuildingName}
+	Focus	buildingNumber
+	Input Text    buildingNumber    ${BuildingNumber}
+	Focus	street
+	Input Text    street    ${Street}
+	Focus	locality
+	Input Text    locality    ${Locality}
+	Focus	subLocality
+	Input Text    subLocality    ${SubLocality}
+	Focus	city
+	Input Text	city	${City}
+	Focus	state
+	Input Text	state	${State}
+	Focus	country	
+	Click ELement	xpath=.//*[@id='country']/option[text()='${Country}']
+	Focus	postCode
+	Input Text	postCode	${Postcode}
+	Focus	phoneNumber
+	Input Text    phoneNumber    ${PhoneNo}
+	Focus	xpath=.//*[@id='centralSiteForm']/div[*]/button[contains(normalize-space(.), 'Search Address')]
+	Click Button	xpath=.//*[@id='centralSiteForm']/div[*]/button[contains(normalize-space(.), 'Search Address')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	
+	Wait Until Element Is visible	xpath=.//*[@id='centralSiteForm']/div[*]/div[*]/div[*]/div/div[1]/div/div/div/div[1]/div[*]/div	${wait_time}
+	Focus	xpath=.//*[@id='centralSiteForm']/div[*]/div[*]/div[*]/div/div[1]/div/div/div/div[1]/div[*]/div	
+	Click Element	xpath=.//*[@id='centralSiteForm']/div[*]/div[*]/div[*]/div/div[1]/div/div/div/div[1]/div[*]/div	
+	#Wait Until Element Is visible	xpath=.//*[@id='centralSiteForm']/div[*]/div[*]/div[*]/div/div/div/div/div/div[*]/div[*]/div/span[contains(normalize-space(.), '${State}')]	${wait_time}
+	#Focus	xpath=.//*[@id='centralSiteForm']/div[*]/div[*]/div[*]/div/div/div/div/div/div[*]/div[*]/div/span[contains(normalize-space(.), '${State}')]
+	#Click Element	xpath=.//*[@id='centralSiteForm']/div[*]/div[*]/div[*]/div/div/div/div/div/div[*]/div[*]/div/span[contains(normalize-space(.), '${State}')]
+	
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Update Address Details	${wait_time}
+	#amended by Azry 28032018 locator Yes button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Yes')]
+	Click Button	${YESBUTTON}
+	#end amended by Azry 28032018 locator Yes button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	createCustomerId
+	Click Button	createCustomerId
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Create Customer Site	${wait_time}
+	Capture ScreenShot	${Numbering}	Create Customer Site
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	
+Create Customer Contract
+	Focus	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Customer Contract')]
+	Click Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Customer Contract')]
+	#Wait Until Page Contains Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	#added by Azry 29032018 new mandatory field - Contractual Cease Term & Client Group
+	Input Text	contractCeaseTerm	${ContractualCeaseTerm}
+	Select From List By Label	clientGroup	${ClientGroup}
+	Wait Until Element Is Enabled	xpath=.//button[@ng-click='updateContract()']
+	Click Button	xpath=.//button[@ng-click='updateContract()']
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains	Update Successful
+	Capture ScreenShot	${Numbering}	Create Customer Contract
+	Focus	${OKBUTTON}
+	Click Button	${OKBUTTON}
+	#end added by Azry 29032018 new mandatory field - Contractual Cease Term & Client Group
+	
+	
+Create Customer Contacts
+	Focus	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Customer Contacts')]
+	Click Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Customer Contacts')]
+	#Wait Until Page Contains Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Run Keyword And Ignore Error	Click Element	xpath=.//*[@id='centralSiteContacts']/div/div[1]/div[2]
+	${statusPrimaryContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='centralSiteContacts']//span[text()='PRIMARY CUSTOMER CONTACT']
+	Run Keyword If 	'${statusPrimaryContact}' == 'True'	Add Customer Contact	PRIMARY CUSTOMER CONTACT
+	${statusSecContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='centralSiteContacts']//span[text()='SECONDARY CUSTOMER CONTACT']
+	Run Keyword If 	'${statusSecContact}' == 'True'	Add Customer Contact	SECONDARY CUSTOMER CONTACT
+	${statusSecContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='centralSiteContacts']//span[text()='Main Contact']
+	Run Keyword If 	'${statusSecContact}' == 'True'	Add Customer Contact	Main Contact
+	${statusSecContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='centralSiteContacts']//span[text()='Secondary Contact']
+	Run Keyword If 	'${statusSecContact}' == 'True'	Add Customer Contact	Secondary Contact
+	${statusSecContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='centralSiteContacts']//span[text()='Site Primary Contact']
+	Run Keyword If 	'${statusSecContact}' == 'True'	Add Customer Contact	Site Primary Contact
+	${statusSecContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='centralSiteContacts']//span[text()='Site Secondary Contact']
+	Run Keyword If 	'${statusSecContact}' == 'True'	Add Customer Contact	Site Secondary Contact
+	Capture ScreenShot	${Numbering}	Create Customer Contacts
+
+Add Customer Contact
+	[Arguments]    ${CustomerRole}
+	Focus	sc_role
+	Click Element	xpath=.//*[@id='sc_role']/option[contains(text(),'${CustomerRole}')]
+	Focus	sc_jobTitle
+	Input Text	sc_jobTitle	${JobTitle}
+	Focus	sc_fname
+	Input Text	sc_fname	${FirstName}
+	Focus	sc_lname
+	Input Text	sc_lname	${LastName}
+	Focus	sc_email
+	Input Text	sc_email	${Email}
+	Focus	sc_phone
+	Input Text	sc_phone	${PhoneNo}
+	Focus	sc_fax
+	Input Text	sc_fax	${FaxNo}
+	Focus	sc_mobile
+	Input Text	sc_mobile	${MobileNo}
+	Wait Until Page Contains Element	xpath=.//*[@id='centralSiteContacts']/.//button[contains(normalize-space(.), 'Create')]	${wait_time}	
+	Focus	xpath=.//*[@id='centralSiteContacts']/.//button[contains(normalize-space(.), 'Create')]
+	Click Button	xpath=.//*[@id='centralSiteContacts']/.//button[contains(normalize-space(.), 'Create')]
+	#Wait Until Page Contains Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Central Site	${wait_time}
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Focus	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Focus	${OKBUTTON}
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	
+Create Billing Details
+	Focus	xpath=.//div/span[contains(text(),'Billing Details')]
+	Click Element	xpath=.//div/span[contains(text(),'Billing Details')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	
+Manage LE Validation
+	Focus	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/ul/li[*]/div/div/div/span[contains(text(),'Manage LE')]
+	Click Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/ul/li[*]/div/div/div/span[contains(text(),'Manage LE')]
+	#Wait Until Page Contains Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	${statusManageLE}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='legalEntityForm']/.//span[contains(text(),'${LegalComName}')]
+	Run Keyword If 	'${statusManageLE}' == 'True'	Create Manage LE
+		
+Create Manage LE
+	Focus	xpath=(.//div[contains(normalize-space(.),'Same As Customer Site')])[last()]/child::input[@type='checkbox']
+	Click Element	xpath=(.//div[contains(normalize-space(.),'Same As Customer Site')])[last()]/child::input[@type='checkbox']
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	companyName
+	Input Text	companyName	${LegalComName}
+	Focus	createCustomerId
+	Click Button	createCustomerId
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Create Legal Entity	${wait_time}
+	Capture ScreenShot	${Numbering}	Create Legal Entity
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Focus	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Focus	${OKBUTTON}
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	
+Billing Acc Validation
+	Focus	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/ul/li[*]/div/div/div/span[contains(text(),'Billing Account')]
+	Click Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/ul/li[*]/div/div/div/span[contains(text(),'Billing Account')]
+	#Wait Until Page Contains Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	${statusBillAcc}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=html/.//span[contains(text(),'${AccountName}')]
+	Run Keyword If 	'${statusBillAcc}' == 'True'	Create Billing Account
+		
+Create Billing Account
+	Focus	firstName
+	Input Text	firstName	${FirstName}
+	Focus	lastName
+	Input Text	lastName	${LastName}
+	Focus	jobTitle
+	Input Text	jobTitle	${JobTitle}
+	Focus	buildingName
+	Input Text	buildingName	${BuildingName}
+	Focus	buildingNumber
+	Input Text	buildingNumber	${BuildingNumber}
+	Focus	street
+	Input Text	street	${Street}
+	Focus	city
+	Input Text	city	${City}
+	Focus	state
+	Input Text	state	${State}
+	Focus	country
+	Click Element	xpath=.//*[@id='country']/option[contains(text(),'${Country}')]
+	Focus	postCode
+	Input Text	postCode	${Postcode}
+	Focus	phoneNumber
+	Input Text	phoneNumber	${PhoneNo}
+	Focus	poBox
+	Input Text	poBox	${PoBox}
+	Focus	xpath=.//button[contains(normalize-space(.), 'Search Address')]
+	Click Element	xpath=.//button[contains(normalize-space(.), 'Search Address')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	xpath=.//ng-view/div/div[*]/div[*]/div[*]/div/div/div/div/div/div[1]/div[*]/div
+	Double Click Element	xpath=.//ng-view/div/div[*]/div[*]/div[*]/div/div/div/div/div/div[1]/div[*]/div
+	
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Update Address Details	${wait_time}
+	#amended by Azry 28032018 locator Yes button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Yes')]
+	Click Button	${YESBUTTON}
+	#end amended by Azry 28032018 locator Yes button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	accountName
+	Input Text	accountName	${AccountName}
+	Focus	billPeriod
+	Click Element	xpath=.//*[@id='billPeriod']/option[contains(text(),'${BillPeriod}')]
+	Focus	usScenario
+	Select From List By Label	xpath=//select[@id='usScenario']	Billed in US, invoice is sent to customer
+	Click Element	xpath=.//*[@id='usScenario']/option[@label="${USScenario}"]
+	Focus	invoiceLanguage
+	Click Element	xpath=.//*[@id='invoiceLanguage']/option[contains(text(),'${InvoiceLang}')]
+	Focus	billingCurrency
+	Click Element	xpath=.//*[@id='billingCurrency']/option[contains(text(),'${BillCurrency}')]
+	Focus	paymentDays
+	Click Element	xpath=.//*[@id='paymentDays']/option[contains(text(),'${PayDay}')]
+	Focus	infoCurrency
+	Click Element	xpath=.//*[@id='infoCurrency']/option[contains(text(),'${InfoCurrency}')]
+	Focus	paymentMethod
+	Click Element	xpath=.//*[@id='paymentMethod']/option[contains(text(),'${PayMethod}')]
+	Focus	activationDate
+	${year}	${month}	${day}=	Get Time	year,month,day
+	Input Text	activationDate	${year}-${month}-30 11:28
+	Click Element	activationDate
+	#Select Window	title=Customer Quote Management
+	#Click Element	xpath=.//*[@id='ui-datepicker-div']//a[contains(text(),'30')]
+	Focus	xpath=.//button[contains(text(),'Create New Account')]
+	Click Element	xpath=.//button[contains(text(),'Create New Account')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Create billing Details	${wait_time}
+	Capture ScreenShot	${Numbering}	Create Billing Details
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Focus	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	#Click Element	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Focus	${OKBUTTON}
+	Click Element	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	Create Advanced Billing Capability
+	
+Create Advanced Billing Capability
+	Focus	xpath=.//div/div/div/span[contains(text(),'Advanced Billing Capability')]
+	Click Element	xpath=.//div/div/div/span[contains(text(),'Advanced Billing Capability')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	xpath=.//div/span[contains(text(),'${AccountName}')]
+	Click Element	xpath=.//div/span[contains(text(),'${AccountName}')]
+	Focus	accountClassification
+	Click Element	xpath=.//*[@id='accountClassification']/option[contains(text(),'${AccClassification}')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	xpath=.//button[contains(text(),'Update Legal Entity')]
+	Click Element	xpath=.//button[contains(text(),'Update Legal Entity')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Billing Account	${wait_time}
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Focus	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	#Click Element	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Focus	${OKBUTTON}
+	Click Element	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	Capture ScreenShot	${Numbering}	Advanced Billing Capability
+		
+Branch Site Toggle 1
+	Run Keyword If	'${branchSiteToggle1}' == 'Yes'	Run Keyword	Create Branch Site 1
+	
+Create Branch Site 1
+	Focus	xpath=.//*[@id='Site']/span/a
+	Click Element	xpath=.//*[@id='Site']/span/a
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[1]/div/div/span[contains(text(),'Create Sites')]
+	Focus	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[1]/div/div/span[contains(text(),'Create Sites')]
+	Click Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[1]/div/div/span[contains(text(),'Create Sites')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains Element	siteName	${wait_time}
+	Focus	siteName
+	Input Text	siteName	${BranchSiteName1}
+	Focus	buildingName
+	Input Text    buildingName    ${BranchBuildingName1}
+	Focus	buildingNumber
+	Input Text	buildingNumber	${BranchBuildingNo1}
+	Focus	room
+	Input Text	room	${BranchRoom1}
+	Focus	floor
+	Input Text	floor	${BranchFloor1}
+	Focus	street
+	Input Text    street    ${BranchStreet1}
+	Focus	locality
+	Input Text    locality    ${BranchLocality1}
+	Focus	subLocality
+	Input Text    subLocality    ${BranchSubLocality1}
+	Focus	city
+	Input Text	city	${BranchCity1}
+	Focus	state
+	Input Text	state	${BranchState1}
+	Focus	country
+	Click Element	xpath=.//*[@id='country']/option[text()='${BranchCountry1}']
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	postCode
+	Input Text	postCode	${BranchPostcode1}
+	Focus	phoneNumber
+	Input Text    phoneNumber    ${BranchPhoneNo1}
+	Focus	xpath=.//*[@id='branchSiteForm']/.//button[contains(normalize-space(.), 'Search Address')]
+	Click Element	xpath=.//*[@id='branchSiteForm']/.//button[contains(normalize-space(.), 'Search Address')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Element Is visible	xpath=.//*[@id='branchSiteForm']/div[*]/div[*]/div[*]/div/div[1]/div/div/div/div[1]/div[*]/div	${wait_time}
+	Click Element	xpath=.//*[@id='branchSiteForm']/div[*]/div[*]/div[*]/div/div[1]/div/div/div/div[1]/div[*]/div	
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Update Address Details	${wait_time}
+	#amended by Azry 28032018 locator Yes button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Yes')]
+	Click Button	${YESBUTTON}
+	#end amended by Azry 28032018 locator Yes button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	createCustomerId
+	Click Button	createCustomerId
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	${status}	${value}=	Run Keyword and Ignore Error	Page Should Contain 	Region is not configured
+	Log	${status}
+	Run Keyword If	'${status}' == 'PASS'	
+	...	Run Keywords
+	...	Capture ScreenShot	${Numbering}	Region is not configured
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#...	AND	Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	...	AND	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	...	AND	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Create Customer Branch Site	${wait_time}
+	Capture ScreenShot	${Numbering}	Create Branch Site 1
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Create Branch Site Contacts	${BranchSiteName1}
+	
+Branch Site Toggle 2
+	Run Keyword If	'${branchSiteToggle2}' == 'Yes'	Run Keyword	Create Branch Site 2
+	
+Create Branch Site 2
+	Focus	xpath=.//*[@id='Site']/span/a
+	Click Element	xpath=.//*[@id='Site']/span/a
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[1]/div/div/span[contains(text(),'Create Sites')]
+	Focus	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[1]/div/div/span[contains(text(),'Create Sites')]
+	Click Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[1]/div/div/span[contains(text(),'Create Sites')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains Element	siteName	${wait_time}
+	Focus	siteName
+	Input Text	siteName	${BranchSiteName2}
+	Focus	buildingName
+	Input Text    buildingName    ${BranchBuildingName2}
+	Focus	buildingNumber
+	Input Text	buildingNumber	${BranchBuildingNo2}
+	Focus	room
+	Input Text	room	${BranchRoom2}
+	Focus	floor
+	Input Text	floor	${BranchFloor2}
+	Focus	street
+	Input Text    street    ${BranchStreet2}
+	Focus	locality
+	Input Text    locality    ${BranchLocality2}
+	Focus	subLocality
+	Input Text    subLocality    ${BranchSubLocality2}
+	Focus	city
+	Input Text	city	${BranchCity2}
+	Focus	state
+	Input Text	state	${BranchState2}
+	Focus	country
+	Click Element	xpath=.//*[@id='country']/option[text()='${BranchCountry2}']
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	postCode
+	Input Text	postCode	${BranchPostcode2}
+	Focus	phoneNumber
+	Input Text    phoneNumber    ${BranchPhoneNo2}
+	Focus	xpath=.//*[@id='branchSiteForm']/.//button[contains(normalize-space(.), 'Search Address')]
+	Click Element	xpath=.//*[@id='branchSiteForm']/.//button[contains(normalize-space(.), 'Search Address')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Element Is visible	xpath=.//*[@id='branchSiteForm']/div[*]/div[*]/div[*]/div/div[1]/div/div/div/div[1]/div[*]/div	${wait_time}
+	Click Element	xpath=.//*[@id='branchSiteForm']/div[*]/div[*]/div[*]/div/div[1]/div/div/div/div[1]/div[*]/div	
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Update Address Details	${wait_time}
+	#amended by Azry 28032018 locator Yes button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Yes')]
+	Click Button	${YESBUTTON}
+	#end amended by Azry 28032018 locator Yes button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	createCustomerId
+	Click Button	createCustomerId
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	${status}	${value}=	Run Keyword and Ignore Error	Page Should Contain 	Region is not configured
+	Log	${status}
+	Run Keyword If	'${status}' == 'PASS'	
+	...	Run Keywords
+	...	Capture ScreenShot	${Numbering}	Region is not configured
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#...	AND	Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	...	AND	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	...	AND	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Create Customer Branch Site	${wait_time}
+	Capture ScreenShot	${Numbering}	Create Branch Site 2
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Create Branch Site Contacts	${BranchSiteName2}
+	
+Create Branch Site Contacts
+	[Arguments]    ${SiteName}
+	Focus	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Site Contacts')]
+	Click Element	xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Site Contacts')]
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Focus	xpath=.//*[@id='branchSiteContacts']/.//span[text()='${SiteName}']
+	Click Element	xpath=.//*[@id='branchSiteContacts']/.//span[text()='${SiteName}']
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	#Run Keyword And Ignore Error	Click Element	xpath=.//*[@id='branchSiteContacts']/div/div[1]/div[2]
+	Run Keyword And Ignore Error	Click Element	xpath=.//div[@ng-grid='branchSiteContactGrid'][not(contains(@class,'ng-hide'))]
+	${statusPrimaryContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='branchSiteContacts']//span[text()='Site Primary Contact']
+	Run Keyword If 	'${statusPrimaryContact}' == 'True'	Add Branch Site Contacts	Site Primary Contact
+	${statusSecContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='branchSiteContacts']//span[text()='Site Secondary Contact']
+	Run Keyword If 	'${statusSecContact}' == 'True'	Add Branch Site Contacts	Site Secondary Contact
+	${statusThirdContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='branchSiteContacts']//span[text()='Main Contact']
+	Run Keyword If 	'${statusThirdContact}' == 'True'	Add Branch Site Contacts	Main Contact
+	${statusFourthContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='branchSiteContacts']//span[text()='Secondary Contact']
+	Run Keyword If 	'${statusFourthContact}' == 'True'	Add Branch Site Contacts	Secondary Contact
+	${statusFifthContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='branchSiteContacts']//span[text()='Service Assurance']
+	Run Keyword If 	'${statusFifthContact}' == 'True'	Add Branch Site Contacts	Service Assurance
+	${statusSixthContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='branchSiteContacts']//span[text()='Service Delivery']
+	Run Keyword If 	'${statusSixthContact}' == 'True'	Add Branch Site Contacts	Service Delivery
+	${statusSeventhContact}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//*[@id='branchSiteContacts']//span[text()='Site Technical']
+	Run Keyword If 	'${statusSeventhContact}' == 'True'	Add Branch Site Contacts	Site Technical
+	Capture ScreenShot	${Numbering}	Create Branch Site Contacts
+	
+Add Branch Site Contacts
+	[Arguments]    ${CustomerRole}
+	Focus	sc_role
+	Click Element	xpath=.//*[@id='sc_role']/option[contains(text(),'${CustomerRole}')][last()]
+	Focus	sc_jobTitle
+	Input Text	sc_jobTitle	${JobTitle}
+	Focus	sc_fname
+	Input Text	sc_fname	${FirstName}
+	Focus	sc_lname
+	Input Text	sc_lname	${LastName}
+	Run Keyword If	'${CustomerRole}' == 'Site Primary Contact'	
+	...	Run Keywords
+	...	Focus	sc_email
+	...	AND	Input Text	sc_email	${Email}
+	...	ELSE	Run Keywords
+	...	Focus	sc_email_not_mandatory
+	...	AND	Input Text	sc_email_not_mandatory	${Email}
+	Focus	sc_phone
+	Input Text	sc_phone	${PhoneNo}
+	Focus	sc_fax
+	Input Text	sc_fax	${FaxNo}
+	Focus	sc_mobile
+	Input Text	sc_mobile	${MobileNo}
+	Focus	xpath=.//*[@id='branchSiteContacts']/div/div[*]/div/button[contains(text(),'Create')]
+	Click Button	xpath=.//*[@id='branchSiteContacts']/div/div[*]/div/button[contains(text(),'Create')]
+	#Wait Until Page Contains Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	${wait_time}
+	Wait Until Page Contains   	Branch Site Contact	${wait_time}
+	#amended by Azry 27032018 - locator OK button changed in R55
+	#Focus	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	#Click Button	xpath=html/body/div[4]/div[*]/div/div[*]/div/button[contains(text(),'Ok')]
+	Focus	${OKBUTTON}
+	Click Button	${OKBUTTON}
+	#end amended by Azry 27032018 - locator OK button changed in R55
+
+Launch RSQE FF
+	${status}	${value}=	Run Keyword and Ignore Error	Select Window	title=IPSDK Product Bundling
+	Log	${status}
+	Run Keyword If	'${status}' == 'FAIL'	
+	...	Run Keywords	
+	...	Focus	xpath=.//button[text()='Launch Configurator']
+	...	AND	Click Element	xpath=.//button[text()='Launch Configurator']
+	...	AND	Wait Until Keyword Succeeds	1m	5s	Select Window	title=IPSDK Product Bundling
+	#Select Window	title=IPSDK Product Bundling
+	Maximize Browser Window
+	Wait Until Page Contains Element	xpath=.//td[contains(text(),'Additional Product')]	120s	Additional Product button is missing
+	Capture ScreenShot	${Numbering}	Launch RSQE
+	
+Launch RSQE 	
+	Focus	xpath=.//button[text()='Launch Configurator']
+	Click Element	xpath=.//button[text()='Launch Configurator']
+	Wait Until Keyword Succeeds	1m	5s	Select Window	title=IPSDK Product Bundling
+	Maximize Browser Window
+	#Select Window	title=IPSDK Product Bundling
+	Wait Until Page Contains Element	xpath=.//td[contains(text(),'Additional Product')]	120s	Additional Product button is missing
+	
+Products in the quote
+	Select Checkbox	${CBOX_ADDITIONAL_PRODUCT}
+	Select From List By Label	${DD_ADDITONAL_PRODUCT_ORDER_TYPE}	${OrderType}
+	Click Element	${BTN_ADD_PRODUCT_TO_QUOTE}
+	Wait Until Page Does Not Contain Element	${BLOCKER}	60s	The page is still loading after 1 minute
+	#Wait Until Page Contains Element	${LINK_ADDITIONAL_PRODUCT_PROVIDE_CONFIGURATION}	30
+	Wait Until Page Contains Element	xpath=.//tr[2]//a[contains(text(),'${OrderType}')]	30s	OrderType field is missing
+	Wait Until Element Is Enabled	xpath=.//tr[2]//a[contains(text(),'${OrderType}')]	30s	OrderType field is disable
+	
+Launch Provide Configuration
+	Wait Until Page Does Not Contain Element	${BLOCKER}	60s	The page is still loading after 1 minute
+	Click Link	xpath=.//tr[2]//a[contains(text(),'${OrderType}')]
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	600s	The page is still loading after 10 minutes
+	${rsqeQoteName}=	Get Text	xpath=.//table[@id='quoteOptionTable']//td[2]
+	${RFOSheet}=	Set Variable	SQE_${EXPQoteName}_${rsqeQoteName}_RFOSheet.xlsx
+	Set Global Variable	${RFOSheet}
+	Click Element	xpath=.//tr/td[1][contains(text(),'${quoteID}')]
+	Run Keyword And Ignore Error	Wait Until Element Is Not Visible	${LOADING_MESSAGE}
+	Run Keyword And Ignore Error	Wait Until Element Is Not Visible	${PROCESSING_MESSAGE}
+	
+	
+Select Quote	
+	Select Created Quote	${quoteID}	${QuoteName}
+	Get Quotation ID
+	Execution-Add Mandatory Channel Contact
+	
+Go To Track Order
+	Focus	TrackAndOrder
+	Click Button	TrackAndOrder
+	Wait Until Page Contains Element	fiterText	${timeOutWait}	filterText is missing
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after 1 minute
+	Wait Until Element Is Enabled	fiterText	${timeOutWait}	filterText is disable
+	
+Retrive OrderID
+	[Arguments]	${OrderIDXpath}
+	${EXPORDERID}=	Get Text	${OrderIDXpath}
+	${EXPORDERIDALL}=	Set Variable	${EXPORDERIDALL} | EXP${EXPORDERID}
+	Set Global Variable	${EXPORDERIDALL}
+	#added global variable to allow retrieve orderID from main file
+	Set Global Variable	${EXPORDERID}
+	Append To List	${myOrderIDListTemp}	EXP${EXPORDERID}
+	
+Export The OrderID
+	Create File	${EXECDIR}\\Output\\OrderIDs.txt	${EXPORDERIDALL}
+
+Capture The OrderID
+	[Arguments]	${quoteID2}
+	Execution-Get quoteID
+	Go To Track Order
+	Execution-Track Quote ID
+	Export The OrderID
+	#Check Type of Order ID	--disable this func due to separation between Q2O and SD
+
+Capturing all Expedio Order IDs
+	${quoteID}=	Get Variable Value	${quoteID}
+	Open Browser And Login To CQM Page
+	Select Customer
+	Capture The OrderID	${quoteID}
+	
+Check Type of Order ID
+	Go To	${AIB_URL}
+	Maximize Browser Window
+	Set Selenium Speed    ${DELAY}
+	#Page Should Contain    21C Authentication: Login
+	#Input Text    USER   ${CQMusername}
+	#Input Text    PASSWORD    ${CQMpassword}
+	#Click Button   	Sign On
+	#Wait Until Page Contains   	21C Authentication: Warning Screen	50s
+	#Wait Until Element Is Enabled	YES
+	#Click Button	YES
+	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after 1 minute
+	Wait Until Element Is Enabled	orderNum	${timeOutWait}
+	:For	${ordernumlist}	IN	@{myOrderIDListTemp}
+	\	Input Text	orderNum	${ordernumlist}
+	\	Click Element	searchBtn
+	\	Wait Until Page Does Not Contain Element	${IMG_LOADING}	${timeOutWait}	The page is still loading
+	\	Click Link	xpath=.//*[text()='${ordernumlist}']
+	\	Wait Until Page Does Not Contain Element	${IMG_LOADING}	${timeOutWait}	The page is still loading
+	\	${orderIDType}=	Get Text	${PRODUCT_NAME}
+	\	Run Keyword If	'${orderIDType}' == 'One Cloud Cisco'
+	\	...	Create File	${EXECDIR}\\order_id\\HCSOrderID.txt	${ordernumlist}
+	\	...	ELSE IF	'${orderIDType}' == 'Cloud Firewall Service'
+	\	...	Create File	${EXECDIR}\\order_id\\FWOrderID.txt	${ordernumlist}
+	\	...	ELSE IF	'${orderIDType}' == 'Cloud Acceleration Service'
+	\	...	Create File	${EXECDIR}\\order_id\\ACCOrderID.txt	${ordernumlist}
+	\	Click Element	summaryTable
+	
+Load Order IDs
+	${statusQuoteID}=	Run Keyword And Return Status	Variable Should Not Exist	${quoteID}
+	Run Keyword If	${statusQuoteID}	Check New Quote or Existing Quote
+	@{myOrderIDList}	Create List
+	Set Global Variable	@{myOrderIDList}
+	${HCSOrderIDExist}=	Run Keyword And Return Status	File Should Exist	${EXECDIR}\\order_id\\HCSOrderID.txt
+	Run Keyword Unless	${HCSOrderIDExist}	Capturing all Expedio Order IDs
+	${FWOrderIDExist}=	Run Keyword And Return Status	File Should Exist	${EXECDIR}\\order_id\\FWOrderID.txt
+	${ACCOrderIDExist}=	Run Keyword And Return Status	File Should Exist	${EXECDIR}\\order_id\\ACCOrderID.txt
+	${HCSOrderID}=	Run Keyword If	${HCSOrderIDExist}	Get File 	${EXECDIR}\\order_id\\HCSOrderID.txt
+	${FWOrderID}=	Run Keyword If	${FWOrderIDExist}	Get File 	${EXECDIR}\\order_id\\FWOrderID.txt
+	${ACCOrderID}=	Run Keyword If	${ACCOrderIDExist}	Get File 	${EXECDIR}\\order_id\\ACCOrderID.txt
+	Set Global Variable	${HCSOrderID}
+	Set Global Variable	${FWOrderID}
+	Set Global Variable	${ACCOrderID}
+	Run Keyword IF	'${HCSOrderID}' != 'Completed' and ${HCSOrderIDExist}
+	...	Append To List	${myOrderIDList}	${HCSOrderID}
+	Run Keyword IF	'${FWOrderID}' != 'Completed' and ${FWOrderIDExist}
+	...	Append To List	${myOrderIDList}	${FWOrderID}
+	Run Keyword IF	'${ACCOrderID}' != 'Completed' and ${ACCOrderIDExist}
+	...	Append To List	${myOrderIDList}	${ACCOrderID}
+	Log To Console	@{myOrderIDList}
+	
+Execution-Checking NEW or OLD Quote
+	${statusQuoteID}=	Run Keyword And Return Status	Variable Should Not Exist	${quoteID}
+	Run Keyword If	${statusQuoteID}	Check New Quote or Existing Quote
+	Run Keyword If	'${newQuote}' == 'Yes'	Run Keyword	Log To Console	${\n}${\n}THIS TEST WILL CREATE A NEW QUOTE
+	...	ELSE IF	'${newQuote}' == 'No'	Log To Console	${\n}${\n}THIS TEST WILL EXECUTE EXISTING QUOTE: ${quoteID}
+	Log To Console	${\n}Press Ctrl-c to abort the test${\n}Test will begin in a moment
+
+Execution-Select A contract
+	${status}=	Run Keyword And Return Status	Page Should Contain Element	xpath=.//span[text()='Select a contract..']
+	Run Keyword If	${status}	Run Keywords
+	...	Click Element	xpath=.//*[@id='s2id_contract']/a/span[2]/b
+	...	AND	Click Element	xpath=.//*[@id='select2-drop']/ul/li[1]/div
+	...	AND	Wait Until Page Does Not Contain Element	${PROCESS_LOADING}	60s	The page is still loading after a minute
+
+Execution-Select New Or Existing Quote
+	${quoteID}=	Get Variable Value	${quoteID}
+	Run Keyword If	'${newQuote}' == 'Yes'
+	...	Run Keyword	Select Created Quote - New Quote
+	...	ELSE IF	'${newQuote}' == 'No'	Run Keyword	Select Created Quote - Existing Quote
+	${quoteID}=	Get Value	quoteRefId
+	Set Global Variable	${quoteID}
+	
+Execution-Add Mandatory Channel Contact
+	Sleep	5s
+	Focus	phone
+	Run Keyword And Ignore Error	Click Element At Coordinates	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]	480	60
+	${statusAccManager}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Account Manager']
+	Run Keyword If 	'${statusAccManager}' == 'True'	Add Channel Contact	Account Manager*
+	${statusSalesSupp}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Sales Support Contact']
+	Run Keyword If 	'${statusSalesSupp}' == 'True'	Add Channel Contact	Sales Support Contact*
+	${statusSystemEng}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='System Eng Contact']
+	Run Keyword If 	'${statusSystemEng}' == 'True'	Add Channel Contact	System Eng Contact*
+	${statusDelManager}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Delivery Manager']
+	Run Keyword If 	'${statusDelManager}' == 'True'	Add Channel Contact	Delivery Manager*
+	${statusProjManager}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Project Manager']
+	Run Keyword If 	'${statusProjManager}' == 'True'	Add Channel Contact	Project Manager
+	Capture ScreenShot	${Numbering}	Add Mandatory Channel Contact
+
+Execution-Get quoteID
+	${quoteID2}=	Get Variable Value	${quoteID2}
+	${quoteID}=	Run Keyword If	'${quoteID2}' == 'None'	Get Variable Value	${quoteID}
+	#${quoteID}=	Run Keyword If	'${quoteID2}' == 'None'	Get File 	${EXECDIR}\\quote_id\\quoteID.txt
+	...	ELSE	Get Variable Value	${quoteID2}
+
+Execution-Track Quote ID
+	@{myOrderIDListTemp}	Create List
+	Set Global Variable	@{myOrderIDListTemp} 
+	Wait Until Element Is Not Visible	${LOADING_MESSAGE}	60s
+	Wait Until Page Contains Element	fiterText	${timeOutWait}
+	Input Text	fiterText	${quoteID}
+	Press Key	fiterText	\\13
+	${EXPORDERIDALL}=	Set Variable	Quote Name: ${QuoteName} (${quoteID}). EXP OrderIDs: 
+	Set Global Variable	${EXPORDERIDALL} 
+	${statusOrderID}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[1]/div[13]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID}' == 'True'	Retrive OrderID	xpath=.//div[1]/div[13]/div[2]/div/span
+	${statusOrderID2}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[2]/div[13]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID2}' == 'True'	Retrive OrderID	xpath=.//div[2]/div[13]/div[2]/div/span
+	${statusOrderID3}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[3]/div[13]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID3}' == 'True'	Retrive OrderID	xpath=.//div[3]/div[13]/div[2]/div/span
+	${statusOrderID4}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[4]/div[13]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID4}' == 'True'	Retrive OrderID	xpath=.//div[4]/div[13]/div[2]/div/span
+	${statusOrderID5}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[5]/div[13]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID5}' == 'True'	Retrive OrderID	xpath=.//div[5]/div[13]/div[2]/div/span
+	${statusOrderID6}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[6]/div[13]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID6}' == 'True'	Retrive OrderID	xpath=.//div[6]/div[13]/div[2]/div/span
+	Capture ScreenShot	${Numbering}	Track Order ID
+
+Validate Products	[Arguments]	${ExpectedStatus}
+	Select Checkbox	listOfQuoteOptionItems
+	Wait Until Element Is Enabled	validateProductsButton
+	Capture ScreenShot	${Numbering}	Cofigured Not Firm
+	Click Link	validateProductsButton
+	#Wait Until Element Is Visible	xpath=.//td[contains(@class,'validity')][text()='VALID']	${waiting_time}
+	Wait Until Page Does Not Contain	xpath=.//td[contains(@class,'validity')][text()='PENDING']
+	Sleep	2s
+	Wait Until Page Does Not Contain	xpath=.//td[@class='validity pending validating']	${waiting_time}
+	#Wait Until Page Does Not Contain	xpath=.//td[@class='validity pending validating']	${waiting_time}
+	#Wait Until Page Does Not Contain	xpath=.//td[@class='validity pending validating']	${waiting_time}
+	Run Keyword If	'${ExpectedStatus}'=='${None}'	Run Keyword	Capture ScreenShot	${Numbering}	Configuration ${ExpectedStatus}
+	...	ELSE	Run Keywords	Page Should Contain	${ExpectedStatus}
+	...	AND	Capture ScreenShot	${Numbering}	Configured ${ExpectedStatus}
+	#Run Keyword Unless	'${ExpectedStatus}'=='${None}'	Run Keywords	Page Should Contain	${ExpectedStatus}
+	#...	AND	Capture ScreenShot	${Numbering}	Cofigured ${ExpectedStatus}
+	#...	ELSE	Run Keyword	Capture ScreenShot	${Numbering}	Cofigured Not ${ExpectedStatus}
+	
+	
+Capture ScreenShot	[Arguments]	${Numbering}	${screenShotName}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-${screenShotName}.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}

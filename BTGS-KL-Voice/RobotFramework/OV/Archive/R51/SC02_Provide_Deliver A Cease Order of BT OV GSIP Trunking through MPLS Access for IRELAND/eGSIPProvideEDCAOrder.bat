@@ -1,0 +1,1 @@
+pybot -i EDCA --removekeywords wuks --removekeywords name:*Execution* -d Output\ -v newOrder:yes eGSIP_Provide.txt

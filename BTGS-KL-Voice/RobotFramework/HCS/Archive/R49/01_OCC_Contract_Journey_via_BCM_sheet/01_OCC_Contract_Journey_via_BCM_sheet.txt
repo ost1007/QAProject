@@ -1,0 +1,97 @@
+*** Settings ***
+Documentation	01_OCC_Contract_Journey_via_BCM_sheet
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../HCS_Common/CommonResources.txt
+Resource	../HCS_Common/CommonAC.txt
+Resource	../HCS_Common/resource_keywords_sd.txt
+Resource	../HCS_Common/readHCSTestDataFromExcel.txt
+Resource	../HCS_Common/HCSResource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${RefNo}		SC01@
+${sheetName}	CQM
+${TC_ID}		SC01
+${NewCustomer}	yes
+
+*** Test Cases ***
+prerequisites
+	[TAGS]	Q2O
+	Read data	CQM	${TC_ID}	
+	Log To Console	Retrieved CQM variables
+	Asset Creation
+	
+TC01 Quote Creation
+	[TAGS]	Q2O
+	Open Browser And Login To CQM Page	
+	Select Customer	
+	Go to Manage Quote
+	Run Keyword If	'${newQuote}' == 'yes'	Run Keyword	Create Quote	${QuoteName}	${OrderType}	${ContractTerm}	${Currency}	${OppurtunityReferenceNumber}
+	Select Quote	${quoteID}	${QuoteName}
+	[Teardown]	Log Location
+	
+TC02 Quote Configuration
+	[TAGS]	Q2O
+	Quote Configuration
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+	...	AND	Close Browser
+	
+TC03 Select Quote
+	[TAGS]	Q2O
+	#Set Suite Variable	${BROWSER}	FF
+	Set Suite Variable	${newQuote}	no
+	Open Browser And Login To CQM Page
+	Select Customer
+	Go to Manage Quote
+	Select Quote	${quoteID}	${QuoteName}
+	[Teardown]	Log Location
+	
+TC04 Pricing
+	[TAGS]	Q2O
+	Quote Configuration
+	Calculate Pricing	
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+
+TC04 Order Creation
+	[TAGS]	Q2O
+	Create Order	
+	Close Browser
+	Sleep	3m
+	Open Browser And Login To CQM Page
+	Select Customer
+	Capture The OrderID	${quoteID}
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+	...	AND	Close Browser
+
+TC05 Review Order
+	[TAGS]	SD
+	Set Suite Variable	${sheetName}	CQM
+	Read data	${sheetName}	${TC_ID}
+	Set Suite Variable	${sheetName}	SD
+	Read data	${sheetName}	${TC_ID}
+	Log	${url}
+	Log	${t3_SI_URL}
+	Load Order IDs
+	Set Suite Variable	${browser}		IE
+	Open Browser And Login	${CQMusername}	${CQMpassword}	${browser}	${t3_SI_URL}
+	Navigate to Workflow and Search Order
+	Select Given Window	title=Si-Workflow
+	${sameSOPInTestData}=	Run Keyword And Return Status	Element Should Contain	lblSopEin	${installCoordinator}
+	Run Keyword Unless	${sameSOPInTestData}	Change Order Contact Details
+	${btnActionDisabled}=	Run Keyword And Return Status	Element Should Be Disabled	btnAction
+	Run Keyword If	${btnActionDisabled}	Accept Order
+	[Teardown]	Log Location
+
+TC06-TC12/13 L2C process	
+	[TAGS]	SD
+	Process Order
+	Confirm Status Complete in AIB
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser	

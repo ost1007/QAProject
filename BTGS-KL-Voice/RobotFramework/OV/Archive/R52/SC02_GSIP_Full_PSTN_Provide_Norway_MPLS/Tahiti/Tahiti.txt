@@ -1,0 +1,26 @@
+Set Environment Variable	no_proxy	127.0.0.1
+
+*** Settings ***
+Documentation     A workflow in Tahiti Portal.
+Suite Setup       
+#Test Setup        Add Needed Image Path
+Resource          resourceTahiti.txt
+
+*** Test Cases ***
+prerequisites
+    Create Index Numbering
+    Set Timestamp    
+    
+TC01 Tahiti Portal
+	Open Browser to Tahiti Login Page
+	Navigate to My Orders
+	Search By Order Search
+	Select OV Service
+    Select And Process Task
+	#Select Service Number
+	#Yank Task
+	#End Task
+	
+    [Teardown]	Log Location
+    #[Teardown]	Run Keywords	Log Location
+	#...	AND	Close Browser	

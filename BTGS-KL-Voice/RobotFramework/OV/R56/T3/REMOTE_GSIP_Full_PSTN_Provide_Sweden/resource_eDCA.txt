@@ -1,0 +1,25 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library	Selenium2Library
+Library	DebugLibrary
+Library	DateTime
+Library		OperatingSystem
+Library		Collections
+Resource	../../Common_OV/EDCA_Resource.txt
+
+*** Keywords ***
+#######eDCA SC02 resource keywords###############
+    	
+Verify Sweden Block Start Number
+      Click Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber
+      Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber	${BlockStartNumber}
+      Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_btnSave	${wait_time}
+      Click Element	UsrOneVoiceAdditionalFeatureDetails_btnSave
+      sleep	10s
+      ${verifySWEblocknumber}=	Run Keyword And Return Status	Page Should Contain	Block Start Number should start from 46 and length should not be less than the 7 and should not be greater than 13
+      #log to console    verifyHKblocknumber is ${verifySWEblocknumber}
+      Run Keyword If    '${verifySWEblocknumber}'=='True'    Fail      Block number for Sweden is not verified correctly

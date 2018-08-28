@@ -1,0 +1,175 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			OperatingSystem
+Library  		String
+Library			Collections
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+Resource		../Common_OV/CommonResources.txt
+
+*** Variables ***
+
+*** Keywords ***
+Open Browser And Login To BFGIMS Page
+	Browser Config	${BFG_IMS_URL}
+	Goto	${BFG_IMS_URL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    21C Authentication: Login
+    Selenium2Library.Input Text    USER   ${Username}
+    Selenium2Library.Input Text    PASSWORD    ${Password}
+    Click Button   	Sign On
+    Wait Until Page Contains   	21C Authentication: Warning Screen	50s	Authentication page is not display
+    Wait Until Element Is Enabled	YES
+	Click Button	YES
+	Wait Until Page Contains	BFG IMS	60s
+    Select Window	title=BFG IMS
+
+Select User Profile Group
+	Select Frame    container
+	Log to console	${Profile_Group}
+	Run Keyword If	'${Profile_Group}'=='AMMEND'	Run Keywords
+	...	Click Element	xpath=.//select[@name='cmbProfile']
+	...	AND	Click Element	xpath=.//select/option[5]
+	...	ELSE	Select From List	xpath=.//select[@name='cmbProfile']	${Profile_Group}	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select User Profile-Group.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)	
+	Focus	xpath=*//input[@value='Continue']	
+	Click Element	xpath=*//input[@value='Continue']
+	Select Window	title=BFG IMS
+
+Search for Existing Customers
+	Select Frame    container
+	Current Frame Contains	Search for Existing Customers	60s
+	Click Link	icssearch2.asp
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Search for Existing Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+
+Customer Search (text)
+	Select Frame    container
+	Current Frame Contains	Customer Search (text)	60s
+	Click Link	icssearch2.asp
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Customer Search (text).png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+
+Customer Search by Customer Name
+	Select Frame    container
+#	Wait Until Page Contains	Customer Search (text)
+	Current Frame Contains	Customer Search (text)
+	Select From List 	SearchTerm	Customer Name	
+	Selenium2Library.Input Text	custName1	${CustomerName}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Search for Existing Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Click Element	xpath=.//input[@value='Search']
+	Select Window	title=BFG IMS
+
+Verify Customer Not Exist
+	Select Frame    container
+	Wait Until Page Contains	No results found with those characters in customer name
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Verify Customer Not Exist.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+	
+Verify Customer Is Exist
+	Select Frame    container
+	Wait Until Page Contains	${CustomerName}
+	#Wait Until Element Is Visible   	.//td[contains(text(),'${CustomerName}')]	100s
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Verify Customer Is Exist.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+	
+Add Non-UK Customer
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Enter Customer Name below
+	Selenium2Library.Input Text	textstringsearch	${CustomerName}
+	Click Element	xpath=.//input[@value='Check']
+	Current Frame Contains   	There are currently no customers matching your search criteria	100s
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Validate LE
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Add Non-UK Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Click Element	xpath=.//input[@value='Add Customer (non-UK)']
+	Fill In Customer Detail
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Select Window	title=BFG IMS
+	
+Fill In Customer Detail
+	#Select Frame    container
+	Wait Until Page Contains	Registered Country
+	Current Frame Contains	Registered Country
+	Select From List 	CUS_REGISTERED_CTY_ID	${Country}
+	Selenium2Library.Input Text	xpath=.//input[@name='CUS_NAME']	${CustomerName}	
+	Selenium2Library.Input Text	xpath=.//input[@name='CUS_REFERENCE']	${CustomerRef}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Fill in Customer Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+	
+Get Customer Details
+	Select Frame    container
+	${Customer_ID}=	Selenium2Library.Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[1]/form
+	LOG	${Customer_ID}
+	Export Variable Into Text File	${CustomerID_TextFile}	${Customer_ID}	
+	${Customer_Name}=	Selenium2Library.Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[2]
+	LOG	${Customer_Name}
+	${Customer_Ref}=	Selenium2Library.Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[3]
+	LOG	${Customer_Ref}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Customer Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+
+Click List Sites
+	Select Frame    container
+	Current Frame Contains	Search Results (Customers)	60s
+	Focus	xpath=*//input[@value='List Sites']	
+	Click Element	xpath=.//input[@value='List Sites']
+	Current Frame Contains   	 No Sites present for this Customer	100s
+	Click Element	xpath=.//input[@value='Add a new Site']
+	Current Frame Contains	${CustomerName}	60s
+	Select From List 	COUNTRY_ID	${BFG_Site_Country}
+	Click Button	xpath=.//button[.//text() = 'Choose']
+	Fill in Site Detail
+	
+Fill in Site Detail
+	Wait Until Page Contains	Site name
+	Current Frame Contains	Site name
+	Selenium2Library.Input Text	xpath=.//input[@name='SIT_NAME']	${BFG_Site_Name}	
+	Selenium2Library.Input Text	xpath=.//input[@name='SIT_REFERENCE']	${BFG_Site_Ref}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_SITE_PREMISES']	${BFG_Site_BuildingName}	
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_STREET_NUMBER']	${BFG_Site_StreetNumber}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_STREET_NAME']	${BFG_Site_StreetName}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_TOWN']	${BFG_Site_City}
+	${BFG_Site_Postal_str}=	 Convert To String	${BFG_Site_Postal}
+	Selenium2Library.Input Text	xpath=.//input[@name='ADR_POST_ZIP_CODE']	${BFG_Site_Postal_str}
+	Select From List By Value 	SIT_LANGUAGE	${BFG_Site_Language}
+	Select From List By Value	SIT_CURRENCY	${BFG_Site_Currency}
+	Select From List 	ADR_COUNTRY	${BFG_Site_Country}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Fill in Site Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Focus	xpath=*//input[@value='Add Site']	
+	Click Element	xpath=.//input[@value='Add Site']
+	Wait Until Page Contains	SUBPREMISE
+	Current Frame Contains	SUBPREMISE
+	Selenium2Library.Input Text	xpath=.//input[@name='LOC_SUBPREMISE']	${BFG_Site_Subpremise}
+	Focus	xpath=*//input[@value='Add Location']
+	Click Element	xpath=.//input[@value='Add Location']
+	Wait Until Page Contains	successfully
+	Select Window	title=BFG IMS
+	
+Get Site Details
+	Select Frame    container
+	Current Frame Contains	Search Results (Customers)	60s
+	Focus	xpath=*//input[@value='List Sites']	
+	Click Element	xpath=.//input[@value='List Sites']
+	Wait Until Page Contains	Site name
+	Current Frame Contains	Site Name	60s	
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Get Site Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)

@@ -1,0 +1,2543 @@
+********************************************************************
+Date 16/02/2017 10:55:10 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 16/02/2017 10:55:17 AM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 16/02/2017 10:58:10 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 16/02/2017 5:04:38 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 16/02/2017 5:04:43 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 16/02/2017 5:05:36 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 16/02/2017 5:05:42 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 16/02/2017 5:06:38 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 16/02/2017 5:06:51 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+********************************************************************
+Date 16/02/2017 5:10:34 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 16/02/2017 5:10:40 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 16/02/2017 5:11:38 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 16/02/2017 5:11:50 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+********************************************************************
+Date 20/02/2017 2:29:31 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/02/2017 2:29:37 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/02/2017 2:32:41 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/02/2017 2:32:44 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 20/02/2017 2:33:40 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 20/02/2017 2:33:52 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+********************************************************************
+Date 20/02/2017 3:08:01 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/02/2017 3:08:07 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 20/02/2017 3:09:01 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 20/02/2017 3:09:13 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCreateCustomer Clicked   #####
+Browser brwAssociateCustomer  Exists
+Page pgAssociateCustomer  Exists
+Frame frmBMRemedyNote Exists
+Link lnkOK Clicked
+####  Link lnkCreateCustomer Clicked   #####
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+Frame frmBMCRemedyUserNote Exists
+Link lnkOK Clicked
+********************************************************************
+Date 20/02/2017 3:11:32 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is Apex Tower
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is Oulton Road
+In Text Box, txtCentralCity, the data entered is Stone
+********************************************************************
+Date 20/02/2017 3:26:36 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/02/2017 3:26:42 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is Apex Tower
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is Oulton Road
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+********************************************************************
+Date 20/02/2017 5:18:13 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/02/2017 5:18:16 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 20/02/2017 5:19:53 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 20/02/2017 5:30:20 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 20/02/2017 5:30:26 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 20/02/2017 5:31:30 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 21/02/2017 11:01:03 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 11:01:10 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 11:12:09 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 11:12:15 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 11:26:55 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 11:27:01 AM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 21/02/2017 11:28:00 AM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 21/02/2017 11:30:47 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 11:30:53 AM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is Apex Tower
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is Oulton Road
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+********************************************************************
+Date 21/02/2017 1:45:01 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 1:45:07 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is Apex Tower
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is Oulton Road
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15
+####  Link lnkSearchAddress Clicked   #####
+********************************************************************
+Date 21/02/2017 1:57:45 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 1:57:50 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCreateCustomer Clicked   #####
+********************************************************************
+Date 21/02/2017 2:01:03 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 2:01:08 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCreateCustomer Clicked   #####
+Browser brwAssociateCustomer  Exists
+Page pgAssociateCustomer  Exists
+Frame frmBMRemedyNote Exists
+Link lnkOK Clicked
+####  Link lnkCreateCustomer Clicked   #####
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+Frame frmBMCRemedyUserNote Exists
+Link lnkOK Clicked
+********************************************************************
+Date 21/02/2017 2:02:31 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is Apex Tower
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is Oulton Road
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+********************************************************************
+Date 21/02/2017 2:15:13 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 2:15:19 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is 
+In Text Box, txtCentralBuidingNumber, the data entered is 
+In Text Box, txtCentralStreet, the data entered is 
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 21/02/2017 3:25:16 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:25:22 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:26:22 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:26:28 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:29:40 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:29:45 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:30:04 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:30:05 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:31:30 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:31:35 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is 
+In Text Box, txtCentralBuidingNumber, the data entered is 
+In Text Box, txtCentralStreet, the data entered is 
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 21/02/2017 3:39:17 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:39:23 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is OULTON ROAD
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 21/02/2017 3:55:50 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:55:56 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+********************************************************************
+Date 21/02/2017 3:59:03 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 3:59:08 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+********************************************************************
+Date 21/02/2017 4:07:17 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 4:07:23 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+********************************************************************
+Date 21/02/2017 4:10:43 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 4:10:49 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+********************************************************************
+Date 21/02/2017 4:23:48 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 21/02/2017 4:23:54 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+********************************************************************
+Date 22/02/2017 3:09:44 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 3:09:51 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 22/02/2017 3:10:52 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 22/02/2017 3:13:39 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 3:13:45 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 22/02/2017 3:22:06 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 3:22:11 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+********************************************************************
+Date 22/02/2017 3:24:10 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 3:24:16 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBillingAccount Clicked   #####
+####  Link lnkManageLE Clicked   #####
+In Text Box, txtLegalcompanyName, the data entered is R48AUTOUKTEST01
+#####	WebCheckBox chkSameAsCustomerSite is Found and Checked   #####
+####  Link lnkSearchAddress Clicked   #####
+********************************************************************
+Date 22/02/2017 4:18:03 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 4:18:09 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBillingAccount Clicked   #####
+####  Link lnkManageLE Clicked   #####
+In Text Box, txtLegalcompanyName, the data entered is R48AUTOUKTEST01
+#####	WebCheckBox chkSameAsCustomerSite is Found and Checked   #####
+####  Link lnkCreateLE Clicked   #####
+********************************************************************
+Date 22/02/2017 4:18:36 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingName, the data entered is APEX TOWER
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+Link lnkSearchAddress Clicked
+********************************************************************
+Date 22/02/2017 4:48:57 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 4:49:04 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+Link lnkSearchAddress Clicked
+********************************************************************
+Date 22/02/2017 5:03:48 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 5:03:54 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+Link lnkSearchAddress Clicked
+********************************************************************
+Date 22/02/2017 5:04:33 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 5:04:39 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+Link lnkSearchAddress Clicked
+********************************************************************
+Date 22/02/2017 5:13:18 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 5:13:25 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+Link lnkSearchAddress Clicked
+********************************************************************
+Date 22/02/2017 5:16:42 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 22/02/2017 5:16:48 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+Link lnkSearchAddress Clicked
+********************************************************************
+Date 22/02/2017 5:18:03 PM
+Starting QTP Script :  DriverScript
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Account Name, the data entered is R48AUTOUKTEST01
+In Text Box, Customer Billing Ref, the data entered is R48AUTOUKTEST01
+In Text Box, ActivationDate, the data entered is 23/02/2017 5:19:14 PM
+Link Advanced Billing Clicked
+Browser AdvancedBillingWindow  exists
+Page AdvancedBillingWindow exists
+Link Save Clicked
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Project Code, the data entered is JA063587
+Link Search Code Clicked
+Link Create Account Clicked
+********************************************************************
+Date 23/02/2017 10:20:58 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 10:21:00 AM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 23/02/2017 10:22:12 AM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 23/02/2017 10:26:01 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 10:26:07 AM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+Link lnkSearchAddress Clicked
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingName, the data entered is APEX TOWER
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+********************************************************************
+Date 23/02/2017 10:27:34 AM
+Starting QTP Script :  DriverScript
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Account Name, the data entered is R48AUTOUKTEST01
+In Text Box, Customer Billing Ref, the data entered is R48AUTOUKTEST01
+In Text Box, ActivationDate, the data entered is 24/02/2017 10:28:43 AM
+Link Advanced Billing Clicked
+Browser AdvancedBillingWindow  exists
+Page AdvancedBillingWindow exists
+Link Save Clicked
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Project Code, the data entered is JA063587
+Link Search Code Clicked
+Link Create Account Clicked
+********************************************************************
+Date 23/02/2017 10:50:20 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 10:50:26 AM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 23/02/2017 10:51:26 AM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 23/02/2017 11:21:51 AM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 11:21:52 AM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 23/02/2017 12:02:33 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 12:02:40 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 2:06:39 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 2:06:45 PM
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 23/02/2017 2:07:54 PM
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 23/02/2017 3:02:18 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 3:03:23 PM
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 3:03:28 PM
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+Link lnkSearchAddress Clicked
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingName, the data entered is APEX TOWER
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+********************************************************************
+Date 23/02/2017 3:04:55 PM
+Starting QTP Script :  DriverScript
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Account Name, the data entered is R48AUTOUKTEST01
+In Text Box, Customer Billing Ref, the data entered is R48AUTOUKTEST01
+In Text Box, ActivationDate, the data entered is 24/02/2017 3:06:05 PM
+Link Advanced Billing Clicked
+Browser AdvancedBillingWindow  exists
+Page AdvancedBillingWindow exists
+Link Save Clicked
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Project Code, the data entered is JA063587
+Link Search Code Clicked
+Link Create Account Clicked
+********************************************************************
+Date 23/02/2017 15:18:21
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 15:18:27
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+Link lnkSearchAddress Clicked
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingName, the data entered is APEX TOWER
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+********************************************************************
+Date 23/02/2017 15:20:17
+Starting QTP Script :  DriverScript
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Account Name, the data entered is R48AUTOUKTEST01
+In Text Box, Customer Billing Ref, the data entered is R48AUTOUKTEST01
+In Text Box, ActivationDate, the data entered is 24/02/2017 15:21:27
+Link Advanced Billing Clicked
+Browser AdvancedBillingWindow  exists
+Page AdvancedBillingWindow exists
+Link Save Clicked
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Project Code, the data entered is JA063587
+Link Search Code Clicked
+Link Create Account Clicked
+********************************************************************
+Date 23/02/2017 15:29:16
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 15:29:22
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 15:30:28
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 15:30:30
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 23/02/2017 15:31:22
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 23/02/2017 15:32:58
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 15:33:04
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is OULTON ROAD
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 23/02/2017 15:34:51
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+********************************************************************
+Date 23/02/2017 15:35:47
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBillingAccount Clicked   #####
+####  Link lnkManageLE Clicked   #####
+In Text Box, txtLegalcompanyName, the data entered is R48AUTOUKTEST02
+#####	WebCheckBox chkSameAsCustomerSite is Found and Checked   #####
+####  Link lnkCreateLE Clicked   #####
+********************************************************************
+Date 23/02/2017 15:36:25
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+Link lnkSearchAddress Clicked
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingName, the data entered is APEX TOWER
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+********************************************************************
+Date 23/02/2017 15:37:42
+Starting QTP Script :  DriverScript
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Account Name, the data entered is R48AUTOUKTEST02
+In Text Box, Customer Billing Ref, the data entered is R48AUTOUKTEST02
+In Text Box, ActivationDate, the data entered is 24/02/2017 15:38:52
+Link Advanced Billing Clicked
+Browser AdvancedBillingWindow  exists
+Page AdvancedBillingWindow exists
+Link Save Clicked
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Project Code, the data entered is JA063587
+Link Search Code Clicked
+Link Create Account Clicked
+********************************************************************
+Date 23/02/2017 16:07:24
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 23/02/2017 16:07:31
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 23/02/2017 16:08:27
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 23/02/2017 16:08:39
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtSearchCustomer, the data entered is R48AUTOUKTEST01
+********************************************************************
+Date 23/02/2017 16:09:45
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+In Text Box, txtQuoteName, the data entered is QT_CONTRACT_BCM
+In Text Box, txtoppurtunityreferencenumber, the data entered is CustRefContract
+####  Link lnkSave Clicked   #####
+####  Link lnkOK Clicked   #####
+********************************************************************
+Date 23/02/2017 16:11:16
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:27:43
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:27:46
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 24/02/2017 10:28:48
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 24/02/2017 10:29:03
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:35:11
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:35:18
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:36:08
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+####  Link lnkSearchQuote Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+********************************************************************
+Date 24/02/2017 10:41:02
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:41:16
+Starting QTP Script :  DriverScript
+Browser brwIPSDKProductBundling  Exists
+Page pgIPSDKProductBundling  Exists
+WebButton btnAddProduct2Quote  Clicked 
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+********************************************************************
+Date 24/02/2017 10:41:41
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+WebButton btnAddProduct  Clicked 
+####  Link lnkContinue2QuoteOption Clicked   #####
+********************************************************************
+Date 24/02/2017 10:43:44
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+####  Link lnkImportProduct Clicked   #####
+Browser brwSalesQuoteEngine  Exists
+WebButton btnUpload  Clicked 
+WebButton btnClose  Clicked 
+********************************************************************
+Date 24/02/2017 10:46:03
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:48:28
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+#####	WebCheckBox chkListOfQuoteOptionItems is Found and Checked   #####
+####  Link lnkCreateOffer Clicked   #####
+In Text Box, txtOfferName, the data entered is OFF_CONTRACT_BCM
+In Text Box, txtCustomerOrderReference, the data entered is Cust_BCM
+WebButton btnSave  Clicked 
+********************************************************************
+Date 24/02/2017 10:54:29
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 24/02/2017 10:54:36
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+#####	WebCheckBox chkListOfQuoteOptionItems is Found and Checked   #####
+####  Link lnkCreateOffer Clicked   #####
+In Text Box, txtOfferName, the data entered is OFF_CONTRACT_BCM
+In Text Box, txtCustomerOrderReference, the data entered is Cust_BCM
+WebButton btnSave  Clicked 
+WebImage imgCustomerApprove Clicked 
+********************************************************************
+Date 24/02/2017 10:56:29
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgOfferDetails  Exists
+#####	WebCheckBox chkListOfOfferItems is Found and Checked   #####
+####  Link lnkCreateOrder Clicked   #####
+In Text Box, txtOrderName, the data entered is BCM_Order
+WebButton btnSave  Clicked 
+********************************************************************
+Date 24/02/2017 10:56:50
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgExportRFO Clicked 
+********************************************************************
+Date 27/02/2017 14:50:21
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 27/02/2017 14:50:24
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+********************************************************************
+Date 27/02/2017 14:59:24
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 27/02/2017 14:59:30
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 27/02/2017 15:03:38
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 27/02/2017 15:03:39
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 27/02/2017 15:04:28
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 27/02/2017 15:04:39
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+********************************************************************
+Date 27/02/2017 15:12:06
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 27/02/2017 15:12:12
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 27/02/2017 15:13:07
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 27/02/2017 15:13:17
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+********************************************************************
+Date 27/02/2017 15:21:28
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 27/02/2017 15:21:34
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is OULTON ROAD
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 27/02/2017 15:30:50
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 27/02/2017 15:30:55
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 27/02/2017 15:32:08
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 27/02/2017 15:32:19
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCreateCustomer Clicked   #####
+Browser brwAssociateCustomer  Exists
+Page pgAssociateCustomer  Exists
+Frame frmBMRemedyNote Exists
+Link lnkOK Clicked
+####  Link lnkCreateCustomer Clicked   #####
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+Frame frmBMCRemedyUserNote Exists
+Link lnkOK Clicked
+********************************************************************
+Date 27/02/2017 15:34:16
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 1
+In Text Box, txtCentralStreet, the data entered is OULTON ROAD
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 27/02/2017 15:36:05
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+********************************************************************
+Date 27/02/2017 15:37:02
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBillingAccount Clicked   #####
+####  Link lnkManageLE Clicked   #####
+In Text Box, txtLegalcompanyName, the data entered is R48AUTOUKTEST03
+#####	WebCheckBox chkSameAsCustomerSite is Found and Checked   #####
+####  Link lnkCreateLE Clicked   #####
+********************************************************************
+Date 27/02/2017 15:37:27
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+Link lnkSearchAddress Clicked
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingName, the data entered is APEX TOWER
+In Text Box, txtBACBuildingNumber, the data entered is 1
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+********************************************************************
+Date 27/02/2017 15:38:44
+Starting QTP Script :  DriverScript
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Account Name, the data entered is R48AUTOUKTEST03
+In Text Box, Customer Billing Ref, the data entered is R48AUTOUKTEST03
+In Text Box, ActivationDate, the data entered is 28/02/2017 15:39:54
+Link Advanced Billing Clicked
+Browser AdvancedBillingWindow  exists
+Page AdvancedBillingWindow exists
+Link Save Clicked
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Project Code, the data entered is JA063587
+Link Search Code Clicked
+Link Create Account Clicked
+********************************************************************
+Date 28/02/2017 10:33:21
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 10:33:28
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 10:41:19
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 10:41:25
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+********************************************************************
+Date 28/02/2017 10:48:17
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 10:48:22
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 28/02/2017 10:48:35
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtSearchCustomer, the data entered is R48AUTOUKTEST02
+********************************************************************
+Date 28/02/2017 10:49:51
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+In Text Box, txtQuoteName, the data entered is QT_CONTRACT_BCM
+In Text Box, txtoppurtunityreferencenumber, the data entered is CustRefContract
+####  Link lnkSave Clicked   #####
+####  Link lnkOK Clicked   #####
+********************************************************************
+Date 28/02/2017 10:51:46
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 10:52:35
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+####  Link lnkSearchQuote Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+********************************************************************
+Date 28/02/2017 10:57:09
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 10:57:23
+Starting QTP Script :  DriverScript
+Browser brwIPSDKProductBundling  Exists
+Page pgIPSDKProductBundling  Exists
+WebButton btnAddProduct2Quote  Clicked 
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+********************************************************************
+Date 28/02/2017 10:57:46
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+WebButton btnAddProduct  Clicked 
+####  Link lnkContinue2QuoteOption Clicked   #####
+********************************************************************
+Date 28/02/2017 10:59:22
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+####  Link lnkImportProduct Clicked   #####
+Browser brwSalesQuoteEngine  Exists
+WebButton btnUpload  Clicked 
+WebButton btnClose  Clicked 
+********************************************************************
+Date 28/02/2017 14:44:24
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 14:44:31
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 14:46:12
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+#####	WebCheckBox chkListOfQuoteOptionItems is Found and Checked   #####
+####  Link lnkCreateOffer Clicked   #####
+In Text Box, txtOfferName, the data entered is OFF_CONTRACT_BCM
+In Text Box, txtCustomerOrderReference, the data entered is Cust_BCM
+WebButton btnSave  Clicked 
+********************************************************************
+Date 28/02/2017 14:51:11
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 28/02/2017 14:51:18
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+#####	WebCheckBox chkListOfQuoteOptionItems is Found and Checked   #####
+####  Link lnkCreateOffer Clicked   #####
+In Text Box, txtOfferName, the data entered is OFF_CONTRACT_BCM
+In Text Box, txtCustomerOrderReference, the data entered is Cust_BCM
+WebButton btnSave  Clicked 
+WebImage imgCustomerApprove Clicked 
+********************************************************************
+Date 28/02/2017 14:52:56
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgOfferDetails  Exists
+#####	WebCheckBox chkListOfOfferItems is Found and Checked   #####
+####  Link lnkCreateOrder Clicked   #####
+In Text Box, txtOrderName, the data entered is BCM_Order
+WebButton btnSave  Clicked 
+********************************************************************
+Date 28/02/2017 14:53:12
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgExportRFO Clicked 
+********************************************************************
+Date 01/03/2017 17:19:37
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 01/03/2017 17:19:45
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 14:47:33
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 14:47:42
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:11:38
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:11:45
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:13:44
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:13:50
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:24:42
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:24:49
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:26:15
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:26:22
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgImportRFO Clicked 
+Browser brwSalesQuoteEngine  Exists
+********************************************************************
+Date 03/03/2017 15:32:39
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:32:46
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgImportRFO Clicked 
+Browser brwSalesQuoteEngine  Exists
+********************************************************************
+Date 03/03/2017 15:54:10
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:54:18
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+#####	WebCheckBox chkListOfQuoteOptionItems is Found and Checked   #####
+####  Link lnkCreateOffer Clicked   #####
+In Text Box, txtOfferName, the data entered is OFF_CONTRACT_BCM
+In Text Box, txtCustomerOrderReference, the data entered is Cust_BCM
+WebButton btnSave  Clicked 
+WebImage imgCustomerApprove Clicked 
+********************************************************************
+Date 03/03/2017 15:56:07
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgOfferDetails  Exists
+#####	WebCheckBox chkListOfOfferItems is Found and Checked   #####
+####  Link lnkCreateOrder Clicked   #####
+In Text Box, txtOrderName, the data entered is BCM_Order
+WebButton btnSave  Clicked 
+********************************************************************
+Date 03/03/2017 15:56:24
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:57:04
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 15:57:11
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgImportRFO Clicked 
+Browser brwSalesQuoteEngine  Exists
+WebButton btnDone  Clicked 
+********************************************************************
+Date 03/03/2017 15:58:27
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+####  Link lnkSubmitOrder Clicked   #####
+********************************************************************
+Date 03/03/2017 16:10:54
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:10:56
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+####  Link lnkSubmitOrder Clicked   #####
+********************************************************************
+Date 03/03/2017 16:12:06
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:31:07
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:31:10
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:44:17
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:45:07
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:45:13
+Starting QTP Script :  DriverScript
+Browser brw21CAuthentication  Exists
+Page pgLogin  Exists
+In Text Box, txtUserName, the data entered is 606813868
+In Text Box, txtPassword, the data entered is 583e7ed3c4dfe50b46d34872a9df59eedbcd2ceaa2bd1977a6e6
+WebButton btnSignOn  Clicked 
+********************************************************************
+Date 03/03/2017 16:46:36
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:46:41
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:47:14
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 03/03/2017 16:47:20
+Starting QTP Script :  DriverScript
+Browser brw21CAuthentication  Exists
+Page pgLogin  Exists
+In Text Box, txtUserName, the data entered is 609424665
+In Text Box, txtPassword, the data entered is 58b92b704b8543f5b7500a5e57088a1a313a46278fdf
+WebButton btnSignOn  Clicked 
+Browser brw21CAuthentication  Exists
+Page pgRedirect  Exists
+WebButton btnYes  Clicked 
+********************************************************************
+Date 03/03/2017 16:47:46
+Starting QTP Script :  DriverScript
+Browser brwBFG-IMS  Exists
+Page pgBFG-IMS  Exists
+IMS - Read / Amend / Add Inventory - One Voice T3 is Selected From cmbProfile
+WebButton btnContinue  Clicked 
+********************************************************************
+Date 06/03/2017 11:05:11
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 11:05:17
+Starting QTP Script :  DriverScript
+Browser brw21CAuthentication  Exists
+Page pgLogin  Exists
+In Text Box, txtUserName, the data entered is 609424665
+In Text Box, txtPassword, the data entered is 58b92b704b8543f5b7500a5e57088a1a313a46278fdf
+WebButton btnSignOn  Clicked 
+Browser brw21CAuthentication  Exists
+Page pgRedirect  Exists
+WebButton btnYes  Clicked 
+********************************************************************
+Date 06/03/2017 11:06:11
+Starting QTP Script :  DriverScript
+Browser brwBFG-IMS  Exists
+Page pgBFG-IMS  Exists
+IMS - Read / Amend / Add Inventory - One Voice T3 is Selected From cmbProfile
+WebButton btnContinue  Clicked 
+R48AUTOUKTEST02 is Selected From cmbCustomer
+WebButton btnSiteSummary  Clicked 
+####  Link lnkPackageInstance Clicked   #####
+********************************************************************
+Date 06/03/2017 11:07:07
+Starting QTP Script :  DriverScript
+Browser brwBFG-IMS  Exists
+Page pgBFG-IMS  Exists
+WebButton btnViewPI  does not Exist & is not Clicked 
+********************************************************************
+Date 06/03/2017 11:21:05
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 11:21:10
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 11:21:51
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 11:21:56
+Starting QTP Script :  DriverScript
+Browser brw21CAuthentication  Exists
+Page pgLogin  Exists
+In Text Box, txtUserName, the data entered is 609424665
+In Text Box, txtPassword, the data entered is 58b92b704b8543f5b7500a5e57088a1a313a46278fdf
+WebButton btnSignOn  Clicked 
+Browser brw21CAuthentication  Exists
+Page pgRedirect  Exists
+WebButton btnYes  Clicked 
+********************************************************************
+Date 06/03/2017 11:22:32
+Starting QTP Script :  DriverScript
+Browser brwBFG-IMS  Exists
+Page pgBFG-IMS  Exists
+IMS - Read Only - One Voice T3 is Selected From cmbProfile
+WebButton btnContinue  Clicked 
+R48AUTOUKTEST02 is Selected From cmbCustomer
+WebButton btnSiteSummary  Clicked 
+####  Link lnkPackageInstance Clicked   #####
+********************************************************************
+Date 06/03/2017 11:23:14
+Starting QTP Script :  DriverScript
+Browser brwBFG-IMS  Exists
+Page pgBFG-IMS  Exists
+WebButton btnViewPI  Clicked 
+********************************************************************
+Date 06/03/2017 13:24:28
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 13:24:34
+Starting QTP Script :  DriverScript
+Browser brwAIB  Exists
+Page pgAIB  Exists
+In Text Box, txtAIBUserName, the data entered is 609424665
+In Text Box, txtAIBPassword, the data entered is 58b92b704b8543f5b7500a5e57088a1a313a46278fdf
+WebButton btnSignOn  Clicked 
+Browser brwAIB  Exists
+Page pgAIB  Exists
+WebButton btnYes  Clicked 
+Browser brwAIB  Exists
+Page pgAIB  Exists
+********************************************************************
+Date 06/03/2017 13:26:13
+Starting QTP Script :  DriverScript
+Browser brwAIB  Exists
+Page pgAIB  Exists
+In Text Box, txtOrderNumber, the data entered is EXP335123
+WebButton btnSearch  Clicked 
+********************************************************************
+Date 06/03/2017 13:26:53
+Starting QTP Script :  DriverScript
+Browser brwAIB  Exists
+Page pgAIB  Exists
+********************************************************************
+Date 06/03/2017 13:27:07
+Starting QTP Script :  DriverScript
+Browser brwAIB  Exists
+Page pgAIB  Exists
+********************************************************************
+Date 06/03/2017 13:27:14
+Starting QTP Script :  DriverScript
+Browser brwSIAuthentication  Exists
+Page pgSIAuthentication  Exists
+In Text Box, txtUserName, the data entered is 609424665
+In Text Box, txtPassword, the data entered is 58b92b704b8543f5b7500a5e57088a1a313a46278fdf
+WebButton btnSignOn  Clicked 
+Browser brwSIAuthentication  Exists
+Page pgSIAuthentication  Exists
+WebButton btnYes  Clicked 
+********************************************************************
+Date 06/03/2017 13:27:41
+Starting QTP Script :  DriverScript
+Browser brwSIMain  Exists
+Page pgSIMain  Exists
+####  Link lnkWorkflow Clicked   #####
+===== Function Call :::: fn_SI_WorkFlowSearchOrder =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+In Text Box, txtSearchID, the data entered is EXP335123
+WebButton btnGo  Clicked 
+********************************************************************
+Date 06/03/2017 13:31:55
+Starting QTP Script :  DriverScript
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+********************************************************************
+Date 06/03/2017 14:04:32
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 14:04:37
+Starting QTP Script :  DriverScript
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+********************************************************************
+Date 06/03/2017 14:09:17
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 14:09:22
+Starting QTP Script :  DriverScript
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+********************************************************************
+Date 06/03/2017 14:15:43
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 14:16:00
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 14:16:01
+Starting QTP Script :  DriverScript
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+===== Function Call ::: fn_SI_UpdateMandateValues =====
+WebButton btnUpdate  Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+===== Function Call ::: fn_SI_UpdateMandateValues =====
+WebButton btnUpdate  Clicked 
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebImage imgToggleOrderItemList Clicked 
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+Browser brwTaskDetails  Exists
+Page pgTaskDetailsPage  Exists
+WebButton btnCloseTask  Clicked 
+WebButton btnOK  Clicked 
+===== Function Call ::: fn_SI_WorkFlowChildTaskCloseCheck =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+===== Function Call ::: fn_SI_ExpandTable =====
+===== Function Call :::: fn_SI_ToggleTaskDetail =====
+Browser brwSIWorkflow  Exists
+Page pgSIWorkflow  Exists
+WebImage imgToggleTaskDetails Clicked 
+===== Function Call ::: fn_SI_ExpandTable =====
+********************************************************************
+Date 06/03/2017 15:18:47
+Starting QTP Script :  DriverScript
+Browser brwSITaskDetails  Exists
+Page pgSITaskDetails  Exists
+********************************************************************
+Date 06/03/2017 15:19:19
+Starting QTP Script :  DriverScript
+Browser brwAIB  Exists
+Page pgAIB  Exists
+In Text Box, txtAIBUserName, the data entered is 609424665
+In Text Box, txtAIBPassword, the data entered is 58b92b704b8543f5b7500a5e57088a1a313a46278fdf
+WebButton btnSignOn  Clicked 
+Browser brwAIB  Exists
+Page pgAIB  Exists
+WebButton btnYes  Clicked 
+Browser brwAIB  Exists
+Page pgAIB  Exists
+********************************************************************
+Date 06/03/2017 15:20:18
+Starting QTP Script :  DriverScript
+Browser brwAIB  Exists
+Page pgAIB  Exists
+In Text Box, txtOrderNumber, the data entered is EXP335123
+WebButton btnSearch  Clicked 
+********************************************************************
+Date 06/03/2017 15:20:56
+Starting QTP Script :  DriverScript
+Browser brwAIB  Exists
+Page pgAIB  Exists
+********************************************************************
+Date 06/03/2017 15:21:17
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 15:21:22
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 06/03/2017 15:22:15
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKTrackOrders Clicked   #####
+********************************************************************
+Date 06/03/2017 15:22:33
+Starting QTP Script :  DriverScript
+Browser brwIPSDKTrackOrder  Exists
+Page pgIPSDKTrackOrder  Exists
+In Text Box, txtQuoteID, the data entered is 000000000236390
+####  Link lnkSearch Clicked   #####
+In Text Box, txtQuoteID, the data entered is 000000000236390
+####  Link lnkSearch Clicked   #####
+In Text Box, txtQuoteID, the data entered is 000000000236390
+####  Link lnkSearch Clicked   #####
+In Text Box, txtQuoteID, the data entered is 000000000236390
+####  Link lnkSearch Clicked   #####
+In Text Box, txtQuoteID, the data entered is 000000000236390
+####  Link lnkSearch Clicked   #####
+********************************************************************
+Date 06/03/2017 15:54:47
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 15:54:53
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 17:30:47
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 06/03/2017 17:30:54
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKTrackOrders Clicked   #####
+********************************************************************
+Date 06/03/2017 17:31:12
+Starting QTP Script :  DriverScript
+Browser brwIPSDKTrackOrder  Exists
+Page pgIPSDKTrackOrder  Exists
+In Text Box, txtQuoteID, the data entered is 000000000236390
+####  Link lnkSearch Clicked   #####
+********************************************************************
+Date 06/03/2017 17:31:57
+Starting QTP Script :  DriverScript
+Browser brw21CAuthentication  Exists
+Page pgLogin  Exists
+In Text Box, txtUserName, the data entered is 609424665
+In Text Box, txtPassword, the data entered is 58b92b704b8543f5b7500a5e57088a1a313a46278fdf
+WebButton btnSignOn  Clicked 
+Browser brw21CAuthentication  Exists
+Page pgRedirect  Exists
+WebButton btnYes  Clicked 
+********************************************************************
+Date 06/03/2017 17:32:44
+Starting QTP Script :  DriverScript
+Browser brwBFG-IMS  Exists
+Page pgBFG-IMS  Exists
+IMS - Read Only - One Voice T3 is Selected From cmbProfile
+WebButton btnContinue  Clicked 
+R48AUTOUKTEST02 is Selected From cmbCustomer
+WebButton btnSiteSummary  Clicked 
+####  Link lnkPackageInstance Clicked   #####
+********************************************************************
+Date 06/03/2017 17:33:27
+Starting QTP Script :  DriverScript
+Browser brwBFG-IMS  Exists
+Page pgBFG-IMS  Exists
+WebButton btnViewPI  Clicked 
+********************************************************************
+Date 07/03/2017 10:46:33
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 10:46:35
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 07/03/2017 10:48:23
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 07/03/2017 10:48:37
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCreateCustomer Clicked   #####
+Browser brwAssociateCustomer  Exists
+Page pgAssociateCustomer  Exists
+Frame frmBMRemedyNote Exists
+Link lnkOK Clicked
+####  Link lnkCreateCustomer Clicked   #####
+********************************************************************
+Date 07/03/2017 10:53:51
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 10:53:52
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 2
+In Text Box, txtCentralStreet, the data entered is OULTON ROAD
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 07/03/2017 10:55:45
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+********************************************************************
+Date 07/03/2017 14:00:18
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 14:00:19
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 14:01:15
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 14:01:16
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 07/03/2017 14:01:59
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 07/03/2017 14:02:06
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCreateCustomer Clicked   #####
+********************************************************************
+Date 07/03/2017 14:05:59
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 07/03/2017 14:06:00
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkCustomerDetails Clicked   #####
+In Text Box, txtCentralCity, the data entered is Stone
+In Text Box, txtCentralZipCode, the data entered is ST15 0RS
+####  Link lnkSearchAddress Clicked   #####
+In Text Box, txtCentralBuildingName, the data entered is APEX TOWER
+In Text Box, txtCentralBuidingNumber, the data entered is 2
+In Text Box, txtCentralStreet, the data entered is OULTON ROAD
+####  Link lnkCreateCustomerSite Clicked   #####
+********************************************************************
+Date 07/03/2017 14:07:18
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+In Text Box, txtCentralJobTitle, the data entered is Tester
+In Text Box, txtCentralFirstName, the data entered is Nagaraj
+In Text Box, txtCentralLastName, the data entered is Venkobasa
+In Text Box, txtCentralEMail, the data entered is nagaraj.venkobasa@bt.com
+In Text Box, txtCentralPhoneNumber, the data entered is 6616878
+####  Link lnkCentralContactSave Clicked   #####
+********************************************************************
+Date 07/03/2017 14:09:03
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBillingAccount Clicked   #####
+####  Link lnkManageLE Clicked   #####
+In Text Box, txtLegalcompanyName, the data entered is R48AUTOUKTEST04
+#####	WebCheckBox chkSameAsCustomerSite is Found and Checked   #####
+####  Link lnkCreateLE Clicked   #####
+********************************************************************
+Date 07/03/2017 14:09:45
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkBAC Clicked   #####
+In Text Box, txtBACCity, the data entered is Stone
+In Text Box, txtBACZIPCode, the data entered is ST15 0RS
+Link lnkSearchAddress Clicked
+In Text Box, txtBACFirstName, the data entered is Nagaraj
+In Text Box, txtBACLastName, the data entered is Venkobasa
+In Text Box, txtBACJobTitle, the data entered is Automation Tester
+In Text Box, txtBACBuildingName, the data entered is APEX TOWER
+In Text Box, txtBACBuildingNumber, the data entered is 2
+In Text Box, txtBACStreet, the data entered is OULTON ROAD
+In Text Box, txtBACPhoneNumber, the data entered is 6616878
+********************************************************************
+Date 07/03/2017 14:10:46
+Starting QTP Script :  DriverScript
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Account Name, the data entered is R48AUTOUKTEST04
+In Text Box, Customer Billing Ref, the data entered is R48AUTOUKTEST04
+In Text Box, ActivationDate, the data entered is 08/03/2017 14:11:33
+Link Advanced Billing Clicked
+Browser AdvancedBillingWindow  exists
+Page AdvancedBillingWindow exists
+Link Save Clicked
+Browser IPSDK WEB GUI  exists
+Page IPSDK WEB GUI exists
+In Text Box, Project Code, the data entered is JA063587
+Link Search Code Clicked
+Link Create Account Clicked
+********************************************************************
+Date 08/03/2017 11:17:02
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:17:04
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:17:54
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:17:55
+Starting QTP Script :  DriverScript
+Browser brwBMCRemedyMidTier  Exists
+Page pgBMCRemedyMidTier  Exists
+In Text Box, txtUserName, the data entered is wanabdwa
+In Text Box, txtPassword, the data entered is 58a5122ffcefc6ade1aa600327de9a3aca9f51e0601d
+WebButton btnLogin  Clicked 
+********************************************************************
+Date 08/03/2017 11:20:16
+Starting QTP Script :  DriverScript
+Browser brwHomePage(Search)  Exists
+Page pgHomePage(Search)  Exists
+####  Link lnkIPSDKWEBGUI Clicked   #####
+********************************************************************
+Date 08/03/2017 11:21:02
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+In Text Box, txtSearchCustomer, the data entered is R48AUTOUKTEST03
+********************************************************************
+Date 08/03/2017 11:21:59
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+In Text Box, txtQuoteName, the data entered is QT_CONTRACT_BCM
+In Text Box, txtoppurtunityreferencenumber, the data entered is CustRefContract
+####  Link lnkSave Clicked   #####
+####  Link lnkOK Clicked   #####
+********************************************************************
+Date 08/03/2017 11:23:12
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:27:41
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:27:42
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+In Text Box, txtQuoteName, the data entered is QT_CONTRACT_BCM
+In Text Box, txtoppurtunityreferencenumber, the data entered is CustRefContract
+####  Link lnkSave Clicked   #####
+####  Link lnkOK Clicked   #####
+********************************************************************
+Date 08/03/2017 11:28:52
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:40:49
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:40:56
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:43:43
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:43:44
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+In Text Box, txtQuoteName, the data entered is QT_CONTRACT_BCM
+In Text Box, txtoppurtunityreferencenumber, the data entered is CustRefContract
+####  Link lnkSave Clicked   #####
+####  Link lnkOK Clicked   #####
+********************************************************************
+Date 08/03/2017 11:45:45
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:46:25
+Starting QTP Script :  DriverScript
+Browser brwIPSDKWEBGUI  Exists
+Page pgIPSDKWEBGUI  Exists
+####  Link lnkQuoteDetails Clicked   #####
+####  Link lnkSearchQuote Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+In Text Box, txtEIN, the data entered is 606623061
+####  Link lnkSearchBTDirectory Clicked   #####
+####  Link lnkChannelContactSave Clicked   #####
+********************************************************************
+Date 08/03/2017 11:49:05
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:49:11
+Starting QTP Script :  DriverScript
+Browser brwIPSDKProductBundling  Exists
+Page pgIPSDKProductBundling  Exists
+WebButton btnAddProduct2Quote  Clicked 
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+********************************************************************
+Date 08/03/2017 11:49:26
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingAddProduct  Exists
+WebButton btnAddProduct  Clicked 
+####  Link lnkContinue2QuoteOption Clicked   #####
+********************************************************************
+Date 08/03/2017 11:51:00
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+####  Link lnkImportProduct Clicked   #####
+Browser brwSalesQuoteEngine  Exists
+WebButton btnUpload  Clicked 
+WebButton btnClose  Clicked 
+********************************************************************
+Date 08/03/2017 11:52:48
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 11:57:51
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+#####	WebCheckBox chkListOfQuoteOptionItems is Found and Checked   #####
+####  Link lnkCreateOffer Clicked   #####
+In Text Box, txtOfferName, the data entered is OFF_CONTRACT_BCM
+In Text Box, txtCustomerOrderReference, the data entered is Cust_BCM
+WebButton btnSave  Clicked 
+WebImage imgCustomerApprove Clicked 
+********************************************************************
+Date 08/03/2017 12:00:04
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgOfferDetails  Exists
+#####	WebCheckBox chkListOfOfferItems is Found and Checked   #####
+####  Link lnkCreateOrder Clicked   #####
+In Text Box, txtOrderName, the data entered is BCM_Order
+WebButton btnSave  Clicked 
+********************************************************************
+Date 08/03/2017 12:00:28
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgImportRFO Clicked 
+Browser brwSalesQuoteEngine  Exists
+********************************************************************
+Date 08/03/2017 12:05:04
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 12:05:05
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+#####	WebCheckBox chkListOfQuoteOptionItems is Found and Checked   #####
+####  Link lnkCreateOffer Clicked   #####
+In Text Box, txtOfferName, the data entered is OFF_CONTRACT_BCM
+In Text Box, txtCustomerOrderReference, the data entered is Cust_BCM
+WebButton btnSave  Clicked 
+WebImage imgCustomerApprove Clicked 
+********************************************************************
+Date 08/03/2017 12:06:33
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgOfferDetails  Exists
+#####	WebCheckBox chkListOfOfferItems is Found and Checked   #####
+####  Link lnkCreateOrder Clicked   #####
+In Text Box, txtOrderName, the data entered is BCM_Order
+WebButton btnSave  Clicked 
+********************************************************************
+Date 08/03/2017 12:06:56
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 12:10:59
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 12:11:00
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 13:35:09
+Starting QTP Script :  DriverScript
+********************************************************************
+Date 08/03/2017 13:35:11
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgExportRFO Clicked 
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+WebImage imgImportRFO Clicked 
+Browser brwSalesQuoteEngine  Exists
+WebButton btnDone  Clicked 
+********************************************************************
+Date 08/03/2017 13:37:00
+Starting QTP Script :  DriverScript
+Browser brwSalesQuoteEngine  Exists
+Page pgShowingQuoteOption  Exists
+####  Link lnkSubmitOrder Clicked   #####

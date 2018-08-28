@@ -1,0 +1,15 @@
+*** Settings ***
+Documentation     A workflow to create quotation in expedio.
+Suite Setup       
+Resource		ResourceExcel.txt
+Resource		readTestDataFromExcel.txt
+Library			DebugLibrary
+Library			Selenium2Library
+
+*** Test Cases ***
+External test data
+    #Define And Read Test Data Variable
+    Open Browser	http://sqe.t3.nat.bt.com/cqm	FF	ff_profile_dir=C://ff_profile
+    Debug
+    #Read Excel
+	[Teardown]    Debug

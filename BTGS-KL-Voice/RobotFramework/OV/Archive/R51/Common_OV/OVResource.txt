@@ -1,0 +1,49 @@
+*** Settings ***
+Documentation	SC01_Customer_Creation_BFG_IMS
+Suite Setup	
+Library			Selenium2Library
+Resource	../Common/resource_keywords_sd.txt
+Resource	../Common/CommonResources.txt
+Resource	../Common/readTestDataFromExcel.txt
+Resource	../Common/BFGIMS_Resource.txt
+Resource	../Common/BFGIMS_Locator.py
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	600
+${story}		SC01
+${QuoteName}	SC01AWSPRIV
+${RefNo}		SC01@
+*** Test Cases ***
+TC01 Customer Creation
+	[TAGS]	Q2O
+#	Set Suite Variable	${sheetName}	Q2O
+#	Define And Read Test Data Variable
+	Open Browser And Login To BFGIMS Page
+	Select User Profile Group
+	Search for Existing Customers
+	Customer Search by Customer Name
+	Verify Customer Not Exist
+	Add Non-UK Customer
+	Customer Search by Customer Name
+	Verify Customer Is Exist
+	
+	
+	[Teardown]	Log Location		
+	 
+fn_BFG_CreateCustomer 	
+
+ 	 
+	 
+ 
+	 
+	Navigation	Should be navigated to Add Customer Page	Navigated to Add Customer LE Page 	Information 	 
+txtCustName	Edit box should exists and R49AUTOCAN001 is to be entered	Edit box Exists and R49AUTOCAN001 is entered 	Pass 	 
+	txtCustReference	Edit box should exists and AUTO35612 is to be entered	Edit box Exists and AUTO35612 is entered 	Pass 	 
+lstRegisteredCountry	Select box should exists & CANADA is to be Selected	Select box Exists & CANADA is selected 	Pass 	 
+btnAddCustomer	Button should exists and it is to be clicked	Button Exists and it is clicked 	Pass 	 
+lstSearchTerm	Select box should exists & Customer Name is to be Selected	Select box Exists & Customer Name is selected 	Pass 	 
+txtCustomerName	Edit box should exists and R49AUTOCAN001 is to be entered	Edit box Exists and R49AUTOCAN001 is entered 	Pass 	 
+btnSearch	Button should exists and it is to be clicked	Button Exists and it is clicked 	Pass 	 
+Search Customer	On Search of Customer, details should be displayed	Customer details table is displayed 	Information 	
+Capture Customer ID	Customer ID should be captured	Customer ID is found to be 883596 	Pass

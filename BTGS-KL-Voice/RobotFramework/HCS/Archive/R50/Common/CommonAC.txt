@@ -1,0 +1,38 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				Resourse for Assets Creation
+
+Library			Selenium2Library
+Resource		../Common/CommonResources.txt
+Resource		../Common/readHCSTestDataFromExcel.txt
+
+*** Keywords ***
+Asset Creation
+	Read data	CustomerDetails	${TC_ID}	#for Customer Creation/Done
+	Log To Console	Retrieved Customer Details variables
+	Create Index Numbering
+	Log To Console	${\n}Create Customer START
+	Open Browser And Login To CQM Page
+	Customer Validation
+	#Log To Console	${\n}TC01 Create Customer END
+	
+	Log To Console	${\n}Create Customer Site START
+	Customer Site Validation
+	Create Customer Contract
+	#Log To Console	${\n}TC02 Create Customer Site END
+	
+	Log To Console	${\n}Create Customer Contacts START
+	Create Customer Contacts
+	#Log To Console	${\n}TC03 Create Customer Contacts END
+	
+	Log To Console	${\n}Create Billing Details START
+	Create Billing Details
+	Manage LE Validation
+	Billing Acc Validation
+	#Log To Console	${\n}TC04 Create Billing Details END
+	
+	Log To Console	${\n}Create Branch Site START
+	Branch Site Toggle
+	Close Browser
+	#Log To Console	${\n}TC05 Create Branch Site END

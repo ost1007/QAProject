@@ -1,0 +1,289 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+Library	OperatingSystem
+Library	Collections
+Variables	static-locators_sd.py
+Variables	variables_sd.py
+
+*** Keywords ***
+Open Browser And Login	[Arguments]	${username}	${password}	${browser}	${url}
+	Set Environment Variable    no_proxy    127.0.0.1
+    Set Environment Variable    webdriver.ie.driver    ${local_ie_driver}
+    Open Browser	${url}	${browser}	#ff_profile_dir=${ff_profile}
+	Maximize Browser Window
+	Set Selenium Speed    ${seleniumSpeed}
+	Page Should Contain    21C Authentication: Login
+	Input Text    USER   ${username}
+	Input Text    PASSWORD    ${password}
+	Click Button   	Sign On
+	Wait Until Page Contains   	21C Authentication: Warning Screen	${timeOutWait}
+	Wait Until Element Is Enabled	YES	${timeOutWait}
+	Click Button   	YES
+	
+Navigate to Workflow and Search Order
+	#Wait Until Page Contains	SI Home	${timeOutWait}
+	Wait Until Element Is Enabled	${LINK_MAIN_WORKFLOW}	${timeOutWait}
+	Click Link	${LINK_MAIN_WORKFLOW}
+	Wait Until Page Contains Element	${TXT_ID}	${timeOutWait}
+	Input Text	${TXT_ID}	${myOrderIDList[0]}
+	Click Element	${GO_SEARCH_ORDER}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Navigate to Workflow and Search Order.png
+	Sleep	1s
+
+Select Given Window	[Arguments]	${windowTitle}
+	Wait Until Keyword Succeeds	10m	5s	Select Window	${windowTitle}
+	Select Window	${windowTitle}
+	Maximize Browser Window
+	#Reload Page
+	#Run Keyword and Ignore Error	Get Alert Message	True
+
+Change Order Contact Details
+	Click Image	${TAB_ORDER_CONTACT_DETAILS}
+	Wait Until Page Does Not Contain Element	${BLOCK_LOADING2}	${timeOutWait}
+	Click Image	${IMG_EDIT_COORDINATOR}
+	Click Image	${IMG_RED_CROSS}
+	Input Text	txtSearchUserName	${InstallCoordinator}
+	Click Image	${IMG_SEARCH}
+	Input Text	${TXT_REASON_FOR_CHANGE}	Assign Coordinator
+	#Debug
+	Capture Page Screenshot		${OUTPUTDIR}${/}Change Order Contact Details in SI.png
+	Focus	${IMG_SAVE}
+	Click Image	${IMG_SAVE}
+	Sleep	3s
+	#Debug
+	#Run Keyword and Ignore Error	Get Alert Message	True
+	#Sleep	3s
+	#Capture Page Screenshot
+	#Reload Page
+	#Run Keyword and Ignore Error	Get Alert Message	True
+	#Capture Page Screenshot
+	Sleep	3s
+	Close Browser
+	Open Browser And Login	${CQMusername}	${CQMpassword}	${browser}	${t3_SI_URL}
+	Navigate to Workflow and Search Order
+	Select Given Window	title=Si-Workflow
+	
+Accept Order
+	Wait Until Keyword Succeeds	10m	30s	Run Keywords	#wait Accept button to be enabled
+	...	Reload Page
+	...	AND	Run Keyword and Ignore Error	Get Alert Message	True
+	...	AND	Wait Until Page Contains Element	btnAccept	${timeOutWait}
+	...	AND	Element Should Be Enabled	btnAccept
+	#Wait Until Page Contains Element	btnAccept	${timeOutWait}
+	Click Element	btnAccept
+	Wait Until Element Is Enabled	btnOk	${timeOutWait}
+	Wait Until Element Is Visible	btnOk	${timeOutWait}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Accept Order.png
+	Click Element	btnOk
+	
+Refresh Task Details and Check Open Task
+	Click Element	${BTN_REFRESH_TASK}
+	Wait Until Page Does Not Contain Element	${BLOCK_LOADING}	${timeOutWait}
+	Clear Element Text	gs_TASK_STATUS
+	Input Text	gs_TASK_STATUS	open
+	Press Key	gs_TASK_STATUS	\\13
+	Page Should Contain Element	${OPEN_TASK}
+	Focus	gs_TASK_STATUS
+	
+Check Task Name
+	${taskNumber}=	Get Element Attribute	${OPEN_TASK}/..@id
+	${taskName}=	Get Element Attribute  xpath=.//tr[@id='${taskNumber}']/td[3]@title
+	${lastTask}=	Run Keyword and Return Status	Page Should Contain Element	xpath=.//tr[@id='${taskNumber}']/td[3][contains(@title,'Confirm Order Closure')]	#Confirm Order Closure
+	Set Global Variable	${taskNumber}
+	Set Global Variable	${taskName}
+	Set Global Variable	${lastTask}
+	
+Process Task
+	Click Link	xpath=.//tr[@id='${taskNumber}']/td[2]/a
+	Select Given Window	title=Task Details
+	Click Image	${TAB_ORDER_ITEM_LIST}
+	Wait Until Page Contains Element	${ORDER_ITEM_LIST}	${timeOutWait}
+	Wait Until Element Is Visible	${ORDER_ITEM_LIST}	${timeOutWait}
+	Run Keyword and Ignore Error	Wait Until Element Is Enabled	${RED_CROSS}
+	Should Not Be True	${taskNotExpected}	Task is not expected
+	#--------------------------------------------------
+	${totalCrossItem}=	Get Matching Xpath Count  xpath=.//img[@src='RedCross2.png']/../../span[1]
+	:FOR	${index}	IN RANGE	${totalCrossItem}
+	\	Wait Until Element Is Enabled	${RED_CROSS}	${timeOutWait}
+	\	Click Element	${RED_CROSS}
+	\	Wait Until Page Does Not Contain Element	${BLOCK_LOADING2}	${timeOutWait}
+	\	Sleep	1s
+	\	Count Mandatory fields
+	\	Check Input Text or Drop Down Menu
+	#--------------------------------------------------
+	#Debug
+	Wait Until Element Is Enabled	btnClose1	 ${timeOutWait}
+	Click Element	btnClose1
+	Wait Until Element Is Enabled	btnOk	 ${timeOutWait}
+	Wait Until Element Is Visible	btnOk	 ${timeOutWait}
+	Click Element	btnOk
+	Wait Until Page Contains Element	lblSuccesMessage
+	Capture Page Screenshot		${OUTPUTDIR}${/}Close Task.png
+	Close Window
+	Select Given Window	title=Si-Workflow
+	
+Check Input Text or Drop Down Menu
+	:FOR	${index}	IN RANGE	${totalMandatoryFields}
+	#\	Debug
+	\	${status}=	Run Keyword and Return Status	Element Should Be Visible	${MANDATORY_FIELDS}[${index}+1]/../select 
+	\	Run Keyword If	${status}	Complete drop down	${index}
+	\	...	ELSE	Complete text field	${index}
+	Click Element	btn_Update
+	Run Keyword and Ignore Error	Get Alert Message	True
+	Click Image	${TAB_ORDER_ITEM_LIST}
+	Wait Until Page Contains Element	${ORDER_ITEM_LIST}	${timeOutWait}
+	Wait Until Element Is Visible	${ORDER_ITEM_LIST}	${timeOutWait}
+	
+Complete text field	[Arguments]	${indexing}	
+	${fieldName}=	Get Element Attribute	${MANDATORY_FIELDS}[${indexing}+1]/../../td@title
+	${status}=	Run Keyword and Return Status	Textfield Value Should Be	${MANDATORY_FIELDS}[${indexing}+1]	${EMPTY}
+	${resiliencyLegTypeStatus}=	Run Keyword and Return Status	Page Should Contain Element	xpath=.//td[@title='RESILIENCY LEG TYPE']
+	${RESILIENCY_LEG_TYPE}=	Run Keyword If	${resiliencyLegTypeStatus}	Get Element Attribute	xpath=.//td[@title='RESILIENCY LEG TYPE']/../td[2]@title	
+	Run Keyword If	'${fieldName}' == 'S TAG' and ${status}	sTAG Field	${indexing}	#sTAG value are define in text file name sTAG1.txt and sTAG2.txt
+	...	ELSE IF	'${fieldName}' == 'INTERCONNECT ID' and ${status} and '${RESILIENCY_LEG_TYPE}' == 'Primary'	Run Keyword
+	...	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	${interconnectIDPri}
+	#...	AND	Remove From List	${interconnectID}	0
+	...	ELSE IF	'${fieldName}' == 'INTERCONNECT ID' and ${status} and '${RESILIENCY_LEG_TYPE}' == 'Secondary'	Run Keyword
+	...	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	${interconnectIDSec}
+	...	ELSE IF	${status} and '${fieldName}' == 'NOTIFY CUSTOMER SERVICE READY DATE'	Run Keywords
+	...	Click Element	${MANDATORY_FIELDS}[${indexing}+1]
+	...	AND	Click Element	xpath=.//td[contains(@class,'ui-datepicker-today')]/a
+	...	ELSE IF	'${fieldName}' == 'GROUP CAC LIMIT' and ${status}	Run Keyword
+	...	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	1000
+	...	ELSE IF	'${fieldName}' == 'TRUNKGROUP CAC LIMIT' and ${status}	Run Keyword
+	...	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	1000
+	...	ELSE IF	'${fieldName}' == 'TRUNK CAC LIMIT' and ${status}	Run Keyword
+	...	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	100
+	...	ELSE IF	'${fieldName}' == 'TRUNK CAC BANDWIDTH LIMIT' and ${status}	Run Keyword
+	...	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	2500
+	...	ELSE IF	${status}	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	1000
+	Capture Page Screenshot		${OUTPUTDIR}${/}Input Mandatory Field.png
+	
+sTAG Field	[Arguments]	${indexing}	
+	${RESILIENCY_LEG_TYPE}=	Get Element Attribute	xpath=.//td[@title='RESILIENCY LEG TYPE']/../td[2]@title
+	Run Keyword If	'${RESILIENCY_LEG_TYPE}' == 'Primary'	Key In STAG1	${indexing}	
+	...	ELSE IF	'${RESILIENCY_LEG_TYPE}' == 'Secondary'	Key In STAG2	${indexing}	
+	
+Key In STAG1	[Arguments]	${indexing}	
+	${sTAG1}=	Get File 	C:\\Jenkins\\sTAG1.txt
+	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	${sTAG1}
+	${sTAG1}=	Evaluate	str(${sTAG1}+2)
+	Create File	C:\\Jenkins\\sTAG1.txt	${sTAG1}
+	
+Key In STAG2	[Arguments]	${indexing}	
+	${sTAG2}=	Get File 	C:\\Jenkins\\sTAG2.txt
+	Input Text	${MANDATORY_FIELDS}[${indexing}+1]	${sTAG2}
+	${sTAG2}=	Evaluate	str(${sTAG2}+2)
+	Create File	C:\\Jenkins\\sTAG2.txt	${sTAG2}
+	
+Complete drop down	[Arguments]	${indexing}
+	${fieldName}=	Get Element Attribute	${MANDATORY_FIELDS}[${indexing}+1]/../../td@title
+	Capture Page Screenshot		${OUTPUTDIR}${/}Complete Drop Down mandatory field.png
+	Run Keyword If	'${fieldName}' == 'ACTION REQUIRED'	Select From List By Label	${MANDATORY_FIELDS}[${indexing}+1]	Complete
+	...	ELSE IF	'${fieldName}' == 'CONFIGURED'	Select From List By Label	${MANDATORY_FIELDS}[${indexing}+1]	YES
+	#Set Selenium Speed	1
+	Wait Until Page Contains Element	${MANDATORY_FIELDS}[${indexing}+1]
+	Wait Until Keyword Succeeds	30s	1s	Element Should Be Enabled	${MANDATORY_FIELDS}[${indexing}+1]
+	Sleep	1s
+	#Wait Until Element Is Enabled	${MANDATORY_FIELDS}[${indexing}+1]
+	#Set Selenium Speed    ${seleniumSpeed}
+	
+Count Mandatory fields
+	${totalMandatoryFields}=	Get Matching Xpath Count  xpath=.//span[@class='mandatoryclass']/../*[1]
+	Set Global Variable	${totalMandatoryFields}
+	
+Check Task Details Tab
+	#Wait Until Element Is Enabled	${TAB_TASK_DETAILS}	${timeOutWait}
+	#Click Image	${TAB_TASK_DETAILS}
+	Wait Until Page Does Not Contain Element	${BLOCK_LOADING}	${timeOutWait}
+	Wait Until Keyword Succeeds	6h	2m	Refresh Task Details and Check Open Task
+	Check Task Name
+	Check Failed Task List
+	Process Task
+	#:FOR    ${ITEM}    IN    @{taskList}
+	#\	Run Keyword If	'${taskName}' == '${ITEM}'
+	#\	...	Run Keywords
+	#\	...	Process Task
+	#\	...	AND	Exit For Loop
+	#\	...	ELSE	Run Keywords
+	#\	...	Check Failed Task List
+	#\	...	AND	Exit For Loop If	${taskNotExpected}
+	
+Check Failed Task List
+	:FOR    ${ITEM}    IN    @{failedTaskNameList}
+	\	${taskNotExpected}=	Run Keyword If	'${taskName}' == '${ITEM}'	Set Variable	'TRUE'
+	\	Exit For Loop If	'${taskName}' == '${ITEM}'
+	Capture Page Screenshot		${OUTPUTDIR}${/}Unexpected Failure.png
+	Set Global Variable	${taskNotExpected}
+	
+Process Order
+	Wait Until Element Is Enabled	${TAB_TASK_DETAILS}	${timeOutWait}
+	Click Image	${TAB_TASK_DETAILS}
+	${taskName}=	Get Variable Value	${taskName}
+	:FOR	${index}	IN RANGE	30
+	\	Check Task Details Tab
+	#\	Exit For Loop If	'${taskName}'=='${LASTTASK}'
+	\	Capture Page Screenshot		${OUTPUTDIR}${/}${index}_${taskName}.png
+	\	Exit For Loop If	${lastTask}
+	Log To Console	Waiting for 1 minutes
+	Sleep	1m
+	Close Browser
+	
+Confirm Status Complete in AIB
+	Open Browser And Login	${CQMusername}	${CQMpassword}	${browser}	${t3_AIB_URL}
+	#Open Browser	http://aibwebc-ws.nat.bt.com:61007/aibweb/	${browser}	#ff_profile_dir=${ff_profile}
+	Maximize Browser Window
+	Set Selenium Speed    ${seleniumSpeed}
+	Wait Until Element Is Enabled	orderNum	${timeOutWait}
+	Input Text	orderNum	${myOrderIDList[0]}
+	Click Element	searchBtn
+	Wait Until Page Does Not Contain Element	${IMG_LOADING}	${timeOutWait}
+	Click Link	xpath=.//*[text()='${myOrderIDList[0]}']
+	Wait Until Page Does Not Contain Element	${IMG_LOADING}	${timeOutWait}
+	Page Should Contain Element	${AIB_COMPLETE}
+	
+##Josh Changes to cater FW, ACC and CDD Order - Start		
+Navigate to Workflow
+	#Wait Until Page Contains	SI Home	${timeOutWait}
+	Wait Until Element Is Enabled	${LINK_MAIN_WORKFLOW}	${timeOutWait}
+	Click Link	${LINK_MAIN_WORKFLOW}
+	Wait Until Page Contains Element	${TXT_ID}	${timeOutWait}
+
+Search Order
+	Input Text	${TXT_ID}	${OrderID}
+	#Input Text	${TXT_ID}	${myOrderIDList[0]}
+	Click Element	${GO_SEARCH_ORDER}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Navigate to Workflow and Search Order.png
+	Sleep	1s
+
+Perform SI Task for CCD
+	${OrderID}=	Get Variable Value	${CCDOrderID}
+	Set Global Variable	${OrderID}
+	Search Order
+	Select Given Window	title=Si-Workflow
+	Process SI+ Tasks	
+
+Perform SI Task for FW	
+	${OrderID}=	Get Variable Value	${FWOrderID}
+	Set Global Variable	${OrderID}
+	Search Order
+	Select Given Window	title=Si-Workflow
+	Process SI+ Tasks
+	
+Perform SI Task for ACC
+	${OrderID}=	Get Variable Value	${ACCOrderID}
+	Set Global Variable	${OrderID}	
+	Search Order
+	Select Given Window	title=Si-Workflow
+	Process SI+ Tasks
+	
+Process SI+ Tasks	
+	#Select Given Window	title=Si-Workflow
+	${sameSOPInTestData}=	Run Keyword And Return Status	Element Should Contain	lblSopEin	${InstallCoordinator}
+	Run Keyword Unless	${sameSOPInTestData}	Change Order Contact Details
+	${btnActionDisabled}=	Run Keyword And Return Status	Element Should Be Disabled	btnAction
+	Run Keyword If	${btnActionDisabled}	Accept Order
+	Process Order
+	Confirm Status Complete in AIB
+##Josh Changes to cater FW, ACC and CDD Order - End	

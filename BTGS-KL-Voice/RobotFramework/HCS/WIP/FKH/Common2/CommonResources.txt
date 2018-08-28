@@ -1,0 +1,280 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			OperatingSystem
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+
+*** Keywords ***
+Open Browser And Login To CQM Page	[Arguments]	${CQMusername}	${CQMpassword}	${Browser}
+    Open Browser	${T3_CQM_URL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    21C Authentication: Login
+    Input Text    USER   ${CQMusername}
+    Input Text    PASSWORD    ${CQMpassword}
+    Click Button   	Sign On
+    Wait Until Page Contains   	21C Authentication: Warning Screen	50s
+    Wait Until Element Is Enabled	YES
+	Click Button	YES
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+    Select Window	title=Customer Quote Management
+    
+Select Customer	[Arguments]	${salesChannel}	${customerName}
+	Click Element	xpath=.//*[@id='salesChannel']/a/span[3]/b
+	Click Element	xpath=.//span[contains(normalize-space(.), '${salesChannel}')]
+	#Sleep	6s
+	Input Text   customer-auto-complete   ${customerName}
+	Wait Until Element Is Visible   xpath=html/body/ul/li/a   60s
+	Click Element	xpath=html/body/ul/li/a
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+	${status}=	Run Keyword and Ignore Error	Page Should Not Contain Element	xpath=.//span[text()='Select a contract..']
+	Run Keyword If	${status}	Run Keywords
+	...	Click Element	xpath=.//*[@id='s2id_contract']/a/span[2]/b
+	...	AND	Click Element	xpath=.//*[@id='select2-drop']/ul/li[1]/div
+	...	AND	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+	Wait Until Element Is Enabled	ManageQuoteOrOrder
+	#Sleep	5s
+    Select Window	title=Customer Quote Management
+	
+Go to Manage Quote
+	Focus	ManageQuoteOrOrder
+	Click Button	ManageQuoteOrOrder
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+	
+Create Quote	[Arguments]	${QuoteName}	${OrderType}	${ContractTerm}	${Currency}	${RefNo}
+	${quoteID}=	Replace Variables	${None}
+	Set Global Variable	${quoteID}
+	${TestRunCount}=	Get File 	${EXECDIR}\\TestRunCount.txt
+	Focus	xpath=html/body/div[1]/div[2]/div/div/div[3]/div/ul/li[2]/div/div/span
+	Click Element	xpath=html/body/div[1]/div[2]/div/div/div[3]/div/ul/li[2]/div/div/span
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+	Wait Until Element Is Visible   quoteName   60s
+	Input Text	quoteName	${QuoteName}${TestRunCount}
+	Click Element	xpath=.//*[@id='orderType']/option[contains(text(),'${OrderType}')]
+	Click Element	xpath=.//*[@id='contractTerm']/option[contains(text(),'${ContractTerm}')]
+	Click Element	xpath=.//*[@id='currency']/option[contains(text(),'${Currency}')]
+	Input Text	orNumber	${RefNo}${TestRunCount}
+	Click Element	xpath=.//*[@id='createQuoteForm']/div[15]/button
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	600s
+	Wait Until Page Contains   	Create Quote	100s
+	Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	${TestRunCount}=	Evaluate	str(${TestRunCount}+1)
+	Create File	${EXECDIR}\\TestRunCount.txt	${TestRunCount}
+	Sleep	5s
+	Select Window	title=IPSDK Product Bundling
+	Close Window
+    Select Window	title=Customer Quote Management
+    Focus	xpath=html/body/div[1]/div[2]/div/div/div[3]/div/ul/li[1]/div/div/span
+    Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	300s
+    Click Element	xpath=html/body/div[1]/div[2]/div/div/div[3]/div/ul/li[1]/div/div/span
+    Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	300s
+    
+Select Created Quote	[Arguments]	${quoteID}	${QuoteName}
+    #Focus   	xpath=.//span[contains(normalize-space(.), '${QuoteName}')]
+    #Click Element   	xpath=.//span[contains(normalize-space(.), '${QuoteName}')]
+    #Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+    Wait Until Element Is Visible	fiterText	120s
+    Input Text	fiterText	${QuoteName}
+    ${quoteID}=	Get Variable Value	${quoteID}
+	Run Keyword If	'${quoteID}' == 'None'
+	...	Run Keywords
+	...	Focus	xpath=.//div[2]/div/div[1]/div/div[1]/div[2]/div/span
+	...	AND	Click Element	xpath=.//div[2]/div/div[1]/div/div[1]/div[2]/div/span
+	...	AND	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60
+	...	ELSE	Wait Until Keyword Succeeds	30s	1s
+	...	Run Keywords
+	...	Click Element	xpath=.//div[2]/div/div[*]/div/div[1]/div[2]/div/span[contains(normalize-space(.), '${quoteID}')]
+	...	AND	Element Should Be Visible	firstName
+	${quoteID}=	Get Value	quoteRefId
+	Set Global Variable	${quoteID}
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60
+	${EXPQoteName}=	Get Value	quoteName
+	Set Suite Variable	${EXPQoteName}
+    
+Get Quotation ID
+	${Quote_Ref_ID}=	Get Text	quoteRefId
+	Log		${Quote_Ref_ID} 
+	Set Suite Variable	${Quote_Ref_ID} 
+    
+Add Channel Contact
+	Input Text	firstName	Sati Kumari
+	Click Element	xpath=.//*[@id='channelContactForm']/div[11]/button
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+	Focus	xpath=.//*[@id='btDirectoryGrid']/div[2]/div/div/div[1]/div[2]/div/span[contains(normalize-space(.), '802026130')]
+	Click Element	xpath=.//*[@id='btDirectoryGrid']/div[2]/div/div/div[1]/div[2]/div/span[contains(normalize-space(.), '802026130')]
+	[Arguments]    ${DistributorRole}
+	Click Element	xpath=.//*[@id='distributorRole']/option[contains(text(),'${DistributorRole}')]
+	Wait Until Element Is Enabled	xpath=.//*[@id='channelContactForm']/div[12]/button
+	Focus	xpath=.//*[@id='channelContactForm']/div[12]/button
+	Click Button	xpath=.//*[@id='channelContactForm']/div[12]/button
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+	Wait Until Page Contains   	Quote Channel Contact	10s
+	Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	Sleep	5s
+    Select Window	title=Customer Quote Management
+	
+Go to Manage Site
+	Focus	ManageSite
+	Click Button	ManageSite
+	
+Create Customer
+	Focus	xpath=.//*[@id='manageCust']/div/ul/li[2]/a
+	Double Click Element	xpath=.//*[@id='manageCust']/div/ul/li[2]/a
+	Wait Until Element Is Visible	create-saleschannel	20s
+	Click Element	create-saleschannel
+	Click Element	xpath=.//*[@id='create-saleschannel']/option[contains(text(),'${salesChannel}')]
+	Input Text	create-customerName	${customerName}
+	Click Element	valid-status
+	Wait Until Element Is Visible	xpath=.//*[@id='valid-status']/option[2]	10s
+	Click Element	xpath=.//*[@id='valid-status']/option[2]
+	Input Text	contractCeaseTerm	${ContractCeaseTerm}
+	Input Text	linkedContractualCeaseTerm	${LinkedContractualCeaseTerm}
+	Click Element	xpath=.//*[@id='createCust']/div/div[7]/div/button
+	Wait Until Element Is Visible	xpath=html/body/div[9]/div	10s
+	Wait Until Element Is Visible	xpath=html/body/div[4]	10s
+	Page Should Contain   	No customers with matching name: 
+	Click Button   	xpath=(.//button[contains(normalize-space(.), 'Ok')])[1]
+	Wait Until Element Is Visible	xpath=html/body/div[19]/div	10s
+	Wait Until Element Is Not Visible	xpath=html/body/div[19]/div	10s
+	Wait Until Element Is Visible	xpath=html/body/div[4]/div[1]	10s
+	Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	Wait Until Element Is Visible	xpath=html/body/div[9]	10s
+	Sleep	5s
+    Select Window	title=Customer Quote Management
+	
+Create Customer Site
+	Wait Until Page Contains Element   	xpath=(.//span[contains(normalize-space(.), 'Customer Site')])[1]	10s
+	Click Element	xpath=.//*[@id='custValidStatus']/option[contains(text(),'Unknown')]
+	Input Text	city	${City}
+	Click ELement	country	
+	Click ELement	xpath=.//*[@id='country']/option[contains(text(),'${Country}')]
+	Input Text	postCode	${PostCode}
+	Click Button	xpath=.//*[@id='centralSiteForm']/div[21]/button[3]
+	Sleep	5s
+	Wait Until Element Is visible	xpath=.//div[8]/div[2]/div/span[contains(text(),'${City}')]	10s
+	Double Click Element	xpath=.//div[8]/div[2]/div/span[contains(text(),'${City}')]
+	Wait Until Element Is Visible	xpath=html/body/div[4]/div[2]/div/div[1]/h5	10s
+	Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	Sleep	5s
+	Wait Until Element Is Not Visible	xpath=html/body/div[21]/div	10s
+	Input Text    buildingName    ${BuildingName}
+	Input Text    subBuilding    ${SubBuildingName}
+	Input Text    buildingNumber    ${BuildingNo}
+	Input Text    street    ${Street}
+	Input Text    subStreet    ${SubStreet}
+	Input Text    locality    ${Locality}
+	Input Text    subLocality    ${SubLocality}
+	Input Text    phoneNumber    ${PhoneNo}
+	Input Text	  poBox			 ${PostCode}
+	Double Click Element	xpath=.//div[8]/div[2]/div/span[contains(text(),'${City}')]
+	Wait Until Element Is Visible	xpath=html/body/div[4]/div[2]/div/div[1]/h5	10s
+	Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	Sleep	5s
+	Wait Until Element Is Not Visible	xpath=html/body/div[21]/div	10s
+	Click Button	createCustomerId
+	Wait Until Element Is Visible	xpath=html/body/div[10]/div	10s
+	Wait Until Element Is Not Visible	xpath=html/body/div[10]/div	10s
+	Wait Until Element Is Visible	xpath=html/body/div[4]/div[2]/div/div[1]/h5	10s
+	Click Button	xpath=html/body/div[4]/div[2]/div/div[2]/div/button[1]
+	
+Launch RSQE FF
+	${status}	${value}=	Run Keyword and Ignore Error	Select Window	title=IPSDK Product Bundling
+	Log	${status}
+	Run Keyword If	'${status}' == 'FAIL'	
+	...	Run Keywords	
+	...	Focus	xpath=.//button[text()='Launch Configurator']
+	...	AND	Click Element	xpath=.//button[text()='Launch Configurator']
+	...	AND	Wait Until Keyword Succeeds	1m	5s	Select Window	title=IPSDK Product Bundling
+	#Select Window	title=IPSDK Product Bundling
+	Wait Until Page Contains Element	xpath=.//td[contains(text(),'Additional Product')]	120
+	
+Launch RSQE 	
+	Focus	xpath=.//button[text()='Launch Configurator']
+	Click Element	xpath=.//button[text()='Launch Configurator']
+	Wait Until Keyword Succeeds	1m	5s	Select Window	title=IPSDK Product Bundling
+	#Select Window	title=IPSDK Product Bundling
+	Wait Until Page Contains Element	xpath=.//td[contains(text(),'Additional Product')]	120
+	
+Products in the quote
+	Select Checkbox	${CBOX_ADDITIONAL_PRODUCT}
+	Select From List	${DD_ADDITONAL_PRODUCT_ORDER_TYPE}	0
+	Click Element	${BTN_ADD_PRODUCT_TO_QUOTE}
+	Wait Until Page Does Not Contain Element	${BLOCKER}	60
+	Wait Until Page Contains Element	${LINK_ADDITIONAL_PRODUCT_PROVIDE_CONFIGURATION}	30
+	Wait Until Element Is Enabled	${LINK_ADDITIONAL_PRODUCT_PROVIDE_CONFIGURATION}	30
+	
+Launch Provide Configuration
+	Click Link	${LINK_ADDITIONAL_PRODUCT_PROVIDE_CONFIGURATION}
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	120s
+	${rsqeQoteName}=	Get Text	xpath=.//table[@id='quoteOptionTable']//td[2]
+	${RFOSheet}=	Set Variable	SQE_${EXPQoteName}_${rsqeQoteName}_RFOSheet.xlsx
+	Set Global Variable	${RFOSheet}
+	Click Element	xpath=.//tr/td[1][contains(text(),'${quoteID}')]
+	
+Select Quote	[Arguments]	${quoteID}	${QuoteName}
+	Select Created Quote	${quoteID}	${QuoteName}
+	Get Quotation ID
+	Add Mandatory Channel Contact
+	
+Add Mandatory Channel Contact
+	Sleep	5s
+	Focus	phone
+	Run Keyword And Ignore Error	Click Element At Coordinates	xpath=html/body/div[1]/div[2]/div/div/div[4]/div[2]/ng-view/div/div[6]	480	60
+	${statusAccManager}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Account Manager']
+	Run Keyword If 	'${statusAccManager}' == 'True'	Add Channel Contact	Account Manager*
+	${statusSalesSupp}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Sales Support Contact']
+	Run Keyword If 	'${statusSalesSupp}' == 'True'	Add Channel Contact	Sales Support Contact*
+	${statusSystemEng}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='System Eng Contact']
+	Run Keyword If 	'${statusSystemEng}' == 'True'	Add Channel Contact	System Eng Contact*
+	${statusDelManager}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Delivery Manager']
+	Run Keyword If 	'${statusDelManager}' == 'True'	Add Channel Contact	Delivery Manager*
+	${statusProjManager}= 	Run Keyword And Return Status	Page Should Not Contain Element	xpath=.//div[@ng-grid='channelContactsGrid'][not(contains(@class,'ng-hide'))]//span[text()='Project Manager']
+	Run Keyword If 	'${statusProjManager}' == 'True'	Add Channel Contact	Project Manager
+	
+Go To Track Order
+	Focus	TrackAndOrder
+	Click Button	TrackAndOrder
+	Wait Until Page Does Not Contain Element	xpath=.//*[contains(text(),'Please wait')]	60s
+	
+Track Quote ID
+	Input Text	fiterText	${quoteID}
+	Press Key	fiterText	\\13
+	${EXPORDERIDALL}=	Set Variable	Quote Name: ${QuoteName} (${quoteID}). EXP OrderIDs: 
+	Set Global Variable	${EXPORDERIDALL} 
+	${statusOrderID}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[1]/div[1]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID}' == 'True'	Retrive OrderID	xpath=.//div[1]/div[1]/div[2]/div/span
+	${statusOrderID2}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[2]/div[1]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID2}' == 'True'	Retrive OrderID	xpath=.//div[2]/div[1]/div[2]/div/span
+	${statusOrderID3}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[3]/div[1]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID3}' == 'True'	Retrive OrderID	xpath=.//div[3]/div[1]/div[2]/div/span
+	${statusOrderID4}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[4]/div[1]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID4}' == 'True'	Retrive OrderID	xpath=.//div[4]/div[1]/div[2]/div/span
+	${statusOrderID5}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[5]/div[1]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID5}' == 'True'	Retrive OrderID	xpath=.//div[5]/div[1]/div[2]/div/span
+	${statusOrderID6}= 	Run Keyword And Return Status	Element Should Be Visible	xpath=.//div[6]/div[1]/div[2]/div/span
+	Run Keyword If 	'${statusOrderID6}' == 'True'	Retrive OrderID	xpath=.//div[6]/div[1]/div[2]/div/span
+	
+Retrive OrderID
+	[Arguments]	${OrderIDXpath}
+	${EXPORDERID}=	Get Text	${OrderIDXpath}
+	${EXPORDERIDALL}=	Set Variable	${EXPORDERIDALL} | EXP${EXPORDERID}
+	Set Global Variable	${EXPORDERIDALL}
+	
+Export The OrderID
+	Create File	${EXECDIR}\\Output\\OrderIDs.txt	${EXPORDERIDALL}
+
+Capture The OrderID
+	[Arguments]	${quoteID2}
+	${quoteID2}=	Get Variable Value	${quoteID2}
+	${quoteID}=	Run Keyword If	'${quoteID2}' == 'None'	Get Variable Value	${quoteID}
+	...	ELSE	Get Variable Value	${quoteID2}
+	Go To Track Order
+	Track Quote ID
+	Export The OrderID
+	

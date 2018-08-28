@@ -1,0 +1,806 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library	Selenium2Library
+Library	DebugLibrary
+Library	DateTime
+Library		OperatingSystem
+Library		Collections
+Resource	../Common_OV/EDCA_Resource.txt
+
+*** Variables ***
+${eDCA_Portal_Title}    SQE Lite Portal
+
+
+*** Keywords ***
+#######eDCA SC02 resource keywords###############
+GSIP Full PSTN Additional Features Details
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	#Run Keyword If    '${AddBlock}' == 'True' and  '${NumberType}' == 'New Number'   Add Block Details
+	#...    ELSE IF '${AddBlock}' == 'True' and  '${NumberType}' == 'Porting'   Add Porting Block Details
+	Run Keyword If    '${AddBlock}' == 'True'    Add Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1	
+	
+Modify GSIP Full PSTN Additional Features Details
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Run Keyword If    '${AddBlock}' == 'True'    Modify Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1		
+	
+		
+
+OLD Add Block Details
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Sleep	30s
+	Select Window	Information
+	Wait Until Page Contains Element	btn1	${wait_time}
+	Click Element	btn1
+	Select Window	${eDCA_Title}
+	#Select Window	SQE Lite - MPLS
+#	Alert Should Be Present	For Main Site Orders,Account Teams please help set the correct expectation with our customers.
+	Wait Until Page Contains Element	${CBO_AFD_NUM_TYPE}	${wait_time}
+	Select From List	${CBO_AFD_NUM_TYPE}	${NumberType}
+	Wait Until Page Contains Element	${CBO_AFD_BT_SUPPLIED}	${wait_time}
+	Select From List	${CBO_AFD_BT_SUPPLIED}	${BTSupplied}
+	Sleep	10s
+
+	Wait Until Page Contains Element	${TXT_AFD_NUM_BLK_SIZE}	${wait_time}
+	Selenium2Library.Input Text	${TXT_AFD_NUM_BLK_SIZE}	${NumberBlockSize}
+	Wait Until Page Contains Element	${CBO_AFD_PARENT_NAME}	${wait_time}
+	Select From List	${CBO_AFD_PARENT_NAME}	${UniqueTrunkGroupFriendlyName}
+
+	Wait Until Page Contains Element	${TXT_AFD_BLK_START_NUM}	${wait_time}
+	Run Keyword If	'${Country}' == 'Hong Kong'	Verify HK Block Start Number
+	#Click Element	${TXT_AFD_BLK_START_NUM}
+	#Selenium2Library.Input Text	${TXT_AFD_BLK_START_NUM}	${BlockStartNumber}
+	Wait Until Page Contains Element	${BTN_AFD_SAVE}	${wait_time}
+	Click Element	${BTN_AFD_SAVE}
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	
+Add Block Details
+	Click Element	${BTN_AFD_ADD_BLK_DETAILS}
+	Sleep	30s
+	Select Window	Information
+	Wait Until Page Contains Element	btn1	${wait_time}
+	Click Element	btn1
+	Select Window	${eDCA_Title}
+	#Select Window	SQE Lite - MPLS
+#	Alert Should Be Present	For Main Site Orders,Account Teams please help set the correct expectation with our customers.
+	Wait Until Page Contains Element	${CBO_AFD_NUM_TYPE}    ${wait_time}
+	Select From List	${CBO_AFD_NUM_TYPE}    ${NumberType}
+	Run Keyword If    '${BTSupplied}' == 'Yes'    Run Keywords
+	...    Wait Until Page Contains Element	${CBO_AFD_BT_SUPPLIED}	${wait_time}
+	...    AND    Select From List	${CBO_AFD_BT_SUPPLIED}	${BTSupplied}
+	Run Keyword If    '${BTSupplied}' == 'No'    Run Keywords
+	...    Wait Until Page Contains Element	${TXT_AFD_SUPPLIER}	${wait_time}
+	...    AND    Selenium2Library.Input Text	${TXT_AFD_SUPPLIER}	${Supplier}
+	Sleep	10s
+    Run Keyword If    '${NumberType}' == 'Porting'    Run Keywords
+    ...    Wait Until Page Contains Element	${CBO_AFD_PORT_IN_OUT}	${wait_time}
+    ...    AND    Select From List	${CBO_AFD_PORT_IN_OUT}	${PortInOut}
+    Sleep    3s
+	Wait Until Page Contains Element	${TXT_AFD_NUM_BLK_SIZE}	${wait_time}
+	Selenium2Library.Input Text	${TXT_AFD_NUM_BLK_SIZE}	${NumberBlockSize}
+	Wait Until Page Contains Element	${CBO_AFD_PARENT_NAME}	${wait_time}
+	Select From List	${CBO_AFD_PARENT_NAME}	${UniqueTrunkGroupFriendlyName}
+
+	Wait Until Page Contains Element	${TXT_AFD_BLK_START_NUM}	${wait_time}
+	Run Keyword If	'${Country}' == 'Hong Kong'	Verify HK Block Start Number
+	#Click Element	${TXT_AFD_BLK_START_NUM}
+	#Selenium2Library.Input Text	${TXT_AFD_BLK_START_NUM}	${BlockStartNumber}
+	Wait Until Page Contains Element	${BTN_AFD_SAVE}	${wait_time}
+	Click Element	${BTN_AFD_SAVE}
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	
+Modify Block Details
+	Click Element	${BTN_AFD_ADD_BLK_DETAILS}
+	#Sleep	30s
+	Wait Until Page Contains Element	${CBO_AFD_NUM_TYPE}    ${wait_time}
+	Select From List	${CBO_AFD_NUM_TYPE}    ${NumberType}
+	Sleep    5s
+	Run Keyword If    '${BTSupplied}' == 'Yes'    Run Keywords
+	...    Wait Until Page Contains Element	${CBO_AFD_BT_SUPPLIED}	${wait_time}
+	...    AND    Select From List	${CBO_AFD_BT_SUPPLIED}	${BTSupplied}
+	Run Keyword If    '${BTSupplied}' == 'No'    Run Keywords
+	...    Wait Until Page Contains Element	${TXT_AFD_SUPPLIER}	${wait_time}
+	...    AND    Selenium2Library.Input Text	${TXT_AFD_SUPPLIER}	${Supplier}
+	Sleep	10s
+    Run Keyword If    '${NumberType}' == 'Porting'    Run Keywords
+    ...    Wait Until Page Contains Element	${CBO_AFD_PORT_IN_OUT}	${wait_time}
+    ...    AND    Select From List	${CBO_AFD_PORT_IN_OUT}	${PortInOut}
+	Wait Until Page Contains Element	${TXT_AFD_NUM_BLK_SIZE}	${wait_time}
+	Selenium2Library.Input Text	${TXT_AFD_NUM_BLK_SIZE}	${NumberBlockSize}
+	Wait Until Page Contains Element	${CBO_AFD_PARENT_NAME}	${wait_time}
+	Select From List	${CBO_AFD_PARENT_NAME}	${UniqueTrunkGroupFriendlyName}
+
+	Wait Until Page Contains Element	${TXT_AFD_BLK_START_NUM}	${wait_time}
+	Run Keyword If    '${NumberType}' == 'Porting'    Run Keywords
+    ...    Wait Until Page Contains Element    ${CBO_BD_PORTING_OUT_HOURS}    ${wait_time}
+    ...    AND    Select From List    ${CBO_BD_PORTING_OUT_HOURS}    ${PortingOutOfHours}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-AdditionalFeaturesDetailsFilled.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Run Keyword If	'${Country}' == 'Hong Kong'	Verify HK Block Start Number
+	#Click Element	${TXT_AFD_BLK_START_NUM}
+	#Selenium2Library.Input Text	${TXT_AFD_BLK_START_NUM}	${BlockStartNumber}
+	
+  #  Sleep    3s
+#	Wait Until Page Contains Element	${BTN_AFD_SAVE}	${wait_time}
+	#Click Element	${BTN_AFD_SAVE}
+	Wait Until Page Contains Element	${BTN_AFD_ADD_BLK_DETAILS}	${wait_time}	
+	
+GSIP Full PSTN Pricing Details
+	Wait Until Page Contains	Pricing Details	${wait_time}
+	Wait Until Page Contains Element	${TXT_PRICING_1}    ${wait_time}   
+	Clear Element Text	${TXT_PRICING_1}
+	Selenium2Library.Input Text	${TXT_PRICING_1}	${AccessPricing1}
+	Wait Until Page Contains Element	${TXT_PRICING_2}	${wait_time}
+	Clear Element Text	${TXT_PRICING_2}
+	Selenium2Library.Input Text	${TXT_PRICING_2}	${AccessPricing2}
+	Wait Until Page Contains Element	${TXT_PRICING_3}	${wait_time}
+	Clear Element Text	${TXT_PRICING_3}
+	Selenium2Library.Input Text	${TXT_PRICING_3}	${AccessPricing3}
+	Wait Until Page Contains Element	${TXT_PRICING_4}	${wait_time}
+	Clear Element Text	${TXT_PRICING_4}
+	Selenium2Library.Input Text	${TXT_PRICING_4}	${AccessPricing4}
+	Wait Until Page Contains Element	${TXT_PRICING_5}	${wait_time}
+	Clear Element Text	${TXT_PRICING_5}
+	Selenium2Library.Input Text	${TXT_PRICING_5}	${AccessPricing5}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Pricing Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Focus	btnNext1
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnPrev1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Ready For submit.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	3s	
+
+
+########eDCA R54 SC35 resource keywords##########
+Service Instance R55 SC61
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	#Wait Until Page Contains Element	UsrTahitiSites_dgMPLSSites__ctl3_btnEdit	${wait_time}
+	#Click Element	UsrTahitiSites_dgMPLSSites__ctl3_btnEdit
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	Click Element	xpath=//input[@value = 'Edit']
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains	Service Instance	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-To fill-Service Instance Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	
+	${DeleteOnevoiceService}=  Run Keyword And Return Status    Element Should Be Enabled   ${BTN_SI_DELTE_SI}
+	Run Keyword If	${DeleteOnevoiceService}	Run Keywords	Click Element		${BTN_SI_DELTE_SI}
+	...	AND	Confirm Action
+	${AddNewOnevoiceService}=  Run Keyword And Return Status    Element Should Be Enabled   ${BTN_SI_ADD_NEW_OV_SRV}
+	Sleep	5s
+	Run Keyword If    ${AddNewOnevoiceService}    Add New Service
+	Wait Until Page Contains Element	${CBO_SI_SRV_TYPE}	${wait_time}
+	Select From List	${CBO_SI_SRV_TYPE}	${ServiceType}
+	Run Keyword Unless	'${SubServiceType}' == '${EMPTY}'	Add SubServiceType
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_SI_NON_STD_ORD}	${wait_time} 
+	Select From List	${CBO_SI_NON_STD_ORD}	${NonStandardType}
+	Wait Until Page Contains Element	${CBO_SI_VOICE_VPN_REQUIRED}	${wait_time} 
+	Select From List	${CBO_SI_VOICE_VPN_REQUIRED}	${VoiceVPNRequired}
+	Run Keyword Unless	'${PSTNRequired}' == '${EMPTY}'	Add PSTNReq
+	Wait Until Page Contains Element	${CBO_SI_DIRECT_ACCESS_TYPE}	${wait_time} 
+	Select From List	${CBO_SI_DIRECT_ACCESS_TYPE}	${DirectAccessType}
+	Sleep	5s
+	Wait Until Page Contains Element	${TXT_NO_OF_CHANNELS}	${wait_time}
+	Selenium2Library.Input Text	${TXT_NO_OF_CHANNELS}	${NoOfChannels}
+	Sleep	5s
+	Run Keyword Unless	'${CoSModel}' == '${EMPTY}'	Add DSCP
+	Wait Until Page Contains Element	${CBO_SI_IP_TEL_IP_PBX_INTEGRATION_REQUIRED}	${wait_time} 
+	Select From List	${CBO_SI_IP_TEL_IP_PBX_INTEGRATION_REQUIRED}	${IPBXRequired}
+	Sleep	5s
+	Wait Until Page Contains Element	${TXT_SI_MPLS_SRV_ID}	${wait_time} 
+	Selenium2Library.Input Text	${TXT_SI_MPLS_SRV_ID}	${MPLSServiceID}
+	Press Key	${TXT_SI_MPLS_SRV_ID}	\\13
+	Sleep	15s
+	Run Keyword And Ignore Error	Alert Should Be Present      Service ID : 'GMPLS6C-01013332-0002' does not belong to the Site ID : 'S1093489', It belongs to Site Id 'S1083910'.. Do you want to continue with the same MPLS Service ID or want to change it ?
+	Sleep	6s
+	Run Keyword Unless	'${POPDualHomed}' == '${EMPTY}'	Add Network Conn Details R55 SC61
+	Wait Until Page Contains Element	${BTN_SI_SAVE}	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Click Element	${BTN_SI_SAVE}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Service Instance.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Wait Until Page Contains Element	${BTN_SI_EDIT}	${wait_time}
+	Click Element		${BTN_SI_EDIT}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1	
+	Click Element	btnNext1
+	Sleep	30s
+	#Select Window	Information
+	#Wait Until Page Contains Element	btn1	${wait_time}
+	#Click Element	btn1
+	#Select Window	${eDCA_Title}
+
+PBX Details R55 SC61
+	Wait Until Page Contains	PBX Details	${wait_time}
+	Select From List	${CBO_SI_PBX_TYPE}	${PBXType}
+	Sleep	5s
+	Wait Until Page Contains Element	${TXT_SI_PBX_MANUFACTURER}	${wait_time}
+	Focus	${TXT_SI_PBX_MANUFACTURER}
+	Click Element	${TXT_SI_PBX_MANUFACTURER}
+	Selenium2Library.Input Text	${TXT_SI_PBX_MANUFACTURER}	${PBXManufacturer}
+	Wait Until Page Contains Element	${TXT_SI_PBX_MODEL}	${wait_time}
+	Focus	${TXT_SI_PBX_MODEL}
+	Selenium2Library.Input Text	${TXT_SI_PBX_MODEL}	${PBXModel}
+	Wait Until Page Contains Element	${CBO_SI_CLI_PRESENTATION}	${wait_time}
+	Focus	${CBO_SI_CLI_PRESENTATION}
+	Select From List	${CBO_SI_CLI_PRESENTATION}	${CLIPresentation}
+	#Run Keyword Unless	'${ConnectedLinePresentation}' == '${EMPTY}'	Add PBX Other Details 
+	Wait Until Page Contains Element	${CBO_SI_PHYSICAL_PORT_SPEED}	${wait_time}
+	Focus	${CBO_SI_PHYSICAL_PORT_SPEED}
+	Select From List	${CBO_SI_PHYSICAL_PORT_SPEED}	${PhysicalPortSpeed}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-PBX Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Click Element	btnNext1	
+
+SIP Trunking Details R55 SC61
+	Select From List	${CBO_SI_CODEC}	${Codec}
+	Sleep	5s	
+	Wait Until Page Contains Element	${CBO_SBC_TRANSPORT_PROTOCOL}	${wait_time}
+	Focus	${CBO_SBC_TRANSPORT_PROTOCOL}
+	Click Element	${CBO_SBC_TRANSPORT_PROTOCOL}
+	Select From List	${CBO_SBC_TRANSPORT_PROTOCOL}	${SBCTransportProtocol}
+	Sleep	5s
+	Wait Until Page Contains Element	${TXT_SI_MPLS_VPN_NAME}	${wait_time}
+	Focus	${TXT_SI_MPLS_VPN_NAME}
+	Selenium2Library.Input Text	${TXT_SI_MPLS_VPN_NAME}	${MPLSVPNName}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-SIP Trunking Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	#Wait Until Element Is Visible    BTN_SI_ADD_NEW_TRUNK_GRP	${wait_time}
+	Wait Until Page Contains Element	${BTN_SI_ADD_NEW_TRUNK_GRP}	${wait_time}
+	Click Element	${BTN_SI_ADD_NEW_TRUNK_GRP}
+	Add New trunk Group
+	
+	#${EditNewTrunkGroup}=	Run Keyword And Return Status	Page Should Contain Element  UsrOneVoiceSIPTrunkingDetails_dgTrunkGrp__ctl2_btnEdit
+	#Run Keyword Unless  '${EditNewTrunkGroup}'=='True'  
+	Wait Until Page Contains Element	${TXT_UNIQUE_TRUNK_FRIENDLY_NAME}	${wait_time}
+	Focus	${TXT_UNIQUE_TRUNK_FRIENDLY_NAME}
+	Selenium2Library.Input Text	${TXT_UNIQUE_TRUNK_FRIENDLY_NAME}	${UniqueTrunkFriendlyName}
+	Wait Until Page Contains Element	${CBO_RESILIENT_TRUNK_GROUP}	${wait_time}
+	Select from List	${CBO_RESILIENT_TRUNK_GROUP}	${UniqueTrunkGroupFriendlyName}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit	${wait_time}
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit	${TrunkCACLimit}														  
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress	${PBXIPaddress}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtTNKGRPPrioroty	${wait_time}
+	#Select From List	UsrOneVoiceSIPTrunkingDetails_txtTNKGRPPrioroty	${TrunkPriority}
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtTNKGRPPrioroty
+	Selenium2Library.Input Text    UsrOneVoiceSIPTrunkingDetails_txtTNKGRPPrioroty	${TrunkPriority}
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_SHARING_OF_CUST_IP_WITH_ICG}	${wait_time}
+	Select From List	${CBO_SHARING_OF_CUST_IP_WITH_ICG}	${SharingOfCustIpWithIcg}
+	Sleep	5s
+	Wait Until Page Contains Element	${BTN_TRUNK_DETAILS_SAVE}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Trunk Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	#Click Element	UsrOneVoiceSIPTrunkingDetails_ddlshrngipwithicg
+	Wait Until Page Contains	Trunk Details:	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	${BTN_TRUNK_DETAILS_SAVE}
+	#Sleep	4s
+	Press Key	${BTN_TRUNK_DETAILS_SAVE}	\\13
+	#Double Click Element	${BTN_TRUNK_DETAILS_SAVE}
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails$dgTrunkDetails$ctl02$Button1	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1
+	Press Key	btnNext1	\\13
+
+SOTI Full PSTN Additional Features Details
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Run Keyword If    '${AddBlock}' == 'True'    Add Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	
+Verify HK Block Start Number
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber    ${BlockStartNumber}
+	Wait Until Page Contains Element	${BTN_AFD_SAVE}    ${wait_time}
+	Click Element	${BTN_AFD_SAVE}
+	sleep	10s
+	${verifyHKblocknumber}=	Run Keyword And Return Status	Page Should Contain  Block Start Number should start from 852 and length should not be less than the 11 and should not be greater than 11
+	#log to console    verifyHKblocknumber is ${verifyHKblocknumber}
+	Run Keyword If	'${verifyHKblocknumber}'=='True'	Fail	Block number for Hong Kong is not verified correctly
+	
+Add Network Conn Details R55 SC61
+	Execute JavaScript    window.scrollTo(0,2000)
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_SI_OV_POP_RESILIENCY_REQUIRED}	${wait_time}
+	Select From List	${CBO_SI_OV_POP_RESILIENCY_REQUIRED}	${POPDualHomed}
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_SI_PRIMARY_VOICE_POP}	${wait_time}
+	Select From List	${CBO_SI_PRIMARY_VOICE_POP}	${PrimaryVoicePoP}
+	Sleep	30s
+	Wait Until Page Contains Element	${CBO_SI_DIRECT_ACCESS_TARIFF}	${wait_time}
+	Click Element	${CBO_SI_DIRECT_ACCESS_TARIFF}
+	Select From List	${CBO_SI_DIRECT_ACCESS_TARIFF}	${DirectAccessTariff}
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_SI_SLA_CATEGORY}	${wait_time}
+	Click Element	${CBO_SI_SLA_CATEGORY}	
+	Select From List	${CBO_SI_SLA_CATEGORY}	${SLACategory}
+	Execute JavaScript    window.scrollTo(0,2000)
+
+Network Connection Details R55 SC61
+	Wait Until Page Contains	Network Connection Details	${wait_time}
+	Select From List	${CBO_OV_POP_REGION}	${OneVoicePoPRegion}
+	Wait Until Page Contains	Network Connection Details	${wait_time}
+	Select From List	${CBO_NCD_ON_NET_ROUTING_TYPE}	${OnNetRoutingType}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Network Connection Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Click Element	btnNext1
+
+	
+Open Browser And Login To EDCA Page As Sales User In T1
+	Execution Status
+#	Execution-Checking NEW or OLD Order
+	Sleep	1s
+	Browser Config EDCA
+    Goto	${EDCAURL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    eDCA Portal
+    Select From List    ddlLogin   ${EDCASalesUserID}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Login As Sales User1.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+#   Wait Until Page Contains Element	${Login}	${wait_time}
+	Sleep	5s
+	Focus	${Login}
+	Click Element	${Login}
+	##for Chrome
+#	Send	{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{ENTER}
+	##for Chrome
+	Wait Until Page Contains	Please Select Profile	${wait_time}
+	Select From List    ddlProfile   ${SalesProfile}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Selection of profile.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	8s
+	Wait Until Page Contains Element	${Continue}	${wait_time}
+	Focus	${Continue}
+	Click Element	${Continue}
+	Wait Until Page Contains	View Pending Order	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-View Pending Order.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+
+Select Order For Full Cycle In T1
+	#Select Order For Full Cycle
+	${EDCAOrderID}=	Get File 	${EXECDIR}\\Extracted_Data\\EDCAOrderID.txt
+	Set Global Variable	${EDCAOrderID}
+	#Select Order
+	Click Element	menu1_rptMenu__ctl12_hlkMenu
+	Wait Until Page Contains	View Pending Order	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select Pending Order.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	xpath=//a[contains(text(),'${EDCAOrderID}')]
+	Wait Until Page Contains	Perform Action	${wait_time}
+	Click Element	dgActions__ctl4_lnkAccess
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	
+Select Order For Full Cycle In T1 R53 SC01 SD
+	#Select Order For Full Cycle
+	${EDCAOrderID}=	Get File 	${EXECDIR}\\Extracted_Data\\EDCAOrderID.txt
+	Set Global Variable	${EDCAOrderID}
+	#Select Order
+	Click Element	menu1_rptMenu__ctl10_hlkMenu
+	Wait Until Page Contains	View Pending Order	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select Pending Order.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	xpath=//a[contains(text(),'${EDCAOrderID}')]
+	Wait Until Page Contains	Perform Action	${wait_time}
+	Click Element	dgActions__ctl5_lnkAccess
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+
+Select Order For Full Cycle In T1 R53 SC01 OET
+	#Select Order For Full Cycle
+	${EDCAOrderID}=	Get File 	${EXECDIR}\\Extracted_Data\\EDCAOrderID.txt
+	Set Global Variable	${EDCAOrderID}
+	#Select Order
+	Click Element	menu1_rptMenu__ctl10_hlkMenu
+	Wait Until Page Contains	View Pending Order	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select Pending Order.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	xpath=//a[contains(text(),'${EDCAOrderID}')]
+	Wait Until Page Contains	Perform Action	${wait_time}
+	Click Element	dgActions__ctl7_lnkAccess
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+
+Modify Billing Details	
+	Wait Until Page Contains	Billing Details	${wait_time}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtContractNo	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtContractNo	${ContractMSANo}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_ddlTariffOption	${wait_time}
+	Select From List	UsrOneVoiceBillingDetails_ddlTariffOption	${TariffOption}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtTariffDetailFileLocation	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtTariffDetailFileLocation	${TariffDetailFileLocation}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_ddlDeliveryMethod	${wait_time}
+	Select From List	UsrOneVoiceBillingDetails_ddlDeliveryMethod	${UsageReportDeliveryMethod}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtAddressLine1	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtAddressLine1	${AddressLine1}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtCity	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtCity	${CityBillingDetails}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtRegion	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtRegion	${RegionState}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtPostCode	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtPostCode	${PostZIPCode}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtBillingContactName	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtBillingContactName	${BillingContactName}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtBillingContactPhoneNo	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtBillingContactPhoneNo	${BillingContactPhoneNumber}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtBillingContactEmail	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtBillingContactEmail	${BillingContactEmailAddress}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtServiceDescription	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtServiceDescription	${ServiceDescription}	
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_txtProductDescription	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceBillingDetails_txtProductDescription	${ProductDescription}
+	Wait Until Page Contains Element	UsrOneVoiceBillingDetails_ddlInvoicePeriod	${wait_time}
+	Select From List	UsrOneVoiceBillingDetails_ddlInvoicePeriod	${InvoicePeriod}
+	${BillReq}=	Run Keyword And Return Status	Page Should Contain Element  UsrOneVoiceBillingDetails_ddlItemisedBillRequired
+	Run Keyword If  '${BillReq}'=='True'	Add Bill Req  
+	sleep    3s
+	Wait Until Page Contains Element	${BTN_BD_NEXT}	${wait_time}
+	${NumValidationReq}=	Run Keyword And Return Status	Page Should Contain Element  UsrOneVoiceBillingDetails_ddlNumberValidationRequired
+	Run Keyword If  '${NumValidationReq}'=='True'	Add Number Validation Req  
+	Wait Until Page Contains Element	${BTN_BD_NEXT}	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Billing Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	5s
+	Focus	btnNext1
+	Click Element	btnNext1
+
+
+Modify Sales User - Submit
+	Win Activate	eDCA - MPLS - Internet Explorer
+	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	${EMPTY}	RIGHT	1	58	321
+	Sleep	2s
+	Send	{DOWN}
+	Send	{ENTER}
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-OrderValidation.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Page Contains Element	UsrTahitiSubmit_btnOrderValidation	${wait_time}
+	Click Element	UsrTahitiSubmit_btnOrderValidation
+	Wait Until Page Contains Element	UsrTahitiSubmit_chkSDqueue	${wait_time}
+	Select Checkbox	UsrTahitiSubmit_chkSDqueue
+	Wait Until Element Is Enabled	UsrTahitiSubmit_ddlSDteam	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDteam	${ServiceDeliveryTeam}
+	Wait Until Page Contains Element	UsrTahitiSubmit_ddlSDowner	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDowner	${ServiceDeliveryOwner}
+	Wait Until Page Contains Element	UsrTahitiSubmit_txtEmail	${wait_time}
+	Clear Element Text	UsrTahitiSubmit_txtEmail
+	Selenium2Library.Input Text	UsrTahitiSubmit_txtEmail	${SubmitEmail}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Submit to SD.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrTahitiSubmit_btnSubmitToSDAuto
+	Wait Until Page Contains	Order ${EDCAOrderID} is submitted to Service Delivery successfully.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Successfull Submission.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	3s
+	
+Modify OET User - Submit	
+	Win Activate	eDCA - MPLS - Internet Explorer
+	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	${EMPTY}	RIGHT	1	58	325
+	Sleep	2s
+	Send	{DOWN}
+	Send	{ENTER}
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-OET User Submit Page.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrTahitiSubmit_btnViewDiffRpt
+	Sleep	5s
+	Select Window	OnevoiceDiffReport
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Diff Report.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Close Window
+	Select Window	eDCA - MPLS
+	Click Element	UsrTahitiSubmit_btnDiffSummary
+	Sleep	5s
+	Select Window	Diff Summary Report
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Diff Summary Report.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Close Window
+	Select Window	eDCA - MPLS
+	Select From List	UsrTahitiSubmit_drpPhyLog	Logical
+	Wait Until Page Contains Element	UsrTahitiSubmit_btnApproveDiffRpt	${wait_time}	
+	Click Element	UsrTahitiSubmit_btnApproveDiffRpt
+	Wait Until Element Is Enabled	UsrTahitiSubmit_btnUploadPass1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Upload Pass1 Enabled.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Choose Ok On Next Confirmation
+	Click Element	UsrTahitiSubmit_btnUploadPass1
+	Confirm Action
+	Wait Until Page Contains	Request is successfully Created and waiting for Response from Classic for Order ${EDCAOrderID}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Request created successsfully to Classic.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Page Contains	Order ${EDCAOrderID} is successfully created in Classic.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Order successfully Created in Classic.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Remove Files	${EXECDIR}\\Extracted_Data\\ClassicOrderID.txt
+	${SuccessMessage}=	Selenium2Library.Get Text	lblMessage
+	${ClassicOrderID}=	Get Substring	${SuccessMessage}	-7
+	Set Global Variable	${ClassicOrderID}
+	Create File	${EXECDIR}\\Extracted_Data\\ClassicOrderID.txt	${ClassicOrderID}	
+	Sleep	3s
+
+Customer Details HK Modify
+	Click Element	${LINK_CREATE_NEW_ORD}
+	Wait Until Page Contains	Customer Details	${wait_time}    Customer Details is not available
+	Remove Files	${EXECDIR}\\Extracted_Data\\EDCAOrderID.txt
+	${EDCAOrderID}=	Selenium2Library.Get Text	lblOrderId
+	Set Global Variable	${EDCAOrderID}
+	Create File	${EXECDIR}\\Extracted_Data\\EDCAOrderID.txt	${EDCAOrderID}
+	Select From List	UsrTahitiCustomerDetails_cboOrderType	MODIFY
+	Wait Until Page Contains	Distributor Legal Name	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-To fill in Customer details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Select From List	UsrTahitiCustomerDetails_cboDistributorLegalName	${DistributorLegalName}
+	Click Element	UsrTahitiCustomerDetails_btnSearch
+	Select Window	Search
+	Selenium2Library.Input Text	TextBox1	${FullLegalCompanyName}
+	Click Element	Button1
+	Sleep	10s
+	Select From List By Index	ListBox1	0
+	sleep    3s
+	Wait Until Element is Visible    btnDone    ${wait_time}    Select Button is not visible
+	Click Element	btnDone
+	Select Window	${eDCA_Title}
+	#Select Window	SQE Lite - MPLS
+	Wait Until Page contains Element	UsrTahitiCustomerDetails_cboSiteCountry	${wait_time}    Site Country is not avaalable
+	Select From List	UsrTahitiCustomerDetails_cboSiteCountry    ${Country}
+	Wait Until Element is Enabled	UsrTahitiCustomerDetails_btnSiteSearch	${wait_time}    Get Sites from Classic is not enabled
+	Click Element	UsrTahitiCustomerDetails_btnSiteSearch
+	Wait Until Page Contains	Request for getting sites has been successfully created. Awaiting the response from classic. Please wait. Status will be updated in every one minute.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Search in Classic for site.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	
+	Select Window    ${eDCA_Title}
+	#commented by Azry 26042018 - cannot get the calling keyword
+	#Verify Classic Site Loaded
+	#end commented by Azry 26042018 - cannot get the calling keyword
+#	Wait Until Element is Enabled	UsrTahitiCustomerDetails_btnSiteSearch	${wait_time}    Get Sites from Classic is not enabled
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select Site.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+#	Choose Ok On Next Confirmation
+#	Click Element	UsrTahitiCustomerDetails_grdSite__ctl4_btnSelect
+	#added by Azry 26042018 - waiting respond from Classic on Site list
+	Wait Until Element Is Enabled	${BTN_SITE_SELECT_BRANCH_SITE}	120s	List of Site from Classic not populating
+	#end added by Azry 26042018 - waiting respond from Classic on Site list
+	Click Element	${BTN_SITE_SELECT_BRANCH_SITE}
+	#Confirm Action
+	sleep    3s
+	Run Keyword And Ignore Error	Alert Should Be Present      After finalization of Site Selection, You can't select another site .Press [Ok] to continue, else press [Cancel] to select another site.
+	Wait Until Page Contains    Request is created successfully. Response has not come yet. Please wait. Status will be updated in every one minute    ${wait_time}
+	#Choose Ok On Next Confirmation
+	Wait Until Page Contains Element	UsrTahitiCustomerDetails_txtContactId	${wait_time}
+	Sleep	10s
+	Selenium2Library.Input Text	UsrTahitiCustomerDetails_txtContactId	${ContractId}
+	Select From List	UsrTahitiCustomerDetails_cboCurrency	${CurrencyName}
+	Selenium2Library.Input Text	UsrTahitiCustomerDetails_txtSiebelId	${SiebelId}
+	Select From List	UsrTahitiCustomerDetails_cboServiceCentre	${ServiceCentre}
+	Selenium2Library.Input Text	UsrTahitiCustomerDetails_txtContactTerms	${ContractTerm}
+	${year}=	Get Current Date	result_format=%Y
+	${month}=	Get Current Date	result_format=%b
+	${day}=	Get Current Date	result_format=%d
+	${my_date_to_select}=	set variable	${day}-${month}-${year}
+	Execute JavaScript  document.getElementById('UsrTahitiCustomerDetails_txtDate').value='${my_date_to_select}'
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Filled in Customer details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	2s
+	Click Element	btnNext1	
+	
+Modify Sites
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains	Sites	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-To fill Site Info.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Page Contains Element	${BTN_S_EDIT}	${wait_time}    Sites Edit button is not available
+	Click Element	${BTN_S_EDIT}
+	Wait Until Page Contains	Site	${wait_time}
+	Wait Until Page Contains Element	UsrTahitiSite_txtCustRequiredDate	${wait_time}
+	${cust_req_date}=	Get Current Date	UTC	7 days	%d-%b-%Y
+	Sleep	6s
+	Focus	UsrTahitiSite_txtCustRequiredDate
+	Execute JavaScript  document.getElementById('UsrTahitiSite_txtCustRequiredDate').value='${cust_req_date}'
+	Wait Until Page Contains Element	UsrTahitiSite_txtCustSignDate	${wait_time}
+	${cust_sign_date}=	Get Current Date	UTC	-3 days	%d-%b-%Y
+	Sleep	6s
+	Focus	UsrTahitiSite_txtCustSignDate
+	Execute JavaScript  document.getElementById('UsrTahitiSite_txtCustSignDate').value='${cust_sign_date}'
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	
+Modify Site Location Details
+	Wait Until Page Contains	SiteLocationDetails	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site Location Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	
+Modify Site Address
+	Wait Until Page Contains	Site Address	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site Address.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+	
+Modify Site Contact Details
+	Wait Until Page Contains	Site Contact Details	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtFirstName	${PrimarySiteFirstName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtLastName	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtLastName	${PrimarySiteLastName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtEmail	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtEmail	${PrimarySiteEmail}
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtPhone	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtPhone	${PrimarySitePhone}
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSFirstname	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtSFirstname	${SecondarySiteFirstName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSLastName	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtSLastName	${SecondarySiteLastName}		
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSEmail	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtSEmail	${SecondarySiteEmail}
+	Wait Until Page Contains Element	UsrTahitiSiteContactDetails_txtSPhone	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiSiteContactDetails_txtSPhone	${SecondarySitePhone}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Site Contact Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	btnNext1
+
+Modify Service Instance
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	${BTN_S_EDIT}	${wait_time}    Sites Edit Button is not available
+	Click Element	${BTN_S_EDIT}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	${BTN_SI_EDIT}	${wait_time}    Service Instance Edit Button is not available
+	Click Element		${BTN_SI_EDIT}
+	#Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlEncryptionReq	${wait_time}
+	#Select From List	UsrTahitiServiceInstance_ddlEncryptionReq	${EncryptionRequired}
+	Wait Until Page Contains Element	btnNext1	${wait_time}    Next button is not available
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1	
+	Click Element	btnNext1
+	
+Modify Network Connection Details
+	Wait Until Page Contains	Network Connection Details	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Select From List	UsrOnevoiceNetworkConnectionNew_ddlOnePOPRegion	${OneVoicePoPRegion}
+	Select From List	UsrOnevoiceNetworkConnectionNew_ddlCasIntRouter	${CascadedIntegratedRouter}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Network Connection Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Click Element	btnNext1
+	
+Modify PBX Details
+	Wait Until Page Contains	PBX Details	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-PBX Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Click Element	btnNext1
+	
+Modify SIP Trunking Details
+	Wait Until Page Contains	SIP Trunking Details	${wait_time}
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlCodec	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-SIP Trunking Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Focus	btnNext1
+	Click Element	btnNext1
+	
+
+
+
+	
+		

@@ -1,0 +1,46 @@
+*** Settings ***
+Documentation		Read Test Data File From Excel. Note - Excel file must be .xls format
+...					Created by:	FKH
+...					Date:	10 August 2016
+...					Edited by:	..... 
+Library		Selenium2Library
+Library		DebugLibrary
+Library		ExcelLibrary
+Library		OperatingSystem
+
+*** Variables ***
+${story}		SC01
+${sheetName}	TestData
+
+*** Keywords ***
+Define And Read Test Data Variable
+	Open Excel	 ${EXECDIR}\\testfile.xls
+	${username}=	Read Excel	${sheetName}	${story}	username
+	${password}=	Read Excel	${sheetName}	${story}	password
+	${browser}=		Read Excel	${sheetName}	${story}	BROWSER
+	${t3_SI_URL}=	Read Excel	${sheetName}	${story}	t3_SI_URL
+	${DELAY}=		Read Excel	${sheetName}	${story}	DELAY
+	Set Global Variable	${username}
+	Set Global Variable	${password}
+	Set Global Variable	${browser}
+	Set Global Variable	${t3_SI_URL}
+	Set Global Variable	${DELAY}
+	
+Read Excel	[Arguments]	${sheetName}	${testCaseNo}	${columnName}
+	${excelColumn}=	Get Column Count	${sheetName}
+	${excelRow}=	Get Row Count	${sheetName}
+	:FOR	${index}	IN RANGE	${excelColumn}
+	\	${fieldName}=	Read Cell Data By Coordinates	${sheetName}	${index}	1
+	\	Run Keyword If	"${fieldName}"=="${columnName}"	Set Test Variable	${colNum}	${index}
+	#\	Log To Console	"fieldName="${index}${fieldName}
+	:FOR	${index}	IN RANGE	${excelRow}
+	\	${tcNo}=	Read Cell Data By Coordinates	${sheetName}	0	${index}
+	#\	Log To Console	"tcNo="${index}${tcNo}
+	\	${searchData}=	Read Cell Data By Coordinates	${sheetName}	${colNum}	${index}
+	\	Run Keyword If	"${tcNo}"=="${testCaseNo}"	Exit For Loop
+	[Return]	${searchData}
+
+*** Test Cases ***
+Test run
+	#Read data
+	Define And Read Test Data Variable

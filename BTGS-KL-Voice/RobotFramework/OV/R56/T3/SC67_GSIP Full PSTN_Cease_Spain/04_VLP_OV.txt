@@ -1,0 +1,28 @@
+Set Environment Variable	no_proxy	127.0.0.1
+
+*** Settings ***
+Documentation	SC67_GSIP Full PSTN_Cease_Spain
+
+Resource	../../Common_OV/CommonResources.txt
+Resource    ../../Common_OV/VLP_OV_Resources.txt
+#Resource    VLP_OV_Resource.txt
+
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+#${TC_ID}		R55_SC61_T3_01
+${journey}    Provide
+
+*** Test Cases ***
+prerequisites
+    Read data	VLP_OV	${TC_ID}
+	Log To Console	Retrieved VLP_OV TestData
+    Create Index Numbering
+    Set Timestamp
+
+TC01 VLP OV Portal
+	Open Browser to VLPOV Login Page
+	Upload CSV
+    [Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser	

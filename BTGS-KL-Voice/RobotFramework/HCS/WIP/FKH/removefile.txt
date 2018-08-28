@@ -1,0 +1,33 @@
+*** Settings ***
+Documentation		Read Test Data File From Excel. Note - Excel file must be .xls format
+...					Created by:	FKH
+...					Date:	20 December 2016
+...					Edited by:	..... 
+Library		Selenium2Library
+Library		OperatingSystem
+Test Teardown	Run Keyword If Test Failed	Close Browser
+Suite Teardown	Delete Unwanted PNG
+
+
+*** Variables ***
+
+*** Keywords ***
+Delete Unwanted PNG
+	@{png_files}=	List Directory	${EXECDIR}\\Output	selenium*.png	absolute=${True}
+	Remove Files	@{png_files}
+
+*** Test Cases ***
+Test run 1
+	#Read data
+	Open Browser	http://sqe.t3.nat.bt.com/cqm	FF
+	Sleep	5
+	Page Should Contain	User Name
+	Capture Page Screenshot	other-{index}-name.png
+	Log To Console	"Test run 1"
+
+	
+Test run 2
+	Log To Console	"Test run 2"
+	Sleep	5
+	Page Should Contain	Password
+	Sleep	5

@@ -1,0 +1,50 @@
+*** Settings ***
+Documentation	Environment Discovery
+Suite Setup
+#Test Teardown    Close Application	
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../CommonEnvDiscovery/CommonResources_EnvDiscovery.txt
+Resource	../CommonEnvDiscovery/readEnvDiscoveryTestDataFromExcel.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	60s
+${sheetName}	EnvDiscovery
+
+*** Test Cases ***
+TC01 CQM	[Documentation]	Check CQM Availability
+	[Tags]	CQM should be able to access	#Expected Result
+	Read data	${sheetName}	CQM
+	Check Execution YesNO and Access to Component
+	[Teardown]	Close Browser
+	
+TC02 AIB	[Documentation]	Check AIB Availability
+	[Tags]	AIB should be able to access
+	Read data	${sheetName}	AIB
+	Check Execution YesNO and Access to Component
+	[Teardown]	Close Browser
+	
+TC03 SI	[Documentation]	Check SI Availability
+	[Tags]	SI should be able to access
+	Read data	${sheetName}	SI
+	Check Execution YesNO and Access to Component
+	[Teardown]	Close Browser
+
+TC04 Expedio OM	[Documentation]	Check Expedio OM Availability
+	[Tags]	Expedio OM should be able to access
+	Read data	${sheetName}	Expedio OM
+	Check Execution YesNO and Access to Component
+	[Teardown]	Close Browser
+	
+TC05 BFG IMS	[Documentation]	Check BFG IMS Availability
+	[Tags]	BFG IMS should be able to access
+	Read data	${sheetName}	BFG IMS
+	Check Execution YesNO and Access to Component
+	[Teardown]	Close Browser
+	
+#TC06 eDCA	[Documentation]	Check eDCA Availability
+#	[Tags]	eDCA should be able to access
+#	Read data	${sheetName}	BFG IMS
+#	Check Execution YesNO and Access to Component
+#	[Teardown]	Close Browser

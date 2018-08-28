@@ -1,0 +1,1 @@
+pybot -d Output\ 04_Tahiti_AssetCreation.txt

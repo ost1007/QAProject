@@ -1,0 +1,49 @@
+*** Settings ***
+Documentation	Assets Creation
+Suite Setup	
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common_HCS/CommonResources.txt
+Resource	../Common_HCS/readHCSTestDataFromExcel.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	60s
+#${TC_ID}		AC05
+*** Test Cases ***
+TC01 Create Customer
+	[TAGS]	AC	BS
+	Read data	AC	${TC_ID}	#for Customer Creation/Done
+	Log To Console	Retrieved Assets Creation Details variables
+	Create Index Numbering
+	#move from CommonResources in R54
+	Execution-Checking NEW or OLD Quote
+	#end move from CommonResources in R54
+	#Open Browser And Login To CQM Page
+	Open Browser And Login	${CQM_URL}	${BROWSER}	
+	Customer Validation
+	
+TC02 Create Customer Site
+	[TAGS]	AC
+	Customer Site Validation
+	Create Customer Contract
+	[Teardown]	Run Keywords	Log Location
+	
+TC03 Create Customer Contacts
+	[TAGS]	AC
+	Create Customer Contacts
+	[Teardown]	Run Keywords	Log Location
+	
+TC04 Create Billing Details
+	[TAGS]	AC
+	Create Billing Details
+	Manage LE Validation
+	Billing Acc Validation
+	[Teardown]	Run Keywords	Log Location
+
+TC05 Create Branch Site
+	[TAGS]	AC	BS
+	Branch Site Toggle 1
+	Branch Site Toggle 2
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser

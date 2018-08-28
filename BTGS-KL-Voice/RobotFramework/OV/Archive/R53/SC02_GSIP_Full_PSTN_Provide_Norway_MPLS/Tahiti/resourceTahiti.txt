@@ -1,0 +1,534 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+Library           DebugLibrary
+Library           OperatingSystem
+Library           Collections    
+#Library			  AutoItLibrary
+#Library			  SikuliLibrary
+#Library			  DateTime
+Resource		../../Common_OV/CommonResources.txt
+Variables		../../Common_OV/CommonVariables.py
+Variables        TahitiLocators.py
+
+*** Variables ***
+#${local_ie_driver}	IEDriverServer.exe
+${BROWSER}        ie
+#${FF_PROFILE}     C:/ff_profile
+#${DELAY}          0.6
+${T3_TAHITI}      http://10.29.79.76:61017/TahitiPortal/index.jsp
+${TXT_USERNAME}	user
+${TXT_PWD}	password
+${USERNAME}	ZAINUDNA
+${PWD}	nurazry3
+${ORDERID}    1150097  #1150156 1150097 1150156 1150063
+
+
+#Test Data
+${CUSTOMERID}	5752
+${CUSTOMERNAME}	R52NOR007
+
+
+${BTN_YANKTASK}	button1
+${BTN_TASKDETAIL}	button2
+${BTN_ENDTASK}	BotonEnd
+${BTN_ORDERSEARCH}    button1
+${BTN_SEARCH}    button1
+${BTN_YES_LEGAL}	YES
+${BTN_ORDERDETAIL}	button0 
+
+${TXT_SEARCH}    txtSearch
+
+${LINK_MYORDERS}	opm1
+
+${ORDERSTATUS_TASKINSERVICE}	Execution
+
+${OPT_TASKID}	IdNumber
+
+${LIST_ORDERTABLE}    orderTable_table
+
+${FORM_ORDERDETAIL}    orderDetail
+${FORM_SERVICELIST}    ec
+${FORM_TASKDETAILS}    formTaskDetails
+
+${TASK_FOR_SERVICE_LIST}	//table[@id='ec_table']/tbody/tr
+${TABLE_HEADER_TASK_ID}    Headerec01
+
+
+
+
+*** Keywords ***
+Test IE InPrivate
+    ${dc}   Evaluate    sys.modules['selenium.webdriver'].DesiredCapabilities.INTERNETEXPLORER  sys, selenium.webdriver
+    Set To Dictionary   ${dc}   ignoreProtectedModeSettings    ${True}
+    Set To Dictionary   ${dc}   ie.forceCreateProcessApi       ${True}
+    Set To Dictionary   ${dc}   ie.browserCommandLineSwitches=-private
+    Open Browser    www.google.com  ie  desired_capabilitie=${dc}
+
+
+Open Browser to Tahiti Login Page
+    #Set Environment Variable	no_proxy	127.0.0.1
+	#Set Environment Variable	webdriver.ie.driver	${local_ie_driver}
+    Browser Config	${T3_TAHITI}
+	Goto	${T3_TAHITI}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Wait Until Element Is Visible	${BTN_LOGIN}    ${waiting_time}    Login Button is not visibled.
+	Input Username Password
+    
+Input Username Password
+    Selenium2Library.Input Text	${TXT_USERNAME}	${USERNAME}
+    Selenium2Library.Input Text	${TXT_PWD}	${PWD}
+    #Debug    
+	Submit Credentials
+   
+Submit Credentials
+    Log to console    Click on Login button
+    Click Element    ${BTN_LOGIN}
+    Wait Until Element Is Visible	${BTN_YES_LEGAL}    ${waiting_time}    Legal page is not visible
+    Log to console    Click on Legal Yes button
+    #Legal warning screen
+    Click Element	${BTN_YES_LEGAL}
+          
+#Process My Orders
+Navigate to My Orders
+	Wait Until Element Is Enabled	${IFRAME_MENU}    ${waiting_time}    Menu Iframe is not enabled    
+	Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-Default_page.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Frame	${IFRAME_MENU}
+	Wait Until Element Is Enabled    ${LINK_MYORDERS}    ${waiting_time}    My Orders Link is not enabled.
+	Click Element	${LINK_MYORDERS}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-MyOrders_page.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+	#Select Window	title=Tahiti Portal
+	UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	Wait Until Element Is Visible	${BTN_ORDERDETAIL}    ${waiting_time}    Order Detail button is not visible
+	
+
+Search By Order Search
+    Click Element    ${BTN_ORDERSEARCH}
+    Wait Until Element Is Enabled    ${TXT_SEARCH}    ${waiting_time}    Search button is not enabled.
+    Input Text    ${TXT_SEARCH}    ${ORDER_ID}
+    Click Element    ${BTN_SEARCH}
+    Wait Until Element Is Enabled    ${LIST_ORDERTABLE}    ${waiting_time}    Order list is not enabled.
+	Select Radio Button    Id    prueba
+	Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-OrderSelected.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Wait Until Element Is Enabled    ${BTN_ORDERDETAIL2}    1m    Order Detail Button is not available
+    Click Element    ${BTN_ORDERDETAIL2}
+	${NotPresent}=  Run Keyword And Return Status    Element Should Not Be Visible   ${FORM_ORDERDETAIL}
+	log to console    NotPresent= ${NotPresent}
+    Run Keyword If    ${NotPresent}    Click Element    ${BTN_ORDERDETAIL2}
+	Wait Until Element is Visible    ${FORM_ORDERDETAIL}    1m    Order Details List is not shown. 
+	Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-OrderDetailsElementShown.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+	
+Search By Customer	
+	Input Text	${TXT_FILTER_CUSTOMERID_ORDERLIST}	${CUSTOMERID}
+	Input Text	${TXT_FILTER_CUSTOMERNAME_ORDERLIST}	${CUSTOMERNAME}
+	#Input Text	${TXT_FILTER_STATUS_ORDERLIST}	${ORDERSTATUS_ORDERLIST}
+	#Input Text	${TXT_FILTER_ID_ORDERLIST}	${ID_ORDERLIST}
+	Click Element	${BTN_FILER}
+	#Loop to only click New Order Status Orders
+	${statusCount}=	Get Matching Xpath Count	.//*[contains(text(),'${CUSTOMERID}')]
+	Set Global Variable	${statusCount}
+	Run Keyword Unless	'${statusCount}' == '0'	Select Order    ${currCount}
+
+Select OV Service
+    Wait Until Element is Visible    ${FORM_SERVICELIST}    ${waiting_time}    Service List is not shown
+    Click Element    xpath=.//a[contains(text(),'GONEV-')]
+    Wait Until Element Is Visible   Table1    ${waiting_time}    Order Details List is not shown
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-OrdersDetails_page.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+
+Select And Process Task
+    Click Element    ${LINK_ALL_TASKS}
+    Wait until Element is Visible    ${TABLE_HEADER_TASK_ID}    ${waiting_time}    All table list is not shown.
+    ${TaskId}    Get TaskId
+    Process Tasks    ${TaskId}
+
+Get TaskId
+    [Return]   ${TaskIdTrim} 
+    ${TaskIdFull}=    Get Text	${TASK_FOR_SERVICE_LIST}[1]/td[2]    
+    ${TaskIdTrim}=    Get Substring    ${TaskIdFull}	0    -1
+
+
+Get Total Results Found
+    [Return]    ${TotalResults}
+    ${TotalResultsLabel}=    Get Text    ${LBL_TOTAL_RESULTS_FOUND}
+    ${TotalResults}=    Get Substring    ${TotalResultsLabel}    0    2
+    Log to console    TotalResults is ${TotalResults}
+
+Process Tasks
+    [Arguments]    ${TaskId}
+    log to console    Click on TABLE_HEADER_TASK_ID
+    Click Element    ${TABLE_HEADER_TASK_ID}  
+    :FOR    ${currCount}    IN Range    3    25   
+    \    log to console    loop ${currCount}
+    \    ${SubTaskId}    Generate SubTaskId    ${TaskId}    ${currCount}
+    \    Set Global Variable    ${SubTaskId}
+    \    log to console    SubTaskId is ${SubTaskId}
+    \    Task Validation    ${SubTaskId}   2    1    ${currCount} 
+    #\   any speical condition to Exit For Loop
+   
+  
+Execute Task - TO be Deleted
+    Log to console    Executing Execute Task Function
+    [Arguments]    ${SubTaskId}    ${currCount}
+    ${checkSelected}=    Task Validation    ${SubTaskId}    2    1
+    log to console    checkSelected is ${checkSelected}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-OrdersDetails_page.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+	Run Keyword unless   ${checkSelected}    Select Order Fr List    ${SubTaskId}    2    1
+	Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-SelectedTask.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+    Wait Until Element Is Visible	${BTN_YANKTASK}	${waiting_time}    Yank Task Button is not visible
+    Yank Task    ${SubTaskId}    ${currCount}
+    End Task    ${currCount}
+
+Generate SubTaskId    
+    [Arguments]    ${TaskId}    ${currCount}
+    [Return]    ${currTaskId}
+   ${currTaskId}=    Set Variable    ${TaskId}${currCount}
+   log to console    currTaskId is ${currTaskId}
+   
+Task Validation
+    [Documentation]	@author 607253786
+	...    @Description 
+    [Arguments]    ${currTaskId}	${taskIdColumn}    ${checkBoxColumn}    ${currCount}
+	#${TotalTaskAvailable}    Get Total Results Found
+	${row} =	Get Row By Cell Text	${TASK_FOR_SERVICE_LIST}	${currTaskId}	${taskIdColumn}    ${currCount}
+	${checkText}	Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskIdColumn}]
+	${taskDescColumn}=    Evaluate    ${taskIdColumn}+1
+	${taskStatusColumn}=    Evaluate    ${taskIdColumn}+2
+	${taskDesc}	Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskDescColumn}]
+	Set Global Variable    ${taskDesc}
+	${taskStatus}	Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskStatusColumn}]
+	log to console     taskDescColumn is ${taskDescColumn}, taskDesc is ${taskDesc}, taskStatusColumn is ${taskStatusColumn}, taskStatus is ${taskStatus}
+	#add condition here to check if taskdesc is automation or last job, exit the task .
+	${AutomaticTask}=  Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}    Automatic Port Allocation
+    ${AutomaticActivation}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	Automatic Service Activation   
+    ${LastTask}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	Confirm Sub Project Completion
+    ${EndedTask}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskStatus}	Ended
+   
+    Log to console   AutomaticTask is ${AutomaticTask} AutomaticActivation is ${AutomaticActivation} LastTask is ${LastTask} EndedTask is ${EndedTask}
+    Run Keyword If	'${AutomaticTask}'\ \ == \ \ 'False' and \ \ '${AutomaticActivation}'\ \ == \ \ 'False' and \ \ '${LastTask}'\ \ == \ \ 'False' and \ \ '${EndedTask}'\ \ == \ \ 'False'    Task Selection    ${checkText}    ${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount} 
+   
+      
+Task Selection    
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]    ${checkText}    ${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount}
+    Log to console    Start Task Selection
+    Run Keyword If  '${checkText}'=='${currTaskId}'      Checkbox Should Not Be Selected    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-checkbox_selection.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+    Select Order Fr List    ${currTaskId}    ${taskIdColumn}    ${checkBoxColumn}    ${currCount}    ${row}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-orderCheckboxSelected.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+    Yank Task    ${currTaskId}    ${currCount}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-Task_Ended_${currTaskId}.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+
+
+#Select CheckBox from List
+#    [Documentation]	@author 607253786
+	#...    @Description 
+    #[Arguments]    ${ColumnValue}	${Column}    ${checkBoxColumn}    ${currCount}
+	#${row} =	Get Row By Cell Text	${TASK_FOR_SERVICE_LIST}	${ColumnValue}	${Column}    ${currCount}
+	#${checkText}	Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${Column}]
+	#Run Keyword And Return If  '${checkText}'=='${ColumnValue}'      Checkbox Should Not Be Selected    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input	
+
+
+Select Order Fr List
+    [Documentation]	@author 607253786
+	...    @Description Function to select the correc torder from the list
+    [Arguments]    ${currTaskId}	${taskIdColumn}    ${checkBoxColumn}    ${currCount}    ${row}
+	#${row} =	Get Row By Cell Text	${TASK_FOR_SERVICE_LIST}	${currTaskId}	${taskIdColumn}    ${currCount}
+	${checkText}	Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskIdColumn}]
+	log to console    checkbox xpath is .${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+	Run Keyword If    '${checkText}'=='${currTaskId}'	Click CheckBox    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+	Checkbox Should Be Selected    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+
+
+Get Table Row Count
+    [Documentation]	@author 607253786
+	...    @Description Function to get the table row count
+    [Arguments]    ${rowLocator}
+    Run Keyword And Return    Get Matching Xpath Count    ${rowLocator}
+       
+    
+Get Row By Cell Text
+    [Documentation]	@author 607253786
+	...    @Description Function to get the row by cell text
+    [Arguments]    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    [Return]    ${rowNumber}
+    ${TotalTask}    Get Total Results Found
+    ${TotalTaskAvailable}=    Convert To Integer    ${TotalTask}
+     Run Keyword If    ${currCount} == 11 and ${TotalTaskAvailable}\ \ < \ \ 11    Hold and Wait for Task    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+     Run Keyword If    ${currCount} == 11 and ${TotalTaskAvailable}\ \ > \ \ 10    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT}
+     ...    AND    Click Element    ${BTN_NEXT_PAGE}
+     Run Keyword If    ${currCount} == 21 and ${TotalTaskAvailable}\ \ < \ \ 21    Hold and Wait for Task    ${rowLocator}    ${cellText}    ${column}    ${currCount} 
+     Run Keyword If    ${currCount} == 21 and ${TotalTaskAvailable}\ \ > \ \ 20    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT
+     ...    AND    Click Element    ${BTN_NEXT_PAGE}
+     ...    AND    Click Element    ${BTN_NEXT_PAGE}
+     #${rowNumber}    Run Keyword If    ${currCount} < 11    Get Row at First Page    ${rowLocator}    ${cellText}    ${column}    ${currCount}    ELSE IF    ${currCount} > 10    Get Row at Next Page    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+     ${rowNumber}    Get Row Number    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+
+    
+ 
+
+Get Row Number
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]   ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    [Return]    ${rowNumber}
+    Log to Console    Get Row Number for ${cellText}
+    ${rowCount}    Get Table Row Count    ${rowLocator}
+    :FOR    ${rowIndex}    IN Range    1    ${rowCount}+1
+    \    ${currText}    Get Text    ${rowLocator}[${rowIndex}]/td[${column}]
+    \    RUN KEYWORD IF	'${cellText}' == '${currText}'	Exit For Loop    ELSE IF    '${rowIndex}'\ \ == \ \ '${rowCount}' and \ \ '${cellText}'\ \ != \ \ '${currText}'    Loop at Service Overview    ${currCount}
+    #\    RUN KEYWORD IF	'${cellText}' == '${currText}'	Exit For Loop    ELSE IF    '${rowIndex}'\ \ == \ \ '${rowCount}' and \ \ '${cellText}'\ \ != \ \ '${currText}'    Hold and Wait for Task    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    ${rowNumber}    Set Variable   ${rowIndex}
+
+Get Row at First Page - to be deleted
+    [Arguments]   ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    [Return]    ${rowNumber}
+    Log to Console    Get Row at First Page
+    ${rowCount}    Get Table Row Count    ${rowLocator}
+     :FOR    ${rowIndex}    IN Range    1    ${rowCount}+1
+    \    ${currText}    Get Text    ${rowLocator}[${rowIndex}]/td[${column}]
+    \    RUN KEYWORD IF	'${cellText}' == '${currText}'	Exit For Loop    ELSE IF    '${rowIndex}'\ \ == \ \ '${rowCount}' and \ \ '${cellText}'\ \ != \ \ '${currText}'    Hold and Wait for Task    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    #\    ELSE IF    '${rowIndex}' > 10    Go to Next Page    ${rowLocator}    ${cellText}	${column}     
+  #  \    ${rowIndex}=    Run Keyword If    '${rowIndex}'\ \ == \ \ '${rowCount}' and \ \ '${cellText}'\ \ != \ \ '${currText}'    	Evaluate    1
+    #\    ELSE IF    '${rowIndex}'\ \ == \ \ '${rowCount}' and \ \ '${cellText}'\ \ != \ \ '${currText}'    Hold and Wait for Task    ${rowLocator}    ${cellText}    ${column}\    
+    ${rowNumber}    Set Variable   ${rowIndex} 
+
+Get Row at Next Page - to be deleted
+    [Arguments]   ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    [Return]    ${rowNumber2}
+    Log to Console    Get Row at Next Page
+    ${rowCount2}    Get Table Row Count    ${rowLocator}
+    :FOR    ${rowIndex}    IN Range    1    ${rowCount2}+1
+    \    ${currText}    Get Text    ${rowLocator}[${rowIndex}]/td[${column}]
+    \    RUN KEYWORD IF	'${cellText}' == '${currText}'	Exit For Loop    ELSE IF    '${rowIndex}'\ \ == \ \ '${rowCount2}' and \ \ '${cellText}'\ \ != \ \ '${currText}'    Hold and Wait for Task    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    ${rowNumber2}    Set Variable   ${rowIndex}       
+    
+Loop at Service Overview
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]    ${currCount}
+    Wait Until Keyword Succeeds    6h    10m    Process Task Via Service Overview    ${SubTaskId}    ${currCount}
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}
+    Wait Until Element Is Enabled   ${FORM_TASKDETAILS}    ${waiting_time}    Task Details Form is not enabled. 
+    Input Yank Task
+    Click End Task Button    ${currCount}
+   
+   
+Hold and Wait for Task
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    [Return]    ${rowNumber}
+    log to console    currCount is ${currCount}
+    Wait Until Keyword Succeeds    6h    5m    Run Keywords
+    ...    Unselect Frame
+    ...    AND    Select Frame    ${IFRAME_ARIADNETHREAD}
+    ...    AND    Selenium2Library.Click Link    ${LINK_TASK_IN_SERV}
+    ...    AND    Unselect Frame
+    ...    AND    Select Frame    ${IFRAME_CONTENT}
+    ...    AND    Run Keyword If    ${currCount} > 10    Click Element    ${BTN_NEXT_PAGE}
+    ...    AND    Run Keyword If    ${currCount} > 20    Click Element    ${BTN_NEXT_PAGE}
+    ...    AND    Get Row Number    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    ...    AND    Get Row By Cell Text    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+
+  
+Click CheckBox
+    [Documentation]	@author 607253786
+	...    @Description 
+    [Arguments]    ${checkBox}
+    Click Element    ${checkBox}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-OrderCheckboxChecked.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering} 
+           
+
+Select Order
+    [Arguments]    ${currCount}
+	:FOR	${indexOrder}	IN RANGE	${statusCount}
+	\	Wait Until Element Is Visible	${BTN_ORDERDETAIL}    ${waiting_time}    Order Detail Button is not visible.
+	\	Click Element	${OPT_ID_MYORDERS}
+	\	Debug
+	\	Click Button	${BTN_ORDERDETAIL}
+	\	Run Keyword	Select Service Number
+
+Select Service Number
+    [Arguments]    ${currCount}
+	Wait Until Element Is Visible	${LINK_SERVICENUMBER}	30    Service Number link is not visible.
+    Click Element	${LINK_SERVICENUMBER}
+    Wait Until Element Is Visible	${LINK_ALLTASKS}    ${waiting_time}    All Tasks link is not visible.
+    Click Element	${LINK_ALLTASKS}
+    Tasks In Service    ${currCount}
+    
+Tasks In Service
+    [Arguments]    ${currCount}
+    Wait Until Element Is Visible	${OPT_TASKID}    ${waiting_time}    Task ID option is not visible.
+    Input Text	${TXT_FILTER_STATUS_TASKINSERVICE}	${ORDERSTATUS_TASKINSERVICE}
+    Click Element	${BTN_FILER}
+    ${statusExecutionCount}=	Get Matching Xpath Count	.//*[contains(text(),'Execution')]
+    Set Global Variable	${statusExecutionCount}
+    Run Keyword Unless	'${statusExecutionCount}' == '0'	Select Task ID    ${currCount}
+    
+Select Task ID
+    [Arguments]    ${currCount}
+	:FOR	${indexTASK}	IN RANGE	${statusExecutionCount}
+	\	Check Feedback Message
+	\	Log	${msgUseClassic}
+	\	Run Keyword If	${msgUseClassic}=='True'
+	\	...	Run Keywords	
+	\	...	Unselect Frame
+	\	...	AND	Select Frame	${IFRAME_MENU}	
+	\	...	AND	Click Element	${LINK_MYORDERS}	
+	\	...	AND	Exit For Loop
+	\	Click Element	${OPT_TASKID}
+	\	Run Keyword	Yank Task	${SubTaskId}    ${currCount}
+	
+    #Click Element	${OPT_TASKID}
+    
+Yank Task
+    [Arguments]    ${SubTaskId}    ${currCount}
+  #  ${EndTaskBtnNotPresent}=  Run Keyword And Return Status    Element Should Not Be Visible   ${BTN_ENDTASK}
+#	log to console    NotPresent= ${EndTaskBtnNotPresent}
+   #Run Keyword If    ${EndTaskBtnNotPresent}    Click Element    ${BTN_YANKTASK}
+   
+    #Wait Until Element Is Enabled    	${BTN_YANKTASK}	${waiting_time}
+    ${YankTaskButtonEnabled}=    Run Keyword And Return Status    Element Should be Enabled    ${BTN_YANKTASK}    
+    Run Keyword If    ${YankTaskButtonEnabled}    Process Task Via All Task    ${currCount}    ELSE       Process Task Via Service Overview    ${SubTaskId}    ${currCount}
+    Input Yank Task
+    Click End Task Button    ${currCount}    
+   
+Process Task Via All Task
+    [Arguments]    ${currCount}
+    Click Element    ${BTN_YANKTASK}
+    ${NotPresent2}=  Run Keyword And Return Status    Element Should Not Be Visible   ${FORM_ORDERDETAIL}
+	log to console    NotPresent2= ${NotPresent2}
+#    Run Keyword If    ${NotPresent2}    Click Element    ${BTN_YANKTASK}
+    Wait Until Element Is Enabled   ${FORM_TASKDETAILS}    ${waiting_time}    Task Details Form is not enabled.    
+
+
+Process Task Via Service Overview
+    [Arguments]    ${SubTaskId}    ${currCount}
+    Unselect Frame        
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_SERV_OVERVIEW}
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}
+    Wait until Element is Visible    ${LINK_ALL_TASKS}    ${waiting_time}    All Task link is not visible.
+    Wait Until Element is Visible    Table1    ${waiting_time}    Task list is not visible.
+    Click Element    xpath=.//strong[text()='${SubTaskId}']
+    
+    
+Click End Task Button
+    [Arguments]    ${currCount}
+    Wait Until Element is Visible    ${BTN_ENDTASK}    ${waiting_time}    End Task Button is not visible.
+    End Task   ${currCount} 
+    
+
+    
+End Task
+    [Arguments]    ${currCount}
+	#Wait Until Element Is Visible	${BTN_ENDTASK}	${waiting_time}
+	${EndTaskBtnEnabled}=  Run Keyword And Return Status	Element Should Be Enabled	${BTN_ENDTASK}
+	Run Keyword if    ${EndTaskBtnEnabled}    Click Element  ${BTN_ENDTASK}
+    Unselect Frame        
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_SERV_OVERVIEW} 
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+    Click Element    ${LINK_ALL_TASKS}
+    Wait until Element is Visible    ${TABLE_HEADER_TASK_ID}    ${waiting_time}    Task List is not visible.
+    Click Element    ${TABLE_HEADER_TASK_ID}
+    Run Keyword If    ${currCount} > 10    Click Element    ${BTN_NEXT_PAGE}
+    Run Keyword If    ${currCount} > 20    Click Element    ${BTN_NEXT_PAGE}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-EndTask_${taskDesc}.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering} 
+#	Run Keyword If 	${yankBtnEnabled}=='True'	Click Element	${BTN_ENDTASK}
+#	...	ELSE	Click Element	${LINK_BREADCRUMBSTASKINSERVICE}
+	
+#	Check Feedback Message
+	
+#	Run Keyword If	Element Should Be Visible	${LINK_FEEDBACKYES}	Click Element	${LINK_FEEDBACKYES}
+    
+
+Check Feedback Message
+    ${msgUseClassic}=  Run Keyword And Return Status	Element Should Be Visible	${TXT_FEEDBACK_USECLASSIC}
+    Set Global Variable	${msgUseClassic}
+    
+Input Yank Task
+    Run Keyword if    '${taskDesc}'=='Plan & Assign Primary Global Networ'    Input Plan Assign Primary Global Network
+    Run Keyword if    '${taskDesc}'=='Select & schedule tests required (P'    Select Schedule Tests Required
+    Run Keyword if    '${taskDesc}'=='Set Elements to Installed (Provide)'    Close Task At Classic  
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-Yank_Task_${taskDesc}.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+
+Close Task At Classic
+    Log to Console    Please manually Close Task At Classic
+    
+    
+    
+    
+Select Schedule Tests Required
+    #task 5
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}  
+	Click Element    ${CBO_CUST_ACT_SUPPORT}  
+    Click Element    ${CBO_CUST_ACT_SUPPORT_NO}
+    Click Element    ${CBO_FULL_SERV_CPE_TEST}
+    Click Element    ${CBO_FULL_SERV_CPE_TEST_NO}
+    #Full Service CPE Test  thsi one needed if full service cpe test is yes
+    Click Element    ${CBO_SERV_TEST_REQ}
+    Click Element    ${CBO_SERV_TEST_REQ_NO}
+
+
+Input Plan Assign Primary Global Network
+    #task 3
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}    
+    Input Text	${TXT_TRUNK_WHITE_LIST}	TWL_${timeStamp}
+    Input Text	${TXT_SWITCH_NNNN_CODE}	SNC_${timeStamp}
+    Input Text	${TXT_IPMS_SRN}	IPMS_SRN_${timeStamp}
+    Input Text	${TXT_IPMS_ENTERPRISE_ID}	IPMS_ETP_${timeStamp}
+    Input Text	${TXT_IPMS_CORP_ID}	IPMS_CorpId_${timeStamp}
+    Input Text	${TXT_IPMS_ORD_NUM}	IPMS_ORD_${timeStamp}
+
+Input Perform Number Management
+    #task1
+    Click Element    ${BTN_TASKDETAIL}
+    
+    
+Full Service CPE Test
+    Click Element    ${CBO_FULL_SERV_CPE_TEST_YES}
+    Click Element    ${DATE_PICKER_FULL_SERV_CPE_TEST}
+    
+    #ensure DateTime Picker page shown
+    #select a date

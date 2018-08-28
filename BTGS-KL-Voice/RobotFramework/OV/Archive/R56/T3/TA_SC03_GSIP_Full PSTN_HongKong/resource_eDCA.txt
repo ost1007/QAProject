@@ -1,0 +1,76 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library	Selenium2Library
+Library	DebugLibrary
+Library	DateTime
+Library		OperatingSystem
+Library		Collections
+Resource	../../Common_OV/EDCA_Resource.txt
+
+*** Variables ***
+${eDCA_Portal_Title}    SQE Lite Portal
+
+
+*** Keywords ***
+#######eDCA SC02 resource keywords###############
+GSIP Full PSTN Additional Features Details
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Run Keyword If    '${AddBlock}' == 'True'    Add Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1	
+
+Add Block Details
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Sleep	30s
+	Select Window	Information
+	Wait Until Page Contains Element	btn1	${wait_time}
+	Click Element	btn1
+	Select Window	${eDCA_Title}
+	#Select Window	SQE Lite - MPLS
+#	Alert Should Be Present	For Main Site Orders,Account Teams please help set the correct expectation with our customers.
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlNumberType	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlNumberType	${NumberType}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlBTSupplied	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlBTSupplied	${BTSupplied}
+	Sleep	10s
+
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_txtNumberBlockSize	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtNumberBlockSize	${NumberBlockSize}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlParentName	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlParentName	${UniqueTrunkGroupFriendlyName}
+
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber	${wait_time}
+	Run Keyword If	'${Country}' == 'Hong Kong'	Verify HK Block Start Number
+	#Click Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber
+	#Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber	${BlockStartNumber}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_btnSave	${wait_time}
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnSave
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	
+	
+Verify HK Block Start Number
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber    ${BlockStartNumber}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_btnSave	${wait_time}
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnSave
+	sleep	10s
+	${verifyHKblocknumber}=	Run Keyword And Return Status	Page Should Contain  Block Start Number should start from 852 and length should not be less than the 11 and should not be greater than 11
+	#log to console    verifyHKblocknumber is ${verifyHKblocknumber}
+	Run Keyword If	'${verifyHKblocknumber}'=='True'	Fail	Block number for Hong Kong is not verified correctly
+	
+
+
+
+
+	
+
+
+

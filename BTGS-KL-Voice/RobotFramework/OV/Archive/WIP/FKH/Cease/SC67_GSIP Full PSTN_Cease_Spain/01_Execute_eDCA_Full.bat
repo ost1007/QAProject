@@ -1,0 +1,1 @@
+pybot -i eDCAFull --removekeywords wuks --removekeywords name:*Execution* -v TC_ID:R56CSF01 -d Output\ --exitonfailure 01_eDCA_Full.txt

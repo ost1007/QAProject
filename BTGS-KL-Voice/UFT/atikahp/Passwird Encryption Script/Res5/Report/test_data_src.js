@@ -1,0 +1,1 @@
+﻿var __testDataSource={items:[{dataFilePath:'Default.xls',dataFileFormat:'excel',dataFileFolder:'C:\\Voice\\backup-BT-GS-UFT-Voice\\Test_Script\\testpoweoioi\\Res5',namePairs:[]}]};

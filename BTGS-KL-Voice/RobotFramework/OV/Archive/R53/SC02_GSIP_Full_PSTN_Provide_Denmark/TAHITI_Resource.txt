@@ -1,0 +1,35 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+Library           DebugLibrary
+Library           OperatingSystem
+Library           Collections    
+Resource		../Common_OV/CommonResources.txt
+Variables		../Common_OV/CommonVariables.py
+Variables       ../Common_OV/TahitiLocators.py
+
+
+*** Keywords ***
+Input Plan Assign Primary Global Network
+    #task 3
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}    
+    #Input Text	${TXT_TRUNK_WHITE_LIST}	TWL_${timeStamp}
+    Input Text	${TXT_SWITCH_NNNN_CODE}	SNC_${timeStamp}
+    Input Text	${TXT_IPMS_SRN}	IPMS_SRN_${timeStamp}
+    Input Text	${TXT_IPMS_ENTERPRISE_ID}	IPMS_ETP_${timeStamp}
+    Input Text	${TXT_IPMS_CORP_ID}	IPMS_CorpId_${timeStamp}
+    Input Text	${TXT_IPMS_ORD_NUM}	IPMS_ORD_${timeStamp}
+    
+    
+Modify Input Plan Assign Primary Global Network
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}    
+	Input Text	${TXT_MOD_SWITCH_NNNN_CODE}	SNC_${timeStamp}
+    
+    #For T3 only
+    Input Text	${TXT_MOD_TRUNK_WHITE_LIST}	TWL_${timeStamp}

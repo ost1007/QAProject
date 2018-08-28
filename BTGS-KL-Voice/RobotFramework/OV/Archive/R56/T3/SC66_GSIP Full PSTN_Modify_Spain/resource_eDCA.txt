@@ -1,0 +1,150 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library	Selenium2Library
+Library	DebugLibrary
+Library	DateTime
+Library		OperatingSystem
+Library		Collections
+Library		SikuliLibrary
+Resource	../../Common_OV/EDCA_Resource.txt
+
+*** Variables ***
+${eDCA_Portal_Title}    SQE Lite Portal
+
+*** Keywords ***
+GSIP Full PSTN Additional Features Details - Modify
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Run Keyword If    '${AddBlock}' == 'True'    Modify Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1		
+	
+
+Modify Block Details
+	Execute Javascript	window.document.getElementById('UsrOneVoiceAdditionalFeatureDetails_dgBlockDetails_ctl02_btnEdit').scrollIntoView(true)
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_dgBlockDetails_ctl02_btnEdit
+	Wait Until Page Contains Element	${CBO_AFD_NUM_TYPE}    ${wait_time}
+	Select From List   UsrOneVoiceAdditionalFeatureDetails_ddlAction   Remove Existing Number Block
+	Sleep    5s
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_btnSave	${wait_time}
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnSave
+	Click Element	${BTN_AFD_ADD_BLK_DETAILS}
+	Sleep	5s
+	Wait Until Page Contains Element	${CBO_AFD_NUM_TYPE}    ${wait_time}
+	Select From List	${CBO_AFD_NUM_TYPE}    ${NumberType}
+	Wait Until Page Contains Element	${CBO_AFD_BT_SUPPLIED}	${wait_time}
+	Select From List	${CBO_AFD_BT_SUPPLIED}	${BTSupplied}
+	Wait Until Page Contains Element	${TXT_AFD_SUPPLIER}	${wait_time}
+	Selenium2Library.Input Text	${TXT_AFD_SUPPLIER}	${Supplier}
+	Sleep	10s
+	Wait Until Page Contains Element	${TXT_AFD_NUM_BLK_SIZE}	${wait_time}
+	Selenium2Library.Input Text	${TXT_AFD_NUM_BLK_SIZE}	${NumberBlockSize}
+	Wait Until Page Contains Element	${CBO_AFD_PARENT_NAME}	${wait_time}
+	Select From List	${CBO_AFD_PARENT_NAME}	${UniqueTrunkGroupFriendlyName}
+	Wait Until Page Contains Element	${TXT_AFD_BLK_START_NUM}	${wait_time}
+	Run Keyword If    '${NumberType}' == 'Porting'    Run Keywords
+    ...    Wait Until Page Contains Element    ${CBO_BD_PORTING_OUT_HOURS}    ${wait_time}
+    ...    AND    Select From List    ${CBO_BD_PORTING_OUT_HOURS}    ${PortingOutOfHours}
+    Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-AdditionalFeaturesDetailsFilled.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber    ${BlockStartNumber}
+	Wait Until Page Contains Element	${BTN_AFD_SAVE}    ${wait_time}
+	Click Element	${BTN_AFD_SAVE}
+	sleep	10s
+	Wait Until Page Contains Element	${BTN_AFD_ADD_BLK_DETAILS}	${wait_time}	
+
+Sales User - Submit - Modify
+	Add Image Path    ${IMAGE_DIR}
+	Win Activate	${eDCA_Title}
+	${imgSubmitLinkExist}=	Run Keyword And Return Status	Wait Until Screen Contain	submit_eDCA.png	5
+	Run Keyword If	${imgSubmitLinkExist}	Right Click	submit_eDCA.png
+	...	ELSE	Control Click	${eDCA_Title}	${EMPTY}	${EMPTY}	RIGHT	1	${submit1_X_axis}	${submit1_Y_axis}
+	Sleep	5s
+	Send	{DOWN}
+	Send	{ENTER}
+	Sleep	5s
+	Win Activate	${eDCA_Title}
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-OrderValidation.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Page Contains Element	UsrTahitiSubmit_btnOrderValidation	${wait_time}
+	Click Element	UsrTahitiSubmit_btnOrderValidation
+	Wait Until Page Contains Element	UsrTahitiSubmit_chkSDqueue	${wait_time}
+	Select Checkbox	UsrTahitiSubmit_chkSDqueue
+	Wait Until Element Is Enabled	UsrTahitiSubmit_ddlSDteam	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDteam	${ServiceDeliveryTeam}
+	Wait Until Page Contains Element	UsrTahitiSubmit_ddlSDowner	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDowner	${ServiceDeliveryOwner}
+	Wait Until Page Contains Element	UsrTahitiSubmit_txtEmail	${wait_time}
+	Clear Element Text	UsrTahitiSubmit_txtEmail
+	Selenium2Library.Input Text	UsrTahitiSubmit_txtEmail	${SubmitEmail}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Submit to SD.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrTahitiSubmit_btnSubmitToSDAuto
+	Wait Until Page Contains	Order ${EDCAOrderID} is submitted to Service Delivery successfully.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Successfull Submission.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	3s
+	
+OET User - Submit - Modify	
+	Win Activate	eDCA - MPLS - Internet Explorer
+	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	${EMPTY}	RIGHT	1	58	325
+	Sleep	2s
+	Send	{DOWN}
+	Send	{ENTER}
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-OET User Submit Page.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Click Element	UsrTahitiSubmit_btnViewDiffRpt
+	Sleep	5s
+	Select Window	OnevoiceDiffReport
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Diff Report.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Close Window
+	Select Window	eDCA - MPLS
+	Click Element	UsrTahitiSubmit_btnDiffSummary
+	Sleep	5s
+	Select Window	Diff Summary Report
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Diff Summary Report.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Close Window
+	Select Window	eDCA - MPLS
+	Select From List	UsrTahitiSubmit_drpPhyLog	Logical
+	Wait Until Page Contains Element	UsrTahitiSubmit_btnApproveDiffRpt	${wait_time}	
+	Click Element	UsrTahitiSubmit_btnApproveDiffRpt
+	Wait Until Element Is Enabled	UsrTahitiSubmit_btnUploadPass1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Upload Pass1 Enabled.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Choose Ok On Next Confirmation
+	Click Element	UsrTahitiSubmit_btnUploadPass1
+	Confirm Action
+	Wait Until Page Contains	Request is successfully Created and waiting for Response from Classic for Order ${EDCAOrderID}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Request created successsfully to Classic.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Wait Until Page Contains	Order ${EDCAOrderID} is successfully created in Classic.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Order successfully Created in Classic.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Remove Files	${EXECDIR}\\Extracted_Data\\ClassicOrderID.txt
+	${SuccessMessage}=	Selenium2Library.Get Text	lblMessage
+	${ClassicOrderID}=	Get Substring	${SuccessMessage}	-7
+	Set Global Variable	${ClassicOrderID}
+	Create File	${EXECDIR}\\Extracted_Data\\ClassicOrderID.txt	${ClassicOrderID}	
+	Sleep	3s

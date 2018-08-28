@@ -1,0 +1,30 @@
+*** Settings ***
+Documentation		Read Test Data File From Excel. Note - Excel file must be .xls format
+...					Created by:	FKH
+...					Date:	10 August 2016
+...					Edited by:	..... 
+Library		Selenium2Library
+Library		DebugLibrary
+Library		ExcelLibrary
+Library		OperatingSystem
+Library		String
+
+*** Variables ***
+
+*** Keywords ***
+Define And Read Test Data Variable
+	Open Excel	${CURDIR}\\testdata.xls
+	${excelColumn}=	Get Column Count	${sheetName}
+	${excelRow}=	Get Row Count	${sheetName}
+	:FOR	${index2}	IN RANGE	${excelRow}
+	\	${tcNo}=	Read Cell Data By Coordinates	${sheetName}	0	${index2}
+	\	Run Keyword If	"${tcNo}"=="${story}"	Set Test Variable	${rowNum}	${index2}
+	\	Run Keyword If	"${tcNo}"=="${story}"	Exit For Loop
+	:FOR	${index}	IN RANGE	${excelColumn}
+	\	${q2o}=	Read Cell Data By Coordinates	${sheetName}	${index}	6
+	\	Run Keyword If	'${q2o}'=='${Empty}'	Continue For Loop	
+	\	${tempValue}=	Read Cell Data By Coordinates	${sheetName}	${index}	${rowNum}
+	\	${str}=	Convert To String	${tempValue}
+	\	${tempValue}=	Strip String	${str}	right	.0
+	\	Set Global Variable	${${q2o}}	${tempValue}
+	\	Log To Console	${q2o}"="${tempValue}

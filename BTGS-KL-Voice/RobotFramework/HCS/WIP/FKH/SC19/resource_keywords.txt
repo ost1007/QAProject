@@ -1,0 +1,166 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+Library	AutoItLibrary
+Library	DebugLibrary
+Variables	static-locators.py
+Variables	variables.py
+
+*** Keywords ***
+RSQE
+	${status}=	Run Keyword and Return Status	Element Should Be Visible	${CBOX_ADDITIONAL_PRODUCT}
+	Run Keyword If	${status}	Products in the quote	ELSE	Log	Product selected
+	Launch Provide Configuration
+	${status2}=	Run Keyword and Return Status	Page Should Not Contain Element	QuoteOptionDetailsTab
+	Run Keyword If	${status2}	Run Keywords
+	...	Create New Cloud Product
+	...	AND	Product Configuration
+	...	ELSE	Select Existing Cloud Product
+	Select Product
+	Calculate Price
+	Create Offer
+	#Jump to Orders
+	
+Select Existing Cloud Product
+	Wait Until Element Is Enabled	xpath=.//td[contains(@class,'validity')][not(contains(@class,'pending'))]	120
+	Select Product
+	${status}=	Run Keyword and Return Status	Page Should Contain Element	xpath=.//td[text()='INVALID']
+	Run Keyword If	${status}	Run Keywords
+	...	Click Element	bulkConfigurationButton
+	...	AND	Product Configuration
+	
+Product Configuration	#Azure O365 inbound RA without NAT Acc FW
+	CCD Base Config
+	MS Express Route Service Connection Config
+	VPN Specification Config
+	NAT Config
+	NAT In MS Express Route Service Connection
+	Customer Address Space Config
+	Customer Address Space in MS Express Route Service Connection
+	Cloud Firewall Service Config
+	Cloud Acceleration Service Config
+	Wait Until Element Is Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Click Element	${LINK_CCD}
+	Cloud Service Leg for Firewall Service Config
+	Cloud Service Leg for Acceleration Service Config
+	Cloud Firewall Services Tab Config
+	Cloud Acceleration Service Tab Config
+	Finalise Config
+	
+Download RFOSheet IE
+	Click Image    Export RFO
+	Wait Until Element Is Visible	export-rfo-sheet-msg	20s
+	Click Element	${BTN_OK_RFO}
+	Sleep	10s
+	Win Activate  Showing Quote Option - Internet Explorer
+	Sleep	1s
+	Send	{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}
+	Send	{ENTER}
+	Edit Excel RFOSheet
+	
+Download RFOSheet FF
+	Click Image    Export RFO
+	Click Element	${BTN_OK_RFO}
+	Win Wait	Opening ${RFOSheet}
+	Win Activate  Opening ${RFOSheet}
+	Sleep	2
+	Send	{ENTER}
+	Edit Excel RFOSheet	#call keywords
+	
+Edit Excel RFOSheet
+	${year}	${month}	${day}=	Get Time	year,month,day
+	AutoItSetOption 	WinWaitDelay	2000
+	Win Wait	${RFOSheet}	#SQE_AUTOQUOTE003_AQ00_RFOSheet.xlsx  [Read-Only] - Excel
+	Win Activate	${RFOSheet}
+	Send	^g
+	Send	m2{ENTER}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	!{DOWN}
+	Sleep	1
+	Send	{DOWN}{ENTER}
+	Send	^g
+	Send	m3{ENTER}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	!{DOWN}
+	Sleep	0.5
+	Send	{DOWN}{ENTER}
+	Send	^g
+	Send	m4{ENTER}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	!{DOWN}
+	Sleep	0.5
+	Send	{DOWN}{ENTER}
+	Send	^g
+	Send	m5{ENTER}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	!{DOWN}
+	Sleep	0.5
+	Send	{DOWN}{ENTER}
+	Send	^g
+	Send	m6{ENTER}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	${year}{-}${month}{-}${day}{TAB}
+	Send	!{DOWN}
+	Sleep	0.5
+	Send	{DOWN}{ENTER}
+	Sleep	1
+	Send	^{PGDN}^{PGDN}^{PGDN}
+	Send	^g
+	Send	f3{ENTER}
+	Sleep	1
+	Send	!{DOWN}
+	Sleep	0.5
+	Send	{DOWN}{ENTER}{TAB}
+	Send	100.45.47.22/32
+	Send	^{PGDN}
+	Send	^g
+	Send	e3{ENTER}
+	Send	AWac1234{-}ADz9{-}ADz9{-}ADz9{-}CQz406201976
+	Send	!{F2}
+	Win Wait	Save As
+	Win Activate	Save As
+	Send	${EXECDIR}\\${RFOSheet}
+	Send	{ENTER}
+	Sleep	5
+	Win Close	${RFOSheet} - Excel
+	
+Upload RFOSheet IE
+	Click Image    Import RFO
+	Click Element	rfoSheet
+	Win Activate	File Upload
+	Send	${EXECDIR}\\${RFOSheet}
+	Send	{ENTER}
+	Click Element	uploadButton
+	Wait Until Page Contains Element	${UPLOAD_SUCCESSFUL}	120
+	Wait Until Element Is Enabled	xpath=.//span[text()='Done']/..	120
+	Click Button	xpath=.//span[text()='Done']/..
+	Wait Until Element Is Enabled	xpath=.//a[text()='Submit Order']	120
+	
+Upload RFOSheet FF
+	Click Image    Import RFO
+	Click Element	rfoSheet
+	Win Activate	File Upload
+	Send	${EXECDIR}\\${RFOSheet}
+	Send	{ENTER}
+	Click Element	uploadButton
+	Wait Until Page Contains Element	${UPLOAD_SUCCESSFUL}	120
+	Wait Until Element Is Enabled	xpath=.//span[text()='Done']/..	120
+	Click Button	xpath=.//span[text()='Done']/..
+	Wait Until Element Is Enabled	xpath=.//a[text()='Submit Order']	120
+	
+Jump to Orders
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	120
+	#Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	120
+	Click Link	OrdersTab
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	120
+	Wait Until Element Is Visible	xpath=.//*[@id='orderName']	120
+	Download RFOSheet FF
+	Upload RFOSheet FF
+	Click Element	xpath=.//a[text()='Submit Order']
+	Wait Until Page Contains Element	${STATUS_SUBMITTED}	10m
+	

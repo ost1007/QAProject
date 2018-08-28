@@ -1,0 +1,165 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+Library	AutoItLibrary
+Library	DebugLibrary
+Library	DateTime
+Library		OperatingSystem
+
+*** Keywords ***
+Open Browser And Login To EDCA Page As Sales User
+	Execution-Checking NEW or OLD Order
+	Sleep	1s
+	${download_directory}=	Run Keyword If	'${BROWSER}'=='Chrome'	Set Variable	C:\\Jenkins\\RFOSheets
+	${chrome_options}=	Run Keyword If	'${BROWSER}'=='Chrome'	Evaluate	sys.modules['selenium.webdriver'].ChromeOptions()	sys, selenium.webdriver
+	${prefs}=	Run Keyword If	'${BROWSER}'=='Chrome'	Create Dictionary	download.default_directory=${download_directory}	#plugins.plugins_disabled=${disabled}
+	Run Keyword If	'${BROWSER}'=='Chrome'	Run Keywords
+    ...	Call Method	${chrome_options}	add_experimental_option	prefs	${prefs}
+    ...	AND	Create Webdriver	Chrome	chrome_options=${chrome_options}
+    ...	ELSE
+    ...	Open Browser	${EDCAURL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+    Goto	${EDCAURL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    eDCA Portal
+    Select From List    ddlLogin   ${EDCASalesUserID}
+    Capture Page Screenshot		${OUTPUTDIR}${/}Login As Sales User1.png
+#   Wait Until Page Contains Element	${Login}	${wait_time}
+    Click Element	${Login}
+	Wait Until Page Contains	Please Select Profile	${wait_time}
+	Select From List    ddlProfile   ${SalesProfile}
+	Wait Until Page Contains Element	${Continue}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Selection of profile.png
+	Click Element	${Continue}
+	Wait Until Page Contains	Team Admin User Report	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Team Admin User Report.png
+	
+Open Browser And Login To EDCA Page As Service Delivery User
+	Execution-Checking NEW or OLD Order
+	Sleep	1s
+	${download_directory}=	Run Keyword If	'${BROWSER}'=='Chrome'	Set Variable	C:\\Jenkins\\RFOSheets
+	${chrome_options}=	Run Keyword If	'${BROWSER}'=='Chrome'	Evaluate	sys.modules['selenium.webdriver'].ChromeOptions()	sys, selenium.webdriver
+	${prefs}=	Run Keyword If	'${BROWSER}'=='Chrome'	Create Dictionary	download.default_directory=${download_directory}	#plugins.plugins_disabled=${disabled}
+	Run Keyword If	'${BROWSER}'=='Chrome'	Run Keywords
+    ...	Call Method	${chrome_options}	add_experimental_option	prefs	${prefs}
+    ...	AND	Create Webdriver	Chrome	chrome_options=${chrome_options}
+    ...	ELSE
+    ...	Open Browser	${EDCAURL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+    Goto	${EDCAURL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    eDCA Portal
+    Select From List    ddlLogin   ${EDCAServiceDeliveryUserID}
+    Capture Page Screenshot		${OUTPUTDIR}${/}Login As Service Delivery User1.png
+#   Wait Until Page Contains Element	${Login}	${wait_time}
+    Click Element	${Login}
+	Wait Until Page Contains	Please Select Profile	${wait_time}
+	Select From List    ddlProfile   ${SDProfile}
+	Wait Until Page Contains Element	${Continue}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Selection of profile.png
+	Click Element	${Continue}
+	Wait Until Page Contains	View Pending Order	${wait_time}
+		
+Sales User - Submit
+	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	${EMPTY}	LEFT	1	59	327
+#	Mouse Click	LEFT	61	394	1
+#	Control Click	eDCA - MPLS - Internet Explorer	Submit	[CLASS:Internet Explorer_Server; INSTANCE:8]
+#	Click Element	xpath=//form[@action='ContainerTahiti.aspx?format=TAHITIOrder&amp;screenptr=8&amp;childformname=SubmitOrder&amp;level=0.7']
+#	Click Element	xpath=comment()[. = '<iewc:TreeNode Text="Order">'][1]/following::*[1]
+#	Click Element	xpath=//a[starts-with(@href, 'ContainerTahiti.aspx?format=TAHITIOrder&screenptr=8&childformname=SubmitOrder')]
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}TrunkValidate.png
+	Click Element	UsrTahitiSubmit_btnTrunkValidate
+	${statusTrunkValidation}=	Run Keyword And Return Status	Wait Until Page Contains	Error in webservice calling	
+	Run Keyword If	${statusTrunkValidation}	Retry Trunk validation
+	Wait Until Element Is Enabled	UsrTahitiSubmit_btnOrderValidation	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}OrderValidation.png
+	Click Element	UsrTahitiSubmit_btnOrderValidation
+	Wait Until Page Contains Element	UsrTahitiSubmit_chkSDqueue	${wait_time}
+	Select Checkbox	UsrTahitiSubmit_chkSDqueue
+	Wait Until Element Is Enabled	UsrTahitiSubmit_ddlSDteam	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDteam	${ServiceDeliveryTeam}
+	Wait Until Page Contains Element	UsrTahitiSubmit_ddlSDowner	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlSDowner	${ServiceDeliveryOwner}
+	Wait Until Page Contains Element	UsrTahitiSubmit_txtEmail	${wait_time}
+	Clear Element Text	UsrTahitiSubmit_txtEmail
+	Input Text	UsrTahitiSubmit_txtEmail	${SubmitEmail}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Submit to SD.png
+	Click Element	UsrTahitiSubmit_btnSubmitToSDAuto
+	Wait Until Page Contains	Order ${orderID} is submitted to Service Delivery successfully.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Successfull Submission.png	
+	
+Retry Trunk validation
+	Click Element	UsrTahitiSubmit_btnTrunkValidate
+
+Service Delivery User - Submit
+	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	${EMPTY}	LEFT	1	59	327
+	Wait Until Page Contains	Submit	${wait_time}
+	Select Checkbox	UsrTahitiSubmit_chkPPR
+	Wait Until Page Contains Element	UsrTahitiSubmit_chkOETOverwrite	${wait_time}
+	Select Checkbox	UsrTahitiSubmit_chkOETOverwrite
+	Wait Until Page Contains Element	UsrTahitiSubmit_ddlOETOwner	${wait_time}
+	Select From List	UsrTahitiSubmit_ddlOETOwner	${OETOwner}
+	Wait Until Page Contains Element	UsrTahitiSubmit_txtOETEmail	${wait_time}
+	Clear Element Text	UsrTahitiSubmit_txtOETEmail
+	Input Text	UsrTahitiSubmit_txtOETEmail	${SubmitEmail}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Submit to OET.png
+	Click Element	UsrTahitiSubmit_btnSubmitToRCEAuto
+	Wait Until Page Contains	Order ${orderID} is submitted to Order Entry Team successfully.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Successfull Submission.png	
+	
+Select Pending Order
+	Click Element	xpath=//a[contains(text(),'${orderID}')]
+	Wait Until Page Contains	Perform Action	${wait_time}
+	Click Element	dgActions__ctl6_lnkAccess
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	
+Open Browser And Login To EDCA Page As OET User
+	Execution-Checking NEW or OLD Order
+	Sleep	1s
+	${download_directory}=	Run Keyword If	'${BROWSER}'=='Chrome'	Set Variable	C:\\Jenkins\\RFOSheets
+	${chrome_options}=	Run Keyword If	'${BROWSER}'=='Chrome'	Evaluate	sys.modules['selenium.webdriver'].ChromeOptions()	sys, selenium.webdriver
+	${prefs}=	Run Keyword If	'${BROWSER}'=='Chrome'	Create Dictionary	download.default_directory=${download_directory}	#plugins.plugins_disabled=${disabled}
+	Run Keyword If	'${BROWSER}'=='Chrome'	Run Keywords
+    ...	Call Method	${chrome_options}	add_experimental_option	prefs	${prefs}
+    ...	AND	Create Webdriver	Chrome	chrome_options=${chrome_options}
+    ...	ELSE
+    ...	Open Browser	${EDCAURL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+    Goto	${EDCAURL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    eDCA Portal
+    Select From List    ddlLogin   ${EDCAOETUserID}
+    Capture Page Screenshot		${OUTPUTDIR}${/}Login As OET User.png
+#   Wait Until Page Contains Element	${Login}	${wait_time}
+    Click Element	${Login}
+	Wait Until Page Contains	Please Select Profile	${wait_time}
+	Select From List    ddlProfile   ${OETProfile}
+	Wait Until Page Contains Element	${Continue}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Selection of profile.png
+	Click Element	${Continue}
+	Wait Until Page Contains	View Pending Order	${wait_time}
+	
+OET User - Submit1
+  ${count}=   Get Matching Xpath Count  xpath=//tvns:treenode
+  Log To Console	${count}	
+  
+OET User - Submit
+	Win Activate	eDCA - MPLS - Internet Explorer
+#	Control Focus	eDCA - MPLS - Internet Explorer	Submit	[CLASS:Internet Explorer_Server; INSTANCE:1]
+#	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	[CLASS:Internet Explorer_Server; INSTANCE:1]	LEFT	1	59	327
+	Control Click	eDCA - MPLS - Internet Explorer	${EMPTY}	${EMPTY}	RIGHT	1	58	325
+	Send	{DOWN}
+	Send	{ENTER}
+	Wait Until Page Contains	Submit	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}OET User Submit Page.png
+	Click Element	UsrTahitiSubmit_btnTrunkValidate
+	Wait Until Element Is Enabled	UsrTahitiSubmit_btnUploadPass1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Upload Pass1 Enabled.png
+	Choose Ok On Next Confirmation
+	Click Element	UsrTahitiSubmit_btnUploadPass1
+	Confirm Action
+	Wait Until Page Contains	Request is successfully Created and waiting for Response from Classic for Order ${orderID}	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Request created successsfully to Classic.png
+	Wait Until Page Contains	Order ${orderID} is successfully created in Classic.	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Order successfully Created in Classic.png  

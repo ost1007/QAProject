@@ -1,0 +1,45 @@
+*** Settings ***
+Documentation	Customer Creation
+Suite Setup	
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common/CommonResources.txt
+Resource	../Common/readHCSTestDataFromExcel.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	60s
+#${TC_ID}		AC01
+*** Test Cases ***
+TC01 Create Customer
+	Read data	CustomerDetails	${TC_ID}	#for Customer Creation/Done
+	Log To Console	Retrieved Customer Details variables
+	Create Index Numbering
+	Log To Console	${\n}TC01 Create Customer START
+	Open Browser And Login To CQM Page	${CQMUsername}	${CQMPassword}	${Browser}
+	Customer Validation
+	
+TC02 Create Customer Site
+	Log To Console	${\n}TC02 Create Customer Site START
+	Customer Site Validation
+	Create Customer Contract
+	[Teardown]	Run Keywords	Log Location
+	
+TC03 Create Customer Contacts
+	Log To Console	${\n}TC03 Create Customer Contacts START
+	Create Customer Contacts
+	[Teardown]	Run Keywords	Log Location
+	
+TC04 Create Billing Details
+	Log To Console	${\n}TC04 Create Billing Details START
+	Create Billing Details
+	Manage LE Validation
+	Billing Acc Validation
+	[Teardown]	Run Keywords	Log Location
+
+TC05 Create Branch Site
+	Log To Console	${\n}TC05 Create Branch Site START
+	Branch Site Toggle
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser
+	

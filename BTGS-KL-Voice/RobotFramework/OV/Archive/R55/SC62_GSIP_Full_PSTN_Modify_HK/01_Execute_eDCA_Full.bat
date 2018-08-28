@@ -1,0 +1,1 @@
+pybot -i SalesUser --removekeywords wuks --removekeywords name:*Execution* -d Output\ --exitonfailure 01_eDCA_Full.txt

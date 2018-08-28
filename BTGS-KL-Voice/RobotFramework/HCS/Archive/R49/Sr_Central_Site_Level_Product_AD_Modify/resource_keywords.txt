@@ -1,0 +1,133 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+Library	AutoItLibrary
+Library	DebugLibrary
+Library	DateTime
+Library	openpyxl.reader.excel
+Library	openpyxl.writer.excel
+Resource	../HCS_Common/HCSResource.txt
+Resource	../HCS_Common/readHCSTestDataFromExcel.txt
+Variables	../HCS_Common/CommonRSQELocators.py
+
+***Variable***
+${AIB TABLE ROW}     //table[@id='root']/tbody/tr
+${SI_TABLE_ROW}     //table[@id='root']/tbody/tr
+
+*** Keywords ***
+Quote Configuration
+	Launch RSQE
+	${status}	${value}=	Run Keyword and Ignore Error	Element Should Be Visible	${CBOX_ADDITIONAL_PRODUCT}
+	Run Keyword If	'${status}' == 'PASS'	Products in the quote	ELSE	Log	Product selected
+	Launch Provide Configuration
+	${noProductCreated}=	Run Keyword And Return Status	Page Should Contain Element	AddProducts
+	Run Keyword If	${noProductCreated}	Product Configuration	ELSE	Log To Console	Product configured
+	
+Product Configuration
+	Modify ActiveDir Product
+	Configure Product
+	Finalise Config
+
+Configure Product
+	Wait Until Element Is Enabled    bulkConfigurationButton 
+	Click Element	bulkConfigurationButton
+	Wait Until Page Contains Element	${LINK_BASE_CONFIGURATION}	${waiting_time} 
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Input Text	${NEW_QUANTITY}    ${Quantity}
+	${Prev_Quantity}=	Get Text    .//*[@id='table-row-index-0']/td[5]/div/div[1]/div
+	Click Element	${ADD_PRODUCT}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-ModifyProduct.png
+	${Numbering}=	Evaluate	str(${Numbering})
+	Click Element	continue-to-quote-details
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	${waiting_time}
+
+Confirm Pricing
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	${waiting_time}
+	#Wait Until Element Is Visible	xpath=.//td[contains(text(),'Firm')]	${waiting_time}	
+	
+Calculate Pricing
+	${orderDoesNotExist}=	Run Keyword And Return Status	Page Should Not Contain Element	OrdersTab
+	Run Keyword If	${orderDoesNotExist}	Run Keywords
+	...	Confirm Pricing
+	...	AND Create Offer and Order
+	...	ELSE	Click Link	OrdersTab
+
+Create Order
+	Wait Until Element Is Visible	orderDetails	1200s
+	${status}=	Run Keyword And Return Status	Page Should Contain Element    ${RFO_INVALID}
+	Run Keyword If	${status}	 Run Keywords
+	...    RFO Sheet Download and Upload
+	...    Submit Order
+	
+	
+Edit Excel RFOSheet
+    Log to console    Edit Excel Sheet
+	#${year}	${month}	${day}=	Get Time	year,month,day
+	${year}=	Get Current Date	result_format=%Y
+	${month}=	Get Current Date	result_format=%b
+	${day}=	Get Current Date	result_format=%d
+	${wb}=	load_workbook	C:\\Jenkins\\RFOSheets\\${RFOSheet}	#read_only=False
+	${ws}=	set variable	${wb['Order Details']}
+	#${ws.cell('L2').value}=	set variable	CENTRAL
+	#${ws.cell('N2').value}=	set variable	CENTRAL
+	${ws.cell('O2').value}=	set variable	${year}-${month}-${day}
+	${ws.cell('P2').value}=	set variable	${year}-${month}-30
+	save_workbook	${wb}	C:\\Jenkins\\RFOSheets\\${RFOSheet}
+	
+
+
+Select AIB Table Row
+    #QUANTITY    1    Modify		2	3	3	2	4
+    [Arguments]    ${itemDesc}    ${itemColumn}    ${actionText}	${actionColumn}		${value1}	${value1Column}		${value2}	${value2Column}
+	[Return]	${checkValues}
+	${row}=    Get Row By AIB Cell Text  ${AIB_TABLE_ROW}    ${itemDesc}    ${itemColumn}
+	${itemText}    Get Text    ${AIB_TABLE_ROW}[${row}]/td[${itemColumn}]
+	${atext}    Get Text    ${AIB_TABLE_ROW}[${row}]/td[${actionColumn}]
+	${v1text}    Get Text    ${AIB_TABLE_ROW}[${row}]/td[${value1Column}]
+	${v2text}    Get Text    ${AIB_TABLE_ROW}[${row}]/td[${value2Column}]
+	#log to console    ${itemText}
+	#log to console    ${aText}
+	#log to console    ${v1text}
+	#log to console    ${v2text}
+	${checkAction}	Evaluate	'${atext}'=='${actionText}'  
+	${checkValue1}	Evaluate	'${v1text}'=='${value1}'  
+	${checkValue2}	Evaluate	'${v2text}'=='${value2}'
+	log to console    ${checkAction}
+	log to console    ${checkValue1}
+	log to console    ${checkValue2}
+	@{checkValues}=		Create List		${checkAction}   ${checkValue1}   ${checkValue2}
+	Run Keyword And Return		Evaluate Multiple Boolean Values	@{checkValues}	
+	
+Get Row By AIB Cell Text
+    [Arguments]    ${rowLocator}    ${cellText}    ${column}
+    [Return]       ${rowNumber}
+    ${rowCount}    Get Table Row Count    ${rowLocator}
+    :FOR    ${rowIndex}    IN Range    3    ${rowCount}+1
+    \    ${currText}    Get Text    ${rowLocator}[${rowIndex}]/td[${column}]
+    \    Exit For Loop If    '${cellText}' == '${currText}'
+    ${rowNumber}    Set Variable   ${rowIndex} 
+    
+Evaluate Multiple Boolean Values
+	[Arguments]    @{values}
+	[Return]       ${checkedValue}
+	:FOR    ${val}    IN	@{values}
+	\    Exit For Loop If  '${val}'=='False'
+	${checkedValue}		Set Variable 	${val}
+	
+Verify Quantity Updated in AIB
+    Click Element    ${ACT_DIR_INTERGRATION}
+	#Select AIB Table Row    <Name> <Column No. name to check> <Action> <Column No. Action>	
+	#						 <Value> <Column No. Value> <Previous> <Column No. Previous>
+	${value}=	Select AIB Table Row    QUANTITY    1    Modify		2	${Quantity}	3	${Prev_Quantity}	4
+	log to console		'Final check value ${value}'
+
+Verify Order Overview in SI
+    verify	Order Status = Complete
+    Verify    OrderType = Modify
+    
+Verify Order Item List in SI
+    Verify Quantity    attributs value = 3, previous value = 1
+    
+    

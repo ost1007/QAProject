@@ -1,0 +1,84 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			AutoItLibrary
+Library			SikuliLibrary
+#Library			OperatingSystem
+Library			Collections
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+Resource		../Common_OV/CommonResources.txt
+
+*** Variables ***
+${OutputDir}	xxx
+${Timeout}		60s
+${CaptureScreenOnError}	True
+
+*** Keywords ***
+Login To AMDOCS
+	Win Activate	Amdocs CRM Login
+	Control Focus	Amdocs CRM Login	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM Login	${EMPTY}	[CLASS:Edit; INSTANCE:2]	${CLASSIC_password}
+	Sleep	10s
+	Control Focus	Amdocs CRM Login	Login	[CLASS:Button; INSTANCE:1]
+	Capture Screen	
+	Control Click	Amdocs CRM Login	Login	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	60s
+	Win Activate	clarify
+	Control Focus	clarify	Yes	[CLASS:Button; INSTANCE:1]
+	Capture Screen
+	Control Click	clarify	Yes	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Sleep	60s
+	
+Select Profile As ClearSales
+	Win Activate	Amdocs CRM - ClearSupport - [Console]
+	Send	!p
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}	
+	Sleep	10s
+	Capture Screen
+
+Select order
+	Send	!s
+	Send	{DOWN}
+	Send	{ENTER}
+	Sleep	20s
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	1	176	24
+	Sleep	10s
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]
+	Control Send	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:Edit; INSTANCE:2]	1150063
+	Sleep	20s
+	Control Focus	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:5]
+	Control Click	Amdocs CRM - ClearSales	&Find	[CLASS:Button; INSTANCE:5]	LEFT	1	
+	Sleep	20s
+	Capture Screen
+	Control Focus	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]
+	Control Click	Amdocs CRM - ClearSales	${EMPTY}	[CLASS:GXWND; INSTANCE:1]	LEFT	2	175	40
+	Sleep	240s
+
+Yank Task
+	Win Activate	Amdocs CRM - ClearSupport - [Console]
+	Send	!d
+	Send	{DOWN}{DOWN}{DOWN}{DOWN}{DOWN}
+	Send	{ENTER}
+	Sleep	10s
+	Control Focus	Yank	Yank	[CLASS:Button; INSTANCE:2]
+	Control Click	Yank	Yank	[CLASS:Button; INSTANCE:2]	LEFT	1
+	Sleep	10s
+	Control Focus	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]
+	Control Click	Amdocs CRM	OK	[CLASS:Button; INSTANCE:1]	LEFT	1
+	Capture Screen
+	Sleep	60s
+	
+
+
+	
+	
+
+	
+	

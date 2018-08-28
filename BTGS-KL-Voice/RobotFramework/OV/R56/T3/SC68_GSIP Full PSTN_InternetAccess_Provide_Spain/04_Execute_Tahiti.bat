@@ -1,0 +1,1 @@
+pybot -d OutputTahitiTest\ -v TC_ID:R56_SP_C2_01 -v REFRESH_WAIT_TIME:10s 04_Tahiti.txt

@@ -1,0 +1,46 @@
+*** Settings ***
+Documentation	SC02_GSIP_Full_PSTN_Provide_Denmark. Customer Creation full
+Suite Setup		Start Sikuli Process
+Library			Selenium2Library
+Resource	../Common_OV/CommonResources.txt
+Resource	../Common_OV/BFGIMS_Resource.txt
+Resource	../Common_OV/CLASSIC_Resource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${TC_ID}	R53_SC02_T1
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	PREREQUISITE	
+	Remove Files in Extracted_Data Folder
+	Create Files in Extracted_Data Folder
+	Read data	BFGIMS	${TC_ID}		
+	Log To Console	Retrieved BFGIMS variables
+	Read data	Classics	${TC_ID}		
+	Log To Console	Retrieved Classics variables
+	Create Index Numbering
+
+TC01 Customer Creation
+	[TAGS]	BFGIMS
+	Open Browser And Login To BFGIMS Page
+	Select User Profile Group
+	Search for Existing Customers
+	Customer Search by Customer Name
+	Verify Customer Not Exist
+	Add Non-UK Customer
+	Customer Search by Customer Name
+	Verify Customer Is Exist
+	Get Customer Details	
+	[Teardown]	Close Browser
+		
+TC02 Seach Customer in Amdocs
+	[TAGS]	CLASSICS
+	Get File Content	${CustomerID_TextFile}
+	Log To Console	${CustomerID} in testcase
+	Login To AMDOCS
+	Select Profile As ClearSales
+	Create New Account
+	Fill In Account Details
+	Quit AMDOCS
+

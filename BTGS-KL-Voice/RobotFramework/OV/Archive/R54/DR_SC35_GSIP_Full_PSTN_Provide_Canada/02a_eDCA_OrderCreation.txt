@@ -1,0 +1,43 @@
+*** Settings ***
+Documentation	SC01_Deliver_SOTI_Full_PSTN_Provide_Sweden. eDCA Full
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common_OV_R53/EDCA_Resource.txt
+Resource	../Common_OV_R53/CommonResources.txt
+Resource	R53_resource_eDCA.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+#${TC_ID}		R54_SC35_DR_03
+
+*** Test Cases ***
+Prerequisites
+	[TAGS]	eDCA    site
+	Read data	eDCA	${TC_ID}
+	Log To Console	Retrieved EDCA TestData
+	Create Index Numbering
+	
+TC01 Order Creation
+	[TAGS]	eDCA    
+	Open Browser And Login To EDCA Page As Sales User In T1
+	Customer Details
+	Customer Contact Details
+	Distributor Contact List
+	Order Contact Details
+	Additional Information
+	Product Selection
+	#[Teardown]	Close Browser
+
+TC02 Sites Information
+	[TAGS]	eDCA    site
+	Open Browser And Login To EDCA Page As Sales User In T1
+	Select Order For Full Cycle In T1
+	Sites
+	Site Location Details
+	Site Address
+	Site Contact Details
+	#[Teardown]	Close Browser	
+					
+	

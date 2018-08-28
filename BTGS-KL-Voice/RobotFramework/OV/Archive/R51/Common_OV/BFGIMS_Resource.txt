@@ -1,0 +1,116 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			OperatingSystem
+Library  		String
+Library			Collections
+Variables		CommonVariables.py
+Variables		CommonStaticLocators.py
+Resource		../Common_OV/CommonResources.txt
+
+*** Variables ***
+
+*** Keywords ***
+Open Browser And Login To BFGIMS Page
+	Browser Config
+	Goto	${BFG_IMS_URL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Page Should Contain    21C Authentication: Login
+    Input Text    USER   ${Username}
+    Input Text    PASSWORD    ${Password}
+    Click Button   	Sign On
+    Wait Until Page Contains   	21C Authentication: Warning Screen	50s	Authentication page is not display
+    Wait Until Element Is Enabled	YES
+	Click Button	YES
+	Wait Until Page Contains	BFG IMS	60s
+    Select Window	title=BFG IMS
+
+Select User Profile Group
+	Select Frame    container
+	Select From List	xpath=.//select[@name='cmbProfile']	${Profile_Group}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Select User Profile-Group.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)	
+	Focus	xpath=*//input[@value='Continue']	
+	Click Element	xpath=*//input[@value='Continue']
+	Select Window	title=BFG IMS
+
+Search for Existing Customers
+	Select Frame    container
+	Current Frame Contains	Search for Existing Customers	60s
+	Click Link	icssearch2.asp
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Search for Existing Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+
+
+Customer Search by Customer Name
+	Select Frame    container
+#	Wait Until Page Contains	Customer Search (text)
+	Current Frame Contains	Customer Search (text)
+	Select From List 	SearchTerm	Customer Name	
+	Input Text	custName1	${CustomerName}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-BFGIMS Search for Existing Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Click Element	xpath=.//input[@value='Search']
+	Select Window	title=BFG IMS
+
+Verify Customer Not Exist
+	Select Frame    container
+	Wait Until Page Contains	No results found with those characters in customer name
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Verify Customer Not Exist.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+	
+Verify Customer Is Exist
+	Select Frame    container
+	Wait Until Page Contains	${CustomerName}
+	#Wait Until Element Is Visible   	.//td[contains(text(),'${CustomerName}')]	100s
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Verify Customer Is Exist.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+	
+Add Non-UK Customer
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Enter Customer Name below
+	Input Text	textstringsearch	${CustomerName}
+	Click Element	xpath=.//input[@value='Check']
+	Current Frame Contains   	There are currently no customers matching your search criteria	100s
+	Click Element	xpath=.//input[@value='Add Customer']
+	Current Frame Contains	Validate LE
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Add Non-UK Customer.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Click Element	xpath=.//input[@value='Add Customer (non-UK)']
+	Fill In Customer Detail
+	Select Frame    container
+	Click Element	xpath=.//input[@value='Add Customer']
+	Select Window	title=BFG IMS
+	
+Fill In Customer Detail
+	#Select Frame    container
+	Wait Until Page Contains	Registered Country
+	Current Frame Contains	Registered Country
+	Select From List 	CUS_REGISTERED_CTY_ID	${Country}
+	Input Text	xpath=.//input[@name='CUS_NAME']	${CustomerName}	
+	Input Text	xpath=.//input[@name='CUS_REFERENCE']	${CustomerRef}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Fill in Customer Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Select Window	title=BFG IMS
+	
+Get Customer Details
+	Select Frame    container
+	${Customer_ID}=	Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[1]/form
+	LOG	${Customer_ID}
+	Export Variable Into Text File	${CustomerID_TextFile}	${Customer_ID}	
+	${Customer_Name}=	Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[2]
+	LOG	${Customer_Name}
+	${Customer_Ref}=	Get Text	xpath=html/body/table[3]/tbody/tr[2]/td[3]
+	LOG	${Customer_Ref}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Customer Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)

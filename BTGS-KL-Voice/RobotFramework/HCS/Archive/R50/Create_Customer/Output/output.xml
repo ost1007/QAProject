@@ -1,0 +1,3068 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20170411 18:41:31.131" generator="Robot 3.0 (Python 2.7.10 on win32)">
+<suite source="C:\Users\608098003\workspace\GS One Voice\BTGS-KL-Voice\RobotFramework\R49\Create_Customer\Create_Customer.txt" id="s1" name="Create Customer">
+<test id="s1-t1" name="TC01 Create Customer">
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>AC</arg>
+</arguments>
+<msg timestamp="20170411 18:41:32.964" level="INFO">${sheetName} = AC</msg>
+<status status="PASS" endtime="20170411 18:41:32.964" starttime="20170411 18:41:32.963"></status>
+</kw>
+<kw name="Define And Read Test Data Variable" library="readTestDataFromExcel">
+<kw name="Open Excel" library="ExcelLibrary">
+<doc>Opens the Excel file from the path provided in the file name parameter.</doc>
+<arguments>
+<arg>C:\\Users\\608098003\\workspace\\GS One Voice\\BTGS-KL-Voice\\RobotFramework\\R49\\Common\\testdata.xls</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:32.998" starttime="20170411 18:41:32.965"></status>
+</kw>
+<kw name="Get Column Count" library="ExcelLibrary">
+<doc>Returns the specific number of columns of the sheet name specified.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+</arguments>
+<assign>
+<var>${excelColumn}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.002" level="INFO">${excelColumn} = 45</msg>
+<status status="PASS" endtime="20170411 18:41:33.002" starttime="20170411 18:41:32.999"></status>
+</kw>
+<kw name="Get Row Count" library="ExcelLibrary">
+<doc>Returns the specific number of rows of the sheet name specified.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+</arguments>
+<assign>
+<var>${excelRow}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.003" level="INFO">${excelRow} = 10</msg>
+<status status="PASS" endtime="20170411 18:41:33.003" starttime="20170411 18:41:33.002"></status>
+</kw>
+<kw type="for" name="${index2} IN RANGE [ ${excelRow} ]">
+<kw type="foritem" name="${index2} = 0">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.004" level="INFO">${tcNo} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.004" starttime="20170411 18:41:33.003"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.006" starttime="20170411 18:41:33.004"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.007" starttime="20170411 18:41:33.006"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.007" starttime="20170411 18:41:33.003"></status>
+</kw>
+<kw type="foritem" name="${index2} = 1">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.008" level="INFO">${tcNo} = Automation Test Journey</msg>
+<status status="PASS" endtime="20170411 18:41:33.008" starttime="20170411 18:41:33.007"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.010" starttime="20170411 18:41:33.009"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.011" starttime="20170411 18:41:33.010"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.011" starttime="20170411 18:41:33.007"></status>
+</kw>
+<kw type="foritem" name="${index2} = 2">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.012" level="INFO">${tcNo} = Required Fields for Customer Creation</msg>
+<status status="PASS" endtime="20170411 18:41:33.012" starttime="20170411 18:41:33.011"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.013" starttime="20170411 18:41:33.012"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.014" starttime="20170411 18:41:33.013"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.014" starttime="20170411 18:41:33.011"></status>
+</kw>
+<kw type="foritem" name="${index2} = 3">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.015" level="INFO">${tcNo} = Product: Live</msg>
+<status status="PASS" endtime="20170411 18:41:33.015" starttime="20170411 18:41:33.015"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.016" starttime="20170411 18:41:33.015"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.018" starttime="20170411 18:41:33.017"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.018" starttime="20170411 18:41:33.015"></status>
+</kw>
+<kw type="foritem" name="${index2} = 4">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.019" level="INFO">${tcNo} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.019" starttime="20170411 18:41:33.018"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.020" starttime="20170411 18:41:33.019"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.021" starttime="20170411 18:41:33.020"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.022" starttime="20170411 18:41:33.018"></status>
+</kw>
+<kw type="foritem" name="${index2} = 5">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.022" level="INFO">${tcNo} = Sc No.</msg>
+<status status="PASS" endtime="20170411 18:41:33.022" starttime="20170411 18:41:33.022"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.024" starttime="20170411 18:41:33.023"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.025" starttime="20170411 18:41:33.024"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.025" starttime="20170411 18:41:33.022"></status>
+</kw>
+<kw type="foritem" name="${index2} = 6">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.026" level="INFO">${tcNo} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.026" starttime="20170411 18:41:33.025"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.027" starttime="20170411 18:41:33.026"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.028" starttime="20170411 18:41:33.027"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.028" starttime="20170411 18:41:33.025"></status>
+</kw>
+<kw type="foritem" name="${index2} = 7">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.029" level="INFO">${tcNo} = AC02</msg>
+<status status="PASS" endtime="20170411 18:41:33.029" starttime="20170411 18:41:33.029"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.030" starttime="20170411 18:41:33.029"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.032" starttime="20170411 18:41:33.031"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.032" starttime="20170411 18:41:33.029"></status>
+</kw>
+<kw type="foritem" name="${index2} = 8">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>0</arg>
+<arg>${index2}</arg>
+</arguments>
+<assign>
+<var>${tcNo}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.032" level="INFO">${tcNo} = AC01</msg>
+<status status="PASS" endtime="20170411 18:41:33.032" starttime="20170411 18:41:33.032"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${rowNum}</arg>
+<arg>${index2}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.036" level="INFO">${rowNum} = 8</msg>
+<status status="PASS" endtime="20170411 18:41:33.036" starttime="20170411 18:41:33.034"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.037" starttime="20170411 18:41:33.033"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tcNo}"=="${story}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing for loop.</doc>
+<msg timestamp="20170411 18:41:33.038" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" endtime="20170411 18:41:33.038" starttime="20170411 18:41:33.038"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.038" starttime="20170411 18:41:33.037"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.039" starttime="20170411 18:41:33.032"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.039" starttime="20170411 18:41:33.003"></status>
+</kw>
+<kw type="for" name="${index} IN RANGE [ ${excelColumn} ]">
+<kw type="foritem" name="${index} = 0">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.039" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.039" starttime="20170411 18:41:33.039"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.041" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.041" starttime="20170411 18:41:33.041"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.041" starttime="20170411 18:41:33.040"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.041" starttime="20170411 18:41:33.039"></status>
+</kw>
+<kw type="foritem" name="${index} = 1">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.042" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.042" starttime="20170411 18:41:33.041"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.044" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.044" starttime="20170411 18:41:33.043"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.044" starttime="20170411 18:41:33.042"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.044" starttime="20170411 18:41:33.041"></status>
+</kw>
+<kw type="foritem" name="${index} = 2">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.044" level="INFO">${q2o} = CQMusername</msg>
+<status status="PASS" endtime="20170411 18:41:33.045" starttime="20170411 18:41:33.044"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.046" starttime="20170411 18:41:33.045"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.047" level="INFO">${tempValue} = 609401468</msg>
+<status status="PASS" endtime="20170411 18:41:33.047" starttime="20170411 18:41:33.046"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.048" level="INFO">${CQMusername} = 609401468</msg>
+<status status="PASS" endtime="20170411 18:41:33.048" starttime="20170411 18:41:33.047"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.049" starttime="20170411 18:41:33.048"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.049" starttime="20170411 18:41:33.044"></status>
+</kw>
+<kw type="foritem" name="${index} = 3">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.050" level="INFO">${q2o} = CQMpassword</msg>
+<status status="PASS" endtime="20170411 18:41:33.050" starttime="20170411 18:41:33.050"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.052" starttime="20170411 18:41:33.050"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.052" level="INFO">${tempValue} = Black$un17</msg>
+<status status="PASS" endtime="20170411 18:41:33.053" starttime="20170411 18:41:33.052"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.054" level="INFO">${CQMpassword} = Black$un17</msg>
+<status status="PASS" endtime="20170411 18:41:33.054" starttime="20170411 18:41:33.053"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.055" starttime="20170411 18:41:33.054"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.055" starttime="20170411 18:41:33.050"></status>
+</kw>
+<kw type="foritem" name="${index} = 4">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.055" level="INFO">${q2o} = Browser</msg>
+<status status="PASS" endtime="20170411 18:41:33.055" starttime="20170411 18:41:33.055"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.057" starttime="20170411 18:41:33.055"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.057" level="INFO">${tempValue} = FF</msg>
+<status status="PASS" endtime="20170411 18:41:33.057" starttime="20170411 18:41:33.057"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.059" level="INFO">${Browser} = FF</msg>
+<status status="PASS" endtime="20170411 18:41:33.060" starttime="20170411 18:41:33.058"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.060" starttime="20170411 18:41:33.060"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.060" starttime="20170411 18:41:33.055"></status>
+</kw>
+<kw type="foritem" name="${index} = 5">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.061" level="INFO">${q2o} = salesChannel</msg>
+<status status="PASS" endtime="20170411 18:41:33.061" starttime="20170411 18:41:33.061"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.062" starttime="20170411 18:41:33.061"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.063" level="INFO">${tempValue} = CSP TEST SANDBOX</msg>
+<status status="PASS" endtime="20170411 18:41:33.063" starttime="20170411 18:41:33.063"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.065" level="INFO">${salesChannel} = CSP TEST SANDBOX</msg>
+<status status="PASS" endtime="20170411 18:41:33.066" starttime="20170411 18:41:33.063"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.066" starttime="20170411 18:41:33.066"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.066" starttime="20170411 18:41:33.060"></status>
+</kw>
+<kw type="foritem" name="${index} = 6">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.067" level="INFO">${q2o} = customerName</msg>
+<status status="PASS" endtime="20170411 18:41:33.067" starttime="20170411 18:41:33.067"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.069" starttime="20170411 18:41:33.067"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.070" level="INFO">${tempValue} = JOSH_TEST_02</msg>
+<status status="PASS" endtime="20170411 18:41:33.070" starttime="20170411 18:41:33.069"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.072" level="INFO">${customerName} = JOSH_TEST_02</msg>
+<status status="PASS" endtime="20170411 18:41:33.072" starttime="20170411 18:41:33.070"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.072" starttime="20170411 18:41:33.072"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.073" starttime="20170411 18:41:33.067"></status>
+</kw>
+<kw type="foritem" name="${index} = 7">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.073" level="INFO">${q2o} = custValidStatus</msg>
+<status status="PASS" endtime="20170411 18:41:33.073" starttime="20170411 18:41:33.073"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.075" starttime="20170411 18:41:33.073"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.075" level="INFO">${tempValue} = Unknown</msg>
+<status status="PASS" endtime="20170411 18:41:33.075" starttime="20170411 18:41:33.075"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.077" level="INFO">${custValidStatus} = Unknown</msg>
+<status status="PASS" endtime="20170411 18:41:33.077" starttime="20170411 18:41:33.076"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.078" starttime="20170411 18:41:33.077"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.078" starttime="20170411 18:41:33.073"></status>
+</kw>
+<kw type="foritem" name="${index} = 8">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.078" level="INFO">${q2o} = ContractCeaseTerm</msg>
+<status status="PASS" endtime="20170411 18:41:33.078" starttime="20170411 18:41:33.078"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.080" starttime="20170411 18:41:33.079"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.080" level="INFO">${tempValue} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.081" starttime="20170411 18:41:33.080"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.082" level="INFO">${ContractCeaseTerm} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.082" starttime="20170411 18:41:33.081"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.083" starttime="20170411 18:41:33.082"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.083" starttime="20170411 18:41:33.078"></status>
+</kw>
+<kw type="foritem" name="${index} = 9">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.084" level="INFO">${q2o} = LinkedContractualCeaseTerm</msg>
+<status status="PASS" endtime="20170411 18:41:33.084" starttime="20170411 18:41:33.083"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.086" starttime="20170411 18:41:33.084"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.087" level="INFO">${tempValue} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.087" starttime="20170411 18:41:33.086"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.089" level="INFO">${LinkedContractualCeaseTerm} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.089" starttime="20170411 18:41:33.087"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.090" starttime="20170411 18:41:33.089"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.090" starttime="20170411 18:41:33.083"></status>
+</kw>
+<kw type="foritem" name="${index} = 10">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.090" level="INFO">${q2o} = city</msg>
+<status status="PASS" endtime="20170411 18:41:33.090" starttime="20170411 18:41:33.090"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.092" starttime="20170411 18:41:33.091"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.093" level="INFO">${tempValue} = Sacramento County</msg>
+<status status="PASS" endtime="20170411 18:41:33.093" starttime="20170411 18:41:33.092"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.094" level="INFO">${city} = Sacramento County</msg>
+<status status="PASS" endtime="20170411 18:41:33.094" starttime="20170411 18:41:33.093"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.095" starttime="20170411 18:41:33.095"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.095" starttime="20170411 18:41:33.090"></status>
+</kw>
+<kw type="foritem" name="${index} = 11">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.096" level="INFO">${q2o} = state</msg>
+<status status="PASS" endtime="20170411 18:41:33.096" starttime="20170411 18:41:33.095"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.097" starttime="20170411 18:41:33.096"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.098" level="INFO">${tempValue} = California</msg>
+<status status="PASS" endtime="20170411 18:41:33.098" starttime="20170411 18:41:33.098"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.100" level="INFO">${state} = California</msg>
+<status status="PASS" endtime="20170411 18:41:33.100" starttime="20170411 18:41:33.098"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.101" starttime="20170411 18:41:33.101"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.102" starttime="20170411 18:41:33.095"></status>
+</kw>
+<kw type="foritem" name="${index} = 12">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.103" level="INFO">${q2o} = country</msg>
+<status status="PASS" endtime="20170411 18:41:33.103" starttime="20170411 18:41:33.102"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.104" starttime="20170411 18:41:33.103"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.105" level="INFO">${tempValue} = UNITED STATES</msg>
+<status status="PASS" endtime="20170411 18:41:33.105" starttime="20170411 18:41:33.105"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.107" level="INFO">${country} = UNITED STATES</msg>
+<status status="PASS" endtime="20170411 18:41:33.107" starttime="20170411 18:41:33.105"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.108" starttime="20170411 18:41:33.107"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.108" starttime="20170411 18:41:33.102"></status>
+</kw>
+<kw type="foritem" name="${index} = 13">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.108" level="INFO">${q2o} = buildingName</msg>
+<status status="PASS" endtime="20170411 18:41:33.109" starttime="20170411 18:41:33.108"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.111" starttime="20170411 18:41:33.109"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.112" level="INFO">${tempValue} = Laguna Creek High School</msg>
+<status status="PASS" endtime="20170411 18:41:33.112" starttime="20170411 18:41:33.111"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.114" level="INFO">${buildingName} = Laguna Creek High School</msg>
+<status status="PASS" endtime="20170411 18:41:33.114" starttime="20170411 18:41:33.112"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.115" starttime="20170411 18:41:33.114"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.115" starttime="20170411 18:41:33.108"></status>
+</kw>
+<kw type="foritem" name="${index} = 14">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.116" level="INFO">${q2o} = street</msg>
+<status status="PASS" endtime="20170411 18:41:33.116" starttime="20170411 18:41:33.115"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.119" starttime="20170411 18:41:33.116"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.119" level="INFO">${tempValue} = VICINO DRIVE</msg>
+<status status="PASS" endtime="20170411 18:41:33.120" starttime="20170411 18:41:33.119"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.121" level="INFO">${street} = VICINO DRIVE</msg>
+<status status="PASS" endtime="20170411 18:41:33.122" starttime="20170411 18:41:33.120"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.122" starttime="20170411 18:41:33.122"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.122" starttime="20170411 18:41:33.115"></status>
+</kw>
+<kw type="foritem" name="${index} = 15">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.123" level="INFO">${q2o} = locality</msg>
+<status status="PASS" endtime="20170411 18:41:33.123" starttime="20170411 18:41:33.123"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.125" starttime="20170411 18:41:33.123"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.125" level="INFO">${tempValue} = ELK GROVE</msg>
+<status status="PASS" endtime="20170411 18:41:33.125" starttime="20170411 18:41:33.125"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.127" level="INFO">${locality} = ELK GROVE</msg>
+<status status="PASS" endtime="20170411 18:41:33.127" starttime="20170411 18:41:33.125"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.128" starttime="20170411 18:41:33.128"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.128" starttime="20170411 18:41:33.122"></status>
+</kw>
+<kw type="foritem" name="${index} = 16">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.129" level="INFO">${q2o} = postcode</msg>
+<status status="PASS" endtime="20170411 18:41:33.129" starttime="20170411 18:41:33.129"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.131" starttime="20170411 18:41:33.130"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.132" level="INFO">${tempValue} = 95758</msg>
+<status status="PASS" endtime="20170411 18:41:33.132" starttime="20170411 18:41:33.131"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.134" level="INFO">${postcode} = 95758</msg>
+<status status="PASS" endtime="20170411 18:41:33.134" starttime="20170411 18:41:33.132"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.134" starttime="20170411 18:41:33.134"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.134" starttime="20170411 18:41:33.129"></status>
+</kw>
+<kw type="foritem" name="${index} = 17">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.135" level="INFO">${q2o} = poBox</msg>
+<status status="PASS" endtime="20170411 18:41:33.135" starttime="20170411 18:41:33.135"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.137" starttime="20170411 18:41:33.136"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.138" level="INFO">${tempValue} = 2349</msg>
+<status status="PASS" endtime="20170411 18:41:33.138" starttime="20170411 18:41:33.137"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.140" level="INFO">${poBox} = 2349</msg>
+<status status="PASS" endtime="20170411 18:41:33.140" starttime="20170411 18:41:33.138"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.141" starttime="20170411 18:41:33.140"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.141" starttime="20170411 18:41:33.134"></status>
+</kw>
+<kw type="foritem" name="${index} = 18">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.142" level="INFO">${q2o} = phoneNo</msg>
+<status status="PASS" endtime="20170411 18:41:33.142" starttime="20170411 18:41:33.141"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.143" starttime="20170411 18:41:33.142"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.144" level="INFO">${tempValue} = 19166831339</msg>
+<status status="PASS" endtime="20170411 18:41:33.144" starttime="20170411 18:41:33.144"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.146" level="INFO">${phoneNo} = 19166831339</msg>
+<status status="PASS" endtime="20170411 18:41:33.146" starttime="20170411 18:41:33.144"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.147" starttime="20170411 18:41:33.146"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.147" starttime="20170411 18:41:33.141"></status>
+</kw>
+<kw type="foritem" name="${index} = 19">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.147" level="INFO">${q2o} = jobTitle</msg>
+<status status="PASS" endtime="20170411 18:41:33.147" starttime="20170411 18:41:33.147"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.149" starttime="20170411 18:41:33.148"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.150" level="INFO">${tempValue} = Tester</msg>
+<status status="PASS" endtime="20170411 18:41:33.150" starttime="20170411 18:41:33.150"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.152" level="INFO">${jobTitle} = Tester</msg>
+<status status="PASS" endtime="20170411 18:41:33.153" starttime="20170411 18:41:33.150"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.153" starttime="20170411 18:41:33.153"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.154" starttime="20170411 18:41:33.147"></status>
+</kw>
+<kw type="foritem" name="${index} = 20">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.154" level="INFO">${q2o} = firstName</msg>
+<status status="PASS" endtime="20170411 18:41:33.154" starttime="20170411 18:41:33.154"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.156" starttime="20170411 18:41:33.154"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.156" level="INFO">${tempValue} = Azrul</msg>
+<status status="PASS" endtime="20170411 18:41:33.157" starttime="20170411 18:41:33.156"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.159" level="INFO">${firstName} = Azrul</msg>
+<status status="PASS" endtime="20170411 18:41:33.159" starttime="20170411 18:41:33.157"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.160" starttime="20170411 18:41:33.159"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.160" starttime="20170411 18:41:33.154"></status>
+</kw>
+<kw type="foritem" name="${index} = 21">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.161" level="INFO">${q2o} = lastName</msg>
+<status status="PASS" endtime="20170411 18:41:33.161" starttime="20170411 18:41:33.160"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.163" starttime="20170411 18:41:33.161"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.164" level="INFO">${tempValue} = Azman</msg>
+<status status="PASS" endtime="20170411 18:41:33.164" starttime="20170411 18:41:33.163"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.167" level="INFO">${lastName} = Azman</msg>
+<status status="PASS" endtime="20170411 18:41:33.167" starttime="20170411 18:41:33.164"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.168" starttime="20170411 18:41:33.168"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.169" starttime="20170411 18:41:33.160"></status>
+</kw>
+<kw type="foritem" name="${index} = 22">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.170" level="INFO">${q2o} = email</msg>
+<status status="PASS" endtime="20170411 18:41:33.170" starttime="20170411 18:41:33.169"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.172" starttime="20170411 18:41:33.170"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.173" level="INFO">${tempValue} = azrul.azman@bt.com</msg>
+<status status="PASS" endtime="20170411 18:41:33.173" starttime="20170411 18:41:33.173"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.175" level="INFO">${email} = azrul.azman@bt.com</msg>
+<status status="PASS" endtime="20170411 18:41:33.175" starttime="20170411 18:41:33.173"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.176" starttime="20170411 18:41:33.175"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.176" starttime="20170411 18:41:33.169"></status>
+</kw>
+<kw type="foritem" name="${index} = 23">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.177" level="INFO">${q2o} = faxNo</msg>
+<status status="PASS" endtime="20170411 18:41:33.177" starttime="20170411 18:41:33.176"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.179" starttime="20170411 18:41:33.177"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.179" level="INFO">${tempValue} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.179" starttime="20170411 18:41:33.179"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.181" level="INFO">${faxNo} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.182" starttime="20170411 18:41:33.180"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.182" starttime="20170411 18:41:33.182"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.182" starttime="20170411 18:41:33.176"></status>
+</kw>
+<kw type="foritem" name="${index} = 24">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.183" level="INFO">${q2o} = mobileNo</msg>
+<status status="PASS" endtime="20170411 18:41:33.183" starttime="20170411 18:41:33.183"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.185" starttime="20170411 18:41:33.183"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.186" level="INFO">${tempValue} = 0192837468</msg>
+<status status="PASS" endtime="20170411 18:41:33.186" starttime="20170411 18:41:33.185"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.188" level="INFO">${mobileNo} = 0192837468</msg>
+<status status="PASS" endtime="20170411 18:41:33.188" starttime="20170411 18:41:33.186"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.189" starttime="20170411 18:41:33.188"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.189" starttime="20170411 18:41:33.182"></status>
+</kw>
+<kw type="foritem" name="${index} = 25">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.190" level="INFO">${q2o} = legalComName</msg>
+<status status="PASS" endtime="20170411 18:41:33.190" starttime="20170411 18:41:33.189"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.192" starttime="20170411 18:41:33.190"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.192" level="INFO">${tempValue} = PPT04Company</msg>
+<status status="PASS" endtime="20170411 18:41:33.193" starttime="20170411 18:41:33.192"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.194" level="INFO">${legalComName} = PPT04Company</msg>
+<status status="PASS" endtime="20170411 18:41:33.195" starttime="20170411 18:41:33.193"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.195" starttime="20170411 18:41:33.195"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.195" starttime="20170411 18:41:33.189"></status>
+</kw>
+<kw type="foritem" name="${index} = 26">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.196" level="INFO">${q2o} = buildingNo</msg>
+<status status="PASS" endtime="20170411 18:41:33.196" starttime="20170411 18:41:33.196"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.198" starttime="20170411 18:41:33.196"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.199" level="INFO">${tempValue} = 30</msg>
+<status status="PASS" endtime="20170411 18:41:33.199" starttime="20170411 18:41:33.198"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.203" level="INFO">${buildingNo} = 30</msg>
+<status status="PASS" endtime="20170411 18:41:33.203" starttime="20170411 18:41:33.199"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.204" starttime="20170411 18:41:33.203"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.204" starttime="20170411 18:41:33.195"></status>
+</kw>
+<kw type="foritem" name="${index} = 27">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.204" level="INFO">${q2o} = billPeriod</msg>
+<status status="PASS" endtime="20170411 18:41:33.204" starttime="20170411 18:41:33.204"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.206" starttime="20170411 18:41:33.205"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.207" level="INFO">${tempValue} = 1</msg>
+<status status="PASS" endtime="20170411 18:41:33.207" starttime="20170411 18:41:33.206"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.210" level="INFO">${billPeriod} = 1</msg>
+<status status="PASS" endtime="20170411 18:41:33.210" starttime="20170411 18:41:33.207"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.210" starttime="20170411 18:41:33.210"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.211" starttime="20170411 18:41:33.204"></status>
+</kw>
+<kw type="foritem" name="${index} = 28">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.211" level="INFO">${q2o} = usScenario</msg>
+<status status="PASS" endtime="20170411 18:41:33.211" starttime="20170411 18:41:33.211"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.214" starttime="20170411 18:41:33.211"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.215" level="INFO">${tempValue} = Billed in US, invoice is sent to customer</msg>
+<status status="PASS" endtime="20170411 18:41:33.215" starttime="20170411 18:41:33.215"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.217" level="INFO">${usScenario} = Billed in US, invoice is sent to customer</msg>
+<status status="PASS" endtime="20170411 18:41:33.217" starttime="20170411 18:41:33.215"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.218" starttime="20170411 18:41:33.217"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.218" starttime="20170411 18:41:33.211"></status>
+</kw>
+<kw type="foritem" name="${index} = 29">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.219" level="INFO">${q2o} = invoiceLang</msg>
+<status status="PASS" endtime="20170411 18:41:33.219" starttime="20170411 18:41:33.219"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.221" starttime="20170411 18:41:33.219"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.224" level="INFO">${tempValue} = Internal</msg>
+<status status="PASS" endtime="20170411 18:41:33.224" starttime="20170411 18:41:33.221"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.227" level="INFO">${invoiceLang} = Internal</msg>
+<status status="PASS" endtime="20170411 18:41:33.228" starttime="20170411 18:41:33.224"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.229" starttime="20170411 18:41:33.228"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.229" starttime="20170411 18:41:33.218"></status>
+</kw>
+<kw type="foritem" name="${index} = 30">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.230" level="INFO">${q2o} = billCurrency</msg>
+<status status="PASS" endtime="20170411 18:41:33.230" starttime="20170411 18:41:33.229"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.231" starttime="20170411 18:41:33.230"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.232" level="INFO">${tempValue} = GBP</msg>
+<status status="PASS" endtime="20170411 18:41:33.232" starttime="20170411 18:41:33.232"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.234" level="INFO">${billCurrency} = GBP</msg>
+<status status="PASS" endtime="20170411 18:41:33.234" starttime="20170411 18:41:33.232"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.235" starttime="20170411 18:41:33.234"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.236" starttime="20170411 18:41:33.229"></status>
+</kw>
+<kw type="foritem" name="${index} = 31">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.237" level="INFO">${q2o} = payDay</msg>
+<status status="PASS" endtime="20170411 18:41:33.237" starttime="20170411 18:41:33.236"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.239" starttime="20170411 18:41:33.237"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.239" level="INFO">${tempValue} = 30</msg>
+<status status="PASS" endtime="20170411 18:41:33.239" starttime="20170411 18:41:33.239"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.241" level="INFO">${payDay} = 30</msg>
+<status status="PASS" endtime="20170411 18:41:33.241" starttime="20170411 18:41:33.239"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.242" starttime="20170411 18:41:33.242"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.242" starttime="20170411 18:41:33.236"></status>
+</kw>
+<kw type="foritem" name="${index} = 32">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.243" level="INFO">${q2o} = infoCurrency</msg>
+<status status="PASS" endtime="20170411 18:41:33.243" starttime="20170411 18:41:33.243"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.245" starttime="20170411 18:41:33.243"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.245" level="INFO">${tempValue} = GBP</msg>
+<status status="PASS" endtime="20170411 18:41:33.245" starttime="20170411 18:41:33.245"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.248" level="INFO">${infoCurrency} = GBP</msg>
+<status status="PASS" endtime="20170411 18:41:33.248" starttime="20170411 18:41:33.246"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.249" starttime="20170411 18:41:33.249"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.249" starttime="20170411 18:41:33.242"></status>
+</kw>
+<kw type="foritem" name="${index} = 33">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.250" level="INFO">${q2o} = payMethod</msg>
+<status status="PASS" endtime="20170411 18:41:33.250" starttime="20170411 18:41:33.250"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.254" starttime="20170411 18:41:33.250"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.255" level="INFO">${tempValue} = External</msg>
+<status status="PASS" endtime="20170411 18:41:33.255" starttime="20170411 18:41:33.254"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.257" level="INFO">${payMethod} = External</msg>
+<status status="PASS" endtime="20170411 18:41:33.257" starttime="20170411 18:41:33.255"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.258" starttime="20170411 18:41:33.257"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.258" starttime="20170411 18:41:33.249"></status>
+</kw>
+<kw type="foritem" name="${index} = 34">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.259" level="INFO">${q2o} = siteName</msg>
+<status status="PASS" endtime="20170411 18:41:33.259" starttime="20170411 18:41:33.259"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.261" starttime="20170411 18:41:33.259"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.262" level="INFO">${tempValue} = Laguna Creek Branch</msg>
+<status status="PASS" endtime="20170411 18:41:33.262" starttime="20170411 18:41:33.261"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.264" level="INFO">${siteName} = Laguna Creek Branch</msg>
+<status status="PASS" endtime="20170411 18:41:33.264" starttime="20170411 18:41:33.262"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.265" starttime="20170411 18:41:33.264"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.265" starttime="20170411 18:41:33.258"></status>
+</kw>
+<kw type="foritem" name="${index} = 35">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.266" level="INFO">${q2o} = room</msg>
+<status status="PASS" endtime="20170411 18:41:33.266" starttime="20170411 18:41:33.265"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.267" starttime="20170411 18:41:33.266"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.268" level="INFO">${tempValue} = 4</msg>
+<status status="PASS" endtime="20170411 18:41:33.268" starttime="20170411 18:41:33.268"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.271" level="INFO">${room} = 4</msg>
+<status status="PASS" endtime="20170411 18:41:33.271" starttime="20170411 18:41:33.268"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.272" starttime="20170411 18:41:33.272"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.272" starttime="20170411 18:41:33.265"></status>
+</kw>
+<kw type="foritem" name="${index} = 36">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.273" level="INFO">${q2o} = floor</msg>
+<status status="PASS" endtime="20170411 18:41:33.273" starttime="20170411 18:41:33.273"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.275" starttime="20170411 18:41:33.273"></status>
+</kw>
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>${rowNum}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.276" level="INFO">${tempValue} = 3</msg>
+<status status="PASS" endtime="20170411 18:41:33.276" starttime="20170411 18:41:33.275"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${q2o}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.278" level="INFO">${floor} = 3</msg>
+<status status="PASS" endtime="20170411 18:41:33.278" starttime="20170411 18:41:33.276"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${q2o}"="${tempValue}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.279" starttime="20170411 18:41:33.278"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.279" starttime="20170411 18:41:33.272"></status>
+</kw>
+<kw type="foritem" name="${index} = 37">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.279" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.279" starttime="20170411 18:41:33.279"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.281" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.282" starttime="20170411 18:41:33.281"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.282" starttime="20170411 18:41:33.279"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.282" starttime="20170411 18:41:33.279"></status>
+</kw>
+<kw type="foritem" name="${index} = 38">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.282" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.282" starttime="20170411 18:41:33.282"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.285" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.285" starttime="20170411 18:41:33.284"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.285" starttime="20170411 18:41:33.283"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.285" starttime="20170411 18:41:33.282"></status>
+</kw>
+<kw type="foritem" name="${index} = 39">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.287" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.287" starttime="20170411 18:41:33.286"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.289" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.289" starttime="20170411 18:41:33.289"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.289" starttime="20170411 18:41:33.287"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.289" starttime="20170411 18:41:33.286"></status>
+</kw>
+<kw type="foritem" name="${index} = 40">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.290" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.290" starttime="20170411 18:41:33.290"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.292" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.292" starttime="20170411 18:41:33.292"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.293" starttime="20170411 18:41:33.290"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.293" starttime="20170411 18:41:33.289"></status>
+</kw>
+<kw type="foritem" name="${index} = 41">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.293" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.293" starttime="20170411 18:41:33.293"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.295" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.296" starttime="20170411 18:41:33.295"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.296" starttime="20170411 18:41:33.293"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.296" starttime="20170411 18:41:33.293"></status>
+</kw>
+<kw type="foritem" name="${index} = 42">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.296" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.296" starttime="20170411 18:41:33.296"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.298" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.299" starttime="20170411 18:41:33.298"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.299" starttime="20170411 18:41:33.296"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.299" starttime="20170411 18:41:33.296"></status>
+</kw>
+<kw type="foritem" name="${index} = 43">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.299" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.299" starttime="20170411 18:41:33.299"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.302" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.302" starttime="20170411 18:41:33.302"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.302" starttime="20170411 18:41:33.299"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.302" starttime="20170411 18:41:33.299"></status>
+</kw>
+<kw type="foritem" name="${index} = 44">
+<kw name="Read Cell Data By Coordinates" library="ExcelLibrary">
+<doc>Uses the column and row to return the data from that cell.</doc>
+<arguments>
+<arg>${sheetName}</arg>
+<arg>${index}</arg>
+<arg>6</arg>
+</arguments>
+<assign>
+<var>${q2o}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.303" level="INFO">${q2o} = </msg>
+<status status="PASS" endtime="20170411 18:41:33.303" starttime="20170411 18:41:33.303"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${q2o}'=='${Empty}'</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20170411 18:41:33.305" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20170411 18:41:33.305" starttime="20170411 18:41:33.305"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.305" starttime="20170411 18:41:33.303"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.306" starttime="20170411 18:41:33.302"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.306" starttime="20170411 18:41:33.039"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.306" starttime="20170411 18:41:32.965"></status>
+</kw>
+<kw name="Create Index Numbering" library="CommonResources">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str(1)</arg>
+</arguments>
+<assign>
+<var>${Numbering}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.309" level="INFO">${Numbering} = 1</msg>
+<status status="PASS" endtime="20170411 18:41:33.309" starttime="20170411 18:41:33.307"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Numbering}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.310" level="INFO">${Numbering} = 1</msg>
+<status status="PASS" endtime="20170411 18:41:33.310" starttime="20170411 18:41:33.309"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.310" starttime="20170411 18:41:33.306"></status>
+</kw>
+<kw name="Open Browser And Login To CQM Page" library="CommonResources">
+<arguments>
+<arg>${CQMusername}</arg>
+<arg>${CQMpassword}</arg>
+<arg>${Browser}</arg>
+</arguments>
+<kw name="Execution-Checking NEW or OLD Quote" library="CommonResources">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Variable Should Not Exist</arg>
+<arg>${quoteID}</arg>
+</arguments>
+<assign>
+<var>${statusQuoteID}</var>
+</assign>
+<kw name="Variable Should Not Exist" library="BuiltIn">
+<doc>Fails if the given variable exists within the current scope.</doc>
+<arguments>
+<arg>${quoteID}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.315" starttime="20170411 18:41:33.311"></status>
+</kw>
+<msg timestamp="20170411 18:41:33.315" level="INFO">${statusQuoteID} = True</msg>
+<status status="PASS" endtime="20170411 18:41:33.315" starttime="20170411 18:41:33.311"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${statusQuoteID}</arg>
+<arg>Check New Quote or Existing Quote</arg>
+</arguments>
+<kw name="Check New Quote or Existing Quote" library="CommonResources">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${newQuote}' == 'no'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\quote_id\\quoteID.txt</arg>
+<arg>ELSE IF</arg>
+<arg>'${newQuote}' == 'yes'</arg>
+<arg>Replace Variables</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${quoteID}</var>
+</assign>
+<msg timestamp="20170411 18:41:33.319" level="INFO">${quoteID} = None</msg>
+<status status="PASS" endtime="20170411 18:41:33.319" starttime="20170411 18:41:33.316"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${quoteID}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:33.320" level="INFO">${quoteID} = None</msg>
+<status status="PASS" endtime="20170411 18:41:33.320" starttime="20170411 18:41:33.320"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.320" starttime="20170411 18:41:33.315"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.320" starttime="20170411 18:41:33.315"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${newQuote}' == 'yes'</arg>
+<arg>Run Keyword</arg>
+<arg>Log To Console</arg>
+<arg>${\n}${\n}THIS TEST WILL CREATE A NEW QUOTE</arg>
+<arg>ELSE IF</arg>
+<arg>'${newQuote}' == 'no'</arg>
+<arg>Log To Console</arg>
+<arg>${\n}${\n}THIS TEST WILL EXECUTE EXISTING QUOTE: ${quoteID}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.324" starttime="20170411 18:41:33.320"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}Press Ctrl-c to abort the test${\n}Test will begin in a moment</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:41:33.324" starttime="20170411 18:41:33.324"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:41:33.325" starttime="20170411 18:41:33.311"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20170411 18:41:34.325" level="INFO">Slept 1 second</msg>
+<status status="PASS" endtime="20170411 18:41:34.325" starttime="20170411 18:41:33.325"></status>
+</kw>
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>${T3_CQM_URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>ff_profile_dir=${FF_PROFILE}</arg>
+</arguments>
+<msg timestamp="20170411 18:41:34.325" level="INFO">Opening browser 'FF' to base url 'http://sqe.t3.nat.bt.com/cqm'</msg>
+<status status="PASS" endtime="20170411 18:45:08.512" starttime="20170411 18:41:34.325"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20170411 18:45:08.534" starttime="20170411 18:45:08.512"></status>
+</kw>
+<kw name="Set Selenium Speed" library="Selenium2Library">
+<doc>Sets the delay in seconds that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${DELAY}</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:08.535" starttime="20170411 18:45:08.534"></status>
+</kw>
+<kw name="Page Should Contain" library="Selenium2Library">
+<doc>Verifies that current page contains `text`.</doc>
+<arguments>
+<arg>21C Authentication: Login</arg>
+</arguments>
+<msg timestamp="20170411 18:45:09.840" level="INFO">Current page contains text '21C Authentication: Login'.</msg>
+<status status="PASS" endtime="20170411 18:45:09.840" starttime="20170411 18:45:08.535"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>USER</arg>
+<arg>${CQMusername}</arg>
+</arguments>
+<msg timestamp="20170411 18:45:09.840" level="INFO">Typing text '609401468' into text field 'USER'</msg>
+<status status="PASS" endtime="20170411 18:45:11.749" starttime="20170411 18:45:09.840"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>PASSWORD</arg>
+<arg>${CQMpassword}</arg>
+</arguments>
+<msg timestamp="20170411 18:45:11.749" level="INFO">Typing text 'Black$un17' into text field 'PASSWORD'</msg>
+<status status="PASS" endtime="20170411 18:45:13.652" starttime="20170411 18:45:11.749"></status>
+</kw>
+<kw name="Click Button" library="Selenium2Library">
+<doc>Clicks a button identified by `locator`.</doc>
+<arguments>
+<arg>Sign On</arg>
+</arguments>
+<msg timestamp="20170411 18:45:13.653" level="INFO">Clicking button 'Sign On'.</msg>
+<status status="PASS" endtime="20170411 18:45:16.655" starttime="20170411 18:45:13.652"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>21C Authentication: Warning Screen</arg>
+<arg>${wait_time}</arg>
+<arg>Authentication page is not display</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:17.275" starttime="20170411 18:45:16.655"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="Selenium2Library">
+<doc>Waits until element specified with `locator` is enabled.</doc>
+<arguments>
+<arg>YES</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:18.506" starttime="20170411 18:45:17.275"></status>
+</kw>
+<kw name="Click Button" library="Selenium2Library">
+<doc>Clicks a button identified by `locator`.</doc>
+<arguments>
+<arg>YES</arg>
+</arguments>
+<msg timestamp="20170411 18:45:18.506" level="INFO">Clicking button 'YES'.</msg>
+<status status="PASS" endtime="20170411 18:45:25.776" starttime="20170411 18:45:18.506"></status>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` disappears from current page.</doc>
+<arguments>
+<arg>${PROCESS_LOADING}</arg>
+<arg>${waiting_time}</arg>
+<arg>The page is still loading after 5 minute</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:26.397" starttime="20170411 18:45:25.776"></status>
+</kw>
+<kw name="Select Window" library="Selenium2Library">
+<doc>Selects the window matching locator and return previous window handle.</doc>
+<arguments>
+<arg>title=Customer Quote Management</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:30.281" starttime="20170411 18:45:26.397"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:45:30.281" starttime="20170411 18:41:33.310"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${newQuote}' == 'Yes'</arg>
+<arg>Run Keyword</arg>
+<arg>Create Customer</arg>
+<arg>ELSE IF</arg>
+<arg>'${newQuote}' == 'No'</arg>
+<arg>Run Keywords</arg>
+<arg>Select Customer</arg>
+<arg>${salesChannel}</arg>
+<arg>${customerName}</arg>
+<arg>AND</arg>
+<arg>Go to Manage Customer</arg>
+</arguments>
+<kw name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Select Customer</arg>
+<arg>${salesChannel}</arg>
+<arg>${customerName}</arg>
+<arg>AND</arg>
+<arg>Go to Manage Customer</arg>
+</arguments>
+<kw name="Select Customer" library="CommonResources">
+<arguments>
+<arg>${salesChannel}</arg>
+<arg>${customerName}</arg>
+</arguments>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=.//*[@id='salesChannel']/a/span[3]/b</arg>
+</arguments>
+<msg timestamp="20170411 18:45:30.286" level="INFO">Clicking element 'xpath=.//*[@id='salesChannel']/a/span[3]/b'.</msg>
+<status status="PASS" endtime="20170411 18:45:31.947" starttime="20170411 18:45:30.286"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element specified with `locator` is visible.</doc>
+<arguments>
+<arg>xpath=.//div/span[contains(normalize-space(.), '${salesChannel}')]</arg>
+<arg>60s</arg>
+<arg>The sales channel field is missing from the page</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:33.188" starttime="20170411 18:45:31.947"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=.//div/span[contains(normalize-space(.), '${salesChannel}')]</arg>
+</arguments>
+<msg timestamp="20170411 18:45:33.188" level="INFO">Clicking element 'xpath=.//div/span[contains(normalize-space(.), 'CSP TEST SANDBOX')]'.</msg>
+<status status="PASS" endtime="20170411 18:45:34.732" starttime="20170411 18:45:33.188"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>customer-auto-complete</arg>
+<arg>${customerName}</arg>
+</arguments>
+<msg timestamp="20170411 18:45:34.733" level="INFO">Typing text 'JOSH_TEST_02' into text field 'customer-auto-complete'</msg>
+<status status="PASS" endtime="20170411 18:45:36.775" starttime="20170411 18:45:34.733"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element specified with `locator` is visible.</doc>
+<arguments>
+<arg>xpath=html/body/ul/li/a</arg>
+<arg>120s</arg>
+<arg>The value in contract field is fail to auto populate</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:39.084" starttime="20170411 18:45:36.775"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=html/body/ul/li/a</arg>
+</arguments>
+<msg timestamp="20170411 18:45:39.084" level="INFO">Clicking element 'xpath=html/body/ul/li/a'.</msg>
+<status status="PASS" endtime="20170411 18:45:40.466" starttime="20170411 18:45:39.084"></status>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` disappears from current page.</doc>
+<arguments>
+<arg>${PROCESS_LOADING}</arg>
+<arg>60s</arg>
+<arg>The page is still loading after a minute</arg>
+</arguments>
+<status status="PASS" endtime="20170411 18:45:41.083" starttime="20170411 18:45:40.466"></status>
+</kw>
+<kw name="Execution-Select A contract" library="CommonResources">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Page Should Contain Element</arg>
+<arg>xpath=.//span[text()='Select a contract..']</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+</assign>
+<kw name="Page Should Contain Element" library="Selenium2Library">
+<doc>Verifies element identified by `locator` is found on the current page.</doc>
+<arguments>
+<arg>xpath=.//span[text()='Select a contract..']</arg>
+</arguments>
+<msg timestamp="20170411 18:45:41.701" level="INFO">Current page contains element 'xpath=.//span[text()='Select a contract..']'.</msg>
+<status status="PASS" endtime="20170411 18:45:41.701" starttime="20170411 18:45:41.084"></status>
+</kw>
+<msg timestamp="20170411 18:45:41.701" level="INFO">${status} = True</msg>
+<status status="PASS" endtime="20170411 18:45:41.701" starttime="20170411 18:45:41.084"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${status}</arg>
+<arg>Run Keywords</arg>
+<arg>Click Element</arg>
+<arg>xpath=.//*[@id='s2id_contract']/a/span[2]/b</arg>
+<arg>AND</arg>
+<arg>Click Element</arg>
+<arg>xpath=.//*[@id='select2-drop']/ul/li[1]/div</arg>
+<arg>AND</arg>
+<arg>Wait Until Page Does Not Contain Element</arg>
+<arg>${PROCESS_LOADING}</arg>
+<arg>60s</arg>
+<arg>The page is still loading after a minute</arg>
+</arguments>
+<kw name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Click Element</arg>
+<arg>xpath=.//*[@id='s2id_contract']/a/span[2]/b</arg>
+<arg>AND</arg>
+<arg>Click Element</arg>
+<arg>xpath=.//*[@id='select2-drop']/ul/li[1]/div</arg>
+<arg>AND</arg>
+<arg>Wait Until Page Does Not Contain Element</arg>
+<arg>${PROCESS_LOADING}</arg>
+<arg>60s</arg>
+<arg>The page is still loading after a minute</arg>
+</arguments>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=.//*[@id='s2id_contract']/a/span[2]/b</arg>
+</arguments>
+<msg timestamp="20170411 18:45:41.702" level="INFO">Clicking element 'xpath=.//*[@id='s2id_contract']/a/span[2]/b'.</msg>
+<status status="PASS" endtime="20170411 18:45:43.074" starttime="20170411 18:45:41.702"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=.//*[@id='select2-drop']/ul/li[1]/div</arg>
+</arguments>
+<msg timestamp="20170411 18:45:43.075" level="INFO">Clicking element 'xpath=.//*[@id='select2-drop']/ul/li[1]/div'.</msg>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20170411 18:45:44.411" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20170411 18:45:44.411" starttime="20170411 18:45:43.721"></status>
+</kw>
+<msg timestamp="20170411 18:45:44.414" level="FAIL">ValueError: Element locator 'xpath=.//*[@id='select2-drop']/ul/li[1]/div' did not match any elements.</msg>
+<status status="FAIL" endtime="20170411 18:45:44.414" starttime="20170411 18:45:43.074"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:45:44.414" starttime="20170411 18:45:41.702"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:45:44.414" starttime="20170411 18:45:41.701"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:45:44.415" starttime="20170411 18:45:41.083"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:45:44.415" starttime="20170411 18:45:30.286"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:45:44.415" starttime="20170411 18:45:30.285"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:45:44.415" starttime="20170411 18:45:30.282"></status>
+</kw>
+<tags>
+<tag>AC</tag>
+</tags>
+<status status="FAIL" endtime="20170411 18:45:44.416" critical="yes" starttime="20170411 18:41:32.962">ValueError: Element locator 'xpath=.//*[@id='select2-drop']/ul/li[1]/div' did not match any elements.</status>
+</test>
+<test id="s1-t2" name="TC02 Create Customer Site">
+<kw name="Create Customer Site" library="CommonResources">
+<kw name="Wait Until Page Contains Element" library="Selenium2Library">
+<doc>Waits until element specified with `locator` appears on current page.</doc>
+<arguments>
+<arg>xpath=.//label[contains(normalize-space(.), 'Customer Main Site (RFO)')]</arg>
+<arg>${wait_time}</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20170411 18:46:45.451" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20170411 18:46:45.452" starttime="20170411 18:46:44.762"></status>
+</kw>
+<msg timestamp="20170411 18:46:45.454" level="FAIL">Element 'xpath=.//label[contains(normalize-space(.), 'Customer Main Site (RFO)')]' did not appear in 1 minute</msg>
+<status status="FAIL" endtime="20170411 18:46:45.454" starttime="20170411 18:45:44.422"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:46:45.454" starttime="20170411 18:45:44.421"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current location.</doc>
+<msg timestamp="20170411 18:46:46.068" level="INFO">http://sqe.t3.nat.bt.com/cqm#/showCust</msg>
+<status status="PASS" endtime="20170411 18:46:46.068" starttime="20170411 18:46:45.456"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:46:46.068" starttime="20170411 18:46:45.455"></status>
+</kw>
+<tags>
+<tag>AC</tag>
+</tags>
+<status status="FAIL" endtime="20170411 18:46:46.068" critical="yes" starttime="20170411 18:45:44.420">Element 'xpath=.//label[contains(normalize-space(.), 'Customer Main Site (RFO)')]' did not appear in 1 minute</status>
+</test>
+<test id="s1-t3" name="TC03 Create Customer Contacts">
+<kw name="Create Customer Contacts" library="CommonResources">
+<kw name="Focus" library="Selenium2Library">
+<doc>Sets focus to element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Customer Contacts')]</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20170411 18:46:47.378" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20170411 18:46:47.378" starttime="20170411 18:46:46.690"></status>
+</kw>
+<msg timestamp="20170411 18:46:47.379" level="FAIL">ValueError: Element locator 'xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Customer Contacts')]' did not match any elements.</msg>
+<status status="FAIL" endtime="20170411 18:46:47.380" starttime="20170411 18:46:46.072"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:46:47.380" starttime="20170411 18:46:46.071"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current location.</doc>
+<msg timestamp="20170411 18:46:47.995" level="INFO">http://sqe.t3.nat.bt.com/cqm#/showCust</msg>
+<status status="PASS" endtime="20170411 18:46:47.995" starttime="20170411 18:46:47.381"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:46:47.995" starttime="20170411 18:46:47.381"></status>
+</kw>
+<tags>
+<tag>AC</tag>
+</tags>
+<status status="FAIL" endtime="20170411 18:46:47.995" critical="yes" starttime="20170411 18:46:46.070">ValueError: Element locator 'xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Customer Contacts')]' did not match any elements.</status>
+</test>
+<test id="s1-t4" name="TC04 Create Billing Details">
+<kw name="Create Billing Details" library="CommonResources">
+<kw name="Focus" library="Selenium2Library">
+<doc>Sets focus to element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Billing Details')]</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20170411 18:46:49.303" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20170411 18:46:49.304" starttime="20170411 18:46:48.618"></status>
+</kw>
+<msg timestamp="20170411 18:46:49.304" level="FAIL">ValueError: Element locator 'xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Billing Details')]' did not match any elements.</msg>
+<status status="FAIL" endtime="20170411 18:46:49.305" starttime="20170411 18:46:47.998"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:46:49.305" starttime="20170411 18:46:47.997"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current location.</doc>
+<msg timestamp="20170411 18:46:49.922" level="INFO">http://sqe.t3.nat.bt.com/cqm#/showCust</msg>
+<status status="PASS" endtime="20170411 18:46:49.922" starttime="20170411 18:46:49.306"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:46:49.922" starttime="20170411 18:46:49.306"></status>
+</kw>
+<tags>
+<tag>AC</tag>
+</tags>
+<status status="FAIL" endtime="20170411 18:46:49.922" critical="yes" starttime="20170411 18:46:47.997">ValueError: Element locator 'xpath=html/body/div[*]/div[*]/div/div/div[*]/div/ul/li[*]/div/div/span[contains(text(),'Billing Details')]' did not match any elements.</status>
+</test>
+<test id="s1-t5" name="TC05 Create Branch Site">
+<kw name="Create Branch Site" library="CommonResources">
+<kw name="Focus" library="Selenium2Library">
+<doc>Sets focus to element identified by `locator`.</doc>
+<arguments>
+<arg>xpath=.//*[@id='Site']/span/a</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20170411 18:46:51.227" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-5.png"&gt;&lt;img src="selenium-screenshot-5.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20170411 18:46:51.227" starttime="20170411 18:46:50.542"></status>
+</kw>
+<msg timestamp="20170411 18:46:51.228" level="FAIL">ValueError: Element locator 'xpath=.//*[@id='Site']/span/a' did not match any elements.</msg>
+<status status="FAIL" endtime="20170411 18:46:51.229" starttime="20170411 18:46:49.925"></status>
+</kw>
+<status status="FAIL" endtime="20170411 18:46:51.229" starttime="20170411 18:46:49.925"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+<arg>AND</arg>
+<arg>Close Browser</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current location.</doc>
+<msg timestamp="20170411 18:46:51.842" level="INFO">http://sqe.t3.nat.bt.com/cqm#/showCust</msg>
+<status status="PASS" endtime="20170411 18:46:51.842" starttime="20170411 18:46:51.230"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20170411 18:46:57.135" starttime="20170411 18:46:51.842"></status>
+</kw>
+<status status="PASS" endtime="20170411 18:46:57.135" starttime="20170411 18:46:51.230"></status>
+</kw>
+<tags>
+<tag>AC</tag>
+</tags>
+<status status="FAIL" endtime="20170411 18:46:57.136" critical="yes" starttime="20170411 18:46:49.924">ValueError: Element locator 'xpath=.//*[@id='Site']/span/a' did not match any elements.</status>
+</test>
+<doc>Customer Creation</doc>
+<status status="FAIL" endtime="20170411 18:46:57.138" starttime="20170411 18:41:31.134"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="5" pass="0">Critical Tests</stat>
+<stat fail="5" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat fail="5" pass="0">AC</stat>
+</tag>
+<suite>
+<stat fail="5" id="s1" name="Create Customer" pass="0">Create Customer</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

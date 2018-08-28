@@ -1,0 +1,72 @@
+*** Settings ***
+Documentation	Cease an OCC Contract
+Suite Setup	
+Library			Selenium2Library
+Library			DebugLibrary
+Resource		../Common/resource_keywords_sd.txt
+Resource	../Common/CommonResources.txt
+Resource	../Common/readHCSTestDataFromExcel.txt
+Resource	../Common/HCSResource.txt	
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	60s
+${TC_ID}	TC037
+*** Test Cases ***
+TC01 Quote Creation
+	[TAGS]	CQM
+	Set Suite Variable	${sheetName}	CQM
+	Read data	${sheetName}	${TC_ID}
+	Create Index Numbering
+	Open Browser And Login To CQM Page	
+	Select Customer	
+	Go to Manage Quote
+	Run Keyword If	'${newQuote}' == 'yes'	Run Keyword	Create Quote	${QuoteName}	${OrderType}	${ContractTerm}	${Currency}	${OppurtunityReferenceNumber}
+	Select Quote	${quoteID}	${QuoteName}	
+	[Teardown]	Log Location	
+TC02 Quote Configuration
+	[TAGS]	CQM
+	Quote Configuration
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}	
+TC03 Pricing
+	[TAGS]	CQM
+	Calculate Pricing	
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+TC04 Order Creation
+	[TAGS]	CQM
+	Create Order	
+	Close Browser
+	Sleep	3m
+	Open Browser And Login To CQM Page	
+	Select Customer
+	Capture The OrderID	${quoteID}
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+	...	AND	Close Browser
+	
+TC05 Review Order
+	[TAGS]	SD
+	Set Suite Variable	${sheetName}	CQM
+	Read data	${sheetName}	${TC_ID}
+	Set Suite Variable	${sheetName}	SD
+	Read data	${sheetName}	${TC_ID}
+	Load Order IDs
+	Set Suite Variable	${browser}		IE
+	Open Browser And Login	${CQMusername}	${CQMpassword}	${browser}	${t3_SI_URL}
+	Navigate to Workflow and Search Order
+	Select Given Window	title=Si-Workflow
+	${sameSOPInTestData}=	Run Keyword And Return Status	Element Should Contain	lblSopEin	${InstallCoordinator}
+	Run Keyword Unless	${sameSOPInTestData}	Change Order Contact Details
+	${btnActionDisabled}=	Run Keyword And Return Status	Element Should Be Disabled	btnAction
+	Run Keyword If	${btnActionDisabled}	Accept Order
+	[Teardown]	Log Location
+
+TC06-TC12/13 L2C process
+	[TAGS]	SD
+	Process Order
+	Confirm Status Complete in AIB
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser	

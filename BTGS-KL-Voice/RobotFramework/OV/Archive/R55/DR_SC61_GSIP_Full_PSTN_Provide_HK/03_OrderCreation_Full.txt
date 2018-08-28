@@ -1,0 +1,49 @@
+*** Settings ***
+Documentation	SC61_GSIP_Full_PSTN_Provide_Hong_Kong. Order Creation full
+
+Library			Selenium2Library
+Library			DebugLibrary
+Library			SikuliLibrary
+Resource	../Common_OV/CLASSIC_Resource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${TC_ID}		DR55_SC61
+${IMAGE_DIR}	${CURDIR}\\img	
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	PREREQUISITE
+	Add Image Path    ${IMAGE_DIR}	
+	Read data	Classics	${TC_ID}		
+	Log To Console	Retrieved Classics variables
+	Create Index Numbering
+	
+TC02 Seach Customer in Amdocs
+	[TAGS]	CLASSICS
+	Get File Content	${ClassicOrderID_TextFile}
+	Log To Console	${ClassicOrderID} in testcase
+	Login To AMDOCS
+	
+TC03 Select Profile
+	[TAGS]	CLASSICS	
+	Select Profile As ClearSales
+	
+	
+TC04 Select Order	
+	Select Order
+	
+	
+#TC05 Perform Yank Task
+#	Yank Task
+	
+	
+TC06 Order Configuration	
+	#Configure Header
+	#Configure Contract Summary
+	#Configure Service Summary
+	#Configure Technical Elements
+	Configure Service Subproject
+	

@@ -1,0 +1,1 @@
+pybot -d OutputTahitiTest\ -v TC_ID:TA_R57_GSIP_US -v REFRESH_WAIT_TIME:10s 04_Tahiti.txt

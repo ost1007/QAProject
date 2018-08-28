@@ -1,0 +1,117 @@
+*** Settings ***
+Documentation	Journey: OCC Contract Journey  for UK Country
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common_HCS/CommonResources.txt
+Resource	../Common_HCS/resource_keywords_sd.txt
+Resource	../Common_HCS/readHCSTestDataFromExcel.txt
+Resource	../Common_HCS/HCSResource.txt
+##added in R54 to cater BFGIMS
+#Resource	../Common_HCS/BFGIMS_Resource.txt
+##end added in R54 to cater BFGIMS
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s
+#${RefNo}		SC01@
+${RefNo}		${TC_ID}@
+#${TC_ID}		SC01			
+
+*** Test Cases ***
+prerequisites
+	[TAGS]	Q2O
+	Read data	CQM	${TC_ID}	
+	Log To Console	Retrieved Q2O TestData
+	Create Index Numbering
+	
+TC01 Quote Creation
+	[TAGS]	Q2O
+	#move from CommonResources in R54
+	Execution-Checking NEW or OLD Quote
+	#end move from CommonResources in R54
+	#Open Browser And Login To CQM Page
+	Open Browser And Login	${CQM_URL}	${BROWSER}
+	Select Customer	
+	Go to Manage Quote
+	Run Keyword If	'${newQuote}' == 'Yes'	Run Keyword	Create Quote	
+	Select Quote	
+	[Teardown]	Log Location
+	
+TC02 Quote Configuration
+	[TAGS]	Q2O
+	Quote Configuration
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+	...	AND	Close Browser
+	
+TC03 Select Quote
+	[TAGS]	Q2O
+	#Set Suite Variable	${BROWSER}	FF
+	Set Suite Variable	${newQuote}	No
+	#Open Browser And Login To CQM Page
+	Open Browser And Login	${CQM_URL}	${BROWSER}
+	Select Customer
+	Go to Manage Quote
+	Select Quote	
+	[Teardown]	Log Location
+	
+TC04 Pricing
+	[TAGS]	Q2O
+	Quote Configuration
+	Calculate Pricing	
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+
+TC05 Order Creation
+	[TAGS]	Q2O
+	Create Order	
+	Close Browser
+	Sleep	3m
+	#Open Browser And Login To CQM Page
+	Open Browser And Login	${CQM_URL}	${BROWSER}
+	Select Customer
+	Capture The OrderID	${quoteID}
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+	#added orderID to Log and console
+	...	AND	Log	EXP${EXPORDERID}
+	...	AND	Log To Console	QuoteID: '${quoteID}'
+	...	AND	Log To Console	OrderID: 'EXP${EXPORDERID}'
+	...	AND	Close Browser
+
+TC06 Review Order
+	[TAGS]	SD
+	Read data	SD	${TC_ID}
+	Log To Console	Retrieved SD TestData
+	Create Index Numbering
+	#Load Order IDs
+	#commented and amended URL to be retrieved from test data
+	#Open Browser And Login	${t3_SI_URL}
+	Open Browser And Login	${SI_URL}	${BROWSER}
+	Navigate to Workflow and Search Order
+	Select Given Window	title=Si-Workflow
+	${sameSOPInTestData}=	Run Keyword And Return Status	Element Should Contain	lblSopEin	${InstallCoordinator}
+	Run Keyword Unless	${sameSOPInTestData}	Change Order Contact Details
+	${btnActionDisabled}=	Run Keyword And Return Status	Element Should Be Disabled	btnAction
+	Run Keyword If	${btnActionDisabled}	Accept Order
+	[Teardown]	Log Location
+
+TC07-TC12/13 L2C process	
+	[TAGS]	SD
+	Process Order
+	Confirm Status Complete in AIB
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser
+	
+#TC BFG Verification
+#	[TAGS]	Q2O	SD
+#	Open Browser And Login	${BFG_IMS_URL}	IE
+#	Select User Profile Group
+#	Customer Search
+#	List Site
+#	Site Summary
+#	Package Instance Status
+#	[Teardown]	Run Keywords	Log Location
+#	...	AND	Close Browser

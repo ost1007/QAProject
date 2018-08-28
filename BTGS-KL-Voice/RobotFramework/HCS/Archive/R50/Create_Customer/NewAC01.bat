@@ -1,0 +1,1 @@
+pybot -d Output\ -v newCustomer:Yes -v TC_ID:AC01 Create_Customer.txt

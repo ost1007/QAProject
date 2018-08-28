@@ -1,0 +1,59 @@
+*** Settings ***
+Documentation		For Fun Only
+...					Created by:	FKH
+...					Date:	11 January 2017
+...					Edited by:	..... 
+Library		Selenium2Library
+Library		openpyxl
+Library		OperatingSystem
+
+*** Variables ***
+${sheetName}	Task Data Mapping-Prov1(CCD)
+${TaskToCheck}	Provide Service Attributes for Supplier end Activation ${SPACE}(Cloud Connect Direct)
+
+*** Keywords ***
+Transfer File from Original Folder to Target Folder
+	Copy File	C:\\Users\\609424665\\Downloads\\SQE_SC01AWSPRIV10_SC01AWSPRIV10_RFOSheet.xlsx	${EXECDIR}\\
+	
+Read data	[Arguments]	${Task_Name}
+	${wb}=	load_workbook	${EXECDIR}\\R41_mPDM_Cloud Networking_Strategic_Sprint7_D7.13.xlsm	data_only=True
+	${ws}=	set variable	${wb['${sheetName}']}
+	${wc}=	set variable	${ws.cell}
+	${column_count}=	set variable	${ws.max_column}
+	@{iterRows}=	set variable	@{ws.iter_cols(min_col=1,max_col=${ws.max_column},min_row=2,max_row=2)}
+	#Log To Console	${\n}directCell = ${ws.cell(row=1, column=4).value}
+	#Log To Console	${\n}directCell = @{ws[3]}
+	Set Global Variable	${ws.rows}
+	Set Global Variable	${ws.cell}
+	Set Global Variable	${ws}
+	#:FOR	${ws.rows}	IN	@{ws.iter_rows(min_col=1,max_col=${ws.max_column},min_row=3,max_row=3)}
+	:FOR	${wc}	IN	@{ws[3]}
+	#\	Run Keyword If	'${ws['${index}3'].value}'=='${Task_Name}'	Set Test Variable	${columnNum}	${index}
+	#\	Log To Console	${\n}VL = ${ws.row}
+	#\	Log To Console	${\n}TC = ${TaskToCheck}
+	#\	Set Global Variable	${ColumnToCheck}
+	\	${ColumnToCheck}=	Run Keyword If	'${wc.value}'=='${TaskToCheck}'	set variable	${wc.column}
+	#\	Run Keyword If	'${wc.value}'=='${TaskToCheck}'	Log To Console	${\n}row = ${wc.column}
+	\	Run Keyword If	'${wc.value}'=='${TaskToCheck}'	Exit For Loop
+	#\	Log To Console	${\n}${ws.cell}
+	#\	Read in Deep	${ws.rows}
+	#\	Log To Console	${\n}${ws.values}
+	:FOR	${wc}	IN	@{ws['${ColumnToCheck}']}
+	\	${RowToCheck}=	Run Keyword If	'${wc.value}'=='Mandatory' or '${wc.value}'=='ReadOnly'	set variable	${wc.row}
+	#\	Run Keyword If	'${wc.value}'=='Mandatory' or '${wc.value}'=='ReadOnly' and '${wc.font.strike}' == 'None'	Log To Console	${\n}${wc.value}${ColumnToCheck}${RowToCheck}${wc.font.strike}
+	\	Set Global Variable	${RowToCheck}
+	\	Run Keyword If	'${wc.value}'=='Mandatory' or '${wc.value}'=='ReadOnly' and '${wc.font.strike}' == 'None'	Read Line Item Attribute
+	
+Read in Deep	[Arguments]	${rowings}
+	:FOR	${wc}	IN	${rowings}
+	\	Log To Console	${\n}${wc.value}
+	\	Run Keyword If	'${wc.value}'=='Mandatory'	Exit For Loop
+	#\	Run Keyword If	'${ws.values}'=='${TaskToCheck}'	Exit For Loop	
+	
+Read Line Item Attribute
+	Log To Console	${\n}Item Attribute = ${ws['C${RowToCheck}'].value}
+
+*** Test Cases ***
+Test run
+	#Transfer File from Original Folder to Target Folder
+	Read data	${TaskToCheck}

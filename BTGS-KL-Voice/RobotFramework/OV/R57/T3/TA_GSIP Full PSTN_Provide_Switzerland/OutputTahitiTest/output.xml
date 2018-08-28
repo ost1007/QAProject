@@ -1,0 +1,3608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20180810 11:49:20.454" generator="Robot 3.0.4 (Python 2.7.14 on win32)">
+<suite source="C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\OV\R57\T3\TA_GSIP Full PSTN_Provide_Spain\04_Tahiti.txt" id="s1" name="04 Tahiti">
+<test id="s1-t1" name="prerequisites">
+<kw name="Read data" library="CommonResources">
+<arguments>
+<arg>Tahiti</arg>
+<arg>${TC_ID}</arg>
+</arguments>
+<kw name="Load Workbook" library="openpyxl.reader.excel">
+<doc>Open the given filename and return the workbook</doc>
+<arguments>
+<arg>C:\\Users\\608098003\\eclipse-workspace\\gs-e2e-voice-automation-test\\BTGS-KL-Voice\\RobotFramework\\OV\\R57\\Common_OV\\TestDataSheet.xlsx</arg>
+<arg>data_only=True</arg>
+</arguments>
+<assign>
+<var>${wb}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.174" level="INFO">${wb} = &lt;openpyxl.workbook.workbook.Workbook object at 0x0404DF70&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.174" starttime="20180810 11:49:25.158"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${wb["${sheetName}"]}</arg>
+</arguments>
+<assign>
+<var>${ws}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.174" level="INFO">${ws} = &lt;Worksheet "Tahiti"&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.174" starttime="20180810 11:49:29.174"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.max_column}</arg>
+</arguments>
+<assign>
+<var>${excelColumn}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.174" level="INFO">${excelColumn} = 10</msg>
+<status status="PASS" endtime="20180810 11:49:29.174" starttime="20180810 11:49:29.174"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.max_row}</arg>
+</arguments>
+<assign>
+<var>${excelRow}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.190" level="INFO">${excelRow} = 4</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw type="for" name="${index} IN RANGE [ ${excelRow} ]">
+<kw type="foritem" name="${index} = 0">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws['A${index+1}'].value}</arg>
+</arguments>
+<assign>
+<var>${TC_ID_TEMP}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.190" level="INFO">${TC_ID_TEMP} = TC_ID</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index+1}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw type="foritem" name="${index} = 1">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws['A${index+1}'].value}</arg>
+</arguments>
+<assign>
+<var>${TC_ID_TEMP}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.190" level="INFO">${TC_ID_TEMP} = R57_DN_S_01</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index+1}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw type="foritem" name="${index} = 2">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws['A${index+1}'].value}</arg>
+</arguments>
+<assign>
+<var>${TC_ID_TEMP}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.190" level="INFO">${TC_ID_TEMP} = TACNF02</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index+1}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw type="foritem" name="${index} = 3">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws['A${index+1}'].value}</arg>
+</arguments>
+<assign>
+<var>${TC_ID_TEMP}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.190" level="INFO">${TC_ID_TEMP} = TA_R57_GSIP_SP</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Set Test Variable</arg>
+<arg>${rowNum}</arg>
+<arg>${index+1}</arg>
+</arguments>
+<kw name="Set Test Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<arguments>
+<arg>${rowNum}</arg>
+<arg>${index+1}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.190" level="INFO">${rowNum} = 4</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${TC_ID_TEMP}"=="${TC_ID}"</arg>
+<arg>Exit For Loop</arg>
+</arguments>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing for loop.</doc>
+<msg timestamp="20180810 11:49:29.190" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw type="for" name="${index} IN RANGE [ ${excelColumn} ]">
+<kw type="foritem" name="${index} = 0">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.190" level="INFO">${tempVariableName} = TC_ID</msg>
+<status status="PASS" endtime="20180810 11:49:29.190" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.190"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${regex} = []</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.205" level="INFO">Length is 0</msg>
+<msg timestamp="20180810 11:49:29.205" level="FAIL">'[]' should not be empty.</msg>
+<status status="FAIL" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${blnResults} = False</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current for loop iteration and continues from the next.</doc>
+<msg timestamp="20180810 11:49:29.205" level="INFO">Continuing for loop from the next iteration.</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw type="foritem" name="${index} = 1">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${tempVariableName} = dBROWSER</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${regex} = [u'dBROWSER']</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.205" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${regex} = dBROWSER</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${regex} = BROWSER</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${tempValue} = IE</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.205" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'NoneType'&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.205" level="INFO">${is_none} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.205" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${BROWSER} = IE</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.205"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.205"></status>
+</kw>
+<kw type="foritem" name="${index} = 2">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${tempVariableName} = dENV</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${regex} = [u'dENV']</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.221" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${regex} = dENV</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${regex} = ENV</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${tempValue} = T3</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.221" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'NoneType'&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.221" level="INFO">${is_none} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.221" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${ENV} = T3</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.221"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.221"></status>
+</kw>
+<kw type="foritem" name="${index} = 3">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${tempVariableName} = dUSERNAME</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${regex} = [u'dUSERNAME']</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.237" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${regex} = dUSERNAME</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${regex} = USERNAME</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${tempValue} = ZAINUDNA</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.237" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'NoneType'&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${is_none} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${USERNAME} = ZAINUDNA</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw type="foritem" name="${index} = 4">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${tempVariableName} = dPWD</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${regex} = [u'dPWD']</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.237" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.237" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.237" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${regex} = dPWD</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${regex} = PWD</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${tempValue} = nurazry7</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.252" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'NoneType'&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${is_none} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${PWD} = nurazry7</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.237"></status>
+</kw>
+<kw type="foritem" name="${index} = 5">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${tempVariableName} = dURL</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${regex} = [u'dURL']</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.252" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${regex} = dURL</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${regex} = URL</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${tempValue} = http://10.29.79.76:61017/TahitiPortal/index.jsp</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.252" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'NoneType'&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.252" level="INFO">${is_none} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.252" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${URL} = http://10.29.79.76:61017/TahitiPortal/index.jsp</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.252"></status>
+</kw>
+<kw type="foritem" name="${index} = 6">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${tempVariableName} = dScenarioType</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${regex} = [u'dScenarioType']</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.268" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${regex} = dScenarioType</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${regex} = ScenarioType</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${tempValue} = Provide</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.268" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'NoneType'&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.268" level="INFO">${is_none} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.268" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${ScenarioType} = Provide</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.268"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.268"></status>
+</kw>
+<kw type="foritem" name="${index} = 7">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${tempVariableName} = dCOUNTRY</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${regex} = [u'dCOUNTRY']</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.284" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${regex} = dCOUNTRY</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${regex} = COUNTRY</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${tempValue} = Spain</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.284" level="INFO">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'NoneType'&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${is_none} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.284" level="INFO">${COUNTRY} = Spain</msg>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.284" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.284"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.284"></status>
+</kw>
+<kw type="foritem" name="${index} = 8">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${tempVariableName} = dGSP</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${regex} = [u'dGSP']</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.299" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${regex} = dGSP</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${regex} = GSP</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${tempValue} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.299" level="FAIL">None == None</msg>
+<status status="FAIL" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${is_none} = False</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${GSP} = </msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw type="foritem" name="${index} = 9">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=1,column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempVariableName}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.299" level="INFO">${tempVariableName} = dLSP</msg>
+<status status="PASS" endtime="20180810 11:49:29.299" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>"${tempVariableName}"!="${None}"</arg>
+<arg>Get Regexp Matches</arg>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Get Regexp Matches" library="String">
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<arguments>
+<arg>${tempVariableName}</arg>
+<arg>^[d][A-Z]{1,2}.*</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.315" level="INFO">${regex} = [u'dLSP']</msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.299"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Empty</arg>
+<arg>${regex}</arg>
+</arguments>
+<assign>
+<var>${blnResults}</var>
+</assign>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${regex}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.315" level="INFO">Length is 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.315" level="INFO">${blnResults} = True</msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<kw name="Run Keyword Unless" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is false.</doc>
+<arguments>
+<arg>${blnResults}</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${regex} or ${blnResults}</arg>
+<arg>Set Variable</arg>
+<arg>${regex[0]}</arg>
+<arg>ELSE</arg>
+<arg>Continue For Loop</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${regex[0]}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.315" level="INFO">${regex} = dLSP</msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<kw name="Strip String" library="String">
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<arguments>
+<arg>${regex}</arg>
+<arg>left</arg>
+<arg>d</arg>
+</arguments>
+<assign>
+<var>${regex}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.315" level="INFO">${regex} = LSP</msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${ws.cell(row=${rowNum},column=${index+1}).value}</arg>
+</arguments>
+<assign>
+<var>${tempValue}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.315" level="INFO">${tempValue} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Not Be Equal</arg>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${is_none}</var>
+</assign>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are equal.</doc>
+<arguments>
+<arg>${tempValue}</arg>
+<arg>${None}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.315" level="FAIL">None == None</msg>
+<status status="FAIL" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.315" level="INFO">${is_none} = False</msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${is_none}</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${tempValue}</arg>
+<arg>ELSE</arg>
+<arg>Set Global Variable</arg>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${${regex}}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.315" level="INFO">${LSP} = </msg>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.315" starttime="20180810 11:49:29.315"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${regex}= ${${regex}}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.315"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.299"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.190"></status>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<arguments>
+<arg>Variable Should Exist</arg>
+<arg>${Password}</arg>
+</arguments>
+<assign>
+<var>${status}</var>
+<var>${errormsg}</var>
+</assign>
+<kw name="Variable Should Exist" library="BuiltIn">
+<doc>Fails unless the given variable exists within the current scope.</doc>
+<arguments>
+<arg>${Password}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.330" level="FAIL">Variable ${Password} does not exist.</msg>
+<status status="FAIL" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.330" level="INFO">${status} = FAIL</msg>
+<msg timestamp="20180810 11:49:29.330" level="INFO">${errormsg} = Variable ${Password} does not exist.</msg>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${status}'=='PASS'</arg>
+<arg>Run Keyword And Ignore Error</arg>
+<arg>Set Password</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:25.158"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Retrieved Tahiti TestData</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Create Index Numbering" library="CommonResources">
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str(1)</arg>
+</arguments>
+<assign>
+<var>${Numbering}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.330" level="INFO">${Numbering} = 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Numbering}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.330" level="INFO">${Numbering} = 1</msg>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Set Timestamp" library="CommonResources">
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<arguments>
+<arg>result_format=%Y%m%d%H%M%S</arg>
+</arguments>
+<assign>
+<var>${timeStamp}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.330" level="INFO">${timeStamp} = 20180810114929</msg>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>timestamp for this test is ${timeStamp}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${timeStamp}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.330" level="INFO">${timeStamp} = 20180810114929</msg>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Get File Content" library="CommonResources">
+<arguments>
+<arg>${ClassicOrderID_TextFile}</arg>
+</arguments>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${CustomerID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${CustomerID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${CustomerID1}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.330" level="INFO">${CustomerID1} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.330" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${AccountID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${AccountID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${AccountID1}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${AccountID1} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${QuoteID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${QuoteID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${QuoteID1}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${QuoteID1} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${OrderID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${OrderID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${OrderID1}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${OrderID1} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${EDCAOrderID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${EDCAOrderID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${EDCAOrderID1}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${EDCAOrderID1} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicOrderID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${ClassicOrderID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${ClassicOrderID1}</var>
+</assign>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${EXECDIR}\\Extracted_Data\\${ClassicOrderID_TextFile}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.346" html="yes" level="INFO">Getting file '&lt;a href="file://C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\OV\R57\T3\TA_GSIP Full PSTN_Provide_Spain\Extracted_Data\ClassicOrderID.txt"&gt;C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\OV\R57\T3\TA_GSIP Full PSTN_Provide_Spain\Extracted_Data\ClassicOrderID.txt&lt;/a&gt;'.</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${ClassicOrderID1} = 1154585</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${BFGSiteID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${BFGSiteID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${BFGSiteID1}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${BFGSiteID1} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicManualTaskID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${ClassicManualTaskID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${TahitiManualTaskID1}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${TahitiManualTaskID1} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${CustomerID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${CustomerID}</arg>
+<arg>${CustomerID1}</arg>
+</arguments>
+<assign>
+<var>${CustomerID2}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${CustomerID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${AccountID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${AccountID}</arg>
+<arg>${AccountID1}</arg>
+</arguments>
+<assign>
+<var>${AccountID2}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${AccountID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${QuoteID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${QuoteID}</arg>
+<arg>${QuoteID1}</arg>
+</arguments>
+<assign>
+<var>${QuoteID2}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${QuoteID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${OrderID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${OrderID}</arg>
+<arg>${OrderID1}</arg>
+</arguments>
+<assign>
+<var>${OrderID2}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${OrderID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${EDCAOrderID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${EDCAOrderID}</arg>
+<arg>${EDCAOrderID1}</arg>
+</arguments>
+<assign>
+<var>${EDCAOrderID2}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${EDCAOrderID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicOrderID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${ClassicOrderID}</arg>
+<arg>${ClassicOrderID1}</arg>
+</arguments>
+<assign>
+<var>${ClassicOrderID2}</var>
+</assign>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${ClassicOrderID}</arg>
+<arg>${ClassicOrderID1}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${ClassicOrderID} = 1154585</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<msg timestamp="20180810 11:49:29.346" level="INFO">${ClassicOrderID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.346" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${BFGSiteID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${BFGSiteID}</arg>
+<arg>${BFGSiteID1}</arg>
+</arguments>
+<assign>
+<var>${BFGSiteID2}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.362" level="INFO">${BFGSiteID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.346"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicManualTaskID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${TahitiManualTaskID}</arg>
+<arg>${TahitiManualTaskID1}</arg>
+</arguments>
+<assign>
+<var>${TahitiManualTaskID2}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.362" level="INFO">${TahitiManualTaskID2} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.362"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.330"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>ClassicOrderID: ${ClassicOrderID}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.362"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>ClassicOrderID: ${ClassicOrderID}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.362" level="INFO">ClassicOrderID: 1154585</msg>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.362"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:29.362" critical="yes" starttime="20180810 11:49:25.143"></status>
+</test>
+<test id="s1-t2" name="TC01 Tahiti Portal">
+<kw name="Open Browser to Tahiti Login Page" library="TAHITI_Resource">
+<kw name="Browser Config" library="CommonResources">
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${BROWSER}'=='Chrome'</arg>
+<arg>Set Variable</arg>
+<arg>C:\\Jenkins\\RFOSheets</arg>
+</arguments>
+<assign>
+<var>${download_directory}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.362" level="INFO">${download_directory} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.362"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${BROWSER}'=='Chrome'</arg>
+<arg>Evaluate</arg>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+</arguments>
+<assign>
+<var>${chrome_options}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.362" level="INFO">${chrome_options} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.362"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${BROWSER}'=='Chrome'</arg>
+<arg>Create Dictionary</arg>
+<arg>download.default_directory=${download_directory}</arg>
+</arguments>
+<assign>
+<var>${prefs}</var>
+</assign>
+<msg timestamp="20180810 11:49:29.362" level="INFO">${prefs} = None</msg>
+<status status="PASS" endtime="20180810 11:49:29.362" starttime="20180810 11:49:29.362"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${BROWSER}'=='Chrome'</arg>
+<arg>Run Keywords</arg>
+<arg>Call Method</arg>
+<arg>${chrome_options}</arg>
+<arg>add_experimental_option</arg>
+<arg>prefs</arg>
+<arg>${prefs}</arg>
+<arg>AND</arg>
+<arg>Create Webdriver</arg>
+<arg>Chrome</arg>
+<arg>chrome_options=${chrome_options}</arg>
+<arg>And Goto</arg>
+<arg>${URL}</arg>
+<arg>ELSE</arg>
+<arg>Open Browser</arg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>ff_profile_dir=${FF_PROFILE}</arg>
+</arguments>
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>ff_profile_dir=${FF_PROFILE}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:29.362" level="INFO">Opening browser 'IE' to base url 'http://10.29.79.76:61017/TahitiPortal/index.jsp'.</msg>
+<status status="PASS" endtime="20180810 11:49:37.003" starttime="20180810 11:49:29.362"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:37.003" starttime="20180810 11:49:29.362"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:37.003" starttime="20180810 11:49:29.362"></status>
+</kw>
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the active browser instance to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:37.003" level="INFO">Opening url 'http://10.29.79.76:61017/TahitiPortal/index.jsp'</msg>
+<status status="PASS" endtime="20180810 11:49:37.644" starttime="20180810 11:49:37.003"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20180810 11:49:37.659" starttime="20180810 11:49:37.644"></status>
+</kw>
+<kw name="Set Selenium Speed" library="Selenium2Library">
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<arguments>
+<arg>${DELAY}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:37.659" starttime="20180810 11:49:37.659"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${BTN_LOGIN}</arg>
+<arg>${waiting_time}</arg>
+<arg>Login Button is not visibled.</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:38.706" starttime="20180810 11:49:37.659"></status>
+</kw>
+<kw name="Input Username Password" library="TAHITI_Resource">
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>${TXT_USERNAME}</arg>
+<arg>${USERNAME}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:38.706" level="INFO">Typing text 'ZAINUDNA' into text field 'user'.</msg>
+<status status="PASS" endtime="20180810 11:49:41.441" starttime="20180810 11:49:38.706"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>${TXT_PWD}</arg>
+<arg>${PWD}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:41.441" level="INFO">Typing text 'nurazry7' into text field 'password'.</msg>
+<status status="PASS" endtime="20180810 11:49:43.550" starttime="20180810 11:49:41.441"></status>
+</kw>
+<kw name="Submit Credentials" library="TAHITI_Resource">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${BTN_LOGIN}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:43.550" level="INFO">Clicking element 'xpath=.//*[@id='needToDisplayOnce']/table/tbody/tr/td/table/tbody/tr[4]/td[1]/input'.</msg>
+<status status="PASS" endtime="20180810 11:49:44.801" starttime="20180810 11:49:43.550"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${BTN_YES_LEGAL}</arg>
+<arg>${waiting_time}</arg>
+<arg>Legal page is not visible</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:45.754" starttime="20180810 11:49:44.801"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${BTN_YES_LEGAL}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:45.754" level="INFO">Clicking element 'YES'.</msg>
+<status status="PASS" endtime="20180810 11:49:46.973" starttime="20180810 11:49:45.754"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:46.973" starttime="20180810 11:49:43.550"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:46.973" starttime="20180810 11:49:38.706"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:46.973" starttime="20180810 11:49:29.362"></status>
+</kw>
+<kw name="Navigate to My Orders" library="TAHITI_Resource">
+<kw name="Wait Until Element Is Enabled" library="Selenium2Library">
+<doc>Waits until element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${IFRAME_MENU}</arg>
+<arg>${waiting_time}</arg>
+<arg>Menu Iframe is not enabled</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:49.660" starttime="20180810 11:49:46.973"></status>
+</kw>
+<kw name="PrintScreen" library="TAHITI_Resource">
+<arguments>
+<arg>Default_page</arg>
+</arguments>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>(</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:49.660" level="INFO">${imageName} = Default_page</msg>
+<status status="PASS" endtime="20180810 11:49:49.660" starttime="20180810 11:49:49.660"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>)</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:49.660" level="INFO">${imageName} = Default_page</msg>
+<status status="PASS" endtime="20180810 11:49:49.660" starttime="20180810 11:49:49.660"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\#</arg>
+<arg>\-</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:49.660" level="INFO">${imageName} = Default_page</msg>
+<status status="PASS" endtime="20180810 11:49:49.660" starttime="20180810 11:49:49.660"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\/</arg>
+<arg>\_</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:49.660" level="INFO">${imageName} = Default_page</msg>
+<status status="PASS" endtime="20180810 11:49:49.660" starttime="20180810 11:49:49.660"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\&amp;</arg>
+<arg>n</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:49.660" level="INFO">${imageName} = Default_page</msg>
+<status status="PASS" endtime="20180810 11:49:49.660" starttime="20180810 11:49:49.660"></status>
+</kw>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<arguments>
+<arg>${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png</arg>
+</arguments>
+<msg timestamp="20180810 11:49:50.317" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20180810114929/1-Default_page.png"&gt;&lt;img src="20180810114929/1-Default_page.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:50.317" starttime="20180810 11:49:49.660"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str(${Numbering}+1)</arg>
+</arguments>
+<assign>
+<var>${Numbering}</var>
+</assign>
+<msg timestamp="20180810 11:49:50.317" level="INFO">${Numbering} = 2</msg>
+<status status="PASS" endtime="20180810 11:49:50.317" starttime="20180810 11:49:50.317"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Numbering}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:50.317" level="INFO">${Numbering} = 2</msg>
+<status status="PASS" endtime="20180810 11:49:50.317" starttime="20180810 11:49:50.317"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:50.317" starttime="20180810 11:49:49.660"></status>
+</kw>
+<kw name="Select Frame" library="Selenium2Library">
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<arguments>
+<arg>${IFRAME_MENU}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:50.317" level="INFO">Selecting frame 'xpath=.//iframe[@id='menu']'.</msg>
+<status status="PASS" endtime="20180810 11:49:51.254" starttime="20180810 11:49:50.317"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="Selenium2Library">
+<doc>Waits until element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${LINK_MYORDERS}</arg>
+<arg>${waiting_time}</arg>
+<arg>My Orders Link is not enabled.</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:49:52.926" starttime="20180810 11:49:51.254"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${LINK_MYORDERS}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:52.926" level="INFO">Clicking element 'opm1'.</msg>
+<status status="PASS" endtime="20180810 11:49:57.864" starttime="20180810 11:49:52.926"></status>
+</kw>
+<kw name="PrintScreen" library="TAHITI_Resource">
+<arguments>
+<arg>MyOrders_page</arg>
+</arguments>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>(</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:57.864" level="INFO">${imageName} = MyOrders_page</msg>
+<status status="PASS" endtime="20180810 11:49:57.864" starttime="20180810 11:49:57.864"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>)</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:57.864" level="INFO">${imageName} = MyOrders_page</msg>
+<status status="PASS" endtime="20180810 11:49:57.864" starttime="20180810 11:49:57.864"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\#</arg>
+<arg>\-</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:57.864" level="INFO">${imageName} = MyOrders_page</msg>
+<status status="PASS" endtime="20180810 11:49:57.864" starttime="20180810 11:49:57.864"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\/</arg>
+<arg>\_</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:57.864" level="INFO">${imageName} = MyOrders_page</msg>
+<status status="PASS" endtime="20180810 11:49:57.864" starttime="20180810 11:49:57.864"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\&amp;</arg>
+<arg>n</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:49:57.864" level="INFO">${imageName} = MyOrders_page</msg>
+<status status="PASS" endtime="20180810 11:49:57.864" starttime="20180810 11:49:57.864"></status>
+</kw>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<arguments>
+<arg>${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png</arg>
+</arguments>
+<msg timestamp="20180810 11:49:58.568" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20180810114929/2-MyOrders_page.png"&gt;&lt;img src="20180810114929/2-MyOrders_page.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:49:58.568" starttime="20180810 11:49:57.864"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str(${Numbering}+1)</arg>
+</arguments>
+<assign>
+<var>${Numbering}</var>
+</assign>
+<msg timestamp="20180810 11:49:58.568" level="INFO">${Numbering} = 3</msg>
+<status status="PASS" endtime="20180810 11:49:58.568" starttime="20180810 11:49:58.568"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Numbering}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:58.568" level="INFO">${Numbering} = 3</msg>
+<status status="PASS" endtime="20180810 11:49:58.568" starttime="20180810 11:49:58.568"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:49:58.568" starttime="20180810 11:49:57.864"></status>
+</kw>
+<kw name="Unselect Frame" library="Selenium2Library">
+<doc>Sets the main frame as the current frame.</doc>
+<status status="PASS" endtime="20180810 11:49:59.005" starttime="20180810 11:49:58.568"></status>
+</kw>
+<kw name="Select Frame" library="Selenium2Library">
+<doc>Sets frame identified by ``locator`` as the current frame.</doc>
+<arguments>
+<arg>${IFRAME_CONTENT}</arg>
+</arguments>
+<msg timestamp="20180810 11:49:59.005" level="INFO">Selecting frame 'xpath=.//iframe[@id='content']'.</msg>
+<status status="PASS" endtime="20180810 11:50:01.508" starttime="20180810 11:49:59.005"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${BTN_ORDERDETAIL}</arg>
+<arg>${waiting_time}</arg>
+<arg>Order Detail button is not visible</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:02.539" starttime="20180810 11:50:01.508"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:02.539" starttime="20180810 11:49:46.973"></status>
+</kw>
+<kw name="Search By Order Search" library="TAHITI_Resource">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${BTN_ORDERSEARCH}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:02.539" level="INFO">Clicking element 'button1'.</msg>
+<status status="PASS" endtime="20180810 11:50:12.875" starttime="20180810 11:50:02.539"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="Selenium2Library">
+<doc>Waits until element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${TXT_SEARCH}</arg>
+<arg>${waiting_time}</arg>
+<arg>Search button is not enabled.</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:15.016" starttime="20180810 11:50:12.875"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>${TXT_SEARCH}</arg>
+<arg>${ClassicOrderID}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:15.016" level="INFO">Typing text '1154585' into text field 'txtSearch'.</msg>
+<status status="PASS" endtime="20180810 11:50:17.251" starttime="20180810 11:50:15.016"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${BTN_SEARCH}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:17.251" level="INFO">Clicking element 'button1'.</msg>
+<status status="PASS" endtime="20180810 11:50:21.689" starttime="20180810 11:50:17.251"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="Selenium2Library">
+<doc>Waits until element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${LIST_ORDERTABLE}</arg>
+<arg>${waiting_time}</arg>
+<arg>Order list is not enabled.</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:23.330" starttime="20180810 11:50:21.689"></status>
+</kw>
+<kw name="Select Radio Button" library="Selenium2Library">
+<doc>Sets radio button group ``group_name`` to ``value``.</doc>
+<arguments>
+<arg>Id</arg>
+<arg>prueba</arg>
+</arguments>
+<msg timestamp="20180810 11:50:23.330" level="INFO">Selecting 'prueba' from radio button 'Id'.</msg>
+<status status="PASS" endtime="20180810 11:50:26.486" starttime="20180810 11:50:23.330"></status>
+</kw>
+<kw name="PrintScreen" library="TAHITI_Resource">
+<arguments>
+<arg>OrderSelected</arg>
+</arguments>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>(</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:26.486" level="INFO">${imageName} = OrderSelected</msg>
+<status status="PASS" endtime="20180810 11:50:26.486" starttime="20180810 11:50:26.486"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>)</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:26.486" level="INFO">${imageName} = OrderSelected</msg>
+<status status="PASS" endtime="20180810 11:50:26.486" starttime="20180810 11:50:26.486"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\#</arg>
+<arg>\-</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:26.486" level="INFO">${imageName} = OrderSelected</msg>
+<status status="PASS" endtime="20180810 11:50:26.486" starttime="20180810 11:50:26.486"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\/</arg>
+<arg>\_</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:26.486" level="INFO">${imageName} = OrderSelected</msg>
+<status status="PASS" endtime="20180810 11:50:26.486" starttime="20180810 11:50:26.486"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\&amp;</arg>
+<arg>n</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:26.486" level="INFO">${imageName} = OrderSelected</msg>
+<status status="PASS" endtime="20180810 11:50:26.486" starttime="20180810 11:50:26.486"></status>
+</kw>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<arguments>
+<arg>${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png</arg>
+</arguments>
+<msg timestamp="20180810 11:50:27.127" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20180810114929/3-OrderSelected.png"&gt;&lt;img src="20180810114929/3-OrderSelected.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:50:27.127" starttime="20180810 11:50:26.486"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str(${Numbering}+1)</arg>
+</arguments>
+<assign>
+<var>${Numbering}</var>
+</assign>
+<msg timestamp="20180810 11:50:27.127" level="INFO">${Numbering} = 4</msg>
+<status status="PASS" endtime="20180810 11:50:27.127" starttime="20180810 11:50:27.127"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Numbering}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:27.127" level="INFO">${Numbering} = 4</msg>
+<status status="PASS" endtime="20180810 11:50:27.127" starttime="20180810 11:50:27.127"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:27.127" starttime="20180810 11:50:26.486"></status>
+</kw>
+<kw name="Wait Until Element Is Enabled" library="Selenium2Library">
+<doc>Waits until element ``locator`` is enabled.</doc>
+<arguments>
+<arg>${BTN_ORDERDETAIL2}</arg>
+<arg>1m</arg>
+<arg>Order Detail Button is not available</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:28.549" starttime="20180810 11:50:27.127"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${BTN_ORDERDETAIL2}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:28.549" level="INFO">Clicking element 'xpath=//tr//td//input[@id='button0']'.</msg>
+<status status="PASS" endtime="20180810 11:50:31.799" starttime="20180810 11:50:28.549"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Element Should Not Be Visible</arg>
+<arg>${FORM_ORDERDETAIL}</arg>
+</arguments>
+<assign>
+<var>${NotPresent}</var>
+</assign>
+<kw name="Element Should Not Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by ``locator`` is NOT visible.</doc>
+<arguments>
+<arg>${FORM_ORDERDETAIL}</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180810 11:50:33.690" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:50:33.690" starttime="20180810 11:50:33.002"></status>
+</kw>
+<msg timestamp="20180810 11:50:33.706" level="FAIL">The element 'orderDetail' should not be visible, but it is.</msg>
+<status status="FAIL" endtime="20180810 11:50:33.706" starttime="20180810 11:50:31.799"></status>
+</kw>
+<msg timestamp="20180810 11:50:33.706" level="INFO">${NotPresent} = False</msg>
+<status status="PASS" endtime="20180810 11:50:33.706" starttime="20180810 11:50:31.799"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${NotPresent}</arg>
+<arg>Click Element</arg>
+<arg>${BTN_ORDERDETAIL2}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:33.706" starttime="20180810 11:50:33.706"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${FORM_ORDERDETAIL}</arg>
+<arg>1m</arg>
+<arg>Order Details List is not shown.</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:34.737" starttime="20180810 11:50:33.706"></status>
+</kw>
+<kw name="PrintScreen" library="TAHITI_Resource">
+<arguments>
+<arg>OrderDetailsElementShown</arg>
+</arguments>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>(</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:34.737" level="INFO">${imageName} = OrderDetailsElementShown</msg>
+<status status="PASS" endtime="20180810 11:50:34.737" starttime="20180810 11:50:34.737"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>)</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:34.737" level="INFO">${imageName} = OrderDetailsElementShown</msg>
+<status status="PASS" endtime="20180810 11:50:34.737" starttime="20180810 11:50:34.737"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\#</arg>
+<arg>\-</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:34.737" level="INFO">${imageName} = OrderDetailsElementShown</msg>
+<status status="PASS" endtime="20180810 11:50:34.737" starttime="20180810 11:50:34.737"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\/</arg>
+<arg>\_</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:34.737" level="INFO">${imageName} = OrderDetailsElementShown</msg>
+<status status="PASS" endtime="20180810 11:50:34.737" starttime="20180810 11:50:34.737"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\&amp;</arg>
+<arg>n</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:34.737" level="INFO">${imageName} = OrderDetailsElementShown</msg>
+<status status="PASS" endtime="20180810 11:50:34.737" starttime="20180810 11:50:34.737"></status>
+</kw>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<arguments>
+<arg>${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png</arg>
+</arguments>
+<msg timestamp="20180810 11:50:35.378" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20180810114929/4-OrderDetailsElementShown.png"&gt;&lt;img src="20180810114929/4-OrderDetailsElementShown.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:50:35.378" starttime="20180810 11:50:34.737"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str(${Numbering}+1)</arg>
+</arguments>
+<assign>
+<var>${Numbering}</var>
+</assign>
+<msg timestamp="20180810 11:50:35.378" level="INFO">${Numbering} = 5</msg>
+<status status="PASS" endtime="20180810 11:50:35.378" starttime="20180810 11:50:35.378"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Numbering}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:35.378" level="INFO">${Numbering} = 5</msg>
+<status status="PASS" endtime="20180810 11:50:35.378" starttime="20180810 11:50:35.378"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:35.378" starttime="20180810 11:50:34.737"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:35.378" starttime="20180810 11:50:02.539"></status>
+</kw>
+<kw name="Select OV Service" library="TAHITI_Resource">
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${FORM_SERVICELIST}</arg>
+<arg>${waiting_time}</arg>
+<arg>Service List is not shown</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:36.315" starttime="20180810 11:50:35.378"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=.//a[contains(text(),'GONEV-')]</arg>
+</arguments>
+<msg timestamp="20180810 11:50:36.315" level="INFO">Clicking element 'xpath=.//a[contains(text(),'GONEV-')]'.</msg>
+<status status="PASS" endtime="20180810 11:50:44.550" starttime="20180810 11:50:36.315"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>Table1</arg>
+<arg>${waiting_time}</arg>
+<arg>Order Details List is not shown</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:45.629" starttime="20180810 11:50:44.550"></status>
+</kw>
+<kw name="PrintScreen" library="TAHITI_Resource">
+<arguments>
+<arg>OrdersDetails_page</arg>
+</arguments>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>(</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:45.629" level="INFO">${imageName} = OrdersDetails_page</msg>
+<status status="PASS" endtime="20180810 11:50:45.629" starttime="20180810 11:50:45.629"></status>
+</kw>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>)</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:45.629" level="INFO">${imageName} = OrdersDetails_page</msg>
+<status status="PASS" endtime="20180810 11:50:45.629" starttime="20180810 11:50:45.629"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\#</arg>
+<arg>\-</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:45.629" level="INFO">${imageName} = OrdersDetails_page</msg>
+<status status="PASS" endtime="20180810 11:50:45.629" starttime="20180810 11:50:45.629"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\/</arg>
+<arg>\_</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:45.629" level="INFO">${imageName} = OrdersDetails_page</msg>
+<status status="PASS" endtime="20180810 11:50:45.629" starttime="20180810 11:50:45.629"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${imageName}</arg>
+<arg>\&amp;</arg>
+<arg>n</arg>
+</arguments>
+<assign>
+<var>${imageName}</var>
+</assign>
+<msg timestamp="20180810 11:50:45.629" level="INFO">${imageName} = OrdersDetails_page</msg>
+<status status="PASS" endtime="20180810 11:50:45.629" starttime="20180810 11:50:45.629"></status>
+</kw>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<arguments>
+<arg>${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png</arg>
+</arguments>
+<msg timestamp="20180810 11:50:46.269" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="20180810114929/5-OrdersDetails_page.png"&gt;&lt;img src="20180810114929/5-OrdersDetails_page.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:50:46.269" starttime="20180810 11:50:45.629"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str(${Numbering}+1)</arg>
+</arguments>
+<assign>
+<var>${Numbering}</var>
+</assign>
+<msg timestamp="20180810 11:50:46.269" level="INFO">${Numbering} = 6</msg>
+<status status="PASS" endtime="20180810 11:50:46.269" starttime="20180810 11:50:46.269"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Numbering}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:46.269" level="INFO">${Numbering} = 6</msg>
+<status status="PASS" endtime="20180810 11:50:46.269" starttime="20180810 11:50:46.269"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:46.269" starttime="20180810 11:50:45.629"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:46.269" starttime="20180810 11:50:35.378"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:46.269" critical="yes" starttime="20180810 11:49:29.362"></status>
+</test>
+<test id="s1-t3" name="TC02 Process Tahiti Tasks">
+<kw name="Select And Process Task" library="TAHITI_Resource">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${LINK_ALL_TASKS}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:46.269" level="INFO">Clicking element 'xpath=.//td[@class='filaimpar']/a[@class='hrefLink'][contains(text(),'All Tasks')]'.</msg>
+<status status="PASS" endtime="20180810 11:50:49.504" starttime="20180810 11:50:46.269"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${TABLE_HEADER_TASK_ID}</arg>
+<arg>${waiting_time}</arg>
+<arg>All table list is not shown.</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:50.473" starttime="20180810 11:50:49.504"></status>
+</kw>
+<kw name="Check Last Task Ended" library="TAHITI_Resource">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Check Last Task Ended</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:50.473" starttime="20180810 11:50:50.473"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=.//*[@id='Filterec02']/input</arg>
+<arg>${lastTaskDesc}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:50.473" level="INFO">Typing text 'Confirm sub' into text field 'xpath=.//*[@id='Filterec02']/input'.</msg>
+<status status="PASS" endtime="20180810 11:50:52.379" starttime="20180810 11:50:50.473"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=.//*[@id='Filterec03']/input</arg>
+<arg>${endStatus}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:52.379" level="INFO">Typing text 'Ended' into text field 'xpath=.//*[@id='Filterec03']/input'.</msg>
+<status status="PASS" endtime="20180810 11:50:54.145" starttime="20180810 11:50:52.379"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=.//*/img[contains(@alt,'Filter')]</arg>
+</arguments>
+<msg timestamp="20180810 11:50:54.145" level="INFO">Clicking element 'xpath=.//*/img[contains(@alt,'Filter')]'.</msg>
+<status status="PASS" endtime="20180810 11:50:57.427" starttime="20180810 11:50:54.145"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${LBL_TOTAL_RESULTS_FOUND}</arg>
+<arg>${waiting_time}</arg>
+<arg>Search result is not visible</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:58.349" starttime="20180810 11:50:57.427"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Element Should Be Visible</arg>
+<arg>${TASK_FOR_SERVICE_LIST}[1]/td[2]</arg>
+</arguments>
+<assign>
+<var>${LastTaskExist}</var>
+</assign>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<arguments>
+<arg>${TASK_FOR_SERVICE_LIST}[1]/td[2]</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180810 11:50:59.677" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-5.png"&gt;&lt;img src="selenium-screenshot-5.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:50:59.677" starttime="20180810 11:50:59.068"></status>
+</kw>
+<msg timestamp="20180810 11:50:59.677" level="FAIL">Element with locator '//table[@id='ec_table']/tbody/tr[1]/td[2]' not found.</msg>
+<status status="FAIL" endtime="20180810 11:50:59.677" starttime="20180810 11:50:58.349"></status>
+</kw>
+<msg timestamp="20180810 11:50:59.677" level="INFO">${LastTaskExist} = False</msg>
+<status status="PASS" endtime="20180810 11:50:59.677" starttime="20180810 11:50:58.349"></status>
+</kw>
+<kw name="Pass Execution If" library="BuiltIn">
+<doc>Conditionally skips rest of the current test, setup, or teardown with PASS status.</doc>
+<arguments>
+<arg>${LastTaskExist}</arg>
+<arg>Last Task already ended. Please close this test execution.</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:59.677" starttime="20180810 11:50:59.677"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:50:59.677" starttime="20180810 11:50:50.473"></status>
+</kw>
+<kw name="Filter and Process Task" library="TAHITI_Resource">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Filtering TaskID</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:59.677" starttime="20180810 11:50:59.677"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Looping 100 times to search for the task until it exists and process it</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:59.677" starttime="20180810 11:50:59.677"></status>
+</kw>
+<kw type="for" name="${currCount} IN RANGE [ 1 | 100 ]">
+<kw type="foritem" name="${currCount} = 1">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Loop ${currCount}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:50:59.677" starttime="20180810 11:50:59.677"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>${TABLE_HEADER_TASK_ID}</arg>
+</arguments>
+<msg timestamp="20180810 11:50:59.677" level="INFO">Clicking element 'Headerec01'.</msg>
+<status status="PASS" endtime="20180810 11:51:02.802" starttime="20180810 11:50:59.677"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=.//*/img[contains(@alt,'Clear')]</arg>
+</arguments>
+<msg timestamp="20180810 11:51:02.802" level="INFO">Clicking element 'xpath=.//*/img[contains(@alt,'Clear')]'.</msg>
+<status status="PASS" endtime="20180810 11:51:06.146" starttime="20180810 11:51:02.802"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=.//*[@id='Filterec03']/input</arg>
+<arg>${ORDERSTATUS_TASKINSERVICE}</arg>
+</arguments>
+<msg timestamp="20180810 11:51:06.146" level="INFO">Typing text 'Execution' into text field 'xpath=.//*[@id='Filterec03']/input'.</msg>
+<status status="PASS" endtime="20180810 11:51:08.037" starttime="20180810 11:51:06.146"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=.//*/img[contains(@alt,'Filter')]</arg>
+</arguments>
+<msg timestamp="20180810 11:51:08.037" level="INFO">Clicking element 'xpath=.//*/img[contains(@alt,'Filter')]'.</msg>
+<status status="PASS" endtime="20180810 11:51:10.741" starttime="20180810 11:51:08.037"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>${LBL_TOTAL_RESULTS_FOUND}</arg>
+<arg>${waiting_time}</arg>
+<arg>Search result is not visible</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:51:11.709" starttime="20180810 11:51:10.741"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Element Should Be Visible</arg>
+<arg>${TASK_FOR_SERVICE_LIST}[1]/td[2]</arg>
+</arguments>
+<assign>
+<var>${TaskExist}</var>
+</assign>
+<kw name="Element Should Be Visible" library="Selenium2Library">
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<arguments>
+<arg>${TASK_FOR_SERVICE_LIST}[1]/td[2]</arg>
+</arguments>
+<msg timestamp="20180810 11:51:12.616" level="INFO">Element '//table[@id='ec_table']/tbody/tr[1]/td[2]' is displayed.</msg>
+<status status="PASS" endtime="20180810 11:51:12.616" starttime="20180810 11:51:11.709"></status>
+</kw>
+<msg timestamp="20180810 11:51:12.616" level="INFO">${TaskExist} = True</msg>
+<status status="PASS" endtime="20180810 11:51:12.616" starttime="20180810 11:51:11.709"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str()</arg>
+</arguments>
+<assign>
+<var>${taskDesc}</var>
+</assign>
+<msg timestamp="20180810 11:51:12.616" level="INFO">${taskDesc} = </msg>
+<status status="PASS" endtime="20180810 11:51:12.616" starttime="20180810 11:51:12.616"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str()</arg>
+</arguments>
+<assign>
+<var>${TaskID}</var>
+</assign>
+<msg timestamp="20180810 11:51:12.616" level="INFO">${TaskID} = </msg>
+<status status="PASS" endtime="20180810 11:51:12.616" starttime="20180810 11:51:12.616"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${TaskExist}</arg>
+<arg>Run Keywords</arg>
+<arg>Get TaskID</arg>
+<arg>AND</arg>
+<arg>Task Validation</arg>
+<arg>${TaskID}</arg>
+<arg>2</arg>
+<arg>1</arg>
+<arg>${currCount}</arg>
+<arg>ELSE</arg>
+<arg>Run Keywords</arg>
+<arg>Log To Console</arg>
+<arg>Sleep ${REFRESH_WAIT_TIME} and Refresh page</arg>
+<arg>AND</arg>
+<arg>Sleep</arg>
+<arg>${REFRESH_WAIT_TIME}</arg>
+<arg>Wait for task to appear before refresh</arg>
+<arg>AND</arg>
+<arg>Log To Console</arg>
+<arg>Refreshing page</arg>
+<arg>AND</arg>
+<arg>Refresh Task In Service</arg>
+</arguments>
+<kw name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Get TaskID</arg>
+<arg>AND</arg>
+<arg>Task Validation</arg>
+<arg>${TaskID}</arg>
+<arg>2</arg>
+<arg>1</arg>
+<arg>${currCount}</arg>
+</arguments>
+<kw name="Get TaskID" library="TAHITI_Resource">
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of element identified by ``locator``.</doc>
+<arguments>
+<arg>${TASK_FOR_SERVICE_LIST}[1]/td[2]</arg>
+</arguments>
+<assign>
+<var>${TaskID}</var>
+</assign>
+<msg timestamp="20180810 11:51:13.600" level="INFO">${TaskID} = 081018#198122-1</msg>
+<status status="PASS" endtime="20180810 11:51:13.600" starttime="20180810 11:51:12.616"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${TaskID}</arg>
+</arguments>
+<msg timestamp="20180810 11:51:13.600" level="INFO">${TaskID} = 081018#198122-1</msg>
+<status status="PASS" endtime="20180810 11:51:13.600" starttime="20180810 11:51:13.600"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>TaskID: ${TaskID}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:51:13.600" starttime="20180810 11:51:13.600"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:51:13.600" starttime="20180810 11:51:12.616"></status>
+</kw>
+<kw name="Task Validation" library="TAHITI_Resource">
+<doc>@author 607253786</doc>
+<arguments>
+<arg>${TaskID}</arg>
+<arg>2</arg>
+<arg>1</arg>
+<arg>${currCount}</arg>
+</arguments>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>currTaskId ${currTaskId} taskIdColumn ${taskIdColumn} checkBoxColumn ${checkBoxColumn} currCount ${currCount}</arg>
+</arguments>
+<msg timestamp="20180810 11:51:13.600" level="INFO">currTaskId 081018#198122-1 taskIdColumn 2 checkBoxColumn 1 currCount 1</msg>
+<status status="PASS" endtime="20180810 11:51:13.600" starttime="20180810 11:51:13.600"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Validating Task</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:51:13.600" starttime="20180810 11:51:13.600"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${row}</var>
+</assign>
+<msg timestamp="20180810 11:51:13.600" level="INFO">${row} = 1</msg>
+<status status="PASS" endtime="20180810 11:51:13.600" starttime="20180810 11:51:13.600"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of element identified by ``locator``.</doc>
+<arguments>
+<arg>${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskIdColumn}]</arg>
+</arguments>
+<assign>
+<var>${checkText}</var>
+</assign>
+<msg timestamp="20180810 11:51:14.522" level="INFO">${checkText} = 081018#198122-1</msg>
+<status status="PASS" endtime="20180810 11:51:14.522" starttime="20180810 11:51:13.600"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>${taskIdColumn}+1</arg>
+</arguments>
+<assign>
+<var>${taskDescColumn}</var>
+</assign>
+<msg timestamp="20180810 11:51:14.522" level="INFO">${taskDescColumn} = 3</msg>
+<status status="PASS" endtime="20180810 11:51:14.522" starttime="20180810 11:51:14.522"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>${taskIdColumn}+2</arg>
+</arguments>
+<assign>
+<var>${taskStatusColumn}</var>
+</assign>
+<msg timestamp="20180810 11:51:14.522" level="INFO">${taskStatusColumn} = 4</msg>
+<status status="PASS" endtime="20180810 11:51:14.522" starttime="20180810 11:51:14.522"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of element identified by ``locator``.</doc>
+<arguments>
+<arg>${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskDescColumn}]</arg>
+</arguments>
+<assign>
+<var>${taskDesc}</var>
+</assign>
+<msg timestamp="20180810 11:51:15.460" level="INFO">${taskDesc} = Perform Number Management</msg>
+<status status="PASS" endtime="20180810 11:51:15.460" starttime="20180810 11:51:14.522"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${taskDesc}</arg>
+</arguments>
+<msg timestamp="20180810 11:51:15.460" level="INFO">${taskDesc} = Perform Number Management</msg>
+<status status="PASS" endtime="20180810 11:51:15.460" starttime="20180810 11:51:15.460"></status>
+</kw>
+<kw name="Get Text" library="Selenium2Library">
+<doc>Returns the text value of element identified by ``locator``.</doc>
+<arguments>
+<arg>${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskStatusColumn}]</arg>
+</arguments>
+<assign>
+<var>${taskStatus}</var>
+</assign>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${taskStatus} = Execution</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:15.460"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Start With</arg>
+<arg>${taskDesc}</arg>
+<arg>Automatic Port Allocation</arg>
+</arguments>
+<assign>
+<var>${AutomaticTask}</var>
+</assign>
+<kw name="Should Start With" library="BuiltIn">
+<doc>Fails if the string ``str1`` does not start with the string ``str2``.</doc>
+<arguments>
+<arg>${taskDesc}</arg>
+<arg>Automatic Port Allocation</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.429" level="FAIL">'Perform Number Management' does not start with 'Automatic Port Allocation'</msg>
+<status status="FAIL" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${AutomaticTask} = False</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Start With</arg>
+<arg>${taskDesc}</arg>
+<arg>Automatic Service Activation</arg>
+</arguments>
+<assign>
+<var>${AutomaticActivation}</var>
+</assign>
+<kw name="Should Start With" library="BuiltIn">
+<doc>Fails if the string ``str1`` does not start with the string ``str2``.</doc>
+<arguments>
+<arg>${taskDesc}</arg>
+<arg>Automatic Service Activation</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.429" level="FAIL">'Perform Number Management' does not start with 'Automatic Service Activation'</msg>
+<status status="FAIL" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${AutomaticActivation} = False</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Start With</arg>
+<arg>${taskDesc}</arg>
+<arg>Automatic Wait for the</arg>
+</arguments>
+<assign>
+<var>${AutomaticWait4}</var>
+</assign>
+<kw name="Should Start With" library="BuiltIn">
+<doc>Fails if the string ``str1`` does not start with the string ``str2``.</doc>
+<arguments>
+<arg>${taskDesc}</arg>
+<arg>Automatic Wait for the</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.429" level="FAIL">'Perform Number Management' does not start with 'Automatic Wait for the'</msg>
+<status status="FAIL" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${AutomaticWait4} = False</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Start With</arg>
+<arg>${taskDesc}</arg>
+<arg>Set Elements to</arg>
+</arguments>
+<assign>
+<var>${ClassicTask}</var>
+</assign>
+<kw name="Should Start With" library="BuiltIn">
+<doc>Fails if the string ``str1`` does not start with the string ``str2``.</doc>
+<arguments>
+<arg>${taskDesc}</arg>
+<arg>Set Elements to</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.429" level="FAIL">'Perform Number Management' does not start with 'Set Elements to'</msg>
+<status status="FAIL" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${ClassicTask} = False</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Start With</arg>
+<arg>${taskDesc}</arg>
+<arg>Confirm Sub Project Completion</arg>
+</arguments>
+<assign>
+<var>${LastTask}</var>
+</assign>
+<kw name="Should Start With" library="BuiltIn">
+<doc>Fails if the string ``str1`` does not start with the string ``str2``.</doc>
+<arguments>
+<arg>${taskDesc}</arg>
+<arg>Confirm Sub Project Completion</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.429" level="FAIL">'Perform Number Management' does not start with 'Confirm Sub Project Completion'</msg>
+<status status="FAIL" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${LastTask} = False</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Be Equal As Strings</arg>
+<arg>${taskStatus}</arg>
+<arg>Ended</arg>
+</arguments>
+<assign>
+<var>${EndedTask}</var>
+</assign>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${taskStatus}</arg>
+<arg>Ended</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.429" level="FAIL">Execution != Ended</msg>
+<status status="FAIL" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${EndedTask} = False</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Should Start With</arg>
+<arg>${taskDesc}</arg>
+<arg>Activate Service for Test</arg>
+</arguments>
+<assign>
+<var>${TaskNeedChkVlan}</var>
+</assign>
+<kw name="Should Start With" library="BuiltIn">
+<doc>Fails if the string ``str1`` does not start with the string ``str2``.</doc>
+<arguments>
+<arg>${taskDesc}</arg>
+<arg>Activate Service for Test</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.429" level="FAIL">'Perform Number Management' does not start with 'Activate Service for Test'</msg>
+<status status="FAIL" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<msg timestamp="20180810 11:51:16.429" level="INFO">${TaskNeedChkVlan} = False</msg>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${ClassicTask}'\ \ == \ \ 'False' and \ \ '${AutomaticTask}'\ \ == \ \ 'False' and \ \ '${AutomaticActivation}'\ \ == \ \ 'False' and \ \ '${AutomaticWait4}'\ \ == \ \ 'False' and \ \ '${LastTask}'\ \ == \ \ 'False' and \ \ '${EndedTask}'\ \ == \ \ 'False'</arg>
+<arg>Task Selection</arg>
+<arg>${checkText}</arg>
+<arg>${currTaskId}</arg>
+<arg>${row}</arg>
+<arg>${checkBoxColumn}</arg>
+<arg>${taskIdColumn}</arg>
+<arg>${currCount}</arg>
+<arg>ELSE IF</arg>
+<arg>'${LastTask}'=='True'</arg>
+<arg>All Tasks Ended</arg>
+<arg>ELSE IF</arg>
+<arg>'${ClassicTask}'=='True' and \ \ '${EndedTask}'\ \ == \ \ 'False'</arg>
+<arg>Close Task At Classic</arg>
+<arg>${currTaskId}</arg>
+<arg>ELSE IF</arg>
+<arg>'${AutomaticTask}'=='True'</arg>
+<arg>End Task Automatic Port Allocation</arg>
+<arg>${checkText}</arg>
+<arg>${currTaskId}</arg>
+<arg>${row}</arg>
+<arg>${checkBoxColumn}</arg>
+<arg>${taskIdColumn}</arg>
+<arg>${currCount}</arg>
+</arguments>
+<kw name="Task Selection" library="TAHITI_Resource">
+<doc>@author 607253786</doc>
+<arguments>
+<arg>${checkText}</arg>
+<arg>${currTaskId}</arg>
+<arg>${row}</arg>
+<arg>${checkBoxColumn}</arg>
+<arg>${taskIdColumn}</arg>
+<arg>${currCount}</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Start Task Selection</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Selecting and processing TaskID: ${currTaskId}</arg>
+</arguments>
+<status status="PASS" endtime="20180810 11:51:16.429" starttime="20180810 11:51:16.429"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${checkText}'=='${currTaskId}'</arg>
+<arg>Checkbox Should Not Be Selected</arg>
+<arg>xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input</arg>
+</arguments>
+<kw name="Checkbox Should Not Be Selected" library="Selenium2Library">
+<doc>Verifies checkbox ``locator`` is not selected/checked.</doc>
+<arguments>
+<arg>xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input</arg>
+</arguments>
+<msg timestamp="20180810 11:51:16.444" level="INFO">Verifying checkbox 'xpath=.//table[@id='ec_table']/tbody/tr[1]/td[1]/input' is not selected.</msg>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180810 11:51:18.460" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-6.png"&gt;&lt;img src="selenium-screenshot-6.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20180810 11:51:18.460" starttime="20180810 11:51:17.819"></status>
+</kw>
+<msg timestamp="20180810 11:51:18.460" level="FAIL">Checkbox with locator 'xpath=.//table[@id='ec_table']/tbody/tr[1]/td[1]/input' not found.</msg>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:51:16.429"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:51:16.429"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:51:16.429"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:51:16.429"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:51:13.600"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:51:12.616"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:51:12.616"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:50:59.677"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:50:59.677"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:50:59.677"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:18.460" starttime="20180810 11:50:46.269"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+<arg>AND</arg>
+<arg>Close Browser</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current URL.</doc>
+<msg timestamp="20180810 11:51:18.898" level="INFO">http://10.29.79.76:61017/TahitiPortal/Login.do</msg>
+<status status="PASS" endtime="20180810 11:51:18.898" starttime="20180810 11:51:18.460"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20180810 11:51:22.360" starttime="20180810 11:51:18.898"></status>
+</kw>
+<status status="PASS" endtime="20180810 11:51:22.360" starttime="20180810 11:51:18.460"></status>
+</kw>
+<status status="FAIL" endtime="20180810 11:51:22.360" critical="yes" starttime="20180810 11:50:46.269">Checkbox with locator 'xpath=.//table[@id='ec_table']/tbody/tr[1]/td[1]/input' not found.</status>
+</test>
+<doc>SC65_GSIP Full PSTN_Provide_Spain</doc>
+<status status="FAIL" endtime="20180810 11:51:22.360" starttime="20180810 11:49:20.454"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="2">Critical Tests</stat>
+<stat fail="1" pass="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="1" id="s1" name="04 Tahiti" pass="2">04 Tahiti</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

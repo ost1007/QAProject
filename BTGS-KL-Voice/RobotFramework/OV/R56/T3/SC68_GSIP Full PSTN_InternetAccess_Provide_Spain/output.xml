@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20180524 20:01:39.358" generator="Robot 3.0.4 (Python 2.7.14 on win32)">
+<suite source="C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\OV\R56\T3\SC68_GSIP Full PSTN_InternetAccess_Provide_Spain\03_OrderCreation_Full.txt" id="s1" name="03 OrderCreation Full">
+<test id="s1-t1" name="PREREQUISITE">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${IMAGE_DIR}\\${IMAGE_FOLDER}</arg>
+</arguments>
+<assign>
+<var>${IMAGE_FINAL_PATH}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.548" level="FAIL">Variable '${IMAGE_FOLDER}' not found.</msg>
+<status status="FAIL" endtime="20180524 20:01:43.548" starttime="20180524 20:01:43.547"></status>
+</kw>
+<tags>
+<tag>PREREQUISITE</tag>
+</tags>
+<status status="FAIL" endtime="20180524 20:01:43.549" critical="yes" starttime="20180524 20:01:43.545">Variable '${IMAGE_FOLDER}' not found.</status>
+</test>
+<test id="s1-t2" name="TC02 Login to AMDOCS">
+<kw name="Get File Content" library="CommonResources">
+<arguments>
+<arg>${ClassicOrderID_TextFile}</arg>
+</arguments>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${CustomerID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${CustomerID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${CustomerID1}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.557" level="INFO">${CustomerID1} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.557" starttime="20180524 20:01:43.556"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${AccountID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${AccountID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${AccountID1}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.558" level="INFO">${AccountID1} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.558" starttime="20180524 20:01:43.557"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${QuoteID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${QuoteID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${QuoteID1}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.558" level="INFO">${QuoteID1} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.558" starttime="20180524 20:01:43.558"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${OrderID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${OrderID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${OrderID1}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.559" level="INFO">${OrderID1} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.559" starttime="20180524 20:01:43.558"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${EDCAOrderID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${EDCAOrderID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${EDCAOrderID1}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.559" level="INFO">${EDCAOrderID1} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.559" starttime="20180524 20:01:43.559"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicOrderID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${ClassicOrderID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${ClassicOrderID1}</var>
+</assign>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${EXECDIR}\\Extracted_Data\\${ClassicOrderID_TextFile}</arg>
+</arguments>
+<msg timestamp="20180524 20:01:43.560" html="yes" level="INFO">Getting file '&lt;a href="file://C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\OV\R56\T3\SC68_GSIP Full PSTN_InternetAccess_Provide_Spain\Extracted_Data\ClassicOrderID.txt"&gt;C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\OV\R56\T3\SC68_GSIP Full PSTN_InternetAccess_Provide_Spain\Extracted_Data\ClassicOrderID.txt&lt;/a&gt;'.</msg>
+<status status="PASS" endtime="20180524 20:01:43.561" starttime="20180524 20:01:43.560"></status>
+</kw>
+<msg timestamp="20180524 20:01:43.561" level="INFO">${ClassicOrderID1} = </msg>
+<status status="PASS" endtime="20180524 20:01:43.561" starttime="20180524 20:01:43.559"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${BFGSiteID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${BFGSiteID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${BFGSiteID1}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.562" level="INFO">${BFGSiteID1} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.562" starttime="20180524 20:01:43.561"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicManualTaskID_TextFile}'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\Extracted_Data\\${ClassicManualTaskID_TextFile}</arg>
+</arguments>
+<assign>
+<var>${TahitiManualTaskID1}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.562" level="INFO">${TahitiManualTaskID1} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.562" starttime="20180524 20:01:43.562"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${CustomerID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${CustomerID}</arg>
+<arg>${CustomerID1}</arg>
+</arguments>
+<assign>
+<var>${CustomerID2}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.563" level="INFO">${CustomerID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.563" starttime="20180524 20:01:43.562"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${AccountID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${AccountID}</arg>
+<arg>${AccountID1}</arg>
+</arguments>
+<assign>
+<var>${AccountID2}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.563" level="INFO">${AccountID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.563" starttime="20180524 20:01:43.563"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${QuoteID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${QuoteID}</arg>
+<arg>${QuoteID1}</arg>
+</arguments>
+<assign>
+<var>${QuoteID2}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.564" level="INFO">${QuoteID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.564" starttime="20180524 20:01:43.563"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${OrderID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${OrderID}</arg>
+<arg>${OrderID1}</arg>
+</arguments>
+<assign>
+<var>${OrderID2}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.565" level="INFO">${OrderID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.565" starttime="20180524 20:01:43.564"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${EDCAOrderID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${EDCAOrderID}</arg>
+<arg>${EDCAOrderID1}</arg>
+</arguments>
+<assign>
+<var>${EDCAOrderID2}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.565" level="INFO">${EDCAOrderID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.565" starttime="20180524 20:01:43.565"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicOrderID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${ClassicOrderID}</arg>
+<arg>${ClassicOrderID1}</arg>
+</arguments>
+<assign>
+<var>${ClassicOrderID2}</var>
+</assign>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${ClassicOrderID}</arg>
+<arg>${ClassicOrderID1}</arg>
+</arguments>
+<msg timestamp="20180524 20:01:43.567" level="INFO">${ClassicOrderID} = </msg>
+<status status="PASS" endtime="20180524 20:01:43.568" starttime="20180524 20:01:43.566"></status>
+</kw>
+<msg timestamp="20180524 20:01:43.568" level="INFO">${ClassicOrderID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.568" starttime="20180524 20:01:43.566"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${BFGSiteID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${BFGSiteID}</arg>
+<arg>${BFGSiteID1}</arg>
+</arguments>
+<assign>
+<var>${BFGSiteID2}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.568" level="INFO">${BFGSiteID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.568" starttime="20180524 20:01:43.568"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FileName}'=='${ClassicManualTaskID_TextFile}'</arg>
+<arg>Set Suite Variable</arg>
+<arg>${TahitiManualTaskID}</arg>
+<arg>${TahitiManualTaskID1}</arg>
+</arguments>
+<assign>
+<var>${TahitiManualTaskID2}</var>
+</assign>
+<msg timestamp="20180524 20:01:43.569" level="INFO">${TahitiManualTaskID2} = None</msg>
+<status status="PASS" endtime="20180524 20:01:43.569" starttime="20180524 20:01:43.568"></status>
+</kw>
+<status status="PASS" endtime="20180524 20:01:43.569" starttime="20180524 20:01:43.556"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${ClassicOrderID} in testcase</arg>
+</arguments>
+<status status="PASS" endtime="20180524 20:01:43.571" starttime="20180524 20:01:43.570"></status>
+</kw>
+<kw name="Login To AMDOCS" library="CLASSIC_Resource">
+<kw name="Win Activate" library="AutoItLibrary">
+<doc>method WinActivate</doc>
+<arguments>
+<arg>Amdocs CRM Login</arg>
+</arguments>
+<status status="PASS" endtime="20180524 20:01:43.573" starttime="20180524 20:01:43.572"></status>
+</kw>
+<kw name="Control Focus" library="AutoItLibrary">
+<doc>method ControlFocus</doc>
+<arguments>
+<arg>Amdocs CRM Login</arg>
+<arg>${EMPTY}</arg>
+<arg>[CLASS:Edit; INSTANCE:2]</arg>
+</arguments>
+<status status="PASS" endtime="20180524 20:01:43.574" starttime="20180524 20:01:43.573"></status>
+</kw>
+<kw name="Control Send" library="AutoItLibrary">
+<doc>method ControlSend</doc>
+<arguments>
+<arg>Amdocs CRM Login</arg>
+<arg>${EMPTY}</arg>
+<arg>[CLASS:Edit; INSTANCE:2]</arg>
+<arg>${CLASSIC_password}</arg>
+</arguments>
+<msg timestamp="20180524 20:01:43.575" level="FAIL">Variable '${CLASSIC_password}' not found.</msg>
+<status status="FAIL" endtime="20180524 20:01:43.575" starttime="20180524 20:01:43.574"></status>
+</kw>
+<status status="FAIL" endtime="20180524 20:01:43.576" starttime="20180524 20:01:43.572"></status>
+</kw>
+<tags>
+<tag>CLASSICS</tag>
+</tags>
+<status status="FAIL" endtime="20180524 20:01:43.576" critical="yes" starttime="20180524 20:01:43.554">Variable '${CLASSIC_password}' not found.</status>
+</test>
+<test id="s1-t3" name="TC03 Select Profile">
+<kw name="Select Profile As ClearSales" library="CLASSIC_Resource">
+<kw name="Wait For Active Window" library="AutoItLibrary">
+<doc>Wait up to _TimeOut_ seconds for the window with the given _WindowTitle_ and optional</doc>
+<arguments>
+<arg>Amdocs CRM - ClearSupport</arg>
+<arg>ClearSupport</arg>
+<arg>60</arg>
+</arguments>
+<msg timestamp="20180524 20:02:43.589" level="INFO">AutoItLibrary.WaitForActiveWindow(WindowTitle='Amdocs CRM - ClearSupport', WindowText='ClearSupport', TimeOut='60')</msg>
+<msg timestamp="20180524 20:02:43.590" level="INFO">AutoItLibrary.WinWait(WindowTitle='Amdocs CRM - ClearSupport', WindowText='ClearSupport', TimeOut='60')</msg>
+<status status="FAIL" endtime="20180524 20:02:43.590" starttime="20180524 20:01:43.582"></status>
+</kw>
+<status status="FAIL" endtime="20180524 20:02:43.592" starttime="20180524 20:01:43.582"></status>
+</kw>
+<tags>
+<tag>CLASSICS</tag>
+</tags>
+<status status="FAIL" endtime="20180524 20:02:43.593" critical="yes" starttime="20180524 20:01:43.581">Execution terminated by signal</status>
+</test>
+<test id="s1-t4" name="TC04 Select Order">
+<tags>
+<tag>robot-exit</tag>
+</tags>
+<status status="FAIL" endtime="20180524 20:02:43.605" critical="yes" starttime="20180524 20:02:43.602">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-t5" name="TC05 Perform Yank Task">
+<tags>
+<tag>robot-exit</tag>
+</tags>
+<status status="FAIL" endtime="20180524 20:02:43.616" critical="yes" starttime="20180524 20:02:43.612">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-t6" name="TC05 Order Configuration">
+<tags>
+<tag>robot-exit</tag>
+</tags>
+<status status="FAIL" endtime="20180524 20:02:43.627" critical="yes" starttime="20180524 20:02:43.624">Test execution stopped due to a fatal error.</status>
+</test>
+<doc>SC68_GSIP Full PSTN_InternetAccess_Provide_Spain</doc>
+<status status="FAIL" endtime="20180524 20:02:43.636" starttime="20180524 20:01:39.361"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="6" pass="0">Critical Tests</stat>
+<stat fail="6" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat info="combined" fail="3" combined="NOT robot-exit" pass="0">NOT robot-exit</stat>
+<stat fail="2" pass="0">CLASSICS</stat>
+<stat fail="1" pass="0">PREREQUISITE</stat>
+<stat fail="3" pass="0">robot-exit</stat>
+</tag>
+<suite>
+<stat fail="6" id="s1" name="03 OrderCreation Full" pass="0">03 OrderCreation Full</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

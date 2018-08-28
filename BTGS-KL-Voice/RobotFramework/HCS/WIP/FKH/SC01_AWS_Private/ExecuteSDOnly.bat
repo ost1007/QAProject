@@ -1,0 +1,1 @@
+pybot -i SD --removekeywords wuks -d Output\ -v newQuote:no MainFile.txt

@@ -1,0 +1,94 @@
+*** Settings ***
+Documentation	Resource file
+Library	Selenium2Library
+Library	AutoItLibrary
+Library	DebugLibrary
+Library	DateTime
+Library	openpyxl.reader.excel
+Library	openpyxl.writer.excel
+Resource	../HCS_Common/HCSResource.txt
+
+*** Keywords ***
+Quote Configuration
+	Launch RSQE
+	${status}	${value}=	Run Keyword and Ignore Error	Element Should Be Visible	${CBOX_ADDITIONAL_PRODUCT}
+	Run Keyword If	'${status}' == 'PASS'	Products in the quote	ELSE	Log	Product selected
+	Launch Provide Configuration
+	${noProductCreated}=	Run Keyword And Return Status	Page Should Contain Element	AddProducts
+	Run Keyword If	${noProductCreated}	Product Configuration	ELSE	Log To Console	Product configured
+	
+Calculate Pricing
+ 	${orderDoesNotExist}=	Run Keyword And Return Status	Page Should Not Contain Element	OrdersTab
+	Run Keyword If	${orderDoesNotExist}	Run Keywords
+	...	Confirm Pricing
+	...	AND	Create Offer and Order
+	...	ELSE	Click Link	OrdersTab
+
+Confirm Pricing
+	Reload Page
+	Wait Until Element Is Visible	xpath=.//td[.='VALID']	${waiting_time}
+	
+	
+Create Order
+	Wait Until Element Is Visible	orderDetails	1200s
+	${status}=	Run Keyword And Return Status	Page Should Contain Element    ${RFO_INVALID}
+	Run Keyword If	${status}	 Run Keywords
+	...    RFO Sheet Download and Upload
+	...    Submit Order
+	
+	
+Product Configuration
+	Create Active Directory Integration Product
+	Active Directory Integration Config
+	Configure Product
+	#Finalise Config
+	
+
+Edit Excel RFOSheet
+	[Documentation]	@author 607253786
+	...    @Description Open the downloaded rfosheets and update the date at column O2 and P2. 
+	
+	#${year}	${month}	${day}=	Get Time	year,month,day
+	${year}=	Get Current Date	result_format=%Y
+	${month}=	Get Current Date	result_format=%b
+	${day}=	Get Current Date	result_format=%d
+	${wb}=	load_workbook	C:\\Jenkins\\RFOSheets\\${RFOSheet}	#read_only=False
+	${ws}=	set variable	${wb['Order Details']}
+	${ws.cell('O2').value}=	set variable	${year}-${month}-${day}
+	${ws.cell('P2').value}=	set variable	${year}-${month}-30
+	save_workbook	${wb}	C:\\Jenkins\\RFOSheets\\${RFOSheet}
+	Log to console    Edit Excel Sheet done    #added by LL
+	
+	
+RFO Base Configuration
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	xpath=.//div[@rel='CUSTOMER BUSINESS DESCRIPTION']/div[2]
+	Input Text	xpath=.//div[@rel='CUSTOMER BUSINESS DESCRIPTION']/div[3]/input	${custBusinessDesc}
+	Click Element	xpath=.//div[@rel='INDICATIVE BUSINESS VALUE']/div[2]
+	Input Text	xpath=.//div[@rel='INDICATIVE BUSINESS VALUE']/div[3]/input	${indicativeBusinessValue}
+	Click Element	xpath=.//div[@rel='CUSTOMER IPCG HELPDESK']/div[2]
+	Input Text	xpath=.//div[@rel='CUSTOMER IPCG HELPDESK']/div[3]/input	${custIPCGHelpdesk}
+	Click Element	xpath=.//div[@rel='CUSTOMER HELPDESK CONTACT']/div[2]
+	Input Text	xpath=.//div[@rel='CUSTOMER HELPDESK CONTACT']/div[3]/input	${custHelpdeskContact}
+	Click Element	xpath=.//div[@rel='CLOUD PROVIDER ACCOUNT ID']/div[2]
+	Input Text	xpath=.//div[@rel='CLOUD PROVIDER ACCOUNT ID']/div[3]/input	${cloudProvAccID}
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}	
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	
+	
+Configure Product
+	Wait Until Element Is Enabled    bulkConfigurationButton 
+	Click Element	bulkConfigurationButton
+	Wait Until Page Contains Element	${LINK_BASE_CONFIGURATION}	${waiting_time} 
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Wait Until Element Is Enabled    ${PROVIDE_QUANTITY}    
+	Input Text	${PROVIDE_QUANTITY}    ${Quantity}
+	Click Element	${ADD_PRODUCT}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-AddProduct.png
+	${Numbering}=	Evaluate	str(${Numbering})
+	Click Element	continue-to-quote-details
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	${waiting_time}

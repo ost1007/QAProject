@@ -1,0 +1,92 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+Library           DebugLibrary
+Library           OperatingSystem
+Library           Collections    
+Library			  AutoItLibrary
+Library			  SikuliLibrary
+#Library			  DateTime
+Resource		CommonResources.txt
+Variables		CommonVariables.py
+Variables       VLPOVLocators.py
+*** Variables ***
+#Test Data
+${TXT_USERNAME}	USER
+${TXT_PWD}	PASSWORD
+${BTN_YES_LEGAL}	YES
+
+
+*** Keywords ***
+Open Browser to VLPOV Login Page
+    Browser Config	${URL}
+	Goto	${URL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Wait Until Element Is Visible	${BTN_SIGN_ON}    ${waiting_time}    Sign On Button is not visible.
+    Page Should Contain    21C Authentication: Login
+	Input Username Password
+	Submit Credentials
+
+Input Username Password
+    Selenium2Library.Input Text	${TXT_USERNAME}	${Username}
+    Selenium2Library.Input Text	${TXT_PWD}	${Password}
+
+	
+Submit Credentials
+    Click Button   	Sign On
+    Wait Until Page Contains   	21C Authentication: Warning Screen    ${wait_time}    Authentication page is not display
+    Wait Until Element Is Visible	${BTN_YES_LEGAL}    ${waiting_time}    Legal page is not visible
+    Click Element	${BTN_YES_LEGAL}
+ 	Wait Until Page Contains	Call Traffic Controller	${wait_time}    Call Traffic Controller page is not displayed
+    Select Window	title=Call Traffic Controller
+    
+    
+Upload CSV
+    Wait Until Element is Visible    ${LINK_UPLOAD_CSV}    ${waiting_time}    UploadUpload CSV(Bulk Manage Number Blocks) option is not available
+    Double Click Element    ${LINK_UPLOAD_CSV}
+    Wait Until Page Contains    Select csv file to upload    ${waiting_time}    Select CSV File to upload pop up is not available
+    Choose File to Upload IE
+    wait until element is visible    ${CBO_UPLOAD_CSV_COUNTRY}    ${wait_time}    Country combo box is not available
+    Click Element    ${CBO_UPLOAD_CSV_COUNTRY}
+    Clear Element Text    ${CBO_UPLOAD_CSV_COUNTRY}
+    send     ${CSVCountry}
+    Click Element    ${CBO_UPLOAD_SCV_PRODUCT_CODE}
+    Clear Element Text    ${CBO_UPLOAD_SCV_PRODUCT_CODE}
+    send    ${CSVProductCode}
+    
+    Double Click Element    ${BTN_UPLOAD_CSV_SUBMIT}
+    Wait Until Page Contains    Command Success
+    PrintScreen    Command_Success
+    Click Element    ${BTN_SUCCESS_OK}
+    log to console    CSV Uplpaded successfully. Please check your email and check on the attachment in the email
+    log    CSV Uplpaded successfully. Please check your email and check on the attachment in the email
+    
+	
+Choose File to Upload IE 
+    Double Click Element    ${BTN_UPLOAD_CSV_BROWSE}
+    ${directory}=    set variable    ${EXECDIR}\\CSV\\${NumberBlockDetailsCSV}
+    log to console    directory is ${directory}
+    log to console    Choose File to Upload
+    Win Activate	Choose File to Upload
+	Send    ${directory}
+	Send	{ENTER}
+	PrintScreen    Selected_CSV
+	Win Activate	Select csv file to upload
+	
+
+PrintScreen
+    [Arguments]    ${imageName}
+	${imageName}=		Remove String	${imageName}  (
+	${imageName}=		Remove String	${imageName}  )
+	${imageName}=		Replace String	${imageName}  \#  \-
+	${imageName}=		Replace String	${imageName}  \/  \_
+	${imageName}=		Replace String	${imageName}  \&  n
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+    

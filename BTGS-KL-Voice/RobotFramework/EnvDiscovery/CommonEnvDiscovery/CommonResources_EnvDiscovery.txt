@@ -1,0 +1,71 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library			Selenium2Library
+Library			DebugLibrary
+Library			OperatingSystem
+Library			Collections
+Variables		CommonVariables.py
+
+*** Variables ***
+${strNotExecuteMsg}	Test Case Not Covered
+
+*** Keywords ***
+Check Execution YesNO and Access to Component
+	Run Keyword If	'${Execute}' == 'Yes'	Run Keywords
+	...	Login to Component
+	...	AND	Log Location
+	#...	AND	Capture Page Screenshot	${OUTPUTDIR}${/}Login to ${ComponentName}.png
+	
+	${strTestCaseResult}=	Set Variable If	'${Execute}' == 'Yes'	${strExecuteMsg}	${strNotExecuteMsg}
+	Set Global Variable	${strTestCaseResult}
+	
+	Test Case Result
+
+Test Case Result
+	Log	${strTestCaseResult}
+	Set Test Message	${strTestCaseResult}	#Actual Result
+	Run Keyword If	'${Execute}' == 'Yes'	Capture Page Screenshot	${OUTPUTDIR}${/}Login to ${ComponentName}.png
+
+Login to Component	
+	#----- Added R50 for running chrome browser to set default download location ---------
+	${download_directory}=	Run Keyword If	'${BROWSER}'=='Chrome'	Set Variable	C:\\Jenkins\\RFOSheets
+	${chrome_options}=	Run Keyword If	'${BROWSER}'=='Chrome'	Evaluate	sys.modules['selenium.webdriver'].ChromeOptions()	sys, selenium.webdriver
+	${prefs}=	Run Keyword If	'${BROWSER}'=='Chrome'	Create Dictionary	download.default_directory=${download_directory}	#plugins.plugins_disabled=${disabled}
+	Run Keyword If	'${BROWSER}'=='Chrome'	Run Keywords
+    ...	Call Method	${chrome_options}	add_experimental_option	prefs	${prefs}
+    ...	AND	Create Webdriver	Chrome	chrome_options=${chrome_options}
+    ...	ELSE
+    ...	Open Browser	${URL}	${BROWSER}	ff_profile_dir=${FF_PROFILE}
+    #-------------------------------------------------------------------------------------
+	#Open Browser	${URL}	${Browser}
+	Maximize Browser Window
+	Set Selenium Speed    ${DELAY}
+	Run Keyword If	'${ComponentName}' == 'Expedio OM'	Run Keyword	Expedio OM Login Related
+	...	ELSE	Run Keyword	21CN Authentication
+	#${strExecuteMsg}=	Set Variable	${ComponentName} able to access successfully
+	#Set Global Variable	${strExecuteMsg}
+	Set Global Variable	${strExecuteMsg}	${ComponentName} able to access successfully
+	
+21CN Authentication
+	Page Should Contain    21C Authentication: Login
+    Input Text    USER   ${Username}
+    Input Text    PASSWORD    ${Password}
+    Click Button   	Sign On
+    Wait Until Page Contains   	21C Authentication: Warning Screen	${wait_time}	Authentication page is not display
+    Wait Until Element Is Enabled	YES
+	Click Button	YES
+	
+Expedio OM Login Related
+    Page Should Contain	BMC Remedy Action Request System
+    Focus	username
+    Input Text	username	${Username}
+    Focus	pwd
+	Input Text	pwd		${Password}
+	Click Element	login
+	Sleep	8s
+	#Select Window	CQM Alert (kaon)
+	#Click Element	xpath=//*[@id='WIN_0_536870915']/div

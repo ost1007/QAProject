@@ -1,0 +1,98 @@
+*** Settings ***
+Documentation		Read and Write Excel xlsx. Does not support xls
+...					Prerequisite: openpyxl library
+...					Created by:	FKH
+...					Date:	6 April 2017
+...					Edited by:	..... 
+Library		Selenium2Library
+Library		DebugLibrary
+#Resource	ReadExcel.py
+#Library		ReadExcel.ExcelUtility
+#Library		update_excel.ExcelUtility
+Library		openpyxl.reader.excel
+Library		openpyxl.writer.excel
+Library		OperatingSystem
+Library		String
+#Library		ExcelLibrary
+
+*** Variables ***
+${sheetName}	VEAddDataSheet
+${statusIndicator}	PASS
+#${TC_ID}	1
+${testDataFileName}	VE Add User Data.xlsx
+
+*** Keywords ***
+Get Total Data	[Arguments]	${testDataFileName}
+	${wb}=	load_workbook	${EXECDIR}\\${testDataFileName}	data_only=True	#load excel file.
+	${ws}=	set variable	${wb["${sheetName}"]}	#select sheet name
+	${totalData}=	set variable	${ws.max_row}		#get max row
+	Set Global Variable	${totalData}
+	
+Check Data Status
+	${wb}=	load_workbook	${EXECDIR}\\${testDataFileName}	data_only=True	#load excel file.
+	${ws}=	set variable	${wb["${sheetName}"]}	#select sheet name
+	${excelColumn}=	set variable	${ws.max_column}	#get max column
+	${excelRow}=	set variable	${ws.max_row}		#get max row
+	:FOR	${index}	IN RANGE	${excelColumn}	#to assign test data to variable
+	\	${tempVariableName}=	set variable	${ws.cell(row=1,column=${index+1}).value}
+	\	${regex}=	Run Keyword If	"${tempVariableName}"!="${None}"	Get Regexp Matches	${tempVariableName}	^[d][A-Z]{1,2}.*	ELSE	Continue For Loop	#regelur expression to find cell with variable format
+	\	${blnResults}=	Run Keyword And Return Status	Should Not Be Empty	${regex}	#to filter regex it not empty
+	\	Run Keyword Unless	${blnResults}	Continue For Loop	#if regex is empty skip index
+	\	${regex}=	Run Keyword If	${regex} or ${blnResults}	Set Variable	${regex[0]}	ELSE	Continue For Loop	#convert regex variable from array to single value
+	\	${regex}=	Strip String	${regex}	left	d									#to remove letter d variable name in test data excel file
+	\	Run Keyword Unless	'${regex}' == 'Status'	Continue For Loop
+	\	Set Global Variable	${columnStatus}	${index+1}
+	\	Exit For Loop
+	:FOR	${index}	IN RANGE	${excelRow}	#to find row equal to given TC_ID
+	\	${statusTemp}=	set variable	${ws.cell(row=${index+2},column=${columnStatus}).value}
+	\	Run Keyword If	'${statusTemp}'!='${statusIndicator}'	Set Global Variable	${startRow}	${index+2}
+	\	Run Keyword If	'${statusTemp}'!='${statusIndicator}'	Exit For Loop
+	
+	
+Read data	[Arguments]	${testDataFileName}	${sheetName}	${TC_ID}
+	#${wb}=	load_workbook	${EXECDIR}\\HCS_VMM_Data_Sheet.xlsx	data_only=True	#load excel file.
+	${wb}=	load_workbook	${EXECDIR}\\${testDataFileName}	data_only=True	#load excel file.
+	${ws}=	set variable	${wb["${sheetName}"]}	#select sheet name
+	${excelColumn}=	set variable	${ws.max_column}	#get max column
+	
+	:FOR	${index}	IN RANGE	${excelColumn}	#to assign test data to variable
+	\	${tempVariableName}=	set variable	${ws.cell(row=1,column=${index+1}).value}	#go through row 1 and get the variable name
+	\	${regex}=	Run Keyword If	"${tempVariableName}"!="${None}"	Get Regexp Matches	${tempVariableName}	^[d][A-Z]{1,2}.*	ELSE	Continue For Loop	#regelur expression to find cell with variable format
+	\	${blnResults}=	Run Keyword And Return Status	Should Not Be Empty	${regex}	#to filter regex it not empty
+	\	Run Keyword Unless	${blnResults}	Continue For Loop	#if regex is empty skip index
+	\	${regex}=	Run Keyword If	${regex} or ${blnResults}	Set Variable	${regex[0]}	ELSE	Continue For Loop	#convert regex variable from array to single value
+	\	${regex}=	Strip String	${regex}	left	d									#to remove letter d variable name in test data excel file
+	\	${tempValue}=	set variable	${ws.cell(row=${TC_ID},column=${index+1}).value}	#get cell value of given TC_ID
+	\	Set Global Variable	${${regex}}	${tempValue}	#assign cell value to variable name
+	\	Log To Console	${regex}= ${tempValue}
+	
+Write data	[Arguments]	${testDataFileName}	${sheetName}	${TC_ID}	${varToWrite}	${valueToWrite}
+	${wb}=	load_workbook	${EXECDIR}\\${testDataFileName}		#load excel file.
+	${ws}=	set variable	${wb["${sheetName}"]}		#select sheet name
+	${excelColumn}=	set variable	${ws.max_column}	#get max column
+	
+	:FOR	${index}	IN RANGE	${excelColumn}											#to assign test data to variable
+	\	${tempVariableName}=	set variable	${ws.cell(row=1,column=${index+1}).value}	#go through row 1 and get the variable name
+	\	${regex}=	Run Keyword If	"${tempVariableName}"!="${None}"	Get Regexp Matches	${tempVariableName}	^[d][A-Z]{1,2}.*	ELSE	Continue For Loop	#regelur expression to find cell with variable format
+	\	${blnResults}=	Run Keyword And Return Status	Should Not Be Empty	${regex}		#to filter regex it not empty
+	\	Run Keyword Unless	${blnResults}	Continue For Loop								#if regex is empty skip index
+	\	${regex}=	Run Keyword If	${regex} or ${blnResults}	Set Variable	${regex[0]}	ELSE	Continue For Loop	#convert regex variable from array to single value
+	\	${regex}=	Strip String	${regex}	left	d									#to remove letter d variable name in test data excel file
+	\	Run Keyword Unless	'${regex}'=='${varToWrite}'	Continue For Loop					#skip current index looping if column is not same with given variable
+	\	${selectedCell}=	Set Variable	${ws.cell(row=${TC_ID}, column=${index+1})}	#assign cell into variable
+	\	${selectedCell.value}=	set variable	${valueToWrite}								#assign value to cell
+	\	save_workbook	${wb}	${EXECDIR}\\${testDataFileName}						#save excel file
+	\	Exit For Loop																		#exit loop 
+	
+*** Test Cases ***
+Test run
+	Get Total Data	${testDataFileName}
+	Check Data Status
+	Set Test Variable	${index1}	${startRow}
+	:FOR	${index}	IN RANGE	${startRow}	${totalData+1}
+	\	Log To Console	${index}
+	\	Read data	${testDataFileName}	${sheetName}	${index}
+	\	Run Keyword If	'${Status}' == '${statusIndicator}'	Continue For Loop
+	\	Log To Console	**************${index}************
+	\	Write data	${testDataFileName}	${sheetName}	${index}	Status	PASS
+	

@@ -1,0 +1,275 @@
+*** Settings ***
+Documentation	A resource file with reusable keywords and variables.
+...
+...				The system specific keywords created here form our own
+...				domain specific language. They utilize keywords provided
+...				by the imported Selenium2Library.
+Library	Selenium2Library
+Library	DebugLibrary
+Library	DateTime
+Library		OperatingSystem
+Library		Collections
+Resource	../Common_OV/EDCA_Resource.txt
+
+*** Variables ***
+${eDCA_Portal_Title}    SQE Lite Portal
+*** Keywords ***
+#######eDCA SC02 resource keywords###############
+GSIP Full PSTN Additional Features Details
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Run Keyword If    '${AddBlock}' == 'True'    Add Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1	
+
+Add Block Details
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Sleep	5s
+	Select Window	Information
+	Wait Until Page Contains Element	btn1	${wait_time}
+	Click Element	btn1
+	Select Window	${eDCA_Title}
+#	Alert Should Be Present	For Main Site Orders,Account Teams please help set the correct expectation with our customers.
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlNumberType	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlNumberType	${NumberType}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlBTSupplied	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlBTSupplied	${BTSupplied}
+	Sleep	5s
+	# Added by Veena on 02052018 to cater Supplier Field
+	Wait Until Page Contains Element	${TXT_AFD_SUPPLIER}	${wait_time}
+	Selenium2Library.Input Text	${TXT_AFD_SUPPLIER}	${Supplier}
+	# Added by Veena on 02052018 to cater Supplier Field
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber	${wait_time}
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtBlockStartNumber	${BlockStartNumber}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_txtNumberBlockSize	${wait_time}
+	Selenium2Library.Input Text	UsrOneVoiceAdditionalFeatureDetails_txtNumberBlockSize	${NumberBlockSize}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_ddlParentName	${wait_time}
+	Select From List	UsrOneVoiceAdditionalFeatureDetails_ddlParentName	${UniqueTrunkGroupFriendlyName}
+	Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_btnSave	${wait_time}
+	Click Element	UsrOneVoiceAdditionalFeatureDetails_btnSave
+	#change by Azry 16042018 - locator changed in R55
+	#Wait Until Page Contains Element	UsrOneVoiceAdditionalFeatureDetails_dgBlockDetails__ctl2_btnEdit	${wait_time}
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	#end change by Azry 16042018 - locator changed in R55
+	
+GSIP Full PSTN Pricing Details
+	Wait Until Page Contains	Pricing Details	${wait_time}
+	#change by Azry 16042018 - locator changed in R55
+	#Wait Until Page Contains Element	UsrOneVoicePricing_dgDirectPrice__ctl2_txtPrice2	${wait_time}
+	#Clear Element Text	UsrOneVoicePricing_dgDirectPrice__ctl2_txtPrice2
+	#Selenium2Library.Input Text	UsrOneVoicePricing_dgDirectPrice__ctl2_txtPrice2	${AccessPricing1}
+	#Wait Until Page Contains Element	UsrOneVoicePricing_dgDirectPrice__ctl3_txtPrice2	${wait_time}
+	#Clear Element Text	UsrOneVoicePricing_dgDirectPrice__ctl3_txtPrice2
+	#Selenium2Library.Input Text	UsrOneVoicePricing_dgDirectPrice__ctl3_txtPrice2	${AccessPricing2}
+	#Wait Until Page Contains Element	UsrOneVoicePricing_dgDirectPrice__ctl4_txtPrice2	${wait_time}
+	#Clear Element Text	UsrOneVoicePricing_dgDirectPrice__ctl4_txtPrice2
+	#Selenium2Library.Input Text	UsrOneVoicePricing_dgDirectPrice__ctl4_txtPrice2	${AccessPricing3}
+	#Wait Until Page Contains Element	UsrOneVoicePricing_dgDirectPrice__ctl5_txtPrice2	${wait_time}
+	#Clear Element Text	UsrOneVoicePricing_dgDirectPrice__ctl5_txtPrice2
+	#Selenium2Library.Input Text	UsrOneVoicePricing_dgDirectPrice__ctl5_txtPrice2	${AccessPricing4}
+	#Wait Until Page Contains Element	UsrOneVoicePricing_dgDirectPrice__ctl6_txtPrice2	${wait_time}
+	#Clear Element Text	UsrOneVoicePricing_dgDirectPrice__ctl6_txtPrice2
+	#Selenium2Library.Input Text	UsrOneVoicePricing_dgDirectPrice__ctl6_txtPrice2	${AccessPricing5}
+	Wait Until Page Contains Element	${TXT_PRICING_1}	${wait_time}
+	Clear Element Text	${TXT_PRICING_1}
+	Selenium2Library.Input Text	${TXT_PRICING_1}	${AccessPricing1}
+	Wait Until Page Contains Element	${TXT_PRICING_2}	${wait_time}
+	Clear Element Text	${TXT_PRICING_2}
+	Selenium2Library.Input Text	${TXT_PRICING_2}	${AccessPricing2}
+	Wait Until Page Contains Element	${TXT_PRICING_3}	${wait_time}
+	Clear Element Text	${TXT_PRICING_3}
+	Selenium2Library.Input Text	${TXT_PRICING_3}	${AccessPricing3}
+	Wait Until Page Contains Element	${TXT_PRICING_4}	${wait_time}
+	Clear Element Text	${TXT_PRICING_4}
+	Selenium2Library.Input Text	${TXT_PRICING_4}	${AccessPricing4}
+	Wait Until Page Contains Element	${TXT_PRICING_5}	${wait_time}
+	Clear Element Text	${TXT_PRICING_5}
+	Selenium2Library.Input Text	${TXT_PRICING_5}	${AccessPricing5}
+	#end change by Azry 16042018 - locator changed in R55
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Pricing Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Focus	btnNext1
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnPrev1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Ready For submit.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Sleep	3s	
+#######eDCA SC02 resource keywords###############
+
+########eDCA R53 SC01 resource keywords##########
+Service Instance R53 SC02
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	#change by Azry 16042018 - locator changed in R55
+	#Wait Until Page Contains Element	UsrTahitiSites_dgMPLSSites__ctl3_btnEdit	${wait_time}
+	#Wait Until Page Contains Element	btnNext1	${wait_time}
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	Click Element	xpath=//input[@value = 'Edit']
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	#end change by Azry 16042018 - locator changed in R55
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	Wait Until Page Contains	Service Instance	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-To fill-Service Instance Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	${DeleteOnevoiceService}=  Run Keyword And Return Status    Element Should Be Enabled   ${BTN_SI_DELTE_SI}
+	Run Keyword If	${DeleteOnevoiceService}	Run Keywords	Click Element		${BTN_SI_DELTE_SI}
+	...	AND	Confirm Action
+	${AddNewOnevoiceService}=  Run Keyword And Return Status    Element Should Be Enabled   ${BTN_SI_ADD_NEW_OV_SRV}
+	Sleep	5s
+	Run Keyword If    ${AddNewOnevoiceService}    Add New Service
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlServiceType	${wait_time}
+	Select From List	UsrTahitiServiceInstance_ddlServiceType	${ServiceType}
+	Run Keyword Unless	'${SubServiceType}' == '${EMPTY}'	Add SubServiceType
+	Sleep	5s
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlnonstandardorder	${wait_time} 
+	Select From List	UsrTahitiServiceInstance_ddlnonstandardorder	${NonStandardType}
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlVOICEVPNREQ	${wait_time} 
+	Select From List	UsrTahitiServiceInstance_ddlVOICEVPNREQ	${VoiceVPNRequired}
+	Run Keyword Unless	'${PSTNRequired}' == '${EMPTY}'	Add PSTNReq
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlDirectAccessType	${wait_time} 
+	Select From List	UsrTahitiServiceInstance_ddlDirectAccessType	${DirectAccessType}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_txtNoOfChannels	${wait_time}
+	Selenium2Library.Input Text	UsrTahitiServiceInstance_txtNoOfChannels	${NoOfChannels}
+	Sleep	5s
+	Run Keyword Unless	'${CoSModel}' == '${EMPTY}'	Add DSCP
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlIPPBXRequired	${wait_time} 
+	Select From List	UsrTahitiServiceInstance_ddlIPPBXRequired	${IPBXRequired}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_txtMPLSServiceID	${wait_time} 
+	Selenium2Library.Input Text	UsrTahitiServiceInstance_txtMPLSServiceID	${MPLSServiceID}
+	Press Key	UsrTahitiServiceInstance_txtMPLSServiceID	\\13
+	Sleep	15s
+	#change by Azry 16042018 in R55 - to cater different service IDs 
+	#Alert Should Be Present      Service ID : 'GMPLS6C-01013332-0002' does not belong to the Site ID : 'NA', It belongs to Site Id 'S1083910'.. Do you want to continue with the same MPLS Service ID or want to change it ?
+	Run Keyword And Ignore Error	Dismiss Alert
+	#end change by Azry 16042018 in R55 - to cater different service IDs 
+	Sleep	6s
+	#Wait Until Page Contains Element	UsrTahitiServiceInstance_btnSave2	${wait_time}
+	#Choose Ok On Next Confirmation
+	#Sleep	6s
+	#Click Element	UsrTahitiServiceInstance_ddlIPPBXRequired
+	#Sleep	6s
+	#Confirm Action
+	Run Keyword Unless	'${POPDualHomed}' == '${EMPTY}'	Add Network Conn Details R53 SC02
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_btnSave2	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Click Element	UsrTahitiServiceInstance_btnSave2
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Service Instance.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	Execute JavaScript    window.scrollTo(0,2000)
+	#change by Azry 16042018 - locator changed in R55
+	#Wait Until Page Contains Element	UsrTahitiServiceInstance_dgServiceInstances__ctl2_btnEdit	${wait_time}
+	#Click Element		UsrTahitiServiceInstance_dgServiceInstances__ctl2_btnEdit
+	Wait Until Page Contains Element	xpath=//input[@value = 'Edit']	${wait_time}
+	Click Element		xpath=//input[@value = 'Edit']
+	#end change by Azry 16042018 - locator changed in R55
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1	
+	Click Element	btnNext1
+
+
+Add SIP Trunking Details R53 SC01
+	Select From List	UsrOneVoiceSIPTrunkingDetails_ddlCodec	${Codec}
+	Sleep	5s	
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol
+	Click Element	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol
+	Select From List	UsrOneVoiceSIPTrunkingDetails_ddlSBCTransportProtocol	${SBCTransportProtocol}
+	Sleep	5s
+	${EditNewTrunkGroup}=	Run Keyword And Return Status	Page Should Contain Element  UsrOneVoiceSIPTrunkingDetails_dgTrunkGrp__ctl2_btnEdit
+	Run Keyword Unless  '${EditNewTrunkGroup}'=='True'  Add New trunk Group
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtTrunkFriendlyName	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_txtTrunkFriendlyName
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtTrunkFriendlyName	${UniqueTrunkFriendlyName}
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlResilienceGRP	${wait_time}
+	Select from List	UsrOneVoiceSIPTrunkingDetails_ddlResilienceGRP	${UniqueTrunkGroupFriendlyName}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit	${wait_time}
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtTDCACLimit	${TrunkCACLimit}														  
+	Click Element	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress	${wait_time}
+	Focus	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress
+	Selenium2Library.Input Text	UsrOneVoiceSIPTrunkingDetails_txtPBXIPAddress	${PBXIPaddress}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_ddlRTPIPPBXIP	${wait_time}
+	Select From List	UsrOneVoiceSIPTrunkingDetails_ddlRTPIPPBXIP	${IsRTPIPSameAsPBX}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails	${wait_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Trunk Detail.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}
+	#Click Element	UsrOneVoiceSIPTrunkingDetails_ddlshrngipwithicg
+	Wait Until Page Contains	Trunk Details:	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails
+	#Sleep	4s
+	Press Key	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails	\\13
+	#Double Click Element	UsrOneVoiceSIPTrunkingDetails_btnSaveTNKDetails
+	Wait Until Page Contains Element	UsrOneVoiceSIPTrunkingDetails_dgTrunkDetails__ctl2_Button1	${wait_time}
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Execute JavaScript    window.scrollTo(0,2000)
+	Focus	btnNext1
+	Press Key	btnNext1	\\13
+
+SOTI Full PSTN Additional Features Details
+	Wait Until Page Contains	Additional Features Details	${wait_time}
+	${AddBlock}=  Run Keyword And Return Status    Element Should Be Enabled   UsrOneVoiceAdditionalFeatureDetails_btnAddBlockDetails
+	Run Keyword If    '${AddBlock}' == 'True'    Add Block Details
+	Capture Page Screenshot		${OUTPUTDIR}${/}${Numbering}-Additional Features Details.png
+	${Numbering}=	Evaluate	str(${Numbering}+1)
+	Set Global Variable	${Numbering}	
+	Wait Until Page Contains Element	btnNext1	${wait_time}
+	Click Element	btnNext1
+	
+Add Network Conn Details R53 SC02
+	Execute JavaScript    window.scrollTo(0,2000)
+	Sleep	5s
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlDualHomedAccess	${wait_time}
+	Select From List	UsrTahitiServiceInstance_ddlDualHomedAccess	${POPDualHomed}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlPrimaryVPop	${wait_time}
+	Select From List	UsrTahitiServiceInstance_ddlPrimaryVPop	${PrimaryVoicePoP}
+	Sleep	5s
+	Wait Until Page Contains Element    UsrTahitiServiceInstance_ddlSecondaryVPop    ${wait_time}
+	Select From List    UsrTahitiServiceInstance_ddlSecondaryVPop    ${SecondaryVoicePoP}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlDirectAccessTarrif	${wait_time}
+	Click Element	UsrTahitiServiceInstance_ddlDirectAccessTarrif
+	Select From List	UsrTahitiServiceInstance_ddlDirectAccessTarrif	${DirectAccessTariff}
+	Sleep	5s
+	Wait Until Page Contains Element	UsrTahitiServiceInstance_ddlSLACategory	${wait_time}
+	Click Element	UsrTahitiServiceInstance_ddlSLACategory	
+	Select From List	UsrTahitiServiceInstance_ddlSLACategory	${SLACategory}
+	Execute JavaScript    window.scrollTo(0,2000)
+
+	
+########eDCA R53 SC01 resource keywords##########

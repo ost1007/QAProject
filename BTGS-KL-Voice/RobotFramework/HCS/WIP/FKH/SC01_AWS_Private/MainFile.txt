@@ -1,0 +1,51 @@
+*** Settings ***
+Documentation	Cloud_SC01_AWS_Private
+Suite Setup	
+#Resource	../../Common/workspace/CommonResources.txt
+Resource	../Common/resource_keywords_sd.txt
+Resource	../Common/CommonResources.txt
+Resource	../Common/readTestDataFromExcel.txt	
+Resource	../Common/CloudResource.txt	
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	600
+${story}		SC01
+${QuoteName}	SC01AWSPRIV
+${RefNo}		SC01@
+*** Test Cases ***
+Load Test Data From Excel Q2O
+	[TAGS]	SD
+	Set Suite Variable	${sheetName}	Q2O
+	Define And Read Test Data Variable	
+SC01_AWS_Private
+	Open Browser And Login To CQM Page	${CQMusername}	${CQMpassword}	${Browser}
+	Select Customer	${salesChannel}	${customerName}
+	Go to Manage Quote
+	Run Keyword If	'${newQuote}' == 'yes'	Run Keyword	Create Quote	${QuoteName}	${OrderType}	${ContractTerm}	${Currency}	${RefNo}
+	Select Quote	${quoteID}	${QuoteName}
+Configure Product in rSQE
+	RSQE And Product Configuration
+	Close Browser
+	[Teardown]	Debug
+Waiting for 3 minutes for order IDs to be generated
+	Sleep	3m
+Load Test Data From Excel L2C
+	[TAGS]	SD
+	Set Suite Variable	${sheetName}	L2C
+	Define And Read Test Data Variable
+	Load Order IDs
+SD SI+
+	[TAGS]	SD
+	Set Suite Variable	${browser}		IE
+	Open Browser And Login	${CQMusername}	${CQMpassword}	${browser}	${t3_SI_URL}
+	Navigate to Workflow and Search Order
+	Select Given Window	title=Si-Workflow
+	${sameSOPInTestData}=	Run Keyword And Return Status	Element Should Contain	lblSopEin	${installCoordinator}
+	Run Keyword Unless	${sameSOPInTestData}	Change Order Contact Details
+	${btnActionDisabled}=	Run Keyword And Return Status	Element Should Be Disabled	btnAction
+	Run Keyword If	${btnActionDisabled}	Accept Order
+	Process Order
+	Confirm Status Complete in AIB
+	[Teardown]	Close Browser
+	

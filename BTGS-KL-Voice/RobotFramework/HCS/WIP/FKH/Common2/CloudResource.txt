@@ -1,0 +1,244 @@
+*** Settings ***
+Documentation	Resource file - specific for Cloud 
+Library		Selenium2Library
+Library		AutoItLibrary
+Library		DebugLibrary
+#Variables	static-locators.py
+#Variables	variables.py
+
+*** Keywords ***
+Create New Cloud Product
+	Wait Until Page Contains	Product Family:	60
+	Click Element	categoryGroupSearch
+	Click Element	xpath=.//a[text()='BT Connect']
+	Click Element	categorySearch
+	Click Element	xpath=.//a[text()='IP Connect Global']
+	Click Element	productSearch
+	Click Element	xpath=.//a[contains(text(),'Cloud Connect Direct')]
+	#Input Text	numberOfProducts	1
+	Click Button	submit
+	Wait Until Element Is Not Visible	${IMG_LOADING}	600
+	Click Element	bulkConfigurationButton
+	
+CCD Base Config
+	Wait Until Page Contains Element	${DD_DIRECT_CONNECT_SERVICE_PROVIDER}	120
+	Select From List By Label	${DD_DIRECT_CONNECT_SERVICE_PROVIDER}	${directConnectServiceProvider}
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Wait Until Page Contains Element	${BOX_INTERCONNECT_LOCATION}	120
+	Click Element	${BOX_INTERCONNECT_LOCATION}
+	Select From List	${DD_INTERCONNECT_LOCATION}	${interconnectLocation}
+	Wait Until Page Contains Element	${networkBTGS}	120
+	Click Element	${BOX_BANDWIDTH}
+	Select From List	${DD_BANDWIDTH}	${bandwidth}
+	
+MS Express Route Service Connection Config
+	Click Element	${LINK_MS_EXP_ROUTE_SVCONN}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List By Label	${LINK_TO_NEW}	${AzServiceConn}
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Click Element	${LINK_MS_EXP_BASE_CONF}
+	Wait Until Page Contains Element	${BOX_CONN_TYPE}	120
+	Click Element	${BOX_CONN_TYPE}
+	Select From List	${DD_CONN_TYPE}	${connType}
+	Wait Until Page Contains Element	${BOX_AF}	120
+	Click Element	${BOX_AF}
+	Select From List	${DD_AF}	${AFkbps}
+	Click Element	${BOX_DE}
+	Select From List	${DD_DE}	${DEkbps}
+	
+VPN Specification Config
+	Click Element	${LINK_VPN_SPEC}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Click Link	${CONFIGURE_ALL}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Wait Until Element Is Enabled	${LINK_TO_EXISTING}	600
+	Select From List By Label	${LINK_TO_EXISTING}	${existingVPN}
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+NAT Config
+	Click Element	${LINK_NAT}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Select From List	${LINK_TO_NEW}	1
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+NAT In MS Express Route Service Connection
+	Click Element	${LINK_MS_EXP_ROUTE_SVCONN}
+	Click Element	${LINK_MS_EXP_NAT}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Wait Until Element Is Enabled	${LINK_TO_EXISTING}	600
+	Select From List	${LINK_TO_EXISTING}	0
+	Select From List	${LINK_TO_EXISTING}	1
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+Customer Address Space Config
+	Click Element	${LINK_CUSTOMER_ADD_SPACE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	2
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+Customer Address Space in MS Express Route Service Connection
+	Click Element	${LINK_MS_EXP_ROUTE_SVCONN}
+	Click Element	${LINK_MS_EXP_CUS_ADD_SPACE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Wait Until Element Is Enabled	${LINK_TO_EXISTING}	600
+	Select From List	${LINK_TO_EXISTING}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+Cloud Firewall Service Config
+	Click Element	${LINK_CLOUD_FW_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+Cloud Acceleration Service Config
+	Click Element	${LINK_CLOUD_ACC_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+Wait loading completed
+	Wait Until Element Is Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	Click Element	${LINK_CCD}
+	
+Cloud Service Leg for Firewall Service Config
+	Wait Until Element Is Enabled	${LINK_CLOUD_SERVICE_LEG}	120
+	Click Element	${LINK_CLOUD_SERVICE_LEG}
+	Wait Until Element Is Enabled	${LINK_CSL_FW_SERVICE}	120
+	Click Element	${LINK_CSL_FW_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE_ALL}	120
+	Wait Until Element Is Visible	${CONFIGURE_ALL}	120
+	Click Link	${CONFIGURE_ALL}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+Cloud Service Leg for Acceleration Service Config
+	Click Element	${LINK_CSL_ACC_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE_ALL}	120
+	Wait Until Element Is Visible	${CONFIGURE_ALL}	120
+	Click Link	${CONFIGURE_ALL}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time_loading_img}
+	
+Cloud Firewall Services Tab Config
+	Click Element	${LINK_CFS}
+	Wait Until Page Contains Element	${BOX_POLICY_CHANGE_MANAGEMENT_TYPE}	120
+	Click Element	${BOX_POLICY_CHANGE_MANAGEMENT_TYPE}
+	Select From List	${DD_POLICY_CHANGE_MANAGEMENT_TYPE}	${policyChangeMgntType}
+	Click Element	${BOX_MY_ACCOUNT_PORTAL_DCF_LINK}
+	Wait Until Element Is Enabled	${INPUT_MY_ACCOUNT_PORTAL_DCF_LINK}	120
+	Input Text	${INPUT_MY_ACCOUNT_PORTAL_DCF_LINK}	${myAccPortalDCFLink}
+	Press Key	${INPUT_MY_ACCOUNT_PORTAL_DCF_LINK}	\\13
+	Click Element	${LINK_FW_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE_ALL}[last()]	120
+	#Wait Until Element Is Visible	${CONFIGURE_ALL}	120
+	#Click Element	${CONFIGURE_ALL}[1]
+	#Wait Until Page Contains Element	${BTN_OK}	120
+	#Click Button	${BTN_OK}
+	#Click Element	${CONFIGURE_ALL}[last()]
+	#Wait Until Page Contains Element	${BTN_OK}	120
+	#Click Button	${BTN_OK}
+	
+Cloud Acceleration Service Tab Config
+	Click Element	${LINK_CAS}
+	Wait Until Element Is Enabled	${LINK_ACC_SERVICE}	120
+	Click Element	${LINK_ACC_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE_ALL}[last()]	120
+	Wait Until Element Is Visible	${CONFIGURE_ALL}	120
+	Click Element	${CONFIGURE_ALL}[1]
+	Wait Until Page Contains Element	${BTN_OK}	120
+	Click Button	${BTN_OK}
+	Click Element	${CONFIGURE_ALL}[last()]
+	Wait Until Page Contains Element	${BTN_OK}	120
+	Click Button	${BTN_OK}
+	
+Finalise Config
+	Wait Until Element Is Enabled	${LINK_QUOTE_OPT_DETAILS}	120
+	Click Element	${LINK_QUOTE_OPT_DETAILS}
+	
+Select Product
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	120
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	120
+	Select Checkbox	listOfQuoteOptionItems
+	
+Calculate Price
+	Click Link	fetchPrices
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'Firm')]	120
+	Click Link	QuoteOptionPricingTab
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	120
+	Wait Until Element Is Not Visible	xpath=.//*[@id='priceLines_processing']	120
+	Click Link	QuoteOptionDetailsTab
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	120
+	Wait Until Element Is Not Visible	xpath=.//*[@id='lineItems_processing']	120
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	120
+	
+Create Offer
+	Select Checkbox	listOfQuoteOptionItems
+	Click Link	createOffer
+	Page Should Contain Textfield	offerNameText
+	Input Text	offerNameText	${offerName}
+	Input Text	customerOrderRefText	${customerOrderRefText}
+	Click Button	submitOffer
+	Wait Until Element Is Enabled	xpath=.//img[@alt='Customer Approve']	120
+	Click Image    Customer Approve
+	Wait Until Page Does Not Contain Element	xpath=.//*[@id='offers']//td[1]	120
+	Wait Until Element Is Enabled	xpath=.//*[@id='offers']//td[1]	120
+	Click Element	xpath=.//*[@id='offers']//td[1]
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	120
+	Wait Until Element Is Not Visible	xpath=.//*[@id='offerDetails_processing']	120
+	Select Checkbox	listOfOfferItems
+	Click Link	createOrder
+	Page Should Contain Textfield	orderName
+	Input Text	orderName	${orderNameText}
+	Click Button	submitCreateOrder
+	#Wait Until Element Is Not Visible	xpath=.//*[@id='orderLoadingMessage']	60
+	Wait Until Element Is Visible	xpath=.//*[contains(text(),'RFO invalid')]	120
+	Run Keyword If	'${Browser}' == 'IE'	
+	...	Run Keywords	
+	...	Download RFOSheet IE
+	...	AND	Upload RFOSheet IE
+	...	ELSE	Wait Until Keyword Succeeds	30s	1s
+	...	Run Keywords
+	...	Download RFOSheet FF
+	...	AND	Upload RFOSheet FF
+	Click Element	xpath=.//a[text()='Submit Order']
+	Wait Until Page Contains Element	${STATUS_SUBMITTED}	10m

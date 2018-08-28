@@ -1,0 +1,91 @@
+*** Settings ***
+Documentation	Central Site Level Product Active Directory Modify
+Suite Setup	
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../Common/CommonResources.txt
+Resource	../Common/resource_keywords_sd.txt
+Resource	../Common/readHCSTestDataFromExcel.txt
+Resource	../Common/HCSResource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	60s
+${TC_ID}		TC41
+${QuoteName}	TC41_01ASite	
+${RefNo}		TC41
+${story}		TC41
+${sheetName}	CQM
+
+*** Test Cases ***
+TC01 CQM Login
+    [TAGS]	CQM
+    #Set Suite Variable  ${sheetName}
+    Read data    ${sheetName}    ${TC_ID}
+    Create Index Numbering
+    Log To Console	Retrieved CQM variables
+    Open Browser And Login To CQM Page
+    Select Customer	
+	
+	
+TC02 Quote Creation	
+    [TAGS]	CQM
+	Go to Manage Quote
+	Run Keyword If	'${newQuote}' == 'yes'	Run Keyword	Create Quote	${QuoteName}	${OrderType}	${ContractTerm}	${Currency}	${OppurtunityReferenceNumber}	
+	Select Quote	${quoteID}	${QuoteName}		
+	[Teardown]	Log Location
+	
+TC03 Quote Configuration
+    [TAGS]	CQM
+	Quote Configuration
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}	
+
+TC04 Pricing
+    [TAGS]	CQM
+	Calculate Pricing	
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+
+TC05 Order Creation
+	[TAGS]	CQM
+	Create Order	
+	Close Browser
+	Sleep	3m
+	Open Browser And Login To CQM Page
+	Select Customer
+	Capture The OrderID	${quoteID}
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Log	${quoteID}
+	...	AND	Close Browser
+
+
+TC06 Review Order
+	[TAGS]	CQM
+	Set Suite Variable	${sheetName}	CQM
+	Read data	${sheetName}	${TC_ID}
+	Set Suite Variable	${sheetName}	SD
+	Read data	${sheetName}	${TC_ID}
+	Load Order IDs
+	Set Suite Variable	${browser}		IE
+	Open Browser And Login	${CQMusername}	${CQMpassword}	${browser}	${t3_SI_URL}
+	Navigate to Workflow and Search Order
+	Select Given Window	title=Si-Workflow
+	${sameSOPInTestData}=	Run Keyword And Return Status	Element Should Contain	lblSopEin	${InstallCoordinator}
+	Run Keyword Unless	${sameSOPInTestData}	Change Order Contact Details
+	${btnActionDisabled}=	Run Keyword And Return Status	Element Should Be Disabled	btnAction
+	Run Keyword If	${btnActionDisabled}	Accept Order
+#	Verify Order Overview in SI
+#	Verify Order Item List in SI
+	[Teardown]	Log Location
+	
+
+TC07-TC12/13 L2C process
+	[TAGS]	CQM
+	Process Order
+	Confirm Status Complete in AIB
+	Verify Quantity Updated in AIB
+	[Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser
+    

@@ -1,0 +1,34 @@
+Set Environment Variable	no_proxy	127.0.0.1
+
+*** Settings ***
+Documentation	TA_SC03_GSIP_Full_PSTN_Provide_HongKong. VLP_OV
+
+Resource	../../Common_OV/CommonResources.txt
+Resource    ../../Common_OV/MNUM_Resources.txt
+#Resource    VLP_OV_Resource.txt
+
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+
+${journey}    Provide
+
+*** Test Cases ***
+prerequisites
+    Read data	MNUM	${TC_ID}
+	Log To Console	Retrieved MNUM TestData
+    Create Index Numbering
+    Set Timestamp
+
+TC01 MNUM Portal
+	Open Browser to MNUM Login Page
+	Select Country
+	
+	
+TC02 Manage Number
+   Manage Number State Change Operations
+   Get Number Details
+   Get Page Response
+    [Teardown]	Run Keywords	Log Location
+	...	AND	Close Browser	

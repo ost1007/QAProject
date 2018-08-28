@@ -1,0 +1,928 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+Library           DebugLibrary
+Library           OperatingSystem
+Library           Collections    
+Library			  AutoItLibrary
+Library			  SikuliLibrary
+Library           Dialogs
+Library			  DateTime
+Resource		CommonResources.txt
+Variables		CommonVariables.py
+Variables       TahitiLocators.py
+*** Variables ***
+#Test Data
+#${CUSTOMERID}	5752
+#${CUSTOMERNAME}	R52NOR007
+#${lastTaskDesc}	Confirm sub-project completion
+#${endStatus}	Ended
+
+*** Keywords ***
+Open Browser to Tahiti Login Page
+    #Set Environment Variable	no_proxy	127.0.0.1
+	#Set Environment Variable	webdriver.ie.driver	${local_ie_driver}
+    Browser Config	${URL}
+	Goto	${URL}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Wait Until Element Is Visible	${BTN_LOGIN}    ${waiting_time}    Login Button is not visibled.
+	Input Username Password
+Input Username Password
+    Selenium2Library.Input Text	${TXT_USERNAME}	${USERNAME}
+    Selenium2Library.Input Text	${TXT_PWD}	${PWD}
+    Submit Credentials
+Submit Credentials
+    Click Element    ${BTN_LOGIN}
+    Wait Until Element Is Visible	${BTN_YES_LEGAL}    ${waiting_time}    Legal page is not visible
+    Click Element	${BTN_YES_LEGAL}
+
+Navigate to My Orders
+	Wait Until Element Is Enabled	${IFRAME_MENU}    ${waiting_time}    Menu Iframe is not enabled    
+    PrintScreen    Default_page
+	Select Frame	${IFRAME_MENU}
+	Wait Until Element Is Enabled    ${LINK_MYORDERS}    ${waiting_time}    My Orders Link is not enabled.
+	Click Element	${LINK_MYORDERS}
+    PrintScreen    MyOrders_page
+	UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	Wait Until Element Is Visible	${BTN_ORDERDETAIL}    ${waiting_time}    Order Detail button is not visible
+Search By Order Search
+    Click Element    ${BTN_ORDERSEARCH}
+    Wait Until Element Is Enabled    ${TXT_SEARCH}    ${waiting_time}    Search button is not enabled.
+    Selenium2Library.Input Text    ${TXT_SEARCH}    ${ClassicOrderID}
+    Click Element    ${BTN_SEARCH}
+    Wait Until Element Is Enabled    ${LIST_ORDERTABLE}    ${waiting_time}    Order list is not enabled.
+	Select Radio Button    Id    prueba
+	PrintScreen    OrderSelected
+    Wait Until Element Is Enabled    ${BTN_ORDERDETAIL2}    1m    Order Detail Button is not available
+    Click Element    ${BTN_ORDERDETAIL2}
+	${NotPresent}=  Run Keyword And Return Status    Element Should Not Be Visible   ${FORM_ORDERDETAIL}
+    Run Keyword If    ${NotPresent}    Click Element    ${BTN_ORDERDETAIL2}
+	Wait Until Element is Visible    ${FORM_ORDERDETAIL}    1m    Order Details List is not shown. 
+    PrintScreen    OrderDetailsElementShown
+Search By Customer
+	Selenium2Library.Input Text	${TXT_FILTER_CUSTOMERID_ORDERLIST}	${CUSTOMERID}
+	Selenium2Library.Input Text	${TXT_FILTER_CUSTOMERNAME_ORDERLIST}	${CUSTOMERNAME}
+	#Input Text	${TXT_FILTER_STATUS_ORDERLIST}	${ORDERSTATUS_ORDERLIST}
+	#Input Text	${TXT_FILTER_ID_ORDERLIST}	${ID_ORDERLIST}
+	Click Element	${BTN_FILER}
+	#Loop to only click New Order Status Orders
+	${statusCount}=	Get Matching Xpath Count	.//*[contains(text(),'${CUSTOMERID}')]
+	Set Global Variable	${statusCount}
+	Run Keyword Unless	'${statusCount}' == '0'	Select Order    ${currCount}
+	
+Select OV Service
+    Wait Until Element is Visible    ${FORM_SERVICELIST}    ${waiting_time}    Service List is not shown
+    Click Element    xpath=.//a[contains(text(),'GONEV-')]
+    Wait Until Element Is Visible   Table1    ${waiting_time}    Order Details List is not shown
+    PrintScreen    OrdersDetails_page
+
+#added by Azry on 23052018
+Check Last Task Ended
+	#check first whether the last task exist and status=Ended - stop test straightaway
+	Log To Console	Check Last Task Ended
+	#${lastTask}=	Set Variable If	'${ScenarioType}'=='Provide'	${lastTaskDescProvide}	${lastTaskDescModify}
+	#Focus	xpath=.//*[@id='Filterec02']/input
+	Selenium2Library.Input Text	xpath=.//*[@id='Filterec02']/input	${lastTaskDesc}
+	#Focus	xpath=.//*[@id='Filterec03']/input
+	Selenium2Library.Input Text	xpath=.//*[@id='Filterec03']/input	${endStatus}
+	Click Element	xpath=.//*/img[contains(@alt,'Filter')]
+	Wait Until Element Is Visible	${LBL_TOTAL_RESULTS_FOUND}	${waiting_time}    Search result is not visible
+	${LastTaskExist}=	Run Keyword And Return Status	Element Should Be Visible	${TASK_FOR_SERVICE_LIST}[1]/td[2]
+	Pass Execution If	${LastTaskExist}	Last Task already ended. Please close this test execution.
+#end added by Azry on 23052018
+
+Select And Process Task
+    Click Element    ${LINK_ALL_TASKS}
+    Wait until Element is Visible    ${TABLE_HEADER_TASK_ID}    ${waiting_time}    All table list is not shown.
+    #ammended and added by Azry 22052018
+    #Click Element    ${TABLE_HEADER_TASK_ID}
+    #${TaskId}    Get TaskId
+    #Process Tasks    ${TaskId}
+    Check Last Task Ended
+    Filter and Process Task
+    #end ammended and added by Azry 22052018
+    
+Get TaskID
+	#ammended and added by Azry on 22052018
+    #[Return]   ${TaskIdTrim} 
+    #${TaskIdFull}=    Selenium2Library.Get Text	${TASK_FOR_SERVICE_LIST}[1]/td[2]
+    #${TaskIdTrim}=    Get Substring    ${TaskIdFull}	0    -1
+    ${TaskID}=    Selenium2Library.Get Text	${TASK_FOR_SERVICE_LIST}[1]/td[2]
+    Set Global Variable	${TaskID}
+    Log To Console	TaskID: ${TaskID}
+    #end ammended and added by Azry on 22052018
+    
+Get Total Results Found
+    [Return]    ${TotalResults}
+    ${TotalResultsLabel}=    Selenium2Library.Get Text    ${LBL_TOTAL_RESULTS_FOUND}
+    ${TotalResults}=    Get Substring    ${TotalResultsLabel}    0    2
+    #Log To Console    TotalResults is ${TotalResults}
+    
+Process Tasks	#not use
+    [Arguments]    ${TaskId}
+    :FOR    ${currCount}    IN Range    1    50
+    \    ${SubTaskId}    Generate SubTaskId    ${TaskId}    ${currCount}
+    \    Set Global Variable    ${SubTaskId}
+    \    Log To Console    SubTaskId is ${SubTaskId}
+    \    Task Validation    ${SubTaskId}   2    1    ${currCount}
+    \	RUN KEYWORD IF	'${taskDesc}'=='Confirm sub-project completion (Pro'    Exit For Loop
+    \	RUN KEYWORD IF	'${taskDesc}'=='Confirm sub-project completion (Cha'    Exit For Loop
+    
+Generate SubTaskId	#not use
+    [Arguments]    ${TaskId}    ${currCount}
+    [Return]    ${currTaskId}
+    ${currTaskId}=    Set Variable    ${TaskId}${currCount}
+
+#added by Azry 21052018
+Filter and Process Task
+	#For loop here to loop to check for the task to be appeared - loop every 10 secs & refresh page - do it 100 times
+	Log To Console	Filtering TaskID
+	Log To Console	Looping 100 times to search for the task until it exists and process it
+	:FOR	${currCount}	IN Range	1	100
+	\	Log To Console	Loop ${currCount}
+	\	Click Element    ${TABLE_HEADER_TASK_ID}	#sort from low to high
+	\	Click Element	xpath=.//*/img[contains(@alt,'Clear')]
+	#\	Focus	xpath=.//*[@id='Filterec03']/input
+	\	Selenium2Library.Input Text	xpath=.//*[@id='Filterec03']/input	${ORDERSTATUS_TASKINSERVICE}
+	\	Click Element	xpath=.//*/img[contains(@alt,'Filter')]
+	\	Wait Until Element Is Visible	${LBL_TOTAL_RESULTS_FOUND}	${waiting_time}    Search result is not visible
+	\	${TaskExist}=	Run Keyword And Return Status	Element Should Be Visible	${TASK_FOR_SERVICE_LIST}[1]/td[2]
+	\	${taskDesc}=	Evaluate	str()
+	\	${TaskID}=	Evaluate	str()
+	#\	${TaskIDExist}=	Get Matching Xpath Count	xpath=.//*/td[contains(text(),'${TaskID}')]
+	#\	Run Keyword If	'${TaskIDExist}'=='1'	Run Keyword	Task Validation	${TaskID}	2	1	${currCount}
+	\	Run Keyword If	${TaskExist}	Run Keywords	Get TaskID	AND	Task Validation	${TaskID}	2	1	${currCount}
+	\	...	ELSE	Run Keywords	Log To Console	Sleep ${REFRESH_WAIT_TIME} and Refresh page
+	\	...	AND	Sleep	${REFRESH_WAIT_TIME}	Wait for task to appear before refresh
+	\	...	AND	Log To Console	Refreshing page
+	\	...	AND	Refresh Task In Service
+	\	${blnLastTask}=	Run Keyword And Return Status    Should Start With    ${taskDesc}	${lastTaskDesc}
+	\	Run Keyword If	${blnLastTask}	Exit For Loop
+#end added by Azry 21052018
+
+Task Validation
+    [Documentation]	@author 607253786
+	...    @Description 
+    [Arguments]    ${currTaskId}	${taskIdColumn}    ${checkBoxColumn}    ${currCount}
+	log    currTaskId ${currTaskId} taskIdColumn ${taskIdColumn} checkBoxColumn ${checkBoxColumn} currCount ${currCount}
+	Log To Console	Validating Task
+	#amended by Azry 22052018
+	#${row} =	Get Row By Cell Text	${TASK_FOR_SERVICE_LIST}	${currTaskId}	${taskIdColumn}    ${currCount}
+	${row}=	Evaluate	1
+	${checkText}	Selenium2Library.Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskIdColumn}]
+	${taskDescColumn}=    Evaluate    ${taskIdColumn}+1
+	${taskStatusColumn}=    Evaluate    ${taskIdColumn}+2
+	${taskDesc}	Selenium2Library.Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskDescColumn}]
+	Set Global Variable    ${taskDesc}
+	${taskStatus}	Selenium2Library.Get Text	${TASK_FOR_SERVICE_LIST}[${row}]/td[${taskStatusColumn}]
+	
+	#ammended by Azry on 23052018
+	##Steps below to check if taskdesc is automation or last job, exit the task
+	#${AutomaticTask}=  Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}    Automatic Port Allocation
+    #${AutomaticActivation}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	Automatic Service Activation
+    #${ProvideClassicTask}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	'Set Elements to Installed (Provide)'
+    #${ModifyClassicTask}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	'Set Elements to Installed (Change)'
+    #${LastTask}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	Confirm Sub Project Completion
+    #${EndedTask}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskStatus}	Ended
+    #${TaskNeedChkVlan}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	'Activate Service for Test & Turnu'
+    #${TaskNeedChkVlan2}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskDesc}	'Activate Service for Test and Turnu'
+    
+    ${AutomaticTask}=  Run Keyword And Return Status	Should Start With	${taskDesc}    Automatic Port Allocation
+    ${AutomaticActivation}=    Run Keyword And Return Status    Should Start With    ${taskDesc}	Automatic Service Activation
+    ${AutomaticWait4}=  Run Keyword And Return Status	Should Start With	${taskDesc}    Automatic Wait for the
+    ${ClassicTask}=    Run Keyword And Return Status    Should Start With    ${taskDesc}	Set Elements to
+    ${LastTask}=    Run Keyword And Return Status    Should Start With    ${taskDesc}	Confirm Sub Project Completion
+    ${EndedTask}=    Run Keyword And Return Status    Should Be Equal As Strings    ${taskStatus}	Ended
+    ${TaskNeedChkVlan}=    Run Keyword And Return Status    Should Start With    ${taskDesc}	Activate Service for Test
+ 	#end amended by Azry on 22052018
+ 	
+   # Log To Console   AutomaticTask is ${AutomaticTask} AutomaticActivation is ${AutomaticActivation} LastTask is ${LastTask} EndedTask is ${EndedTask}
+   # log to console    taskDesc is ${taskDesc} and EndedTask is ${EndedTask}
+
+	#amended by Azry 22052018
+    #Run Keyword If	'${ProvideClassicTask}'\ \ == \ \ 'False' and \ \ '${ModifyClassicTask}'\ \ == \ \ 'False' and \ \ '${AutomaticTask}'\ \ == \ \ 'False' and \ \ '${AutomaticActivation}'\ \ == \ \ 'False' and \ \ '${LastTask}'\ \ == \ \ 'False' and \ \ '${EndedTask}'\ \ == \ \ 'False' and \ \ '${taskDesc}'\ \ != \ \ 'Set Elements to Installed (Provide)' and \ \ '${TaskNeedChkVlan}'\ \ == \ \ 'False' and \ \ '${TaskNeedChkVlan2}'\ \ == \ \ 'False' and \ \ '${TaskNeedChkVlan2}'=='False' and \ \ '${TaskNeedChkVlan}'=='False'     Task Selection    ${checkText}    ${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount}
+    Run Keyword If	'${ClassicTask}'\ \ == \ \ 'False' and \ \ '${AutomaticTask}'\ \ == \ \ 'False' and \ \ '${AutomaticActivation}'\ \ == \ \ 'False' and \ \ '${AutomaticWait4}'\ \ == \ \ 'False' and \ \ '${LastTask}'\ \ == \ \ 'False' and \ \ '${EndedTask}'\ \ == \ \ 'False'	Task Selection    ${checkText}    ${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount}
+    #end amended by Azry 22052018
+    #commented by Azry on 23052018 
+    #...    ELSE IF    '${taskDesc}'=='Set Elements to Installed (Provide)' and \ \ '${EndedTask}'\ \ == \ \ 'False'    Close Task At Classic    ${currTaskId}   
+    #end commented by Azry on 23052018 
+    ...    ELSE IF    '${LastTask}'=='True'    All Tasks Ended
+    #ammended by Azry on 24052018
+    #...    ELSE IF    '${ProvideClassicTask}'=='True' and \ \ '${EndedTask}'\ \ == \ \ 'False'    Close Task At Classic    ${currTaskId}
+    #...    ELSE IF    '${ModifyClassicTask}'=='True' and \ \ '${EndedTask}'\ \ == \ \ 'False'    Close Task At Classic    ${currTaskId}
+    #...    ELSE IF    '${TaskNeedChkVlan}'=='True' and \ \ '${EndedTask}'\ \ == \ \ 'False'    Input Activate Service for Test And Turnup
+    ...    ELSE IF    '${ClassicTask}'=='True' and \ \ '${EndedTask}'\ \ == \ \ 'False'    Close Task At Classic    ${currTaskId}
+    #end ammended by Azry on 24052018
+     #commented by Azry on 23052018 
+    #...    ELSE IF    '${TaskNeedChkVlan2}'=='True' and \ \ '${EndedTask}'\ \ == \ \ 'False'    Input Activate Service for Test And Turnup
+     #end commented by Azry on 23052018
+     #added by Azry 24052018
+     ...	ELSE IF	'${AutomaticTask}'=='True'	End Task Automatic Port Allocation	${checkText}	${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount}
+     #end added by Azry 24052018
+
+Task Selection
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]    ${checkText}    ${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount}
+    Log To Console    Start Task Selection
+    #added by Azry 23052018
+    Log To Console	Selecting and processing TaskID: ${currTaskId}
+    #end added by Azry 23052018
+    Run Keyword If  '${checkText}'=='${currTaskId}'      Checkbox Should Not Be Selected    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+    Select Order Fr List    ${currTaskId}    ${taskIdColumn}    ${checkBoxColumn}    ${currCount}    ${row}
+    Yank Task    ${currTaskId}    ${currCount}
+    PrintScreen    Task_Ended_${currTaskId}
+Select Order Fr List
+    [Documentation]	@author 607253786
+	...    @Description Function to select the correc torder from the list
+    [Arguments]    ${currTaskId}	${taskIdColumn}    ${checkBoxColumn}    ${currCount}    ${row}
+	Wait Until Keyword Succeeds    6m    2m    Click CheckBox    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+	Checkbox Should Be Selected    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+	
+select checkbox
+    [Arguments]    ${checkText}    ${currTaskId}    ${TASK_FOR_SERVICE_LIST}    ${row}    ${checkBoxColumn}
+    Run Keyword If    '${checkText}'=='${currTaskId}'	Click CheckBox    xpath=.${TASK_FOR_SERVICE_LIST}[${row}]/td[${checkBoxColumn}]/input
+    
+Get Table Row Count
+    [Documentation]	@author 607253786
+	...    @Description Function to get the table row count
+    [Arguments]    ${rowLocator}
+    Run Keyword And Return    Get Matching Xpath Count    ${rowLocator}
+
+Get Row By Cell Text	#not use
+    [Documentation]	@author 607253786
+	...    @Description Function to get the row by cell text
+    [Arguments]    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    [Return]    ${rowNumber}
+    ${TotalTask}    Get Total Results Found
+    ${TotalTaskAvailable}=    Convert To Integer    ${TotalTask}
+    Set Global Variable	${TotalTaskAvailable}
+    Run Keyword If    ${TotalTaskAvailable} < ${currCount}    Hold and Wait for Task    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    Run Keyword If    ${currCount} == 11 and ${TotalTaskAvailable}\ \ > \ \ 10    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT}
+     ...    AND    Wait Until Element Is Enabled    ${BTN_NEXT_PAGE}    ${waiting_time}    Next Button is not Enabled
+     ...    AND    Wait Until Keyword Succeeds    6m    2m    Click Element    ${BTN_NEXT_PAGE}
+     ...    AND    PrintScreen    Next1stPage
+    Run Keyword If    ${currCount} == 21 and ${TotalTaskAvailable}\ \ > \ \ 20    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT}
+     ...    AND    Wait Until Element Is Enabled    ${BTN_NEXT_PAGE}    ${waiting_time}    Next Button is not Enabled
+     ...    AND    Wait Until Keyword Succeeds    6m    2m    Click Element    ${BTN_NEXT_PAGE}
+     ...    AND    PrintScreen    Next2ndPage
+    Run Keyword If    ${currCount} == 31 and ${TotalTaskAvailable}\ \ > \ \ 30    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT}
+     ...    AND    Wait Until Element Is Enabled    ${BTN_NEXT_PAGE}    ${waiting_time}    Next Button is not Enabled
+     ...    AND    Wait Until Keyword Succeeds    6m    2m    Click Element    ${BTN_NEXT_PAGE}
+     ...    AND    PrintScreen    Next3rdPage
+#     log to console    currCount ${currCount}
+     ${rowNumber}    Get Row Number    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+     
+Get Row Number	#not use
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]   ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    [Return]    ${rowNumber}
+     ${rowCount}    Get Table Row Count    ${rowLocator}
+    :FOR    ${rowIndex}    IN Range    1    ${rowCount}+1
+    \    ${currText}    Selenium2Library.Get Text    ${rowLocator}[${rowIndex}]/td[${column}]
+    \    RUN KEYWORD IF	'${rowIndex}'\ \ == \ \ '${rowCount}' and \ \ '${cellText}'\ \ != \ \ '${currText}'    Run Keywords    Hold and Wait    ${rowLocator}    ${cellText}    ${column}    ${currCount}    ${rowCount}    AND    Get Row By Cell Text    ${rowLocator}	${cellText}	${column}    ${currCount}
+    \    RUN KEYWORD IF	'${cellText}' == '${currText}'	Exit For Loop
+    ${rowNumber}    Set Variable   ${rowIndex}
+
+Loop at Service Overview
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]    ${currCount}
+    Wait Until Keyword Succeeds    6h    15m    Process Task Via Service Overview    ${SubTaskId}    ${currCount}
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}
+    Wait Until Element Is Enabled   ${FORM_TASKDETAILS}    ${waiting_time}    Task Details Form is disabled. 
+    Input Yank Task    ${currCount}
+Hold and Wait
+   [Arguments]    ${rowLocator}    ${cellText}    ${column}    ${currCount}    ${rowCount}
+   :FOR    ${loop}    IN Range    1    999
+   \    Log To Console    loop${loop}
+   \    Sleep    5m
+   \    Refresh Task In Service
+   \    ${newTotalTask}    Get Total Results Found
+   \    ${NewTotalTaskAvailable}=    Convert To Integer    ${newTotalTask}
+   \    log to console    NewTotalTaskAvailable is ${NewTotalTaskAvailable} and TotalTaskAvailable is ${TotalTaskAvailable}
+   \    Run Keyword if    '${NewTotalTaskAvailable}' > '${TotalTaskAvailable}'    Exit For Loop
+   Run Keyword If    ${currCount} > 10 and ${NewTotalTaskAvailable}\ \ > \ \ 10    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT}
+     ...    AND    Wait Until Element Is Enabled    ${BTN_NEXT_PAGE}    ${waiting_time}    Next Button is not Enabled
+     ...    AND    Wait Until Keyword Succeeds    6m    2m    Click Element    ${BTN_NEXT_PAGE}
+     ...    AND    PrintScreen    Next1stPage
+    Run Keyword If    ${currCount} > 20 and ${NewTotalTaskAvailable}\ \ > \ \ 20    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT}
+     ...    AND    Wait Until Element Is Enabled    ${BTN_NEXT_PAGE}    ${waiting_time}    Next Button is not Enabled
+     ...    AND    Wait Until Keyword Succeeds    6m    2m    Click Element    ${BTN_NEXT_PAGE}
+     ...    AND    PrintScreen    Next2ndPage
+    Run Keyword If    ${currCount} > 30 and ${NewTotalTaskAvailable}\ \ > \ \ 30    Run Keywords
+     ...    Unselect Frame
+     ...    AND    Select Frame    ${IFRAME_CONTENT}
+     ...    AND    Wait Until Element Is Enabled    ${BTN_NEXT_PAGE}    ${waiting_time}    Next Button is not Enabled
+     ...    AND    Wait Until Keyword Succeeds    6m    2m    Click Element    ${BTN_NEXT_PAGE}
+     ...    AND    PrintScreen    Next3rdPage
+       
+Refresh Task In Service
+    Unselect Frame
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_TASK_IN_SERV}
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	#commented by Azry 22052018
+    #Click Element    ${TABLE_HEADER_TASK_ID}
+    #end commented by Azry 22052018
+    
+Hold and Wait for Task
+    [Documentation]	@author 607253786
+	...    @Description     
+    [Arguments]    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    ${rowCount}    Get Table Row Count    ${rowLocator}
+    Hold and Wait    ${rowLocator}    ${cellText}    ${column}    ${currCount}    ${rowCount}
+    
+    Wait Until Keyword Succeeds    6h    15m    Run Keywords
+    ...    Refresh Task In Service
+    ...    AND    Unselect Frame
+    ...    AND    Select Frame    ${IFRAME_CONTENT}
+    ...    AND    Wait Until Keyword Succeeds    6m    2m    Run Keyword If    ${currCount} > 10    Click Element    ${BTN_NEXT_PAGE}
+    ...    AND    Wait Until Keyword Succeeds    6m    2m    Run Keyword If    ${currCount} > 20    Click Element    ${BTN_NEXT_PAGE}
+    ...    AND    Wait Until Keyword Succeeds    6m    2m    Run Keyword If    ${currCount} > 30    Click Element    ${BTN_NEXT_PAGE}
+    ...    AND    Get Row Number    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+    ...    AND    Get Row By Cell Text    ${rowLocator}    ${cellText}    ${column}    ${currCount}
+Click CheckBox
+    [Documentation]	@author 607253786
+	...    @Description 
+    [Arguments]    ${checkBox}
+    Click Element    ${checkBox}
+    PrintScreen    OrderCheckboxChecked
+Select Order
+    [Arguments]    ${currCount}
+	:FOR	${indexOrder}	IN RANGE	${statusCount}
+	\	Wait Until Element Is Visible	${BTN_ORDERDETAIL}    ${waiting_time}    Order Detail Button is not visible.
+	\	Click Element	${OPT_ID_MYORDERS}
+	\	Debug
+	\	Click Button	${BTN_ORDERDETAIL}
+	\	Run Keyword	Select Service Number
+	
+Select Service Number
+    [Arguments]    ${currCount}
+	Wait Until Element Is Visible	${LINK_SERVICENUMBER}	30    Service Number link is not visible.
+    Click Element	${LINK_SERVICENUMBER}
+    Wait Until Element Is Visible	${LINK_ALLTASKS}    ${waiting_time}    All Tasks link is not visible.
+    Click Element	${LINK_ALLTASKS}
+    Tasks In Service    ${currCount}
+    
+Tasks In Service
+    [Arguments]    ${currCount}
+    Wait Until Element Is Visible	${OPT_TASKID}    ${waiting_time}    Task ID option is not visible.
+    Selenium2Library.Input Text	${TXT_FILTER_STATUS_TASKINSERVICE}	${ORDERSTATUS_TASKINSERVICE}
+    Click Element	${BTN_FILER}
+    ${statusExecutionCount}=	Get Matching Xpath Count	.//*[contains(text(),'Execution')]
+    Set Global Variable	${statusExecutionCount}
+    Run Keyword Unless	'${statusExecutionCount}' == '0'	Select Task ID    ${currCount}
+    
+Select Task ID
+    [Arguments]    ${currCount}
+    :FOR	${indexTASK}	IN RANGE	${statusExecutionCount}
+	\	Check Feedback Message
+	\	Log	${msgUseClassic}
+	\	Run Keyword If	${msgUseClassic}=='True'	Run Keywords	Unselect Frame	AND	Select Frame	${IFRAME_MENU}	AND	Click Element	${LINK_MYORDERS}	AND	Exit For Loop
+	\	Click Element	${OPT_TASKID}
+	\	Run Keyword	Yank Task	${SubTaskId}    ${currCount}
+
+Yank Task
+    [Arguments]    ${SubTaskId}    ${currCount}
+    ${YankTaskButtonEnabled}=    Run Keyword And Return Status    Element Should be Enabled    ${BTN_YANKTASK}    
+    Run Keyword If    ${YankTaskButtonEnabled}    Process Task Via All Task    ${currCount}    ELSE       Process Task Via Service Overview    ${SubTaskId}    ${currCount}
+    Input Yank Task    ${currCount}
+    #Click End Task Button    ${currCount}    
+        
+Process Task Via All Task
+    [Arguments]    ${currCount}
+    Click Element    ${BTN_YANKTASK}
+    ${NotPresent2}=  Run Keyword And Return Status    Element Should Not Be Visible   ${FORM_ORDERDETAIL}
+    Wait Until Element Is Enabled   ${FORM_TASKDETAILS}    ${waiting_time}    Task Details Form is not enabled.
+    
+Process Task Via Service Overview
+    [Arguments]    ${SubTaskId}    ${currCount}
+    Unselect Frame
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_SERV_OVERVIEW}
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}
+    Wait until Element is Visible    ${LINK_ALL_TASKS}    ${waiting_time}    All Task link is not visible.
+    Wait Until Element is Visible    Table1    ${waiting_time}    Task list is not visible.
+    Click Element    xpath=.//strong[text()='${SubTaskId}']
+    
+Click End Task Button
+    [Arguments]    ${currCount}
+    Wait Until Element is Visible    ${BTN_ENDTASK}    ${waiting_time}    End Task Button is not visible.
+    End Task   ${currCount} 
+    
+End Task  
+    [Arguments]    ${currCount}
+	Wait Until Element Is Enabled   ${BTN_ENDTASK}    ${waiting_time}    End task button is not enabled.
+	${EndTaskBtnEnabled}=  Run Keyword And Return Status	Element Should Be Enabled	${BTN_ENDTASK}
+	
+	Run Keyword if    ${EndTaskBtnEnabled}    Click Element  ${BTN_ENDTASK}
+	#Added by Veena on 08052018 to cater CRE Update for UK
+	Run Keyword if    '${COUNTRY}'=='UK' and '${taskDesc}'=='Activate Service for Test & Turnup' or '${taskDesc}'=='Activate Service for Test and Turnu'	Update CRE
+	#Added by Veena on 08052018 to cater CRE Update for UK
+	
+	${TaskEndedWithinWaitingTime}=    Wait until Element is Visible    ${LBL_TASK_ENDED}    ${waiting_time}
+	Run Keyword if     ${TaskEndedWithinWaitingTime}=='NONE'    Timeout Refresh
+	Element Should Contain    ${LBL_TASK_ENDED}    Task ended
+	PrintScreen    EndTask_${taskDesc}
+    Unselect Frame
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_SERV_OVERVIEW}	#back to Service Overview screen
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	Wait Until Element Is Enabled   ${LINK_ALL_TASKS}    ${waiting_time}    All Tasks Link is not enabled.
+    Click Element    ${LINK_ALL_TASKS}	#click All Tasks hyperlink
+    Wait until Element is Visible    ${TABLE_HEADER_TASK_ID}    ${waiting_time}    Task List is not visible.
+    #commented by Azry 22052018
+    #Click Element    ${TABLE_HEADER_TASK_ID}
+    #end commented by Azry 22052018
+	Sleep    5s
+	#commented by Azry 23052018
+    #Wait Until Keyword Succeeds    6m    2m    Run Keyword If    ${currCount} > 10    Click Element    ${BTN_NEXT_PAGE}
+    #Wait Until Keyword Succeeds    6m    2m    Run Keyword If    ${currCount} > 20    Click Element    ${BTN_NEXT_PAGE}
+    #end commented by Azry 23052018
+    PrintScreen    EndedTask_${taskDesc}
+
+Check Feedback Message
+    ${msgUseClassic}=  Run Keyword And Return Status	Element Should Be Visible	${TXT_FEEDBACK_USECLASSIC}
+    Set Global Variable	${msgUseClassic}
+    
+Timeout Refresh
+    ${PageTimeout}=   Element Should Contain    html/body/blockquote/table/tbody/tr[1]/td/big    Web Server Temporarily Unavailable
+    Run Keyword if    ${PageTimeout}
+    Unselect Frame
+    Wait Until Element Is Enabled   ${IFRAME_ARIADNETHREAD}    ${waiting_time}    IFRAME_ARIADNETHREAD is not enabled.
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_TASKDETAILS}
+Input Yank Task
+    [arguments]    ${currCount}
+    #ammended by Azry on 23052018
+    #Run Keyword if    '${taskDesc}'\ \ == \ \ 'Plan & Assign Primary Global Networ' and \ \ '${journey}'\ \==\ \'Provide'    Input Plan Assign Primary Global Network
+    Run Keyword if    '${taskDesc}'\ \ == \ \ 'Plan & Assign Primary Global Networ' and \ \ '${ScenarioType}'\ \==\ \'Provide'    Input Plan Assign Primary Global Network
+    #end ammended by Azry on 23052018
+    Run Keyword if    '${taskDesc}'=='Select & schedule tests required (P'    Select Schedule Tests Required
+    Run Keyword if    '${taskDesc}'=='Set Elements to Installed (Provide)'    Close Task At Classic  
+    Run Keyword if    '${taskDesc}'=='Notify Customer Service is Ready (P' or '${taskDesc}'=='Notify Customer Service is Ready (C'    Input Notify Customer Service is Ready
+    Run Keyword if    '${taskDesc}'=='Configure Mediation'    Input Configure Mediation
+    Run Keyword if    '${taskDesc}'=='Hand over into maintenance (Provide' or '${taskDesc}'=='Hand over into maintenance (Change)'    Input Hand over into maintenance
+    Run Keyword if    '${taskDesc}'=='Activate Service for Test and Turnu'    Input Activate Service for Test And Turnup
+    Run Keyword if    '${taskDesc}'=='Activate Service for Test & Turnup'    Input Activate Service for Test And Turnup
+    Run Keyword if    '${taskDesc}'=='Update MNUM(Provide)' or '${taskDesc}'=='Update MNUM(Modify)' or '${taskDesc}'=='Update MNUM(Cease)'    Input Update MNUM
+    
+    
+    #modify task
+    #ammended by Azry on 23052018
+    #Run Keyword if    '${taskDesc}'\ \ == \ \ 'Plan & Assign Primary Global Networ' and \ \ '${journey}'\ \==\ \'Modify'    Modify Input Plan Assign Primary Global Network
+    Run Keyword if    '${taskDesc}'\ \ == \ \ 'Plan & Assign Primary Global Networ' and \ \ '${ScenarioType}'\ \==\ \'Modify'    Modify Input Plan Assign Primary Global Network
+    #end ammended by Azry on 23052018
+    Run Keyword if    '${taskDesc}'=='Plan Service Modification (Change)'    Input Plan Service Modification
+    #Modified by Veena on 01062018 since the flow is same for all countries
+    #Run Keyword if    '${COUNTRY}'<>'Hong Kong' and '${taskDesc}'=='Perform Number Management (Change)'    Modify Input Perform Number Management
+    Run Keyword if    '${taskDesc}'=='Perform Number Management (Change)'    Modify HK Input Perform Number Management
+    #Modified by Veena on 01062018 since the flow is same for all countries
+    Run Keyword if    '${taskDesc}'=='Gather & Confirm Service Configurat'    Input Gather Confirm Service Config
+    Run Keyword if    '${taskDesc}'=='Configure GMV (Change)'    Input Configure GMV
+    Run Keyword if    '${taskDesc}'=='Perform Alarm Check (Change)'    Input Perform Alarm Check
+    Run Keyword if    '${taskDesc}'=='Perform On-Site / CPE Connectivity'    Input Perform OnSite CPE Connectivity
+    Run Keyword if    '${taskDesc}'=='Perform Service Test (Change)'    Input Perform Service Test
+    Run Keyword if    '${taskDesc}'=='Perform Full Service / CPE Test (Ch'    Input Perform Full Service CPE Test
+    Run Keyword if    '${taskDesc}'=='Port in/out and test service with c'    Input Port In Out and Test Srv with Cust
+    # Added by Veena on 02052018 to cater Confirm Access Dates (Change)Task in Modify HK
+    Run Keyword if    '${taskDesc}'=='Confirm Access Dates (Change)'    Input Access Order Accepted
+    # Added by Veena on 02052018 to cater Confirm Access Dates (Change)Task in Modify HK
+    
+    
+    #cease task#
+    Run Keyword if    '${taskDesc}'=='Notify Billing of Cease (Cease)'	Input Notify Billing of Cease
+    Run Keyword if    '${taskDesc}'=='Deactivate Service / Feature (Cease'	Input Deactivate Service
+    #Run Keyword if    '${taskDesc}'=='Recover Primary Global Network Reso'	Input Recover Primary Global Network
+    #--End cease task--#
+    PrintScreen    Yank_Task_${taskDesc}
+    Click End Task Button    ${currCount}    
+    
+Close Task At Classic
+    [Arguments]    ${currTaskId}
+    Log To Console    Please manually Close Task at Classic
+    #output task id to txt file
+	LOG	${currTaskId}
+	Export Variable Into Text File	${ClassicManualTaskID_TextFile}	${currTaskId}
+	#ammended by Azry on 24052018
+	#Pause Execution
+	Pass Execution	Retrigger Test once completed Close Task at Classic
+	#end ammended by Azry on 24052018
+Select Schedule Tests Required
+    #task 5
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}  
+	Click Element    ${CBO_CUST_ACT_SUPPORT}  
+    Click Element    ${CBO_CUST_ACT_SUPPORT_NO}
+    Click Element    ${CBO_FULL_SERV_CPE_TEST}
+    Click Element    ${CBO_FULL_SERV_CPE_TEST_NO}
+    #Full Service CPE Test  this one needed if full service cpe test is yes
+    Click Element    ${CBO_SERV_TEST_REQ}
+    Click Element    ${CBO_SERV_TEST_REQ}/option[text()='NO']
+     
+Modify Input Perform Number Management
+    Click Element    ${LINK_MATRIXCONFIG}
+    PrintScreen    Input_PerformNumberMgmt
+	#apply for all
+    Wait Until Element Is Enabled   ${BTN_SAVE}    ${waiting_time}    Save button is not enabled. 
+    Click Element    ${BTN_SAVE}
+    Unselect Frame
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_TASK_IN_SERV}
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}
+    
+Modify HK Input Perform Number Management
+    Click Element    ${LINK_MATRIXCONFIG}
+    
+    #For Hong Kong porting modify only
+    ${my_date_to_select}=	Get Current Date	UTC	7 days	%d/%m/%Y
+	#Selenium2Library.Input Text    ${TXT_PNMC_PORT_IN_DATE_NN}    ${my_date_to_select}
+	Selenium2Library.Input Text    ${TXT_PNMC_PORT_IN_DATE_P}    ${my_date_to_select} 
+	#Selenium2Library.Input Text    ${TXT_PNMC_PORT_OUT_DATE_NN}    ${my_date_to_select} 
+	#Selenium2Library.Input Text    ${TXT_PNMC_PORT_OUT_DATE_P}    ${my_date_to_select} 
+	#Selenium2Library.Input Text    ${TXT_PNMC_CUT_OVER_DATE_NN}    ${my_date_to_select} 
+	#Selenium2Library.Input Text    ${TXT_PNMC_CUT_OVER_DATE_P}    ${my_date_to_select}  
+	Selenium2Library.Input Text    ${TXT_PNMC_GSP_P}    ${GSP}
+	Selenium2Library.Input Text    ${TXT_PNMC_LSP_P}    ${LSP}
+	PrintScreen    Input_PerformNumberMgmt
+	#apply for all
+    Wait Until Element Is Enabled   ${BTN_SAVE}    ${waiting_time}    Save button is not enabled. 
+    Click Element    ${BTN_SAVE}
+    PrintScreen    PerformNumberMgmt_Saved
+    Unselect Frame
+    Select Frame    ${IFRAME_ARIADNETHREAD}
+    Selenium2Library.Click Link    ${LINK_TASK_IN_SERV}
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}    
+    
+Input Notify Customer Service is Ready
+    Click Element    ${DATE_PICKER_NOTIFY_CUST_SVC_READY_DATE}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+	Sleep    5s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	PrintScreen    DateTimePicker_NotifyCust
+	
+Input Configure Mediation
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}
+    Selenium2Library.Input Text    ${TXT_SVC_LOC_ID}    SL_${timeStamp}
+    
+Input Hand over into maintenance
+    Unselect Frame
+    Select Frame	${IFRAME_CONTENT}
+    Click Element    ${CBO_CSC_ACCEPTED}
+    Click Element    ${CBO_CSC_ACCEPTED_YES}
+    
+Input Plan Service Modification
+    Unselect Frame
+    Select Frame	${IFRAME_CONTENT}
+    Click Element    ${CBO_CUST_KEEP_CPE}
+    Click Element    ${CBO_CUST_KEEP_CPE}/option[text()='NO']
+    Click Element    ${CBO_CEASE_ACCESS_TAIL}
+    Click Element    ${CBO_CEASE_ACCESS_TAIL}/option[text()='NO']
+    Click Element    ${CBO_RECOVER_OWN_ACCESS}
+    Run Keyword if    '${COUNTRY}'=='Hong Kong'    Click Element    ${CBO_RECOVER_OWN_ACCESS}/option[text()='YES']    ELSE    Click Element    ${CBO_RECOVER_OWN_ACCESS}/option[text()='NO']
+    Click Element    ${CBO_RECOVER_PORT}
+    Run Keyword if    '${COUNTRY}'=='Hong Kong'    Click Element    ${CBO_RECOVER_PORT}/option[text()='YES']    ELSE    Click Element    ${CBO_RECOVER_PORT}/option[text()='NO']
+    Click Element    ${CBO_ALLOCATE_NEW_NETWORK_RESOURCES}
+    Click Element    ${CBO_ALLOCATE_NEW_NETWORK_RESOURCES}/option[text()='YES']
+    Click Element    ${CBO_BILLING_ONLY}
+    Click Element    ${CBO_BILLING_ONLY}/option[text()='NO']
+    Click Element    ${CBO_CEASE_EXISTING_CPE}
+    Click Element    ${CBO_CEASE_EXISTING_CPE}/option[text()='NO']
+    Click Element    ${CBO_CHANGE_CPE}
+    Click Element    ${CBO_CHANGE_CPE}/option[text()='No Change']
+    Click Element    ${CBO_CHANGE_ETH_CFN}
+    Click Element    ${CBO_CHANGE_ETH_CFN}/option[text()='NO']
+    Click Element    ${CBO_CHANGE_OLO_DSL}
+    Click Element    ${CBO_CHANGE_OLO_DSL}/option[text()='NO']
+    Click Element    ${CBO_CHANGE_TRANSMISSION_PATH}
+    Click Element    ${CBO_CHANGE_TRANSMISSION_PATH}/option[text()='NO']
+    Click Element    ${CBO_NW_RECONFIG_REQUIRED}
+    Click Element    ${CBO_NW_RECONFIG_REQUIRED}/option[text()='YES']
+    Click Element    ${CBO_OWN_ACCESS_MOD}
+    Click Element    ${CBO_OWN_ACCESS_MOD}/option[text()='NO']
+    Click Element    ${CBO_SRV_OUTAGE_REQUIRED}
+    Click Element    ${CBO_SRV_OUTAGE_REQUIRED}/option[text()='NO']
+    Access Alarm Test Required Yes
+    Full Service CPE Test Yes
+    Onsite CPE Test Required Yes
+    SRV Test Required Yes
+    
+Access Alarm Test Required Yes
+    Click Element    ${CBO_ACCESS_ALARM_TEST_REQ}
+    Click Element    ${CBO_ACCESS_ALARM_TEST_REQ}/option[text()='YES']
+    Click Element    ${DATE_PICKER_ACCESS_ALARM_TEST_REQ}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	PrintScreen    DateTimePicker_ACCESS_ALARM_TEST_REQ
+	
+Full Service CPE Test Yes
+    Click Element    ${CBO_FULL_SERV_CPE_TEST}
+    Click Element    ${CBO_FULL_SERV_CPE_TEST}/option[text()='YES']
+    Click Element    ${DATE_PICKER_FULL_SERV_CPE_TEST}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}	
+	PrintScreen    DateTimePicker_FULL_SERV_CPE_TEST
+	
+Onsite CPE Test Required Yes
+    Click Element    ${CBO_ONSITE_CPE_TEST_REQ}
+    Click Element    ${CBO_ONSITE_CPE_TEST_REQ}/option[text()='YES']
+    Click Element    ${DATE_PICKER_SCHEDULED_ONSITE_CPE_TEST_DATE}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	PrintScreen    DateTimePicker_ONSITE_CPE_TEST_REQ
+	
+SRV Test Required Yes
+	Click Element    ${CBO_SERV_TEST_REQ_MOD}
+    Click Element    ${CBO_SERV_TEST_REQ_MOD}/option[text()='YES']
+    Click Element    ${DATE_PICKER_SCHEDULED_SERV_TEST_DATE}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	PrintScreen    DateTimePicker_SCHEDULED_SERV_TEST
+	
+Input Perform Number Management
+    Click Element    ${LINK_NUM_BLK_MATRIX_CONFIG}
+    Unselect Frame
+    Select Frame    ${IFRAME_MATRIX_ATTR}
+    #check if need to input anything here
+    
+Input Gather Confirm Service Config
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT} 
+    Click Element    ${CBO_CUST_CONFIG_DATA_AVAI}
+    Click Element    ${CBO_CUST_CONFIG_DATA_AVAI}/option[text()='Passed']
+    
+Input Configure GMV
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT} 
+    Selenium2Library.Input Text    ${TXT_SWITCH_NNNN_CODE}    SBC_${timeStamp}      #provided it is the same xpath with provide, else have to create a new one.
+
+Input Perform Alarm Check
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}    
+    Click Element    ${CBO_ACCESS_ALARM_TEST_EXECUTED}
+    Click Element    ${CBO_ACCESS_ALARM_TEST_EXECUTED}/option[text()='YES']
+    Click Element    ${CBO_ACCESS_ALARM_TEST_RESULT}
+    Click Element    ${CBO_ACCESS_ALARM_TEST_RESULT}/option[text()='Passed']
+    Execution Access Test Yes
+    
+Execution Access Test Yes
+    Click Element    ${DATE_PICKER_EXECUTION_ACCESS_ALARM_TEST_DATE}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    PrintScreen    DateTimePicker_EXECUTION_ACCESS_ALARM_TEST
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+   
+Input Perform OnSite CPE Connectivity
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}  
+    Execution Onsite CPE Test Executed Yes 
+    Click Element    ${CBO_ONSITE_CPE_TEST_RESULT}
+    Click Element    ${CBO_ONSITE_CPE_TEST_RESULT}/option[text()='Passed'] 
+   
+Execution Onsite CPE Test Executed Yes 
+    Click Element    ${CBO_ONSITE_CPE_TEST_EXECUTED}
+    Click Element    ${CBO_ONSITE_CPE_TEST_EXECUTED}/option[text()='YES'] 
+    Click Element    ${DATE_PICKER_ONSITE_CPE_TEST_DATE}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    PrintScreen    DateTimePicker_ONSITE_CPE_TEST
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+       
+Input Perform Service Test
+    Unselect Frame
+    Select Frame    ${IFRAME_CONTENT}
+    Click Element    ${CBO_ENCRYPTION_APPLIED}
+    Click Element    ${CBO_ENCRYPTION_APPLIED}/option[text()='Yes']
+    Click Element    ${CBO_SRV_TEST_EXECUTED}
+    Click Element    ${CBO_SRV_TEST_EXECUTED}/option[text()='YES']
+    Execution Service Test Date
+    Click Element    ${CBO_SRV_TEST_RESULT}
+    Click Element    ${CBO_SRV_TEST_RESULT}/option[text()='Passed']    
+    
+Execution Service Test Date
+    Click Element    ${DATE_PICKER_EXECUTION_SERVICE_TEST_DATE}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    PrintScreen    DateTimePicker_EXECUTION_SERVICE_TEST
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+    
+Input Perform Full Service CPE Test
+    Execute Full Service CPE test date
+    Click Element    ${CBO_FULL_SRV_CPE_TEST_EXECUTED}
+    Click Element    ${CBO_FULL_SRV_CPE_TEST_EXECUTED}/option[text()='YES']
+    Click Element    ${CBO_FULL_SRV_CPE_TEST_RESULT}
+    Click Element    ${CBO_FULL_SRV_CPE_TEST_RESULT}/option[text()='Passed']
+    
+Execute Full Service CPE test date
+    #have to check out how to select the date, it is not available in screenshoot 
+    Click Element    ${CBO_FULL_SRV_CPE_TEST_EXECUTED}
+    Click Element    ${CBO_FULL_SRV_CPE_TEST_EXECUTED}/option[text()='YES']
+    Click Element    ${DATE_PICKER_EXECUTION_FILL_SERVICE_CPE_TEST_DATE}
+    Unselect Frame
+    Select Window	title=DateTime Picker
+    PrintScreen    DATE_PICKER_EXECUTION_FILL_SERVICE_CPE_TEST_DATE
+    Sleep    10s
+    Click Element    xpath=.//*[@bgcolor='#ffff33']
+    Select Window    title=Tahiti Portal
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+   
+Input Activate Service for Test And Turnup
+	#ammended by Azry on 23052018
+	#Log to Console    Task 'Activate Service for Test & Turnup', Please check VLAN status at rPACS before click on OK to continue the test.
+	#Pause Execution
+    #${UpdateRpacsBtnEnabled}=  Run Keyword And Return Status	Element Should Be Enabled	${BTN_UPDATE_RPACS}
+    #Run Keyword if    ${UpdateRpacsBtnEnabled}    Click Element  ${BTN_UPDATE_RPACS}
+	#PrintScreen    updated_rpacs
+	#amended by Azry on 28052018
+    #Run Keyword If	'${ENV}'=='T3'	Run Keywords	Log to Console	Task 'Activate Service for Test & Turnup', Please check VLAN status at rPACS before click on OK to continue the test.
+	#...	AND	Pause Execution
+	#...	AND	Check rPACS Update Button
+	Run Keyword If	'${ENV}'=='T3' and '${ScenarioType}'=='Provide'	Run Keyword	Message to User
+	#end amended by Azry on 28052018
+	#end ammended by Azry on 23052018
+	
+Input Notify Billing of Cease
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+    Click Element    ${CBO_BILLING_RECORD_SETUP}
+    Click Element    ${CBO_BILLING_RECORD_SETUP}/option[text()='Passed']
+    
+    
+#### added by FKH --- reserved for future revision
+Input Deactivate Service
+	Log To Console	in Input Deactivate Service
+	UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}
+	Click Element	${CALENDER_IMG}
+	Wait Until Keyword Succeeds	1m	1s	Select Window	title=DateTime Picker
+	Wait Until Page Contains Element	${TODAYSDATE}
+	Click Link	${TODAYSDATE}
+	Select Window    title=Tahiti Portal
+	Select Frame	${IFRAME_CONTENT}
+	Wait Until Element Is Enabled	BotonSave
+	Focus	BotonSave
+	Click Element	BotonSave
+	Wait Until Page Contains	All changes were updated	30s
+    #Check rPACS Update Button
+    #Debug
+
+    
+#Input Recover Primary Global Network
+	#Log To Console	in Input Recover Primary Global Network
+	#Debug
+	#Check rPACS Update Button
+#### --------------------------------------- #####
+
+#added by Azry on 24052018
+Check rPACS Update Button
+	${UpdateRpacsBtnEnabled}=  Run Keyword And Return Status	Element Should Be Enabled	${BTN_UPDATE_RPACS}
+	Run Keyword If	${UpdateRpacsBtnEnabled}	Run Keywords	Click Element	${BTN_UPDATE_RPACS}
+	...	AND	PrintScreen	updated_rpacs
+	...	ELSE	Log To Console	Update rPACS button not enabled!
+	
+End Task Automatic Port Allocation
+	[Arguments]    ${checkText}    ${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount}
+	Run Keyword If	'${ENV}'=='T3'	Run Keywords	Log To Console	Task Automatic Port Allocation, awaiting end task automatically in ${ENV}
+	#added by Azry on 28052018
+	...	AND	Refresh Task In Service
+	#end added by Azry on 28052018
+	...	ELSE	Run Keywords	Log To Console	Task Automatic Port Allocation, force end task in T1 and Live
+	...	AND	Task Selection    ${checkText}    ${currTaskId}    ${row}    ${checkBoxColumn}    ${taskIdColumn}    ${currCount}
+#end added by Azry on 24052018
+
+Input Update MNUM
+   #to add checking to run this for Hong Kong Only
+   Save Number Block Export
+
+Save Number Block Export 
+    log to console    start Input Update MNUM Sikuli 
+    ${NumberBlkExportVisible}=  Run Keyword And Return Status	Element Should Be Visible	${LINK_NUMBER_BLK_EXPORT}
+    log to console    NumberBlkExportVisible is ${NumberBlkExportVisible}
+   # Run Keyword if    ${NumberBlkExportVisible}    Click Element    ${LINK_NUMBER_BLK_EXPORT}
+    Log to Console    Please Click at Number Block Export and save CSV file before you click on Ok button. 
+    Pause Execution
+    #Save Csv File
+    
+Save Csv File    
+    # the code below is not working still, so manual intervention to save the file for now.
+    log to console    click save bar
+    Win Activate	Tahiti Portal - Internet Explorer
+    Control Click	Tahiti Portal - Internet Explorer	${EMPTY}	[CLASS:DirectUIHWND; INSTANCE:1]	LEFT	1
+    log to console    start waiting for dl file dialog box
+    
+    Wait Until Screen Contain	tahiti_dl_file_dialog_box.png	24
+	log to console    Click on download options
+	Click In	tahiti_dl_file_dialog_box.png	tahiti_dl_file_save_options.png
+	log to console    click save as option
+	Click	tahiti_dl_file_save_as.png
+	log to console    select save as window.
+	Select Window    title=Save As
+	
+    Control Click	Save As    ${EMPTY}	[CLASS:ToolbarWindow32; INSTANCE:4]	LEFT	1
+    ${downloadDirectory}    Join Path    ${OUTPUTDIR}    ${timeStamp}
+    log to console    downloadDirectory is ${downloadDirectory}
+    Send	${downloadDirectory}
+    log to console    click save as button
+    Control Click	Save As    	&Save	[CLASS:Button; INSTANCE:1]	LEFT	1
+    Select Window    title=Tahiti Portal
+    PrintScreen    save_mnum_csv   
+
+Input Port In Out and Test Srv with Cust
+    Click Element    ${CBO_PORT_IN_OUT_COMPLETED}
+    Click Element    ${CBO_PORT_IN_OUT_COMPLETED}/option[text()='YES']
+
+# Added by Veena on 02052018 to cater Confirm Access Dates (Change) Task in Modify HK
+Input Access Order Accepted
+    Click Element    ${CBO_ACCESS_ORDER_ACCEPTED}
+    Click Element    ${CBO_ACCESS_ORDER_ACCEPTED}/option[text()='Accepted']
+    Log to Console    Task 'Confirm Access Dates (Change)', Please goto Classic and rename cease proof document before click on OK to continue the test.
+    Pause Execution
+# Added by Veena on 02052018 to cater Confirm Access Dates (Change) Task in Modify HK
+    
+PrintScreen
+     [Arguments]    ${imageName}
+	${imageName}=		Remove String	${imageName}  (
+	${imageName}=		Remove String	${imageName}  )
+	${imageName}=		Replace String	${imageName}  \#  \-
+	${imageName}=		Replace String	${imageName}  \/  \_
+	${imageName}=		Replace String	${imageName}  \&  n
+    Capture Page Screenshot		${OUTPUTDIR}${/}${timeStamp}${/}${Numbering}-${imageName}.png
+    ${Numbering}=	Evaluate	str(${Numbering}+1)
+    Set Global Variable	${Numbering}
+    
+All Tasks Ended
+    Log To Console    All task are ended, we have reach the end of the test. 
+    
+#Added by Veena on 08052018 to cater CRE Update for UK
+Update CRE
+	${CREUpdateMessage}=    Run Keyword And Return Status    Element Should be Visible    ${LINK_CRE_UPDATE_COMPLETE}
+	log to console    CREUpdateMessagePresent
+	Run Keyword If    ${CREUpdateMessage}    Click Element	${LINK_FEEDBACKYES}
+	#Added by Veena on 08052018 to cater CRE Update for UK
+	
+#Added by Veena on 04062018 to cater Modify scenario Test and Turn Up
+Message to User	
+	Log to Console	Task 'Activate Service for Test & Turnup', Please check rPACS response and VLAN status in rPACS GUI.
+	Pass Execution	Interim solution, this task needs to be closed manually.

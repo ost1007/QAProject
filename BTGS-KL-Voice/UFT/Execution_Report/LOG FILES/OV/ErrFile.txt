@@ -1,0 +1,104 @@
+
+Date 18/01/2017 2:36:43 PM
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brweDCAPortal
+Error Description : Browser Does Not Exist
+
+Date 16/02/2017 10:53:31 AM
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brwTahitiPortal
+Error Description : Browser Does Not Exist
+
+Date 02/03/2017 11:30:35
+Script Name : DriverScript
+Error Number : 2400
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		WebEdit:txtTrunkCACLimit
+Error Description : WebEdit Does Not Exist
+
+Date 07/03/2017 14:59:12
+Script Name : DriverScript
+Error Number : 2505
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		List:
+Error Description : List Does Not Exist
+
+Date 07/03/2017 15:51:40
+Script Name : DriverScript
+Error Number : 2400
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		WebEdit:txtTrunkCACLimit
+Error Description : WebEdit Does Not Exist
+
+Date 07/03/2017 17:00:58
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brweDCAPortal
+Error Description : Browser Does Not Exist
+
+Date 07/03/2017 17:03:51
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brweDCAPortal
+Error Description : Browser Does Not Exist
+
+Date 07/03/2017 17:36:48
+Script Name : DriverScript
+Error Number : 2105
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		Link:lnkWrite/AmendOrder
+Error Description : Link Does Not Exist
+
+Date 07/03/2017 17:42:29
+Script Name : DriverScript
+Error Number : 2505
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		List:
+Error Description : List Does Not Exist
+
+Date 08/03/2017 10:15:48
+Script Name : DriverScript
+Error Number : 2505
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		List:
+Error Description : List Does Not Exist
+
+Date 08/03/2017 10:20:15
+Script Name : DriverScript
+Error Number : 2505
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		List:
+Error Description : List Does Not Exist
+
+Date 08/03/2017 10:28:15
+Script Name : DriverScript
+Error Number : 2505
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		List:
+Error Description : List Does Not Exist
+
+Date 08/03/2017 10:56:32
+Script Name : DriverScript
+Error Number : 2505
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		List:
+Error Description : List Does Not Exist
+
+Date 08/03/2017 11:00:17
+Script Name : DriverScript
+Error Number : 2505
+Error Source : Browser:brweDCAPortal
+		Page:pgeDCAPortal
+		List:
+Error Description : List Does Not Exist

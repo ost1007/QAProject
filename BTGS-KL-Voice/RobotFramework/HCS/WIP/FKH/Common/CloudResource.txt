@@ -1,0 +1,574 @@
+*** Settings ***
+Documentation	Resource file - specific for Cloud 
+Library		Selenium2Library
+Library		AutoItLibrary
+Library		DebugLibrary
+Variables	CloudLocators.py
+#Variables	static-locators.py
+#Variables	variables.py
+
+*** Keywords ***
+Create New Cloud Product
+	Wait Until Page Contains	Product Family:	${waiting_time}
+	Click Element	categoryGroupSearch
+	Click Element	xpath=.//a[text()='BT Connect']
+	Click Element	categorySearch
+	Click Element	xpath=.//a[text()='IP Connect Global']
+	Click Element	productSearch
+	Click Element	xpath=.//a[contains(text(),'Cloud Connect Direct')]
+	#Input Text	numberOfProducts	1
+	Click Button	submit
+	Wait Until Page Does Not Contain Element	screenHide	600
+	#Capture Page Screenshot		${OUTPUTDIR}${/}Create New Cloud Product.png
+	Click Element	bulkConfigurationButton
+	
+Create New IG Product
+	Wait Until Page Contains	Product Family:	${waiting_time}
+	Click Element	categoryGroupSearch
+	Click Element	xpath=.//a[text()='BT Connect']
+	Click Element	categorySearch
+	Click Element	xpath=.//a[text()='IP Connect Global']
+	Click Element	productSearch
+	Click Element	xpath=.//a[contains(text(),'Internet Gateway')]
+	#Input Text	numberOfProducts	1
+	Click Button	submit
+	Wait Until Page Does Not Contain Element	screenHide	600
+	Click Element	bulkConfigurationButton
+
+Cease Cloud Product
+	Wait Until Page Contains	Product Family:	${waiting_time}
+	Click Element	ModifyProducts
+	Click Element	categoryGroupSearch
+	Click Element	xpath=.//a[text()='BT Connect']
+	Click Element	categorySearch
+	Click Element	xpath=.//a[text()='IP Connect Global']
+	Click Element	productSearch
+	Click Element	xpath=.//a[contains(text(),'Cloud Connect Direct')]
+	#Input Text	numberOfProducts	1
+	Click Button	submit
+	Wait Until Page Does Not Contain Element	screenHide	600
+	Click Element	bulkConfigurationButton
+	
+CCD Base Config
+	Wait Until Page Contains Element	${DD_DIRECT_CONNECT_SERVICE_PROVIDER}	${waiting_time}
+	Select From List By Label	${DD_DIRECT_CONNECT_SERVICE_PROVIDER}	${directConnectServiceProvider}
+	Click Element	${LINK_BASE_CONFIGURATION}
+	Wait Until Page Contains Element	${BOX_INTERCONNECT_LOCATION}	${waiting_time}
+	Click Element	${BOX_INTERCONNECT_LOCATION}
+	Select From List	${DD_INTERCONNECT_LOCATION}	${interconnectLocation}
+	Wait Until Page Contains Element	xpath=.//div[2][contains(text(),'BTGS')]	${waiting_time}
+	#Capture Page Screenshot		${OUTPUTDIR}${/}CCD Base Config.png
+	#Click Element	${BOX_BANDWIDTH}--------------------------- created new Set Bandwidth function ----------
+	#Select From List	${DD_BANDWIDTH}	${bandwidth}----------- created new Set Bandwidth function ----------
+	
+#####
+IG Base Configuration
+	Click Element	${IG_TAB}
+	Wait Until Page Contains Element	${IG_BASE_CONFIG}	${waiting_time}
+	Click Element	${IG_BASE_CONFIG}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	${status}=	Run Keyword and Return Status	Page Should Not Contain Element	${IG_TAB}/../../../div[1][contains(@class,'active')]
+	Wait Until Page Contains Element	${BOX_GATEWAY_LOCATION}	${waiting_time}
+	Click Element	${DD_GATEWAY_LOCATION}
+	Select From List	${DD_GATEWAY_LOCATION}	${interconnectLocation}
+	Wait Until Page Contains Element	xpath=.//div[2][contains(text(),'BTGS')]	${waiting_time}
+	
+	
+	
+Set Bandwidth
+	Click Element	${BOX_BANDWIDTH}
+	Select From List	${DD_BANDWIDTH}	${bandwidth}
+	#Capture Page Screenshot		${OUTPUTDIR}${/}Set Bandwidth.png
+	
+Provider Connection
+	Click Element	${LINK_PROVIDER_CONNECTION}
+	Wait Until Element Is Visible	${STATUS_LOADING}	300
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	300
+	Click Element	${LINK_PROV_CONN_BASE_CONF}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	300
+	#Capture Page Screenshot		${OUTPUTDIR}${/}Provider Connection.png
+	
+	
+	
+MS Express Route Service Connection Config
+	Click Element	${LINK_MS_EXP_ROUTE_SVCONN}
+	Wait Until Page Contains Element	${CONFIGURE}	${waiting_time}
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	${waiting_time}
+	Select From List By Label	${LINK_TO_NEW}	${AzServiceConn}
+	##---- Added for Phase Regression R47-----###
+	Run Keyword Unless	'${AzServiceConn2}' == '${EMPTY}'	Select From List By Label	${LINK_TO_NEW}	${AzServiceConn2}
+	##---- Added for Phase Regression R47-----###
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	20	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Run Keyword Unless	'${AFkbps}' == '0' and '${DEkbps}' == '0'
+	...	Run Keywords
+	...	Click Element	${LINK_MS_EXP_BASE_CONF}
+	...	AND	Wait Until Page Contains Element	${BOX_CONN_TYPE}	${waiting_time}
+	...	AND	Click Element	${BOX_CONN_TYPE}
+	...	AND	Select From List	${DD_CONN_TYPE}	${connType}
+	...	AND	Wait Until Page Contains Element	${BOX_AF}	${waiting_time}
+	...	AND	Click Element	${BOX_AF}
+	...	AND	Select From List	${DD_AF}	${AFkbps}
+	...	AND	Click Element	${BOX_DE}
+	...	AND	Select From List	${DD_DE}	${DEkbps}
+	#Capture Page Screenshot		${OUTPUTDIR}${/}MS Express Route Service Connection Config.png
+	
+VPN Specification Config
+	Wait Until Element Is Enabled	${LINK_VPN_SPEC}	${waiting_time}
+	Click Element	${LINK_VPN_SPEC}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Link	${CONFIGURE_ALL}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Enabled	${LINK_TO_EXISTING}	${waiting_time}
+	Select From List By Label	${LINK_TO_EXISTING}	${existingVPN}
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}VPN Specification Config.png
+	
+NAT Config
+	Click Element	${LINK_NAT}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	${waiting_time}
+	Run Keyword Unless	'${nat1}' == '${EMPTY}'	Select From List By Label	${LINK_TO_NEW}	${nat1}
+	Run Keyword Unless	'${nat2}' == '${EMPTY}'	Select From List By Label	${LINK_TO_NEW}	${nat2}
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}NAT Config in CCD Tab.png
+	
+NAT In MS Express Route Service Connection
+	Click Element	${LINK_MS_EXP_ROUTE_SVCONN}
+	Click Element	${LINK_MS_EXP_NAT}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Enabled	${LINK_TO_EXISTING}	600
+	Run Keyword Unless	'${nat1}' == '${EMPTY}'	Select From List	${LINK_TO_EXISTING}	0
+	#Click Button	${BTN_ADD} ###---- Commented in R47 -----###
+	Run Keyword Unless	'${nat2}' == '${EMPTY}'	Select From List	${LINK_TO_EXISTING}	1
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	20	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}NAT In MS Express Route Service Connection.png
+	
+Customer Address Space Config
+	Click Element	${LINK_CUSTOMER_ADD_SPACE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List By Label	${LINK_TO_NEW}	${custAddrSpace}
+	##---- Added for Phase Regression R47-----###
+	Run Keyword Unless	'${custAddrSpace2}' == '${EMPTY}'	Select From List By Label	${LINK_TO_NEW}	${custAddrSpace2}
+	##---- Added for Phase Regression R47-----###
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	20	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}Customer Address Space Config in CCD Tab.png
+	
+Customer Address Space in MS Express Route Service Connection
+	Click Element	${LINK_MS_EXP_ROUTE_SVCONN}
+	Click Element	${LINK_MS_EXP_CUS_ADD_SPACE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Enabled	${LINK_TO_EXISTING}	600
+	Select From List	${LINK_TO_EXISTING}	0
+		##---- Added for Phase Regression R47-----###
+	Run Keyword Unless	'${custAddrSpace2}' == '${EMPTY}'	Select From List	${LINK_TO_EXISTING}	1
+		##---- Added for Phase Regression R47-----###
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	20	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}Customer Address Space in MS Express Route Service Connection.png
+	
+Cloud Firewall Service Config
+	Click Element	${LINK_CLOUD_FW_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	${waiting_time}
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Page Contains Element	${LINK_CFS}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}Cloud Firewall Service Config in CCD Tab.png
+	
+Cloud Acceleration Service Config
+	Click Element	${LINK_CLOUD_ACC_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE}	120
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Page Contains Element	${LINK_CAS}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}Cloud Acceleration Service Config in CCD Tab.png
+	
+Wait loading completed
+	Wait Until Element Is Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	${LINK_CCD}
+	
+Cloud Service Leg for Firewall Service Config
+	Wait Until Element Is Enabled	${LINK_CLOUD_SERVICE_LEG}	120
+	${CCDNOTACTIVE}=	Run Keyword and Return Status	Page Should Not Contain Element	${LINK_CCD}/../../../div[2][contains(@style,'auto')]
+	Run Keyword If	${CCDNOTACTIVE}	Click Element	${LINK_CCD}
+	${CSLNOTACTIVE}=	Run Keyword and Return Status	Page Should Not Contain Element	${LINK_CLOUD_SERVICE_LEG}[@class='label ng-scope ng-binding selected']
+	Run Keyword If	${CSLNOTACTIVE}	Click Element	${LINK_CLOUD_SERVICE_LEG}
+	Wait Until Element Is Enabled	${LINK_CSL_FW_SERVICE}	120
+	Click Element	${LINK_CSL_FW_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE_ALL}	120
+	Wait Until Element Is Visible	${CONFIGURE_ALL}	120
+	Click Link	${CONFIGURE_ALL}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}Cloud Service Leg for Firewall Service Config.png
+	
+Cloud Service Leg for Acceleration Service Config
+	Wait Until Element Is Enabled	${LINK_CLOUD_SERVICE_LEG}	${waiting_time}
+	${CCDNOTACTIVE}=	Run Keyword and Return Status	Page Should Not Contain Element	${LINK_CCD}/../../../div[2][contains(@style,'auto')]
+	Run Keyword If	${CCDNOTACTIVE}	Click Element	${LINK_CCD}
+	${CSLNOTACTIVE}=	Run Keyword and Return Status	Page Should Not Contain Element	${LINK_CLOUD_SERVICE_LEG}[@class='label ng-scope ng-binding selected']
+	Run Keyword If	${CSLNOTACTIVE}	Click Element	${LINK_CLOUD_SERVICE_LEG}
+	Wait Until Element Is Enabled	${LINK_CSL_ACC_SERVICE}	${waiting_time}
+	Click Element	${LINK_CSL_ACC_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE_ALL}	120
+	Wait Until Element Is Visible	${CONFIGURE_ALL}	120
+	Click Link	${CONFIGURE_ALL}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}Cloud Service Leg for Acceleration Service Config.png
+	
+Cloud Firewall Services Tab Config
+	Click Element	${LINK_CFS}
+	Wait Until Page Contains Element	${BOX_POLICY_CHANGE_MANAGEMENT_TYPE}	120
+	Click Element	${BOX_POLICY_CHANGE_MANAGEMENT_TYPE}
+	Select From List	${DD_POLICY_CHANGE_MANAGEMENT_TYPE}	${policyChangeMgntType}
+	#------- Commented in R47 -------------------------
+	#Click Element	${BOX_MY_ACCOUNT_PORTAL_DCF_LINK}
+	#Wait Until Element Is Enabled	${INPUT_MY_ACCOUNT_PORTAL_DCF_LINK}	120
+	#Input Text	${INPUT_MY_ACCOUNT_PORTAL_DCF_LINK}	${myAccPortalDCFLink}
+	#Press Key	${INPUT_MY_ACCOUNT_PORTAL_DCF_LINK}	\\13
+	#--------------------------------------------------
+	Click Element	${LINK_FW_SERVICE}
+	Wait Until Page Contains Element	${CONFIGURE_ALL}[last()]	120
+	#Wait Until Element Is Visible	${CONFIGURE_ALL}	120
+	#Click Element	${CONFIGURE_ALL}[1]
+	#Wait Until Page Contains Element	${BTN_OK}	120
+	#Click Button	${BTN_OK}
+	#Click Element	${CONFIGURE_ALL}[last()]
+	#Wait Until Page Contains Element	${BTN_OK}	120
+	#Click Button	${BTN_OK}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Cloud Firewall Services Tab Config.png
+	
+IG Cloud Firewall Services
+	Click Element	${LINK_CFS}
+	Wait Until Page Contains Element	${BOX_POLICY_CHANGE_MANAGEMENT_TYPE}	120
+	Click Element	${BOX_POLICY_CHANGE_MANAGEMENT_TYPE}
+	Select From List	${DD_POLICY_CHANGE_MANAGEMENT_TYPE}	${policyChangeMgntType}
+	Click Element	${LINK_USER}
+	Click Element	${CONFIGURE}
+	Wait Until Element Is Enabled	${LINK_TO_NEW}	600
+	Select From List	${LINK_TO_NEW}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Enabled	${USER_BASE_CONFIG}
+	Click Element	${BOX_USER_EMAIL_ID}
+	Input Text	${INPUT_USER_EMAIL_ID}	atikah.mohdaminchebusu@bt.com
+	Click Element	${LINK_FW_SERVICE}
+	Click Link	${CONFIGURE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Enabled	${LINK_TO_EXISTING}	600
+	Select From List	${LINK_TO_EXISTING}	0
+	Click Button	${BTN_ADD}
+	Click Button	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	
+
+	
+	
+Cloud Acceleration Service Tab Config
+	Click Element	${LINK_CAS}
+	Wait Until Element Is Enabled	${BOX_BT_MANAGED_DEVICE}	${waiting_time}	#------- Added in R47 --------#
+	Click Element	${BOX_BT_MANAGED_DEVICE}									#------- Added in R47 --------#
+	Select From List	${DD_BT_MANAGED_DEVICE}	Y								#------- Added in R47 --------#
+	Wait Until Element Is Enabled	${LINK_ACC_SERVICE}	${waiting_time}
+	Click Element	${LINK_ACC_SERVICE}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Wait Until Page Contains Element	${CONFIGURE_ALL}[last()]	${waiting_time}
+	Wait Until Element Is Visible	${CONFIGURE_ALL}	${waiting_time}
+	Capture Page Screenshot
+	##R46 Checking for primary & secondary acceleration service
+	${VSHPRI_FAIL}=	Run Keyword and Return Status	Element Should Contain	${PRIMARY_ACC_SVC}	Configure
+	${VSHSEC_FAIL}=	Run Keyword and Return Status	Element Should Contain	${SEC_ACC_SVC}	Configure
+	Run Keyword If	${VSHPRI_FAIL}	Run Keywords
+	...	Click Element	${PRIMARY_ACC_SVC_CONFIG_ALL}
+	...	AND	Wait Until Element Is Visible	${ACC_SVC_LINK_TO_EXISTING}	${waiting_time}
+	...	AND	Click Element	${ACC_SVC_LINK_TO_EXISTING}
+	...	AND	Click Button	${BTN_ADD}
+	...	AND	Click Element	${BTN_OK}
+	...	AND	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	...	AND	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	...	AND	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	
+	Run Keyword If	${VSHSEC_FAIL}	Run Keywords
+	...	Click Element	${SECONDARY_ACC_SVC_CONFIG_ALL}
+	...	AND	Wait Until Element Is Visible	${ACC_SVC_LINK_TO_EXISTING}	${waiting_time}
+	...	AND	Click Element	${ACC_SVC_LINK_TO_EXISTING}
+	...	AND	Click Button	${BTN_ADD}
+	...	AND	Click Element	${BTN_OK}
+	...	AND	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	...	AND	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	...	AND	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	##/R46
+
+
+	##R46 Connect Acc Service Removal
+	#Click Element	${CONNECT_ACC_SERVICE}
+	#Click Element	${CONFIGURE_ALL}
+	#Wait Until Element Is Not Visible	${LINK_TO_EXISTING_LOADING}	120s
+	#Click Element	${CONNECT_ACC_SVC_OPTION1}
+	#Click Button	${BTN_REMOVE}
+	#Click Button	${BTN_OK}
+	#Wait Until Element Is Visible	${STATUS_LOADING}	80s
+	#Wait Until Element Is Not Visible	${STATUS_LOADING}	600s
+	#Sleep	30s
+	##/R46
+	Capture Page Screenshot		${OUTPUTDIR}${/}Cloud Acceleration Service Tab Config.png
+	
+	
+Customer Address Space Tab Config
+	Wait Until Page Contains Element	${CUST_ADD_SPACE_TAB}	${waiting_time}
+	Wait Until Element Is Enabled	${CUST_ADD_SPACE_TAB}	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	${CUST_ADD_SPACE_TAB}
+	Wait Until Element Is Not Visible	${ADD_SUCCESS_LOADING}	${waiting_time}
+	Wait Until Page Contains Element	${CUST_ADD_SPACE_BASE_CONFIG}	${waiting_time}
+	Wait Until Element Is Enabled	${CUST_ADD_SPACE_BASE_CONFIG}	${waiting_time}
+	Click Element	${CUST_ADD_SPACE_BASE_CONFIG}
+	Wait Until Page Contains Element	${ROUTING_ADVERT_WITH_NAT}	${waiting_time}
+	Wait Until Element Is Enabled	${ROUTING_ADVERT_WITH_NAT}	${waiting_time}
+	Click Element	${ROUTING_ADVERT_WITH_NAT}
+	Click Element	${CONFIGURE_ALL}
+	Wait Until Element Is Not Visible	${LINK_TO_EXISTING_LOADING}	${waiting_time}
+	Wait Until Element Is Visible	${NAT_IP_ADDRESS_RA_BT_PROVIDED}	${waiting_time}
+	Click Element	${NAT_IP_ADDRESS_RA_BT_PROVIDED}
+	Click Button	${BTN_ADD}
+	Click Element	${BTN_OK}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Visible	${ROUTING_ADVERT_WITH_NAT_TAB}	${waiting_time}
+	Run Keyword And Ignore Error	Wait Until Page Contains Element	xpath=.//p[contains(text(),'Loaded')]	10	#------- Added in R47 --------#
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}											#------- Added in R47 --------#
+	Capture Page Screenshot		${OUTPUTDIR}${/}Customer Address Space Tab Config.png
+	
+Routing Advertisement with NAT Config
+	Wait Until Page Contains Element	${ROUTING_ADVERT_WITH_NAT_TAB}	${waiting_time}
+	Wait Until Element Is Enabled	${ROUTING_ADVERT_WITH_NAT_TAB}	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Click Element	${ROUTING_ADVERT_WITH_NAT_TAB}
+	Click Element	${ROUTING_ADVERT_WITH_NAT_BASE_CONFIG}
+	Click Element	${ROUTING_ADVERT_WITH_NAT_CUST_NAT_IP_LABEL}
+	Wait Until Element Is Visible	${ROUTING_ADVERT_WITH_NAT_CUST_NAT_IP_LABEL_INPUT_TEXT}	${waiting_time}
+	Input Text	${ROUTING_ADVERT_WITH_NAT_CUST_NAT_IP_LABEL_INPUT_TEXT}	ab12cd34
+	Click Element	${ROUTING_ADVERT_WITH_NAT_BASE_CONFIG}
+	${CUST_NAT_IP_LABEL_TEXT}=	Get Text	${ROUTING_ADVERT_WITH_NAT_CUST_NAT_IP_LABEL}
+	Set Suite Variable	${CUST_NAT_IP_LABEL_TEXT}
+	Wait Until Element Contains	${ROUTING_ADVERT_WITH_NAT_NAT_IP_LABEL}	${CUST_NAT_IP_LABEL_TEXT}	${waiting_time}
+	Wait Until Page Contains Element	${CUST_ADD_SPACE_TAB}	${waiting_time}
+	Wait Until Element Is Enabled	${CUST_ADD_SPACE_TAB}	${waiting_time}
+	Click Element	${CUST_ADD_SPACE_TAB}
+	Wait Until Page Contains Element	${CUST_ADD_SPACE_BASE_CONFIG}	${waiting_time}
+	Wait Until Element Is Enabled	${CUST_ADD_SPACE_BASE_CONFIG}	${waiting_time}
+	Click Element	${CUST_ADD_SPACE_BASE_CONFIG}
+	Wait Until Page Contains Element	${CUST_ADD_SPACE_NAT_IP_LABEL}	${waiting_time}
+	Wait Until Element Is Enabled	${CUST_ADD_SPACE_NAT_IP_LABEL}	${waiting_time}
+	Element Should Contain	${CUST_ADD_SPACE_NAT_IP_LABEL}	${CUST_NAT_IP_LABEL_TEXT}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Routing Advertisement with NAT Config.png
+	
+#------ Add in R46 -----------------------------------------------------------------------
+Configure Order
+	Wait Until Element Is Visible	xpath=.//*[contains(text(),'RFO invalid')]	${waiting_time}
+	Wait Until Element Is Visible	xpath=.//*[@id='orderName']	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Create Order.png
+	Click Element	orderDetails
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Page Contains Element	configureOrder	${waiting_time}
+	Wait Until Element Is Not Visible	orderDetails_processing	${waiting_time}
+	Click Element	configureOrder
+	#Wait Until Page Does Not Contain Element	xpath=.//div[@class='status-bar']/p	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	Wait Until Element Is Not Visible	${STATUS_LOADING}	${waiting_time}
+	${status}=	Run Keyword and Return Status	Page Should Not Contain Element	${LINK_CCD}/../../../div[1][contains(@class,'active')]
+	Run Keyword If	${status}	Click Element	${LINK_CCD}
+	${VPNnotConfigured}=	Run Keyword and Return Status	Page Should Contain Element	${LINK_VPN_SPEC}/../../../i[@title='Not Configured']
+	Run Keyword If	${VPNnotConfigured}	Run Keyword	VPN Specification Config
+	Capture Page Screenshot		${OUTPUTDIR}${/}Configure Order.png
+	Click Element	orderOption
+#-----------------------------------------------------------------------------------------
+	
+Finalise Config
+	Wait Until Element Is Enabled	${LINK_QUOTE_OPT_DETAILS}	${waiting_time}
+	Click Element	${LINK_QUOTE_OPT_DETAILS}
+	
+Select Product
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	${waiting_time}
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Valid Configuration.png
+	Select Checkbox	listOfQuoteOptionItems
+	Capture Page Screenshot		${OUTPUTDIR}${/}Select Product.png
+	
+Calculate Price
+	Capture Page Screenshot
+	Click Link	fetchPrices
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'Firm')]	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Price Firm.png
+	Click Link	QuoteOptionPricingTab
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	${waiting_time}
+	Wait Until Element Is Not Visible	xpath=.//*[@id='priceLines_processing']	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Pricing Sheet in rSQE.png
+	Click Link	QuoteOptionDetailsTab
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	${waiting_time}
+	Wait Until Element Is Not Visible	xpath=.//*[@id='lineItems_processing']	${waiting_time}
+	Wait Until Element Is Visible	xpath=.//td[contains(text(),'VALID')]	${waiting_time}
+	
+Create Offer and Order
+	${TestRunCount}=	Get File 	${EXECDIR}\\TestRunCount.txt
+	${TestRunCount}=	Evaluate	str(${TestRunCount}-1)
+	Select Checkbox	listOfQuoteOptionItems
+	Click Link	createOffer
+	Page Should Contain Textfield	offerNameText
+	Input Text	offerNameText	${offerName}${TestRunCount}
+	Input Text	customerOrderRefText	${customerOrderRefText}${TestRunCount}
+	Click Button	submitOffer
+	Wait Until Element Is Enabled	xpath=.//img[@alt='Customer Approve']	${waiting_time}
+	Capture Page Screenshot		${OUTPUTDIR}${/}Create Offer.png
+	Click Image    Customer Approve
+	Wait Until Page Contains Element	cancelApproval	${waiting_time}
+	Wait Until Element Is Enabled	xpath=.//*[@id='offers']//td[1]	120
+	Capture Page Screenshot		${OUTPUTDIR}${/}Customer Approve.png
+	Click Element	xpath=.//*[@id='offers']//td[1]
+	Wait Until Element Is Not Visible	xpath=.//*[@id='loadingMessage']	${waiting_time}
+	Wait Until Element Is Not Visible	xpath=.//*[@id='offerDetails_processing']	${waiting_time}
+	Select Checkbox	listOfOfferItems
+	Click Link	createOrder
+	Page Should Contain Textfield	orderName
+	Input Text	orderName	${orderNameText}${TestRunCount}
+	Click Button	submitCreateOrder
+RFO Sheet Download and Upload
+	#Configure Order
+	Wait Until Element Is Visible	xpath=.//*[contains(text(),'RFO invalid')]	${waiting_time}
+	Run Keyword If	'${Browser}' == 'IE'	
+	...	Run Keywords	
+	...	Download RFOSheet IE
+	...	AND	Upload RFOSheet IE
+	...	ELSE	Wait Until Keyword Succeeds	30s	1s
+	...	Run Keywords
+	...	Download RFOSheet FF
+	...	AND	Upload RFOSheet FF
+Submit Order
+	Click Element	xpath=.//a[text()='Submit Order']
+	Wait Until Page Contains Element	${STATUS_SUBMITTED}	10m
+	Capture Page Screenshot		${OUTPUTDIR}${/}Submit Order.png
+	
+Download RFOSheet FF
+	Click Image    Export RFO
+	Capture Page Screenshot		${OUTPUTDIR}${/}Download RFOSheet.png
+	Click Element	${BTN_OK_RFO}
+	Win Wait	Opening ${RFOSheet}
+	Win Activate  Opening ${RFOSheet}
+	Sleep	2
+	Send	!s{ENTER}
+	Win Wait	Enter name of file to save to
+	Win Activate  Enter name of file to save to
+	Send	${EXECDIR}\\${RFOSheet}
+	Sleep	3
+	Send	{ENTER}
+	Sleep	3
+	${RFOexist}=	Run Keyword and Return Status	WinExists	Confirm Save As	Then
+	Sleep	3
+	Run Keyword If	${RFOexist}	Send	y	ELSE	Log To Console	RFO does not exist
+	Sleep	2
+	Send	^j
+	Win Wait	Library
+	Win Activate  Library
+	Send	{ENTER}
+	Edit Excel RFOSheet	#call keywords
+	Save RFOSheet
+	
+Download RFOSheet IE
+	Click Image    Export RFO
+	Wait Until Element Is Visible	export-rfo-sheet-msg	20s
+	Click Element	${BTN_OK_RFO}
+	Sleep	10s
+	Win Activate  Showing Quote Option - Internet Explorer
+	Sleep	1s
+	Send	{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}
+	Send	{ENTER}
+	Edit Excel RFOSheet	#call keywords
+	
+Save RFOSheet
+	Send	^s
+	Win Close	${RFOSheet} - Excel
+	
+Upload RFOSheet IE
+	Double Click Element	rfoImport
+	Wait Until Element Is Visible	rfoSheet	60s
+	Double Click Element	rfoSheet
+	Win Activate	Choose File to Upload
+	Send	${EXECDIR}\\${RFOSheet}
+	Send	{ENTER}
+	Click Element	uploadButton
+	Select Window	title=Showing Quote Option
+	Wait Until Page Contains	Upload Successful	120s
+	Click Button	xpath=.//span[text()='Done']/..
+	Wait Until Element Is Enabled	xpath=.//a[text()='Submit Order']	60s
+	
+Upload RFOSheet FF
+	Click Image    Import RFO
+	Click Element	rfoSheet
+	Win Activate	File Upload
+	Send	${EXECDIR}\\${RFOSheet}
+	Send	{ENTER}
+	Click Element	uploadButton
+	Wait Until Page Contains Element	${UPLOAD_SUCCESSFUL}	120
+	Capture Page Screenshot		${OUTPUTDIR}${/}Upload RFOSheet.png
+	Wait Until Element Is Enabled	xpath=.//span[text()='Done']/..	120
+	Click Button	xpath=.//span[text()='Done']/..
+	Wait Until Element Is Enabled	xpath=.//a[text()='Submit Order']	120

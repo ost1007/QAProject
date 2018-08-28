@@ -1,0 +1,86 @@
+*** Settings ***
+Documentation	SC67_GSIP Full PSTN_Cease_Spain
+#Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../../Common_OV/EDCA_Resource.txt
+Resource	../../Common_OV/CommonResources.txt
+Resource	resource_eDCA.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+#${TC_ID}		R55_SC62_T3_09
+${test_environment}	T3
+${str}	E-Ma il*
+
+*** Test Cases ***
+Prerequisites    
+	[TAGS]	eDCAFull	Sites	ServiceInstanceDetails	SalesUser	ServiceDeliveryUser	OrderEntryTeam
+	Read data	eDCA	${TC_ID}
+	Log To Console	Retrieved EDCA TestData
+	#Get File Content	${BFGSiteID_TextFile}
+	#Log To Console	BFGSiteID: ${BFGSiteID}
+	#Log	BFGSiteID: ${BFGSiteID}
+	Create Index Numbering
+	
+	
+TC01 Order Creation
+	[TAGS]	eDCAFull
+	Open Browser And Login To EDCA	${EDCASalesUserID}	${SalesProfile}
+	Create New Order
+	Customer Details - Cease
+	Customer Contact Details - Cease
+	Distributor Contact List - Cease
+	Order Contact Details
+	Additional Information
+	Sites - Cease
+	#[Teardown]	Debug
+
+TC02 Sites Information
+	[TAGS]	Sites
+	Open Browser And Login To EDCA	${EDCASalesUserID}	${SalesProfile}
+	Select Order For Full Cycle
+	Sites - Cease
+	#Modify Sites
+	#Modify Site Location Details
+	#Modify Site Address
+	#Modify Site Contact Details
+	[Teardown]	Close Browser
+	
+TC03 Service Instance Details
+	[TAGS]	eDCAFull	ServiceInstanceDetails	Sites
+	#Get File Content	${AccountID_TextFile}
+	#Log To Console	AccountID: ${AccountID}
+	#Log	AccountID: ${AccountID}
+	Get File Content	${EDCAOrderID_TextFile}
+	Log To Console	EDCAOrderID:${EDCAOrderID}
+	Log	EDCAOrderID: ${EDCAOrderID}
+	#Log To Console	${MPLSVPNName}
+	#Log	MPLSVPNName: ${MPLSVPNName}
+	Open Browser And Login To EDCA	${EDCASalesUserID}	${SalesProfile}
+	Select Order For Full Cycle
+	Service Instance - Cease
+	[Teardown]	Close Browser
+
+TC04 EDCA Sales User
+	[TAGS]	eDCAFull	ServiceInstanceDetails	SalesUser    Sites
+	Open Browser And Login To EDCA	${EDCASalesUserID}	${SalesProfile}
+	Select Order For Full Cycle
+	Cease Sales User - Submit
+	[Teardown]	Debug
+	
+TC05 EDCA Service Delivery User
+	[TAGS]	eDCAFull	ServiceInstanceDetails	SalesUser	ServiceDeliveryUser    Sites
+	Open Browser And Login To EDCA	${EDCAServiceDeliveryUserID}	${SDProfile}
+	Select Pending Order For Full Cycle
+	Service Delivery User - Submit
+	[Teardown]	Close Browser
+
+TC06 EDCA Order Entry Team
+	[TAGS]	eDCAFull	ServiceInstanceDetails	SalesUser	ServiceDeliveryUser	OrderEntryTeam    Sites
+	Open Browser And Login To EDCA	${EDCAOETUserID}	${OETProfile}
+	Select Pending Order For Full Cycle
+	Cease OET User - Submit
+	[Teardown]	Close Browser						
+	

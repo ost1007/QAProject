@@ -1,0 +1,36 @@
+*** Settings ***
+Documentation	Journey: Provide Order of Deliver SOTI FULL PSTN Provide Sweden. Ordering Classic
+Suite Setup		
+Library			Selenium2Library
+Library			DebugLibrary
+Library			SikuliLibrary
+#Resource	../Common_OV/readOVTestDataFromExcel.txt
+#Resource	../Common_OV/EDCA_Resource.txt
+Resource	../Common_OV/CLASSIC_Resource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${TC_ID}		R53_SC01
+${IMAGE_DIR}	${CURDIR}\\img	
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	PREREQUISITE	CustomerCreation
+	Add Image Path    ${IMAGE_DIR}	
+	Read data	Classics	${TC_ID}		
+	Log To Console	Retrieved Classics variables
+	Create Index Numbering
+	
+TC02 Seach Customer in Amdocs
+	[TAGS]	CLASSICS	CustomerCreation
+	Get File Content	${EDCAOrderID_TextFile}
+	Log To Console	${EDCAOrderID} in testcase
+	Login To AMDOCS
+	Select Profile As ClearSales
+	Select Order
+	Yank Task
+	Configure Order
+	
+	

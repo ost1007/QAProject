@@ -1,0 +1,1 @@
+pybot --removekeywords wuks -d Output\%DATE:~6,4%%DATE:~3,2%%DATE:~0,2%@%TIME::=%\ read_write_xlsx.txt

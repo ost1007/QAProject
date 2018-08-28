@@ -1,0 +1,114 @@
+
+Date 16/02/2017 10:58:10 AM
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brwHomePage(Search)
+Error Description : Browser Does Not Exist
+
+Date 16/02/2017 5:04:44 PM
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brwHomePage(Search)
+Error Description : Browser Does Not Exist
+
+Date 20/02/2017 2:32:21 PM
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist
+
+Date 21/02/2017 11:01:10 AM
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brwIPSDKWEBGUI
+Error Description : Browser Does Not Exist
+
+Date 21/02/2017 11:12:15 AM
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brwIPSDKWEBGUI
+Error Description : Browser Does Not Exist
+
+Date 23/02/2017 12:19:41 PM
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist
+
+Date 23/02/2017 15:30:11
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist
+
+Date 27/02/2017 15:03:18
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist
+
+Date 28/02/2017 10:34:40
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist
+
+Date 01/03/2017 17:19:46
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brwSalesQuoteEngine
+Error Description : Browser Does Not Exist
+
+Date 03/03/2017 16:46:21
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brw21CAuthentication
+Error Description : Browser Does Not Exist
+
+Date 06/03/2017 11:07:21
+Script Name : DriverScript
+Error Number : 2104
+Error Source : Browser:brwBFG-IMS
+		Page:pgBFG-IMS
+		WebButton:btnViewPI
+Error Description : WebButton Does Not Exist
+
+Date 06/03/2017 14:07:27
+Script Name : DriverScript
+Error Number : 2000
+Error Source : Browser:brwSIWorkflow
+Error Description : Browser Does Not Exist
+
+Date 06/03/2017 16:00:26
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist
+
+Date 07/03/2017 14:01:02
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist
+
+Date 08/03/2017 11:17:41
+Script Name : DriverScript
+Error Number : 2400
+Error Source : :
+		:
+		WebEdit:txtUserName
+Error Description : WebEdit Does Not Exist

@@ -1,0 +1,42 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+...
+...               The system specific keywords created here form our own
+...               domain specific language. They utilize keywords provided
+...               by the imported Selenium2Library.
+Library           Selenium2Library
+Library           DebugLibrary
+Library           OperatingSystem
+Library           Collections    
+Resource		../../Common_OV/CommonResources.txt
+Variables		../../Common_OV/CommonVariables.py
+Variables       ../../Common_OV/TahitiLocators.py
+
+
+*** Keywords ***
+Input Plan Assign Primary Global Network
+    #task 3
+    ${6DigitTimeStamp}=    Get Substring    ${timeStamp}	4    10
+    log to console    6DigitTimeStamp is ${6DigitTimeStamp}
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}    
+    #Selenium2Library.Input Text	${TXT_TRUNK_WHITE_LIST}	TWL_${timeStamp}
+    Selenium2Library.Input Text	${TXT_TRUNK_GROUP_OSS_ID}	TGO_${timeStamp}
+    Selenium2Library.Input Text  ${TXT_TRUNK_OSS_ID}	TO_${timeStamp}
+    #Selenium2Library.Input Text  ${TXT_ICG_TRUNK_OSS_ID}	ITO_${timeStamp}
+    Selenium2Library.Input Text	${TXT_SWITCH_NNNN_CODE}	SNC_${timeStamp}
+    Selenium2Library.Input Text	${TXT_IPMS_SRN}	IPMS_SRN_${timeStamp}
+    Selenium2Library.Input Text	${TXT_IPMS_ENTERPRISE_ID}	IPMS_ETP_${timeStamp}
+    Selenium2Library.Input Text	${TXT_IPMS_CORP_ID}	98${6DigitTimeStamp}
+    Selenium2Library.Input Text	${TXT_IPMS_ORD_NUM}	IPMS_ORD_${timeStamp}
+    Selenium2Library.Input Text	${TXT_ICG_IPMS_SRN}	IIS_${timeStamp}
+    Selenium2Library.Input Text	${TXT_ICG_IPMS_CORP_ID}	IIC_${timeStamp}
+    
+Modify Input Plan Assign Primary Global Network
+    ${6DigitTimeStamp}=    Get Substring    ${timeStamp}	4    10
+    UnSelect Frame
+	Select Frame	${IFRAME_CONTENT}    
+	Selenium2Library.Input Text	${TXT_MOD_SWITCH_NNNN_CODE}	SNC_${timeStamp}
+    
+    #For T3 only
+    Selenium2Library.Input Text	${TXT_MOD_TRUNK_WHITE_LIST}	TWL_${timeStamp}

@@ -1,0 +1,1 @@
+pybot -d Output\ -v TC_ID:R56_TA_SC04_01 06_MNUM.txt

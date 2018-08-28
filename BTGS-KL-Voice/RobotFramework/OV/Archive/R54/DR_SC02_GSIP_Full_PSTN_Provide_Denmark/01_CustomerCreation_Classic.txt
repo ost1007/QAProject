@@ -1,0 +1,29 @@
+*** Settings ***
+Documentation	SC02_GSIP_Full_PSTN_Provide_Denmark. Customer Creation. Classic
+Suite Setup		Start Sikuli Process
+Library			Selenium2Library
+Resource	../Common_OV_R53/CommonResources.txt
+Resource	../Common_OV_R53/BFGIMS_Resource.txt
+Resource	../Common_OV_R53/CLASSIC_Resource.txt
+Resource	resource_keywords.txt
+
+*** Variables ***
+${TC_ID}	R54_SC02_T1
+
+*** Test Cases ***
+PREREQUISITE
+	[TAGS]	PREREQUISITE
+	Read data	Classics	${TC_ID}		
+	Log To Console	Retrieved Classics variables
+	Create Index Numbering
+
+TC01 Seach Customer in Amdocs
+	[TAGS]	CLASSICS
+	Get File Content	${CustomerID_TextFile}
+	Log To Console	${CustomerID} in testcase
+	Login To AMDOCS
+	Select Profile As ClearSales
+	Create New Account
+	Fill In Account Details
+	Quit AMDOCS
+

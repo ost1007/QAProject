@@ -1,0 +1,86 @@
+*** Settings ***
+Documentation	SC65_GSIP Full PSTN_Provide_Spain
+Suite Setup			
+Library			Selenium2Library
+Library			DebugLibrary
+Resource	../../Common_OV/EDCA_Resource.txt
+Resource	../../Common_OV/CommonResources.txt
+Resource	resource_eDCA.txt
+
+*** Variables ***
+${waiting_time}	5m
+${wait_time}	360s			
+${TC_ID}		R56_SC65_SP_C1_6 
+${test_environment}	T3
+
+*** Test Cases ***
+Prerequisites
+	[TAGS]	eDCAFull	Sites	ServiceInstanceDetails	SalesUser	ServiceDeliveryUser	OrderEntryTeam
+	Read data	eDCA	${TC_ID}
+	Log To Console	Retrieved EDCA TestData
+	Get File Content	${BFGSiteID_TextFile}
+	Log To Console	BFGSiteID: ${BFGSiteID}
+	Log	BFGSiteID: ${BFGSiteID}
+	Create Index Numbering
+
+
+TC01 Order Creation
+	[TAGS]	eDCAFull
+	Open Browser And Login To EDCA Page As Sales User
+	Customer Details
+	Customer Contact Details
+	Distributor Contact List
+	Order Contact Details
+	Additional Information
+	Product Selection
+	Sites - Select Classic Branch Site
+	[Teardown]	Close Browser
+
+TC02 Sites Information
+	[TAGS]	Sites
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	Sites - Select Classic Branch Site
+	[Teardown]	Close Browser
+
+TC02 Service Instance Details
+	[TAGS]	eDCAFull	ServiceInstanceDetails	Sites
+	Get File Content	${AccountID_TextFile}
+	Log To Console	AccountID: ${AccountID}
+	Log	AccountID: ${AccountID}
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	Service Instance
+	Network Connection Details
+	PBX Details
+	Configure Access
+	Access Details
+	Configure NTE
+	Configure VLAN
+	SIP Trunking Details
+	GSIP Full PSTN Additional Features Details
+	Billing Details
+	GSIP Full PSTN Pricing Details
+	[Teardown]	Close Browser
+
+TC04 EDCA Sales User
+	[TAGS]	eDCAFull	ServiceInstanceDetails	SalesUser	Sites
+	Open Browser And Login To EDCA Page As Sales User
+	Select Order For Full Cycle
+	Sales User - Submit
+	[Teardown]	Close Browser
+	
+
+TC05 EDCA Service Delivery User
+	[TAGS]	eDCAFull	ServiceInstanceDetails	SalesUser	ServiceDeliveryUser	Sites
+	Open Browser And Login To EDCA Page As Service Delivery User
+	Select Pending Order For Full Cycle
+	Service Delivery User - Submit
+	[Teardown]	Close Browser
+
+TC06 EDCA Order Entry Team
+	[TAGS]	eDCAFull	ServiceInstanceDetails	SalesUser	ServiceDeliveryUser	OrderEntryTeam	Sites
+	Open Browser And Login To EDCA Page As OET User
+	Select Pending Order For Full Cycle
+	OET User - Submit
+	[Teardown]	Close Browser

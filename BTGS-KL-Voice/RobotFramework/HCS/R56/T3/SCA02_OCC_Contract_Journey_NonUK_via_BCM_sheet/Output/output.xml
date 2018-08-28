@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20180604 14:52:33.374" generator="Robot 3.0.4 (Python 2.7.14 on win32)">
+<suite source="C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\HCS\R56\T3\SCA02_OCC_Contract_Journey_NonUK_via_BCM_sheet\OCC_Contract_Journey_via_BCM_sheet.txt" id="s1" name="OCC Contract Journey via BCM sheet">
+<test id="s1-t1" name="prerequisites">
+<kw name="Read data" library="readHCSTestDataFromExcel">
+<arguments>
+<arg>CQM</arg>
+<arg>${TC_ID}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.494" level="FAIL">Variable '${TC_ID}' not found. Did you mean:
+    ${TXT_ID}</msg>
+<status status="FAIL" endtime="20180604 14:52:34.494" starttime="20180604 14:52:34.491"></status>
+</kw>
+<tags>
+<tag>Q2O</tag>
+</tags>
+<status status="FAIL" endtime="20180604 14:52:34.494" critical="yes" starttime="20180604 14:52:34.490">Variable '${TC_ID}' not found. Did you mean:
+    ${TXT_ID}</status>
+</test>
+<test id="s1-t2" name="TC01 Quote Creation">
+<kw name="Execution-Checking NEW or OLD Quote" library="CommonResources">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Variable Should Not Exist</arg>
+<arg>${quoteID}</arg>
+</arguments>
+<assign>
+<var>${statusQuoteID}</var>
+</assign>
+<kw name="Variable Should Not Exist" library="BuiltIn">
+<doc>Fails if the given variable exists within the current scope.</doc>
+<arguments>
+<arg>${quoteID}</arg>
+</arguments>
+<status status="PASS" endtime="20180604 14:52:34.504" starttime="20180604 14:52:34.498"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.504" level="INFO">${statusQuoteID} = True</msg>
+<status status="PASS" endtime="20180604 14:52:34.504" starttime="20180604 14:52:34.498"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>${statusQuoteID}</arg>
+<arg>Check New Quote or Existing Quote</arg>
+</arguments>
+<kw name="Check New Quote or Existing Quote" library="CommonResources">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${newQuote}' == 'No'</arg>
+<arg>Get File</arg>
+<arg>${EXECDIR}\\quote_id\\quoteID.txt</arg>
+<arg>ELSE IF</arg>
+<arg>'${newQuote}' == 'Yes'</arg>
+<arg>Replace Variables</arg>
+<arg>${None}</arg>
+</arguments>
+<assign>
+<var>${quoteID}</var>
+</assign>
+<kw name="Get File" library="OperatingSystem">
+<doc>Returns the contents of a specified file.</doc>
+<arguments>
+<arg>${EXECDIR}\\quote_id\\quoteID.txt</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.506" html="yes" level="INFO">Getting file '&lt;a href="file://C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\HCS\R56\T3\SCA02_OCC_Contract_Journey_NonUK_via_BCM_sheet\quote_id\quoteID.txt"&gt;C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\HCS\R56\T3\SCA02_OCC_Contract_Journey_NonUK_via_BCM_sheet\quote_id\quoteID.txt&lt;/a&gt;'.</msg>
+<status status="PASS" endtime="20180604 14:52:34.507" starttime="20180604 14:52:34.506"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.507" level="INFO">${quoteID} = 000000000260504</msg>
+<status status="PASS" endtime="20180604 14:52:34.507" starttime="20180604 14:52:34.505"></status>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${quoteID}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.508" level="INFO">${quoteID} = 000000000260504</msg>
+<status status="PASS" endtime="20180604 14:52:34.508" starttime="20180604 14:52:34.507"></status>
+</kw>
+<status status="PASS" endtime="20180604 14:52:34.508" starttime="20180604 14:52:34.505"></status>
+</kw>
+<status status="PASS" endtime="20180604 14:52:34.508" starttime="20180604 14:52:34.504"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${newQuote}' == 'Yes'</arg>
+<arg>Run Keyword</arg>
+<arg>Log To Console</arg>
+<arg>${\n}${\n}THIS TEST WILL CREATE A NEW QUOTE</arg>
+<arg>ELSE IF</arg>
+<arg>'${newQuote}' == 'No'</arg>
+<arg>Log To Console</arg>
+<arg>${\n}${\n}THIS TEST WILL EXECUTE EXISTING QUOTE: ${quoteID}</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}${\n}THIS TEST WILL EXECUTE EXISTING QUOTE: ${quoteID}</arg>
+</arguments>
+<status status="PASS" endtime="20180604 14:52:34.509" starttime="20180604 14:52:34.509"></status>
+</kw>
+<status status="PASS" endtime="20180604 14:52:34.509" starttime="20180604 14:52:34.508"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${\n}Press Ctrl-c to abort the test${\n}Test will begin in a moment</arg>
+</arguments>
+<status status="PASS" endtime="20180604 14:52:34.510" starttime="20180604 14:52:34.510"></status>
+</kw>
+<status status="PASS" endtime="20180604 14:52:34.510" starttime="20180604 14:52:34.497"></status>
+</kw>
+<kw name="Open Browser And Login" library="CommonResources">
+<arguments>
+<arg>${CQM_URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.513" level="FAIL">Variable '${CQM_URL}' not found. Did you mean:
+    ${T3_CQM_URL}
+    ${T1_CQM_URL}</msg>
+<status status="FAIL" endtime="20180604 14:52:34.513" starttime="20180604 14:52:34.511"></status>
+</kw>
+<kw type="teardown" name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current URL.</doc>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.515" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.515" starttime="20180604 14:52:34.514"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.517" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.517" starttime="20180604 14:52:34.514">No browser is open.</status>
+</kw>
+<tags>
+<tag>Q2O</tag>
+</tags>
+<status status="FAIL" endtime="20180604 14:52:34.518" critical="yes" starttime="20180604 14:52:34.497">Variable '${CQM_URL}' not found. Did you mean:
+    ${T3_CQM_URL}
+    ${T1_CQM_URL}
+
+Also teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-t3" name="TC02 Quote Configuration">
+<kw name="Quote Configuration" library="resource_keywords">
+<kw name="Launch RSQE" library="CommonResources">
+<kw name="Focus" library="Selenium2Library">
+<doc>Deprecated. Use `Set Focus To Element` instead.</doc>
+<arguments>
+<arg>xpath=.//button[text()='Launch Configurator']</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.522" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.522" starttime="20180604 14:52:34.522"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.524" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.524" starttime="20180604 14:52:34.521"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.524" starttime="20180604 14:52:34.521"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.524" starttime="20180604 14:52:34.520"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+<arg>AND</arg>
+<arg>Log</arg>
+<arg>${quoteID}</arg>
+<arg>AND</arg>
+<arg>Close Browser</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current URL.</doc>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.526" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.526" starttime="20180604 14:52:34.526"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.527" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.527" starttime="20180604 14:52:34.526"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${quoteID}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.528" level="INFO">000000000260504</msg>
+<status status="PASS" endtime="20180604 14:52:34.528" starttime="20180604 14:52:34.527"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20180604 14:52:34.528" starttime="20180604 14:52:34.528"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.528" starttime="20180604 14:52:34.525">No browser is open.</status>
+</kw>
+<tags>
+<tag>Q2O</tag>
+</tags>
+<status status="FAIL" endtime="20180604 14:52:34.529" critical="yes" starttime="20180604 14:52:34.519">No browser is open.
+
+Also teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-t4" name="TC03 Select Quote">
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${newQuote}</arg>
+<arg>No</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.531" level="INFO">${newQuote} = No</msg>
+<status status="PASS" endtime="20180604 14:52:34.532" starttime="20180604 14:52:34.531"></status>
+</kw>
+<kw name="Open Browser And Login" library="CommonResources">
+<arguments>
+<arg>${CQM_URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.535" level="FAIL">Variable '${CQM_URL}' not found. Did you mean:
+    ${T3_CQM_URL}
+    ${T1_CQM_URL}</msg>
+<status status="FAIL" endtime="20180604 14:52:34.535" starttime="20180604 14:52:34.532"></status>
+</kw>
+<kw type="teardown" name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current URL.</doc>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.537" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.537" starttime="20180604 14:52:34.537"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.538" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.538" starttime="20180604 14:52:34.536">No browser is open.</status>
+</kw>
+<tags>
+<tag>Q2O</tag>
+</tags>
+<status status="FAIL" endtime="20180604 14:52:34.539" critical="yes" starttime="20180604 14:52:34.530">Variable '${CQM_URL}' not found. Did you mean:
+    ${T3_CQM_URL}
+    ${T1_CQM_URL}
+
+Also teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-t5" name="TC04 Pricing">
+<kw name="Quote Configuration" library="resource_keywords">
+<kw name="Launch RSQE" library="CommonResources">
+<kw name="Focus" library="Selenium2Library">
+<doc>Deprecated. Use `Set Focus To Element` instead.</doc>
+<arguments>
+<arg>xpath=.//button[text()='Launch Configurator']</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.542" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.542" starttime="20180604 14:52:34.542"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.543" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.543" starttime="20180604 14:52:34.542"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.543" starttime="20180604 14:52:34.541"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.543" starttime="20180604 14:52:34.541"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+<arg>AND</arg>
+<arg>Log</arg>
+<arg>${quoteID}</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current URL.</doc>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.545" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.545" starttime="20180604 14:52:34.545"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.546" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.546" starttime="20180604 14:52:34.544"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${quoteID}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.546" level="INFO">000000000260504</msg>
+<status status="PASS" endtime="20180604 14:52:34.546" starttime="20180604 14:52:34.546"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.546" starttime="20180604 14:52:34.544">No browser is open.</status>
+</kw>
+<tags>
+<tag>Q2O</tag>
+</tags>
+<status status="FAIL" endtime="20180604 14:52:34.547" critical="yes" starttime="20180604 14:52:34.540">No browser is open.
+
+Also teardown failed:
+No browser is open.</status>
+</test>
+<test id="s1-t6" name="TC05 Order Creation">
+<kw name="Create Order" library="resource_keywords">
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element ``locator`` is visible.</doc>
+<arguments>
+<arg>orderDetails</arg>
+<arg>1200s</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.550" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.550" starttime="20180604 14:52:34.550"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.554" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.554" starttime="20180604 14:52:34.549"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.554" starttime="20180604 14:52:34.549"></status>
+</kw>
+<kw type="teardown" name="Run Keywords" library="BuiltIn">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Log Location</arg>
+<arg>AND</arg>
+<arg>Log</arg>
+<arg>${quoteID}</arg>
+<arg>AND</arg>
+<arg>Log</arg>
+<arg>EXP${EXPORDERID}</arg>
+<arg>AND</arg>
+<arg>Log To Console</arg>
+<arg>QuoteID: '${quoteID}'</arg>
+<arg>AND</arg>
+<arg>Log To Console</arg>
+<arg>OrderID: 'EXP${EXPORDERID}'</arg>
+<arg>AND</arg>
+<arg>Close Browser</arg>
+</arguments>
+<kw name="Log Location" library="Selenium2Library">
+<doc>Logs and returns the current URL.</doc>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20180604 14:52:34.556" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" endtime="20180604 14:52:34.556" starttime="20180604 14:52:34.556"></status>
+</kw>
+<msg timestamp="20180604 14:52:34.557" level="FAIL">No browser is open.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.557" starttime="20180604 14:52:34.556"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${quoteID}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.559" level="INFO">000000000260504</msg>
+<status status="PASS" endtime="20180604 14:52:34.559" starttime="20180604 14:52:34.558"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>EXP${EXPORDERID}</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.563" level="FAIL">Variable '${EXPORDERID}' not found.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.563" starttime="20180604 14:52:34.560"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>QuoteID: '${quoteID}'</arg>
+</arguments>
+<status status="PASS" endtime="20180604 14:52:34.564" starttime="20180604 14:52:34.563"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>OrderID: 'EXP${EXPORDERID}'</arg>
+</arguments>
+<msg timestamp="20180604 14:52:34.567" level="FAIL">Variable '${EXPORDERID}' not found.</msg>
+<status status="FAIL" endtime="20180604 14:52:34.567" starttime="20180604 14:52:34.564"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20180604 14:52:34.567" starttime="20180604 14:52:34.567"></status>
+</kw>
+<status status="FAIL" endtime="20180604 14:52:34.567" starttime="20180604 14:52:34.555">Several failures occurred:
+
+1) No browser is open.
+
+2) Variable '${EXPORDERID}' not found.
+
+3) Variable '${EXPORDERID}' not found.</status>
+</kw>
+<tags>
+<tag>Q2O</tag>
+</tags>
+<status status="FAIL" endtime="20180604 14:52:34.568" critical="yes" starttime="20180604 14:52:34.548">No browser is open.
+
+Also teardown failed:
+Several failures occurred:
+
+1) No browser is open.
+
+2) Variable '${EXPORDERID}' not found.
+
+3) Variable '${EXPORDERID}' not found.</status>
+</test>
+<doc>Journey: OCC Contract Journey for Non UK Country</doc>
+<status status="FAIL" endtime="20180604 14:52:34.570" starttime="20180604 14:52:33.381"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="6" pass="0">Critical Tests</stat>
+<stat fail="6" pass="0">All Tests</stat>
+</total>
+<tag>
+<stat fail="6" pass="0">Q2O</stat>
+</tag>
+<suite>
+<stat fail="6" id="s1" name="OCC Contract Journey via BCM sheet" pass="0">OCC Contract Journey via BCM sheet</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20180604 14:52:34.485" level="ERROR">Error in file 'C:\Users\608098003\eclipse-workspace\gs-e2e-voice-automation-test\BTGS-KL-Voice\RobotFramework\HCS\R56\T3\SCA02_OCC_Contract_Journey_NonUK_via_BCM_sheet\OCC_Contract_Journey_via_BCM_sheet.txt': Setting variable '${RefNo}' failed: Variable '${TC_ID}' not found. Did you mean:
+    ${TXT_ID}</msg>
+</errors>
+</robot>
